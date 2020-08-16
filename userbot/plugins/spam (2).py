@@ -7,7 +7,6 @@ import pybase64
 from telethon.tl.functions.messages import ImportChatInviteRequest
 import os 
 
-BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 BOTLOG = True
 
 @borg.on(admin_cmd(pattern = "spam ?(.*)" ))
