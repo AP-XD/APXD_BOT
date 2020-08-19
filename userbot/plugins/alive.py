@@ -18,12 +18,19 @@ pm_caption += "**Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "**License** : [MIT Licence](github.com/APXD-git/FridayUserbot/blob/master/LICENSE)\n"
 pm_caption += "Copyright : By [☣️🇦 🇵 🇽 🇩 ☣️@Github](github.com/APXD-git/FridayUserbot)\n"
 pm_caption += " [Deploy FridayUserbot](https://telegra.ph/FRIDAY-06-15)"
-#@command(outgoing=True, pattern="^.alive$")
-@borg.on(admin_cmd(pattern=r"alive", allow_sudo=True))
-async def amireallyalive(alive):
+
+@borg.on(admin_cmd(pattern=r"alive"))
+async def friday(alive):
     chat = await alive.get_chat()
-    await alive.delete()
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG,caption=pm_caption)
-    await alive.delete() 
+    await alive.delete()
+
+    
+@borg.on(admin_cmd(pattern=r"Alive", allow_sudo=True))
+async def friday(alive):
+    chat = await alive.get_chat()
+    """ For .alive command, check if the bot is running.  """
+    await borg.send_file(alive.chat_id, PM_IMG,caption=pm_caption)
+
     
