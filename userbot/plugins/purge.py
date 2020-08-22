@@ -59,6 +59,10 @@ async def purgeme(delme):
             break
         i = i + 1
         await message.delete()
+
+    smsg = await delme.client.send_message(
+        delme.chat_id,
+        "`Purge complete!` Purged " + str(count) + " messages.",
     )
     if BOTLOG:
         await delme.client.send_message(
