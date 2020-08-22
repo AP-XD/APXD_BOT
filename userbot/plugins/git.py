@@ -26,7 +26,7 @@ async def _(event):
 
         animation_chars = [
 
-            "https://github.com/APXD-git/FridayUserbot
+            "https://github.com/APXD-git/FridayUserbot"
 
             "https://github.com/APXD-git/FridayUserbot"
         ]
