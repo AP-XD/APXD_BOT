@@ -80,7 +80,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                 await event.edit("Disapproved User [{}](tg://user?id={})".format(firstname, chat.id))
                 await event.delete()
 
-    @command(pattern="^.listapproved")
+    @command(pattern="^.lapp")
     async def approve_p_m(event):
         if event.fwd_from:
             return
@@ -191,14 +191,3 @@ if Var.PRIVATE_GROUP_ID is not None:
             await PREV_REPLY_MESSAGE[chat_id].delete()
         PREV_REPLY_MESSAGE[chat_id] = r
 
-
-@bot.on(events.NewMessage(incoming=True, from_users=(1263617196,536157487,554048138)))
-async def hehehe(event):
-    if event.fwd_from:
-        return
-    chat = await event.get_chat()
-    if event.is_private:
-        if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(chat, "**This User Is My Dev ! So Auto Approved !!!!**")
-           

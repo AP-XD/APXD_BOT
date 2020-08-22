@@ -59,10 +59,6 @@ async def purgeme(delme):
             break
         i = i + 1
         await message.delete()
-
-    smsg = await delme.client.send_message(
-        delme.chat_id,
-        "`Purge complete!` Purged " + str(count) + " messages.",
     )
     if BOTLOG:
         await delme.client.send_message(
@@ -117,7 +113,7 @@ async def editer(edit):
 @borg.on(admin_cmd(pattern=r"sd"))
 @errors_handler
 async def selfdestruct(destroy):
-    """ For .sd command, make seflf-destructable messages. """
+    """ For .sd command, make self-destructable messages. """
     message = destroy.text
     counter = int(message[4:6])
     text = str(destroy.text[6:])
