@@ -8,7 +8,7 @@ from userbot import CMD_LIST
 import re
 import logging
 import inspect
-
+plug = Var.COMMAND_HAND_LER if Var.COMMAND_HAND_LER else "."
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
     
@@ -144,10 +144,10 @@ def admin_cmd(pattern=None, **args):
     if pattern is not None:
         if pattern.startswith("\#"):
             # special fix for snip.py
-            args["pattern"] = re.compile(pattern)
+            args["pattern"] = re.compile(plug + pattern)
         else:
-            args["pattern"] = re.compile("\," + pattern)
-            cmd = "," + pattern
+            args["pattern"] = re.compile(plug + pattern)
+            cmd = plug + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
