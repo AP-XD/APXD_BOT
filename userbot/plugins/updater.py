@@ -27,7 +27,7 @@ async def gen_chlog(repo, diff):
     ch_log = ''
     d_form = "On " + "%d/%m/%y" + " at " + "%H:%M:%S"
     for c in repo.iter_commits(diff):
-        ch_log += f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by __{c.author}__\n"
+        ch_log += f"**#{c.count()}** : {c.committed_datetime.strftime(d_form)} : [{c.summary}]({UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}) by **{c.author}**\n""
     return ch_log
 
 
@@ -178,6 +178,6 @@ async def upstream(ups):
         await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
         # Spin a new instance of bot
-        args = [sys.executable, "-m", "stdborg"]
+        args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
         return
