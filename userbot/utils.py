@@ -191,7 +191,7 @@ def admin2_cmd(pattern=None, **args):
             # special fix for snip.py
             args["pattern"] = re.compile(plug + pattern)
         else:
-            args["pattern"] = re.compile("\" + pattern)
+            args["pattern"] = re.compile(pattern)
             cmd = pattern
             try:
                 CMD_LIST[file_test].append(cmd)
