@@ -46,6 +46,8 @@ if ENV:
             view_messages=None,
             send_messages=True
         )
+        ALIVE_PIC=os.environ.get("ALIVE_PIC","https://telegra.ph/file/e4d5011aa1fd76b742649.png")
+        ALIVE_MSG=os.environ.get("ALIVE_MSG",None)
         # chat ids or usernames, it is recommended to use chat ids,
         # providing usernames means an additional overhead for the user
         CHATS_TO_MONITOR_FOR_ANTI_FLOOD = []
