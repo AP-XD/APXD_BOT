@@ -9,7 +9,7 @@ from telethon.tl.functions.channels import LeaveChannelRequest, CreateChannelReq
 from collections import deque
 from telethon.tl.functions.users import GetFullUserRequest
 from userbot.events import register
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, admin2_cmd
 
 @borg.on(admin_cmd("leave$"))
 async def leave(e):
@@ -29,7 +29,7 @@ async def fun(e):
         t = t[:-1] + "_;"
         await e.edit(t)
 
-@borg.on(admin_cmd("yo$"))
+@borg.on(admin2_cmd("yo$"))
 #@register(outgoing=True, pattern="^yo$")
 async def Ooo(e):
     t = "Yo"
@@ -37,15 +37,31 @@ async def Ooo(e):
         t = t[:-1] + "oo"
         await e.edit(t)
 	
-@borg.on(admin_cmd("hmm$"))
-#@register(outgoing=True, pattern="^yo$")
+@borg.on(admin2_cmd("Hmm$"))
+#@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
     t = "Hmm"
     for j in range(8):
         t = t[:-1] + "mm"
         await e.edit(t)
 	
-@borg.on(admin_cmd("binod$"))
+@borg.on(admin2_cmd("uff$"))
+#@register(outgoing=True, pattern="^Hmm$")
+async def Mmm(e):
+    t = "Uff"
+    for j in range(8):
+        t = t[:-1] + "ff"
+        await e.edit(t)
+
+@borg.on(admin2_cmd("fuck$"))
+#@register(outgoing=True, pattern="^Hmm$")
+async def Mmm(e):
+    t = "Fuck"
+    for j in range(8):
+        t = t[:-1] + "kk"
+        await e.edit(t)
+        
+@borg.on(admin2_cmd("binod$"))
 #@register(outgoing=True, pattern="^yo$")
 async def Binod(e):
     t = "BINOD"
@@ -54,7 +70,7 @@ async def Binod(e):
         await e.edit(t)
 
 
-@borg.on(admin_cmd("Oof$"))
+@borg.on(admin2_cmd("oof$"))
 #@register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
     t = "Oof"
