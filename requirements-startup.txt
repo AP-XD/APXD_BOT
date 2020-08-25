@@ -26,9 +26,11 @@ hachoir
 heroku3
 httplib2
 humanize
+justwatch
 lxml
 lyricsgenius
 oauth2client
+patool
 psycopg2
 psycopg2-binary
 PyLyrics
@@ -49,6 +51,7 @@ requests>=2.18.4
 search-engine-parser>=0.4.2
 selenium
 speedtest-cli>=2.0.2
+spotify_token
 sqlalchemy>=1.2
 telegraph
 tswift
@@ -57,3 +60,12 @@ wikipedia>=1.4.0
 youtube-dl
 covid
 validators
+tswift
+asyncurban
+jikanpy
+psutil
+pyLyrics
+wheel
+cairosvg
+lottie
+glitch_this

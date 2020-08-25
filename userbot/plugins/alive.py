@@ -12,12 +12,12 @@ pm_caption += "`TELETHON VERSION:` **1.15.0**\n`Python:` **3.8.3**\n"
 pm_caption += "`DATABASE STATUS:` **Functional**\n"
 pm_caption += "**Current Branch** : `master`\n"
 pm_caption += "**Friday OS** : `3.14`\n"
-pm_caption += "**Current Sat** : `☣️🇦 🇵 🇽 🇩 ☣️Sat-6.96`\n"
+pm_caption += "**Current Sat** : `༒★彡☣️ 🇦 🇵  🇽 🇩  ☣️彡★༒Sat-6.96`\n"
 pm_caption += f"**My Peru Owner** : {DEFAULTUSER} \n"
 pm_caption += "**Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "**License** : [MIT Licence](github.com/APXD-git/FridayUserbot/blob/master/LICENSE)\n"
 pm_caption += "Copyright : By [☣️🇦 🇵 🇽 🇩 ☣️@Github](github.com/APXD-git/FridayUserbot)\n"
-pm_caption += " [Deploy FridayUserbot](https://telegra.ph/FRIDAY-06-15)"
+pm_caption += " [Deploy FridayUserbot](https://telegra.ph/file/e4d5011aa1fd76b742649.png)"
 
 @borg.on(admin_cmd(pattern=r"alive"))
 async def friday(alive):
