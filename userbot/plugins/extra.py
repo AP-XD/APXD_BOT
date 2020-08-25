@@ -45,15 +45,15 @@ async def Mmm(e):
         t = t[:-1] + "mm"
         await e.edit(t)
 	
-@borg.on(admin2_cmd("uff$"))
+@borg.on(admin2_cmd("Ufff$"))
 #@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
-    t = "Uff"
+    t = "Ufff"
     for j in range(8):
         t = t[:-1] + "ff"
         await e.edit(t)
 
-@borg.on(admin2_cmd("fuck$"))
+@borg.on(admin2_cmd("Fuck$"))
 #@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
     t = "Fuck"
@@ -70,7 +70,7 @@ async def Binod(e):
         await e.edit(t)
 
 
-@borg.on(admin2_cmd("oof$"))
+@borg.on(admin2_cmd("Oof$"))
 #@register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
     t = "Oof"
