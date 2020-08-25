@@ -1,5 +1,5 @@
 from telethon.tl.types import InputMediaDice
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
 
 # EMOJI CONSTANTS
 DART_E_MOJI = "🎯"
