@@ -10,6 +10,8 @@ from pylast import LastFMNetwork, md5
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
 from pySmartDL import SmartDL
+from userbot.helpers import fonts as fonts
+from userbot.helpers import functions as catdef
 from dotenv import load_dotenv
 import asyncio
 import pylast
