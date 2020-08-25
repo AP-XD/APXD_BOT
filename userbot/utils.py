@@ -187,7 +187,10 @@ def admin2_cmd(pattern=None, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
-        if
+        if pattern.startswith("\#"):
+            # special fix for snip.py
+            args["pattern"] = re.compile(plug + pattern)
+        else:
             args["pattern"] = re.compile("\" + pattern)
             cmd = pattern
             try:
