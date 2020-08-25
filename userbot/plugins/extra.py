@@ -37,7 +37,7 @@ async def Ooo(e):
         t = t[:-1] + "oo"
         await e.edit(t)
 	
-@borg.on(admin2_cmd("Hmm$"))
+@borg.on(admin2_cmd("Hmmm$"))
 #@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
     t = "Hmm"
