@@ -29,7 +29,7 @@ async def fun(e):
         t = t[:-1] + "_;"
         await e.edit(t)
 
-@borg.on(admin2_cmd("yo$"))
+@borg.on(admin2_cmd("Yo$"))
 #@register(outgoing=True, pattern="^yo$")
 async def Ooo(e):
     t = "Yo"
@@ -40,7 +40,7 @@ async def Ooo(e):
 @borg.on(admin2_cmd("Hmmm$"))
 #@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
-    t = "Hmm"
+    t = "Hmmm"
     for j in range(8):
         t = t[:-1] + "mm"
         await e.edit(t)
@@ -61,7 +61,7 @@ async def Mmm(e):
         t = t[:-1] + "kk"
         await e.edit(t)
         
-@borg.on(admin2_cmd("binod$"))
+@borg.on(admin2_cmd("Binod$"))
 #@register(outgoing=True, pattern="^yo$")
 async def Binod(e):
     t = "BINOD"
