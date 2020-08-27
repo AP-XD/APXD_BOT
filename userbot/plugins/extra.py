@@ -21,7 +21,21 @@ async def leave(e):
         else:
             await e.edit('`But Boss! This is Not A Chat`')
 
-@borg.on(admin_cmd(";__;$"))
+@borg.on(admin2_cmd("lol$"))
+#@register(outgoing=True, pattern="^;__;$")
+async def lolo(e):
+    animation_ttl = range(0, 16)
+    t="Lol"
+    await e.edit(t)
+        animation_chars = [
+            "-__-",
+            "-_-"
+        ]
+        for i in animation_ttl:
+            await asyncio.sleep(0.3)
+            await e.edit(animation_chars[i % 2])
+
+@borg.on(admin2_cmd("sad$"))
 #@register(outgoing=True, pattern="^;__;$")
 async def fun(e):
     t = ";__;"
@@ -47,7 +61,7 @@ async def Mmm(e):
 	
 @borg.on(admin2_cmd("Ufff$"))
 #@register(outgoing=True, pattern="^Hmm$")
-async def Mmm(e):
+async def UFF(e):
     t = "Ufff"
     for j in range(8):
         t = t[:-1] + "ff"
@@ -55,7 +69,7 @@ async def Mmm(e):
 
 @borg.on(admin2_cmd("Fuck$"))
 #@register(outgoing=True, pattern="^Hmm$")
-async def Mmm(e):
+async def fck(e):
     t = "Fuck"
     for j in range(8):
         t = t[:-1] + "kk"
