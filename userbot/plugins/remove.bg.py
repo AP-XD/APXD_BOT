@@ -10,7 +10,7 @@ from telethon import events
 from userbot.utils import progress, admin_cmd
 
 
-@borg.on(admin_cmd("rmbg ?(.*)"))
+@borg.on(admin_cmd("rembg ?(.*)"))
 async def _(event):
     HELP_STR = "`.rmbg` as reply to a media, or give a link as an argument to this command"
     if event.fwd_from:
