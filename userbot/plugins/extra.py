@@ -21,7 +21,7 @@ async def leave(e):
         else:
             await e.edit('`But Boss! This is Not A Chat`')
 
-@borg.on(admin2_cmd("lol$"))
+@borg.on(admin2_cmd("Lol$"))
 #@register(outgoing=True, pattern="^;__;$")
 async def lolo(e):
     animation_ttl = range(0, 16)
