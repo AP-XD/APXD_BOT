@@ -25,7 +25,7 @@ async def leave(e):
 #@register(outgoing=True, pattern="^;__;$")
 async def lolo(e):
     animation_ttl = range(0, 16)
-    t="Lol"
+    t="lol"
     await e.edit(t)
     animation_chars = [
         "-__-",
