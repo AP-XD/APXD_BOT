@@ -27,13 +27,13 @@ async def lolo(e):
     animation_ttl = range(0, 16)
     t="Lol"
     await e.edit(t)
-        animation_chars = [
-            "-__-",
-            "-_-"
-        ]
-        for i in animation_ttl:
-            await asyncio.sleep(0.3)
-            await e.edit(animation_chars[i % 2])
+    animation_chars = [
+        "-__-",
+        "-_-"
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(0.3)
+        await e.edit(animation_chars[i % 2])
 
 @borg.on(admin2_cmd("sad$"))
 #@register(outgoing=True, pattern="^;__;$")
