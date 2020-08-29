@@ -5,7 +5,7 @@ aiofiles
 aiohttp
 aria2p
 async_generator
-beautifulsoup4
+beautifulsoup4==4.6.0
 bs4
 bwb==3.0.0
 cfscrape
