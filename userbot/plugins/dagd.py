@@ -4,7 +4,10 @@ Available Commands:
 .dns google.com
 .url <long url>
 .unshort <short url>"""
+from telethon import events
+import os
 import requests
+import json
 from userbot.utils import admin_cmd
 
 

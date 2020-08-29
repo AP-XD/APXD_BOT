@@ -8,11 +8,11 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
 PM_IMG = "https://telegra.ph/file/e4d5011aa1fd76b742649.png"
 pm_caption = "`FRIDAY IS:` **ONLINE**\n\n"
 pm_caption += "**SYSTEM STATUS**\n"
-pm_caption += "`TELETHON VERSION:` **1.15.0**\n`Python:` **3.8.3**\n"
+pm_caption += "`TELETHON VERSION:` **1.15.0**\n`Python:` **3.7.4**\n"
 pm_caption += "`DATABASE STATUS:` **Functional**\n"
 pm_caption += "**Current Branch** : `master`\n"
-pm_caption += "**Friday OS** : `3.14`\n"
-pm_caption += "**Current Sat** : `༒★彡☣️ 🇦 🇵  🇽 🇩  ☣️彡★༒Sat-6.96`\n"
+pm_caption += "**Friday OS** : `2.0`\n"
+pm_caption += "**Current Sat** : `༒★彡☣️ 🇦 🇵  🇽 🇩  ☣️彡★༒Sat-2.25`\n"
 pm_caption += f"**My Peru Owner** : {DEFAULTUSER} \n"
 pm_caption += "**Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "**License** : [MIT Licence](github.com/APXD-git/FridayUserbot/blob/master/LICENSE)\n"
@@ -25,12 +25,3 @@ async def friday(alive):
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG,caption=pm_caption)
     await alive.delete()
-
-    
-@borg.on(admin_cmd(pattern=r"Alive", allow_sudo=True))
-async def friday(alive):
-    chat = await alive.get_chat()
-    """ For .alive command, check if the bot is running.  """
-    await borg.send_file(alive.chat_id, PM_IMG,caption=pm_caption)
-
-    

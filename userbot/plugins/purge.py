@@ -11,11 +11,9 @@ from telethon.errors import rpcbaseerrors
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.utils import register, errors_handler
-from userbot.utils import admin_cmd
 
 
-#@register(outgoing=True, pattern="^.purge$")
-@borg.on(admin_cmd(pattern=r"purge"))
+@register(outgoing=True, pattern="^.purge$")
 @errors_handler
 async def fastpurger(purg):
     """ For .purge command, purge all messages starting from the reply. """
@@ -44,8 +42,7 @@ async def fastpurger(purg):
     await done.delete()
 
 
-#@register(outgoing=True, pattern="^.purgeme")
-@borg.on(admin_cmd(pattern=r"purgeme"))
+@register(outgoing=True, pattern="^.purgeme")
 @errors_handler
 async def purgeme(delme):
     """ For .purgeme, delete x count of your latest message."""
@@ -73,8 +70,7 @@ async def purgeme(delme):
     await smsg.delete()
 
 
-#@register(outgoing=True, pattern="^.del$")
-@borg.on(admin_cmd(pattern=r"del"))
+@register(outgoing=True, pattern="^.del$")
 @errors_handler
 async def delete_it(delme):
     """ For .del command, delete the replied message. """
@@ -92,8 +88,7 @@ async def delete_it(delme):
                     BOTLOG_CHATID, "Well, I can't delete a message")
 
 
-#@register(outgoing=True, pattern="^.edit")
-@borg.on(admin_cmd(pattern=r"edit"))
+@register(outgoing=True, pattern="^.edit")
 @errors_handler
 async def editer(edit):
     """ For .editme command, edit your last message. """
@@ -113,8 +108,7 @@ async def editer(edit):
                                        "Edit query was executed successfully")
 
 
-#@register(outgoing=True, pattern="^.sd")
-@borg.on(admin_cmd(pattern=r"sd"))
+@register(outgoing=True, pattern="^.sd")
 @errors_handler
 async def selfdestruct(destroy):
     """ For .sd command, make self-destructable messages. """

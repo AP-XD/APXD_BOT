@@ -1,4 +1,5 @@
 # FRIDAY-USERBOT
+Based On X-Tra Tg Repo
 
 <p align="center">
 <img src="https://telegra.ph/file/e4d5011aa1fd76b742649.png" alt="FRIDAY USERBOT">
