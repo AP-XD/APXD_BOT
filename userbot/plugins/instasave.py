@@ -10,7 +10,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="insta ?(.*)"))
+@borg.on(admin_cmd(pattern="instag ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return 
