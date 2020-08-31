@@ -5,6 +5,7 @@
   "keywords": ["telegram", "userbot", "plugin", "modular", "productivity"],
   "repository": "https://github.com/APXD-git/FridayUserbot",
   "website": "#TODO",
+  "stack": "container",
   "success_url": "#TODO",
   "env": {
     "ENV": {
