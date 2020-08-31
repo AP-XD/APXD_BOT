@@ -677,7 +677,7 @@ async def _(event):
             await event.edit(animation_chars[i % 30])        
 
  # By @AP_XD. Kangers keep credits xD		
-@register(outgoing=True, pattern="^.lulu$")
+@register(outgoing=True, pattern="^.lal$")
 
 async def join(e):
 
