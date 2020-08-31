@@ -53,7 +53,7 @@ async def _(event):
 	if event.fwd_from:
 		return
 	deq = deque(list("🤔🧐🤨🤔🧐🤨"))
-	for _ in range(48):
+	for _ in range(24):
 		await asyncio.sleep(0.1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
@@ -64,7 +64,7 @@ async def _(event):
 		return
 	deq = deque(list("😂🤣😂🤣😂🤣"))
 	for _ in range(12):
-		await asyncio.sleep(0,1)
+		await asyncio.sleep(0.1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
     
@@ -677,7 +677,7 @@ async def _(event):
             await event.edit(animation_chars[i % 30])        
 
  # By @AP_XD. Kangers keep credits xD		
-@register(outgoing=True, pattern="^.lul$")
+@register(outgoing=True, pattern="^.lulu$")
 
 async def join(e):
 

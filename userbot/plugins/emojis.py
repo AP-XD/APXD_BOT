@@ -1,15 +1,15 @@
-"""emoj
+"""em
 Available Commands:
-.emoj shrug
-.emoj apple
-.emoj :/
-.emoj -_-"""
+.em shrug
+.em apple
+.em :/
+.em -_-"""
 from telethon import events
 import asyncio
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="emoj (.*)"))
+@borg.on(admin_cmd(pattern="em (.*)"))
 async def _(event):
     if event.fwd_from:
         return
