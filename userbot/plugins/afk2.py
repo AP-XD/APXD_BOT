@@ -1,5 +1,5 @@
 """AFK Plugin for @UniBorg
-Syntax: .afk REASON"""
+Syntax: .affk REASON"""
 import asyncio
 import datetime
 from datetime import datetime
@@ -31,7 +31,7 @@ async def set_not_afk(event):
     if afk_start != {}:
         total_afk_time = str((afk_end - afk_start))
     current_message = event.message.message
-    if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
+    if ".affk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
         shite = await borg.send_message(event.chat_id, "__Back alive!__\n**No Longer afk.**\n `Was afk for:``" + total_afk_time + "`")
         try:
             await borg.send_message(  # pylint:disable=E0602
@@ -52,7 +52,7 @@ async def set_not_afk(event):
         USER_AFK = {}  # pylint:disable=E0602
         afk_time = None  # pylint:disable=E0602
 
-@borg.on(admin_cmd(pattern=r"a2fk ?(.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=r"affk ?(.*)"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -111,7 +111,7 @@ async def on_afk(event):
         total_afk_time = str((afk_end - afk_start))
     afk_since = "**a while ago**"
     current_message_text = event.message.message.lower()
-    if "afk" in current_message_text:
+    if "affk" in current_message_text:
         # userbot's should not reply to other userbot's
         # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
         return False
@@ -157,8 +157,8 @@ async def on_afk(event):
 
         
 CMD_HELP.update({
-    "aafk":
-    ".aafk [Optional Reason]\
+    "affk":
+    ".affk [Optional Reason]\
 \nUsage: Sets you as afk.\nReplies to anyone who tags/PM's \
 you telling them that you are AFK(reason).\n\nSwitches off AFK when you type back anything, anywhere.\
 \n afk full form away from keyboard/keypad.\
