@@ -351,7 +351,7 @@ async def bluedevilpig(pig):
 @borg.on(admin_cmd(pattern=r"kiler"))
 async def bluedevilkiller(kiler):
     await kiler.edit(K)
-@borg.on(admin_cmd(pattern=r"gun"))
+@borg.on(admin_cmd(pattern=r"guun"))
 async def bluedevilgun(gun):
     await gun.edit(G)
 @borg.on(admin_cmd(pattern=r"dog"))
@@ -375,9 +375,9 @@ async def bluedevilindia(india):
 @borg.on(admin_cmd(pattern=r"wlcm"))
 async def bluedevilwelcome(welcome):
     await welcome.edit(W)
-@borg.on(admin_cmd(pattern=r"snk"))
+@borg.on(admin_cmd(pattern=r"snake"))
 async def bluedevilsnake(snake):
     await snake.edit(Z)
-@borg.on(admin_cmd(pattern=r"bye"))
+@borg.on(admin_cmd(pattern=r"byye"))
 async def bluedevilbye(bye):
     await bye.edit(B)    
