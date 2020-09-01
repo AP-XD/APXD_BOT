@@ -375,7 +375,7 @@ async def bluedevilindia(india):
 @borg.on(admin_cmd(pattern=r"wlcm"))
 async def bluedevilwelcome(welcome):
     await welcome.edit(W)
-@borg.on(admin_cmd(pattern=r"snake"))
+@borg.on(admin_cmd(pattern=r"ske"))
 async def bluedevilsnake(snake):
     await snake.edit(Z)
 @borg.on(admin_cmd(pattern=r"byye"))
