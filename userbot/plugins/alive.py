@@ -1,7 +1,8 @@
+"""Check if userbot alive. If you change these, you become the gayest gay such that even the gay world will disown you."""
 #IMG CREDITS: @WhySooSerious
 import asyncio
 from telethon import events
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
 from userbot import ALIVE_NAME
 from telethon.tl.types import ChannelParticipantsAdmins
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
@@ -20,6 +21,7 @@ pm_caption += "Copyright : By [☣️🇦 🇵 🇽 🇩 ☣️@Github](github.c
 pm_caption += " [Deploy FridayUserbot](https://telegra.ph/file/e4d5011aa1fd76b742649.png)"
 
 @borg.on(admin_cmd(pattern=r"alive"))
+@borg.on(sudo_cmd(pattern=r"alive", allow_sudo=True))
 async def friday(alive):
     chat = await alive.get_chat()
     """ For .alive command, check if the bot is running.  """

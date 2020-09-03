@@ -1,32 +1,21 @@
-"""Auto Profile Updation Commands
-
+﻿"""Auto Profile Updation Commands
 .autoname"""
-
 from telethon import events
-
 import asyncio
-
 import time
-
 from telethon.tl import functions
-
 from telethon.errors import FloodWaitError
-
-from uniborg.util import admin_cmd
-
+from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
 from userbot import ALIVE_NAME
-
 DEL_TIME_OUT = 60
-
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "FridayUserbot"
 
 @borg.on(admin_cmd(pattern="autoname"))  # pylint:disable=E0602
-
-async def _(event):
-
+@borg.on(sudo_cmd(pattern="autoname", allow_sudo=True))
+async def _(event): 
+    event = await edit_or_reply(event ,"`Checking for updates, please wait....`")
     if event.fwd_from:
-
-        return
+         return
 
     while True:
 
@@ -66,4 +55,4 @@ async def _(event):
 
         await asyncio.sleep(DEL_TIME_OUT)
 
-    await event.edit(f"Auto Name has been started Master") 
+    await event.edit(f"Auto Name has been started my Master") 
