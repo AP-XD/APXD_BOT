@@ -15,7 +15,7 @@ from traceback import format_exc
 
 from telethon import events
 
-from userbot import bot, BOTLOG_CHATID, LOGSPAMMER
+from userbot import bot, PRIVATE_GROUP_ID, LOGSPAMMER
 
 
 def register(**args):
@@ -52,10 +52,10 @@ def register(**args):
 
     def decorator(func):
         async def wrapper(check):
-            if not LOGSPAMMER:
+            if not PRIVATE_GROUP_ID:
                 send_to = check.chat_id
             else:
-                send_to = BOTLOG_CHATID
+                send_to = PRIVATE_GROUP_ID
 
             if not trigger_on_fwd and check.fwd_from:
                 return
