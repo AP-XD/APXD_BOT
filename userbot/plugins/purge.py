@@ -32,13 +32,16 @@ async def fastpurger(purg):
 
     if msgs:
         await purg.client.delete_messages(chat, msgs)
-  
-
+    done = await purg.client.send_message(
+        purg.chat_id,
+        "`Fast purge complete!\n`Purged " + str(count) + " messages.",
+    )
     if BOTLOG:
         await purg.client.send_message(
             BOTLOG_CHATID,
             "Purge of " + str(count) + " messages done successfully.")
-    await sleep(2)
+    await sleep(1)
+    count=0
     await done.delete()
 
 
@@ -65,7 +68,7 @@ async def purgeme(delme):
         await delme.client.send_message(
             BOTLOG_CHATID,
             "Purge of " + str(count) + " messages done successfully.")
-    await sleep(2)
+    await sleep(1)
     i = 1
     await smsg.delete()
 
@@ -111,7 +114,8 @@ async def editer(edit):
 @register(outgoing=True, pattern="^.sd")
 @errors_handler
 async def selfdestruct(destroy):
-    """ For .sd command, make self-destructable messages. """
+
+    """ For .sd command, make seflf-destructable messages. """
     message = destroy.text
     counter = int(message[4:6])
     text = str(destroy.text[6:])
