@@ -1,5 +1,6 @@
 import os
 from telethon.tl.types import ChatBannedRights
+from pymongo import MongoClient
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     import os
@@ -35,6 +36,9 @@ if ENV:
         SPOTIFY_USERNAME = os.environ.get("SPOTIFY_USERNAME", None)
         SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
         SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
+        THUMB_IMAGE = os.environ.get(
+            "THUMB_IMAGE",
+            "https://telegra.ph/file/e4d5011aa1fd76b742649.png")                                                            
         #
         PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", False))
         #
@@ -122,6 +126,17 @@ if ENV:
         DUAL_LOG = os.environ.get("DUAL_LOG", False) 
         #Lydia API
         LYDIA_API = os.environ.get("LYDIA_API",None)
+         # define the "types" that should be uplaoded as streamable
+        TL_VID_STREAM_TYPES = ("MKV", "MP4", "WEBM")
+        TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")                                            
+        WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")
+        TZ = os.environ.get("TZ", None)
+        # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
+        RSS_POST_MSG_GROUP_ID = os.environ.get("RSS_POST_MSG_GROUP_ID", None)
+        if RSS_POST_MSG_GROUP_ID:
+        RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
+        SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API", None)
+                                                            
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", False))
 else:
