@@ -115,10 +115,10 @@ if ENV:
             t_file.close()
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
-        #MongoDB
-# to work manager.py
-    DUAL_LOG = os.environ.get("DUAL_LOG", False)                        
+        #MongoDB                       
         MONGO_URI = os.environ.get("MONGO_URI", None)
+        # to work manager.py
+        DUAL_LOG = os.environ.get("DUAL_LOG", False) 
         #Lydia API
         LYDIA_API = os.environ.get("LYDIA_API",None)
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
