@@ -134,7 +134,7 @@ if ENV:
         # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
         RSS_POST_MSG_GROUP_ID = os.environ.get("RSS_POST_MSG_GROUP_ID", None)
         if RSS_POST_MSG_GROUP_ID:
-        RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
+            RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
         SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API", None)
                                                             
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
