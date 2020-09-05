@@ -18,7 +18,7 @@ pm_caption += f"**My Peru Owner** : {DEFAULTUSER} \n"
 pm_caption += "**Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "**License** : [MIT Licence](github.com/APXD-git/FridayUserbot/blob/master/LICENSE)\n"
 pm_caption += "Copyright : By [@Github](github.com/APXD-git/FridayUserbot)\n"
-pm_caption += " [Deploy FridayUserbot](https://telegra.ph/file/e4d5011aa1fd76b742649.png)"
+pm_caption += " [Deploy FridayUserbot](https://telegra.ph/file/1959ecf64cbca739ef584.png)"
 
 @borg.on(admin_cmd(pattern=r"alive"))
 @borg.on(sudo_cmd(pattern=r"alive", allow_sudo=True))
