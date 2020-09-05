@@ -28,14 +28,24 @@ import asyncio
 import pylast
 from requests import get
 import time
-
+from .helpers import fonts as fonts, functions as catdef
+from .helpers import memeshelper as memes
+from .helpers import tempmemes, process as process                             
+StartTime = time.time()                                                 
+catversion = "2.7.2"
 Lastupdate = time.time()
 
 from var import Var
 
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
+                                  
+                             
     bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
+                       
+                         
+                                         
+                                         
 else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
@@ -46,7 +56,7 @@ CMD_LIST = {}
 CMD_HELP = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
-
+CAT_ID = ["1035034432", "551290198"]
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
 """ PPE initialization. """
