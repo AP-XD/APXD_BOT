@@ -85,7 +85,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="grs"))
+@borg.on(admin_cmd(pattern="ggrs"))
 async def _(event):
     if event.fwd_from:
         return
