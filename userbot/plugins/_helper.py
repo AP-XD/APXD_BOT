@@ -22,12 +22,13 @@ async def cmd_list(event):
             if input_str in CMD_LIST:
                 string = "Commands found in {}:\n".format(input_str)
                 for i in CMD_LIST[input_str]:
-                    string += "    " + i + "    "
+                    string += "    " + i
+                    string += "\n"
                 await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = """Friday Userbot Modules of my Peru Master  [༒★彡☣️ 🇦 🇵  🇽 🇩  ☣️彡★༒         Are Listed Here !"""
+            help_string = """Friday Userbot Modules of my Peru Master  ༒★彡☣️ 🇦 🇵  🇽 🇩  ☣️彡★༒         Are Listed Here !"""""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername,
                 help_string

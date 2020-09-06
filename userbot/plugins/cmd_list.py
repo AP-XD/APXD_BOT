@@ -15,7 +15,7 @@ async def install(event):
     )
     stdout, stderr = await process.communicate()
     o = stdout.decode()
-    _o = o.split("\n")
-    o = "\n".join(_o)
+    _o = o.split("    ")
+    o = "   ".join(_o)
     OUTPUT = f"**List of Plugins:**\n - {o}\n\n**HELP:** __If you want to know the commands for a plugin, do:-__ \n `.help <plugin name>` **without the < > brackets.**\n__All plugins might not work directly. Visit__ @FRIDAYSUPPORTOFFICIAL __for assistance.__"
     await event.edit(OUTPUT)
