@@ -2,6 +2,7 @@ from telethon import events
 import subprocess
 import asyncio
 import time
+import io
 from userbot.utils import admin_cmd
 
 #@command(pattern="^.cmds", outgoing=True)
