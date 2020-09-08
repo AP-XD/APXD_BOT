@@ -1,9 +1,9 @@
 {
   "name": "Friday-Userbot",
   "description": "A Userbot Based On Telethon By @StarkXD",
-  "logo": "https://telegra.ph/file/e4d5011aa1fd76b742649.png",
+  "logo": "https://telegra.ph/file/1959ecf64cbca739ef584.png",
   "keywords": ["telegram", "userbot", "plugin", "telegram-userbot", "productivity"],
-  "repository": "https://github.com/APXD-git/FridayUserbot",
+  "repository": "https://github.com/SP-PIKACHU/FridayUserbot",
   "website": "StarkGang.ml",
   "stack": "container",
   "success_url": "t.me/FridayOT",
