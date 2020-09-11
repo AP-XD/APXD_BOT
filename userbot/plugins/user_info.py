@@ -301,7 +301,7 @@ class TGDoc:
 
 
 
-@register(pattern=r"^\.u(?:ser)?(\s+[\S\s]+|$)", outgoing=True)
+@borg.on(pattern=r"^\.u(?:ser)?(\s+[\S\s]+|$)", outgoing=True)
 async def who(event: NewMessage.Event):
     """ For .user command, get info about a user. """
     if event.fwd_from:
