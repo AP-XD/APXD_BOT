@@ -8,13 +8,13 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot.utils import admin_cmd
 
 
-@borg(outgoing=True, pattern="^!corona$")
+@borg.on(outgoing=True, pattern="^!corona$")
 async def iqless(e):
     await e.edit("Antivirus scan was completed \n⚠️ Warning! This  donkey has Corona Virus")      
     
 
     
-@borg(outgoing=True, pattern="^!covid (.*)")
+@borg.on(outgoing=True, pattern="^!covid (.*)")
 async def corona(event):
     await event.edit("`Processing...`")
     country = event.pattern_match.group(1)
@@ -36,7 +36,7 @@ async def corona(event):
         output_text = "Invalid Country name"
     await event.edit(f"Corona Virus Info in {country}:\n\n{output_text}")
 
-@borg(outgoing=True, pattern="^!covid2 (.*)")
+@borg.on(outgoing=True, pattern="^!covid2 (.*)")
 async def _(event):
     if event.fwd_from:
         return 
