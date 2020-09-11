@@ -12,7 +12,7 @@ import inspect
 running_processes: dict = {}
 
 
-@borg.on(outgoing=True, pattern="^\,term(?: |$|\n)([\s\S]*)")
+@borg.on(admin_cmd(pattern="^\,term(?: |$|\n)([\s\S]*)"))
 async def evaluate(event):  
     await event.edit(f"**AP_XD**: `Running Terminal.....`")
     message = (str(event.chat_id) + ':' + str(event.message.id))
@@ -48,7 +48,7 @@ async def evaluate(event):
     return
         
  
-@borg.on(outgoing=True, pattern=r"^\,exec(?: |$)([\s\S]*)")
+@borg.on(admin_cmd(pattern=r"^\,exec(?: |$)([\s\S]*)"))
 async def run(run_q):
     code = run_q.pattern_match.group(1)
     
@@ -102,7 +102,7 @@ execute. Use !help script for an example.**")
                          f"{codepre}"
                          "`\n**Result: **\n`No Result Returned/False`")
 
-@borg.on(outgoing=True, pattern="^\,eval(?: |$)(.*)")
+@borg.on(admin_cmd(pattern="^\,eval(?: |$)(.*)"))
 async def evaluate(query):
     if query.pattern_match.group(1):
         expression = query.pattern_match.group(1)
@@ -145,7 +145,7 @@ async def evaluate(query):
                          "`\n**Exception: **\n"
                          f"`{err}`")
 
-@borg.on(outgoing=True, pattern="^\,hash (.*)")
+@borg.on(admin_cmd(pattern="^\,hash (.*)"))
 async def gethash(hash_q):
     hashtxt_ = hash_q.pattern_match.group(1)
     hashtxt = open("hashdis.txt", "w+")
@@ -175,7 +175,7 @@ async def gethash(hash_q):
     else:
         await hash_q.reply(ans)
 
-@borg.on(outgoing=True, pattern="^\,base64 (en|de) (.*)")
+@borg.on(admin_cmd(pattern="^\,base64 (en|de) (.*)"))
 async def endecrypt(query):
     if query.pattern_match.group(1) == "en":
         lething = str(
