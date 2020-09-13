@@ -30,7 +30,7 @@ async def catmusic(cat , QUALITY):
   os.system(command)
 
 
-@borg.on(admin_cmd(pattern="song(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="soong(?: |$)(.*)"))
 async def _(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
