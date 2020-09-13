@@ -4,6 +4,7 @@ import time
 import math
 import heroku3
 import requests
+import spamwatch as spam_watch
 from ..helpers import *
 from .. import StartTime
 from userbot import catdef
@@ -72,6 +73,12 @@ def check_data_base_heal_th():
         is_database_working = True
     return is_database_working, output
 
+# spamwatch support
+if Config.SPAMWATCH_API:
+    token = Config.SPAMWATCH_API
+    spamwatch = spam_watch.Client(token)
+else:
+    spamwatch = None
 
 async def catalive():
     _, check_sgnirts = check_data_base_heal_th()
