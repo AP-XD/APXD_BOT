@@ -95,6 +95,9 @@ if bool(ENV):
 
     # Userbot logging feature switch.
     BOTLOG = sb(os.environ.get("BOTLOG", "False"))
+    
+    # For bit.ly plugin
+    BITLY_TOKEN = os.environ.get("BITLY_TOKEN", None)
 
     # Bleep Blop, this is a bot ;)
     PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))

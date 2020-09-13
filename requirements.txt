@@ -9,6 +9,7 @@ aria2p
 async_generator
 asyncurban
 beautifulsoup4==4.6.0
+bitlyshortener
 bs4
 bwb==3.0.0
 cairosvg
