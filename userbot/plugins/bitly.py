@@ -14,7 +14,7 @@ from userbot.utils import admin_cmd
 BIT_TOKEN = os.environ.get("BITLY_TOKEN", None)
 BOTLOG = True
 
-@telebot.on(admin_cmd(outgoing=True, pattern=r"bitly(?: |$)(.*)"))
+@borg.on(admin_cmd(outgoing=True, pattern=r"bitly(?: |$)(.*)"))
 async def shortener(short):
     """
         Shorten link using bit.ly API

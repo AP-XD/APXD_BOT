@@ -5,8 +5,8 @@ from telethon.errors.rpcerrorlist import StickersetInvalidError
 from telethon.errors import MessageNotModifiedError
 # (c)2020 TeleBot
 
-@telebot.on(admin_cmd(pattern="stickerize(?: |)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="stickerize(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="stickerize(?: |)(.*)"))
+@borg.on(sudo_cmd(outgoing=True, pattern="stickerize(?: |$)(.*)"))
 async def _(event):
   sender = await event.get_sender() ; me = await event.client.get_me()
   if not sender.id == me.id:
