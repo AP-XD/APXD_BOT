@@ -1,48 +1,62 @@
 """ Powered by @Google
 Available Commands:
 .gs <query>
+.grs """
 
-.grs"""
-
-
-
+import os
+from re import findall
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-from google_images_download import google_images_download
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
+from re import findall
+from search_engine_parser import GoogleSearch
+from userbot.uniborgConfig import Config
 
 
 def progress(current, total):
-    logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
+    logger.info(
+        "Downloaded {} of {}\nCompleted {}".format(
+            current,
+            total,
+            (current / total) * 100))
 
 
-@borg.on(admin_cmd(pattern="gs (.*)"))
-async def _(event):
-    if event.fwd_from:
-        return
-    start = datetime.now()
-    await event.edit("searching")
-    # SHOW_DESCRIPTION = False
-    input_str = event.pattern_match.group(1) # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
-    input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
-    headers = {"USER-AGENT": "UniBorg"}
-    response = requests.get(input_url, headers=headers).json()
-    output_str = " "
-    for result in response["results"]:
-        text = result.get("title")
-        url = result.get("url")
-        description = result.get("description")
-        image = result.get("image")
-        output_str += " 👉🏻  [{}]({}) \n\n".format(text, url)
-    end = datetime.now()
-    ms = (end - start).seconds
-    await event.edit("searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str), link_preview=False)
-    await asyncio.sleep(5)
-    await event.edit("**Google: {}\n{}**".format(input_str, output_str), link_preview=False)
+BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+BOTLOG = True
 
 
-
+@borg.on(admin_cmd(outgoing=True, pattern=r"gs (.*)"))
+async def gsearch(q_event):
+    """ For .google command, do a Google search. """
+    match = q_event.pattern_match.group(1)
+    page = findall(r"page=\d+", match)
+    try:
+        page = page[0]
+        page = page.replace("page=", "")
+        match = match.replace("page=" + page[0], "")
+    except IndexError:
+        page = 1
+    search_args = (str(match), int(page))
+    gsearch = GoogleSearch()
+    gresults = await gsearch.async_search(*search_args)
+    msg = ""
+    for i in range(len(gresults["links"])):
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"👉[{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
+    await q_event.edit("**Search Query:**\n`" + match + "`\n\n**Results:**\n" +
+                       msg,
+                       link_preview=False)
+    if BOTLOG:
+        await q_event.client.send_message(
+            BOTLOG_CHATID,
+            "Google Search query `" + match + "` was executed successfully",
+        )
 
 
 @borg.on(admin_cmd(pattern="grs"))
@@ -63,20 +77,25 @@ async def _(event):
             )
             SEARCH_URL = "{}/searchbyimage/upload".format(BASE_URL)
             multipart = {
-                "encoded_image": (downloaded_file_name, open(downloaded_file_name, "rb")),
-                "image_content": ""
-            }
+                "encoded_image": (
+                    downloaded_file_name,
+                    open(
+                        downloaded_file_name,
+                        "rb")),
+                "image_content": ""}
             # https://stackoverflow.com/a/28792943/4723940
-            google_rs_response = requests.post(SEARCH_URL, files=multipart, allow_redirects=False)
+            google_rs_response = requests.post(
+                SEARCH_URL, files=multipart, allow_redirects=False)
             the_location = google_rs_response.headers.get("Location")
             os.remove(downloaded_file_name)
         else:
             previous_message_text = previous_message.message
             SEARCH_URL = "{}/searchbyimage?image_url={}"
             request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
-            google_rs_response = requests.get(request_url, allow_redirects=False)
+            google_rs_response = requests.get(
+                request_url, allow_redirects=False)
             the_location = google_rs_response.headers.get("Location")
-        await event.edit("Found Google Result")
+        await event.edit("Found Google Result. Pouring some soup on it!")
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0"
         }
@@ -93,10 +112,6 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         OUTPUT_STR = """{img_size}
-*Possible Related Search*: <a href="{prs_url}">{prs_text}</a>
-
-More Info: Open this <a href="{the_location}">LINK</a> in {ms} seconds""".format(**locals())
+**Possible Related Search**: <a href="{prs_url}">{prs_text}</a>
+More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format(**locals())
     await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
-
-
- 
