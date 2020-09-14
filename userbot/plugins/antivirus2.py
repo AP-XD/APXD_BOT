@@ -1,11 +1,9 @@
 # Lots of lub to @r4v4n4 for gibing the base <3
-import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot.utils import admin_cmd,register
+from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd("scan ?(.*)"))
+@borg.on(admin_cmd(pattern="scan ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return 
