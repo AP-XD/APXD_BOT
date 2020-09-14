@@ -7,15 +7,13 @@ By:- @Zero_cool7870
 
 """
 
-from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
+from uniborg.util import admin_cmd
 import asyncio
 import os
 
 
 @borg.on(admin_cmd(pattern="ls ?(.*)"))
-@borg.on(admin_cmd(pattern="ls ?(.*)", allow_sudo=True))
 async def lst(event):
-	genesis = await edit_or_reply(event, "Processing")
 	if event.fwd_from:
 		return
 	input_str = event.pattern_match.group(1)
@@ -28,7 +26,7 @@ async def lst(event):
 	for file in files:
 		msg += "`{}`\n".format(file)
 	if len(msg) <= Config.MAX_MESSAGE_SIZE_LIMIT:
-		await genesis.edit(msg)
+		await event.edit(msg)
 	else:
 		msg = msg.replace("`","")
 		out = 'filesList.txt'

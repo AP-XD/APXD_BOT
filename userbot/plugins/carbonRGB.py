@@ -1,16 +1,21 @@
 """Carbon Scraper Plugin for Userbot. //text in creative way.
 usage: .karb //as a reply to any text message
 
-Thanks to @TeleBotHelp for THIS PLUGIN"""
+Thanks to @mariodevs for THIS PLUGIN"""
+
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+from telethon import events
 from urllib.parse import quote_plus
+from urllib.error import HTTPError
 from time import sleep
+import asyncio
 import os
 import random
 from userbot.utils import admin_cmd
 #@borg.on(events.NewMessage(pattern=r"\.karb ", outgoing=True))
-@borg.on(admin_cmd(pattern="karb"))
+@borg.on(admin_cmd(pattern="karb", allow_sudo=True))
 async def carbon_api(e):
  RED = random.randint(0,256)
  GREEN = random.randint(0,256)
@@ -91,11 +96,11 @@ async def carbon_api(e):
 
    await e.edit("⬛⬛⬛⬛⬛")
    file = './carbon.png'
-   await e.edit("⚡️ RGB Karbon Completed, Uploading RGB Karbon ⚡️")
+   await e.edit("✅RGB Karbon Completed, Uploading...........")
    await e.client.send_file(
          e.chat_id,
          file,
-         caption="Carbonised ⚡️",
+         caption="Carbonised by [FRIDAY](https://github.com/midhunkm1294-bit/Friday)",
          force_document=False,
          reply_to=e.message.reply_to_msg_id,
          )

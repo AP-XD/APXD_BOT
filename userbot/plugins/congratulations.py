@@ -1,6 +1,6 @@
 from telethon import events
 import random, re
-from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
+from uniborg.util import admin_cmd
 
 RUNSREACTS = [
     "`Congratulations and BRAVO!`",
@@ -16,10 +16,9 @@ RUNSREACTS = [
 ]
 
 @borg.on(admin_cmd(pattern="congo"))
-@borg.on(sudo_cmd(pattern="congo", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
          return
     bro = random.randint(0, len(RUNSREACTS) - 1)    
     reply_text = RUNSREACTS[bro]
-    await edit_or_reply(event, reply_text)
+    await event.edit(reply_text)

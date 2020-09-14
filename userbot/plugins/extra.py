@@ -24,7 +24,7 @@ async def leave(e):
 @borg.on(admin2_cmd("Lol$"))
 #@register(outgoing=True, pattern="^;__;$")
 async def lolo(e):
-    animation_ttl = range(0, 8)
+    animation_ttl = range(0, 16)
     t="lol"
     await e.edit(t)
     animation_chars = [
@@ -35,7 +35,7 @@ async def lolo(e):
         await asyncio.sleep(0.3)
         await e.edit(animation_chars[i % 2])
 
-@borg.on(admin2_cmd("Sad$"))
+@borg.on(admin2_cmd("sad$"))
 #@register(outgoing=True, pattern="^;__;$")
 async def fun(e):
     t = ";__;"
@@ -47,7 +47,7 @@ async def fun(e):
 #@register(outgoing=True, pattern="^yo$")
 async def Ooo(e):
     t = "Yo"
-    for j in range(5):
+    for j in range(8):
         t = t[:-1] + "oo"
         await e.edit(t)
 	
@@ -55,7 +55,7 @@ async def Ooo(e):
 #@register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
     t = "Hmmm"
-    for j in range(5):
+    for j in range(8):
         t = t[:-1] + "mm"
         await e.edit(t)
 	
@@ -63,7 +63,7 @@ async def Mmm(e):
 #@register(outgoing=True, pattern="^Hmm$")
 async def UFF(e):
     t = "Ufff"
-    for j in range(5):
+    for j in range(8):
         t = t[:-1] + "ff"
         await e.edit(t)
 
@@ -79,7 +79,7 @@ async def fck(e):
 #@register(outgoing=True, pattern="^yo$")
 async def Binod(e):
     t = "BINOD"
-    for j in range(5):
+    for j in range(8):
         t = t[:-1] + "DD"
         await e.edit(t)
 
@@ -88,7 +88,7 @@ async def Binod(e):
 #@register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
     t = "Oof"
-    for j in range(6):
+    for j in range(8):
         t = t[:-1] + "of"
         await e.edit(t)
 

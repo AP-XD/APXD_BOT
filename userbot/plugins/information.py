@@ -8,8 +8,8 @@ from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 
-@borg.on(admin_cmd("innfo ?(.*)"))
-@borg.on(sudo_cmd("innfo ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd("infow ?(.*)"))
+@borg.on(sudo_cmd("infow ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

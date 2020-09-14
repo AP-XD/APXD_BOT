@@ -11,7 +11,8 @@ import asyncio
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern=r"(.*)", outgoing=True))
+
+@borg.on(admin_cmd(pattern=r"ding"))
 
 async def _(event):
 
@@ -19,17 +20,17 @@ async def _(event):
 
         return
 
-    animation_interval = 0.3
+    animation_interval = 0.5
 
     animation_ttl = range(0, 10)
 
-    input_str = event.pattern_match.group(1)
+    #input_str = event.pattern_match.group(1)
 
-    if input_str == "ding":
+    #if input_str == "ding":
 
-        await event.edit(input_str)
+    await event.edit("dong")
 
-        animation_chars = [
+    animation_chars = [
         
             "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
@@ -40,12 +41,12 @@ async def _(event):
             "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
             "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-            "⬜⬜⬜⬜⬜\n⬜ [BECOME A VIDHAYAK](https://github.com/Dark-Princ3/X-tra-Telegram/) ⬜\n⬜⬜⬜⬜⬜"
+            "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜\n⬜  [FRIDAY IS BEST](https://github.com/midhunkm1294-bit/FRIDAY/) ⬜\n⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜"
 
  ]
 
-        for i in animation_ttl:
+    for i in animation_ttl:
 
-            await asyncio.sleep(animation_interval)
+        await asyncio.sleep(animation_interval)
 
-            await event.edit(animation_chars[i % 10])
+        await event.edit(animation_chars[i % 10])

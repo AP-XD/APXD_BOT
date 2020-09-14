@@ -7,15 +7,13 @@ credits :@mrconfused
 # don't edit credits 
 
 from geopy.geocoders import Nominatim
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.utils import admin_cmd
 from telethon.tl import types
 
 
 
 @borg.on(admin_cmd(pattern="gps ?(.*)"))
-@borg.on(sudo_cmd(pattern="gps ?(.*)", allow_sudo=True))
 async def gps(event):
-    starkislub = await edit_or_reply(event, "Processing")
     if event.fwd_from:
         return
     reply_to_id = event.message
@@ -24,9 +22,9 @@ async def gps(event):
     input_str = event.pattern_match.group(1)
 
     if not input_str:
-        return await starkislub.edit("what should i find give me location.")
+        return await event.edit("what should i find give me location.")
 
-    await starkislub.edit("finding")
+    await event.edit("finding")
 
     geolocator = Nominatim(user_agent="catuserbot")
     geoloc = geolocator.geocode(input_str)
@@ -44,6 +42,6 @@ async def gps(event):
         )
         await event.delete()
     else:
-        await starkislub.edit("i coudn't find it")
+        await event.edit("i coudn't find it")
         
         

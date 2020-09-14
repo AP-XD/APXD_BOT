@@ -10,21 +10,19 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 from google_images_download import google_images_download
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from userbot.utils import admin_cmd
 
 
 def progress(current, total):
     logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
 
 
-@borg.on(admin_cmd(pattern="search (.*)"))
-@borg.on(sudo_cmd(pattern="search (.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="google search (.*)"))
 async def _(event):
-    stark = await edit_or_reply(event, "`Processing Your Request`")
     if event.fwd_from:
         return
     start = datetime.now()
-    await stark.edit("`Trying To Connect...`")
+    await event.edit("Processing ...")
     # SHOW_DESCRIPTION = False
     input_str = event.pattern_match.group(1) # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
     input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
@@ -36,15 +34,15 @@ async def _(event):
         url = result.get("url")
         description = result.get("description")
         image = result.get("image")
-        output_str += "📃  [{}]({}) \n\n".format(text, url)
+        output_str += " 👉🏻  [{}]({}) \n\n".format(text, url)
     end = datetime.now()
     ms = (end - start).seconds
-    await stark.edit("searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str), link_preview=False)
+    await event.edit("searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str), link_preview=False)
     await asyncio.sleep(5)
-    await stark.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
+    await event.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
-@borg.on(admin_cmd(pattern="image (.*)"))
+@borg.on(admin_cmd(pattern="google image (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -85,7 +83,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="ggrs"))
+@borg.on(admin_cmd(pattern="google reverse search"))
 async def _(event):
     if event.fwd_from:
         return

@@ -1,6 +1,5 @@
 import os
 from telethon.tl.types import ChatBannedRights
-from pymongo import MongoClient
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     import os
@@ -12,8 +11,7 @@ if ENV:
         # Get your own ACCESS_KEY from http://api.screenshotlayer.com/api/capture
         SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get("SCREEN_SHOT_LAYER_ACCESS_KEY", None)
         # Send .get_id in any group to fill this value.
-        HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
-        HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
+
         # This is required for the plugins involving the file system.
         TMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
         # This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
@@ -36,9 +34,6 @@ if ENV:
         SPOTIFY_USERNAME = os.environ.get("SPOTIFY_USERNAME", None)
         SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
         SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
-        THUMB_IMAGE = os.environ.get(
-            "THUMB_IMAGE",
-            "https://telegra.ph/file/1959ecf64cbca739ef584.png")                                                            
         #
         PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", False))
         #
@@ -55,7 +50,7 @@ if ENV:
             view_messages=None,
             send_messages=True
         )
-        ALIVE_PIC=os.environ.get("ALIVE_PIC","https://telegra.ph/file/1959ecf64cbca739ef584.png")
+        ALIVE_PIC=os.environ.get("ALIVE_PIC","https://telegra.ph/file/e4d5011aa1fd76b742649.png")
         ALIVE_MSG=os.environ.get("ALIVE_MSG",None)
         # chat ids or usernames, it is recommended to use chat ids,
         # providing usernames means an additional overhead for the user
@@ -90,7 +85,6 @@ if ENV:
         # this should be a valid "regex" pattern
         COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", "\.")
         SUDO_COMMAND_HAND_LER = os.environ.get("SUDO_COMMAND_HAND_LER", "\.")
-        HELP_INLINETYPE = os.environ.get("HELP_INLINETYPE", None)
         # specify list of users allowed to use bot
         # WARNING: be careful who you grant access to your bot.
         # malicious users could do ".exec rm -rf /*"
@@ -109,7 +103,6 @@ if ENV:
         #Google Chrome Stuff
         CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver")
         GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
-        CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         # Google Drive ()
         G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
         G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
@@ -122,25 +115,10 @@ if ENV:
             t_file.close()
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
-        #MongoDB                       
+        #MongoDB
         MONGO_URI = os.environ.get("MONGO_URI", None)
-        # to work manager.py
-        DUAL_LOG = os.environ.get("DUAL_LOG", False) 
         #Lydia API
         LYDIA_API = os.environ.get("LYDIA_API",None)
-         # define the "types" that should be uplaoded as streamable
-        TL_VID_STREAM_TYPES = ("MKV", "MP4", "WEBM")
-        TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")                                            
-        WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")
-        TZ = os.environ.get("TZ", None)
-        # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
-        RSS_POST_MSG_GROUP_ID = os.environ.get("RSS_POST_MSG_GROUP_ID", None)
-        if RSS_POST_MSG_GROUP_ID:
-            RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
-        # SpamWatch API you can get it from get api from http://t.me/SpamWatchBot?start=token
-        SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
-        # SpamWatch, CAS, SpamProtection ban Needed or not
-        ANTISPAMBOT_BAN = os.environ.get("ANTISPAMBOT_BAN", False)                                                    
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", False))
 else:
