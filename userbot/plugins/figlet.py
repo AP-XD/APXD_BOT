@@ -4,7 +4,7 @@ from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 @borg.on(admin_cmd(pattern="figlet ?(.*)", outgoing=True))
 @borg.on(sudo_cmd(pattern="figlet ?(.*)", allow_sudo=True))
 async def figlet(event):
-    arjun = await edit_or_reply(event, "`Figleting This Text PIKAA ⚡️`")
+    arjun = await edit_or_reply(event, "`Figleting This Text `")
     if event.fwd_from:
         return
     CMD_FIG = {"slant": "slant", "3D": "3-d", "5line": "5lineoblique", "alpha": "alphabet", "banner": "banner3-D", "doh": "doh", "iso": "isometric1", "letter": "letters", "allig": "alligator", "dotm": "dotmatrix", "bubble": "bubble", "bulb": "bulbhead", "digi": "digital"}
@@ -27,4 +27,3 @@ async def figlet(event):
     else:
         result = pyfiglet.figlet_format(text)
     await arjun.edit("‌‌‎`{}`".format(result))
-    await event.delete()
