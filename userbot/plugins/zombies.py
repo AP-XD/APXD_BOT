@@ -41,7 +41,6 @@ BANNED_RIGHTS = ChatBannedRights(
     embed_links=True,
 )
 
-
 UNBAN_RIGHTS = ChatBannedRights(
     until_date=None,
     send_messages=None,

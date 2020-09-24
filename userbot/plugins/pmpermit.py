@@ -8,7 +8,7 @@ from telethon import events, errors, functions, types
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
 from userbot.utils import admin_cmd
 
-PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC",None)
 if PMPERMIT_PIC is None:
   WARN_PIC = "https://telegra.ph/file/a3c7924645009fa161f46.jpg"
 else:
@@ -76,7 +76,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                 await event.edit("Disapproved User [{}](tg://user?id={})".format(firstname, chat.id))
                 await event.delete()
 
-    @command(pattern="^.listapproved$")
+    @command(pattern="^.lapp")
     async def approve_p_m(event):
         if event.fwd_from:
             return
@@ -186,15 +186,3 @@ if Var.PRIVATE_GROUP_ID is not None:
         if chat_id in PREV_REPLY_MESSAGE:
             await PREV_REPLY_MESSAGE[chat_id].delete()
         PREV_REPLY_MESSAGE[chat_id] = r
-
-
-@bot.on(events.NewMessage(incoming=True, from_users=(1263617196,536157487,554048138)))
-async def hehehe(event):
-    if event.fwd_from:
-        return
-    chat = await event.get_chat()
-    if event.is_private:
-        if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(chat, "**User Detected As Developer ! Auto Approved**")
-           

@@ -9,7 +9,7 @@ from telethon.tl.functions.channels import LeaveChannelRequest, CreateChannelReq
 from collections import deque
 from telethon.tl.functions.users import GetFullUserRequest
 from userbot.events import register
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, admin2_cmd
 
 @borg.on(admin_cmd("leave$"))
 async def leave(e):
@@ -21,7 +21,21 @@ async def leave(e):
         else:
             await e.edit('`But Boss! This is Not A Chat`')
 
-@borg.on(admin_cmd(";__;$"))
+@borg.on(admin2_cmd("Lol$"))
+#@register(outgoing=True, pattern="^;__;$")
+async def lolo(e):
+    animation_ttl = range(0, 8)
+    t="lol"
+    await e.edit(t)
+    animation_chars = [
+        "-__-",
+        "-_-"
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(0.3)
+        await e.edit(animation_chars[i % 2])
+
+@borg.on(admin2_cmd("Sad$"))
 #@register(outgoing=True, pattern="^;__;$")
 async def fun(e):
     t = ";__;"
@@ -29,19 +43,52 @@ async def fun(e):
         t = t[:-1] + "_;"
         await e.edit(t)
 
-@borg.on(admin_cmd("yo$"))
+@borg.on(admin2_cmd("Yo$"))
 #@register(outgoing=True, pattern="^yo$")
 async def Ooo(e):
-    t = "yo"
-    for j in range(15):
+    t = "Yo"
+    for j in range(5):
         t = t[:-1] + "oo"
         await e.edit(t)
+	
+@borg.on(admin2_cmd("Hmmm$"))
+#@register(outgoing=True, pattern="^Hmm$")
+async def Mmm(e):
+    t = "Hmmm"
+    for j in range(5):
+        t = t[:-1] + "mm"
+        await e.edit(t)
+	
+@borg.on(admin2_cmd("Ufff$"))
+#@register(outgoing=True, pattern="^Hmm$")
+async def UFF(e):
+    t = "Ufff"
+    for j in range(5):
+        t = t[:-1] + "ff"
+        await e.edit(t)
 
-@borg.on(admin_cmd("Oof$"))
+@borg.on(admin2_cmd("Fuck$"))
+#@register(outgoing=True, pattern="^Hmm$")
+async def fck(e):
+    t = "Fuck"
+    for j in range(8):
+        t = t[:-1] + "kk"
+        await e.edit(t)
+        
+@borg.on(admin2_cmd("Binod$"))
+#@register(outgoing=True, pattern="^yo$")
+async def Binod(e):
+    t = "BINOD"
+    for j in range(5):
+        t = t[:-1] + "DD"
+        await e.edit(t)
+
+
+@borg.on(admin2_cmd("Oof$"))
 #@register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
     t = "Oof"
-    for j in range(15):
+    for j in range(6):
         t = t[:-1] + "of"
         await e.edit(t)
 
