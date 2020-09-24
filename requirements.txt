@@ -7,6 +7,7 @@ aiofiles
 aiohttp
 async_generator
 asyncurban
+aria2p
 beautifulsoup4==4.6.0
 bitlyshortener
 bs4
