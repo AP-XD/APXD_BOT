@@ -41,7 +41,7 @@ if ENV:
             "https://telegra.ph/file/1959ecf64cbca739ef584.png")                                                            
         #
         PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", False))
-        #
+        YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         # DO NOT EDIT BELOW THIS LINE IF YOU DO NOT KNOW WHAT YOU ARE DOING
         # TG API limit. A message can have maximum 4096 characters!
         MAX_MESSAGE_SIZE_LIMIT = 4095
