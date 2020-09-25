@@ -11,4 +11,4 @@ async def _(event):
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    await starkislub.edit("**Pong!**\n`{}`\n [丂𝙋⚡️ㄕ𝙄𝙆𝘼𝘾𝙃𝙐𒁂ᴾᴿᴼ𒋨ᵛᶰᴳᵒᵈシ](https://t.me/pik0chu007)".format(ms))
+    await starkislub.edit("**Pong!**\n`{}`\n Bot of PERU Master ༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ".format(ms))
