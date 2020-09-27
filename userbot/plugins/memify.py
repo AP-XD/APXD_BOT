@@ -1,5 +1,4 @@
 """
-Created by @mrconfused and @sandy1709
 memify plugin
 """
 import os

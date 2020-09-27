@@ -6,6 +6,7 @@ Available Commands:
 .em -_-"""
 from telethon import events
 import asyncio
+
 from uniborg.util import admin_cmd
 
 
@@ -22,19 +23,13 @@ async def _(event):
         await event.edit("\uF8FF")
     elif input_str == ":/":
         await event.edit(input_str)
-        animation_chars = [
-            ":\\",
-            ":/"
-        ]
+        animation_chars = [":\\", ":/"]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 2])
     elif input_str == "lol":
         await event.edit(input_str)
-        animation_chars = [
-            "-__-",
-            "-_-"
-        ]
+        animation_chars = ["-__-", "-_-"]
         for i in animation_ttl:
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 2])

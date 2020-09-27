@@ -7,7 +7,6 @@ from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.utils import admin_cmd
 
-# Added to TeleBot by @its_xditya# Added to TeleBot by @its_xditya
 @borg.on(admin_cmd(pattern=r"administrator", outgoing=True))
 async def _(event):
     if event.fwd_from:
@@ -31,7 +30,7 @@ async def _(event):
         return
     mentions = "Hello"
     chat = await event.get_input_chat()
-    async for x in borg.iter_participants(chat, 300):
+    async for x in borg.iter_participants(chat, 350):
         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
     await event.reply(mentions)
     await event.delete()
