@@ -8,7 +8,7 @@ from uniborg.util import admin_cmd, sudo_cmd, edit_or_reply
 from userbot import ALIVE_NAME
 from telethon.tl.types import ChannelParticipantsAdmins
 
-uptime = get_readable_time((time.time() - uptimebot))
+uptime = get_readable_time((time.time() - StartTime))
 issudousing = Config.SUDO_USERS
 islogokay = Config.PRIVATE_GROUP_ID
 currentversion = "3.0"
