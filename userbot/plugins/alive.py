@@ -1,7 +1,7 @@
 """Check if userbot alive. If you change these, you become the gayest gay such that even the gay world will disown you."""
 # IMG CREDITS: @WhySooSerious
 import time
-
+from userbot.__init__ import StartTime
 from uniborg.util import admin_cmd, sudo_cmd
 
 from userbot import ALIVE_NAME

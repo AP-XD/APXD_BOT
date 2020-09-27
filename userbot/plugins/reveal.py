@@ -1,6 +1,15 @@
+#  (c)2020 borg
+#
+# You may not use this plugin without proper authorship and consent from @borgSupport
+#
+# By @buddhhu, @Itzsjdude
+#
 import os
-from userbot.utils import admin_cmd
-@borg.on(admin_cmd(pattern=r"reveal"))
+from userbot.utils import admin_cmd, sudo_cmd
+
+@borg.on(admin_cmd(pattern=r"reveal", outgoing=True))
+@borg.on(sudo_cmd(pattern=r"reveal", incoming=True, allow_sudo=True))
+
 async def _(event):
     b = await event.client.download_media(await event.get_reply_message())
     a = open(b, 'r')
