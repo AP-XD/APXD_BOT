@@ -23,7 +23,7 @@ else:
     logchat = "Dis-Connected ❌"
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
-PM_IMG = "https://telegra.ph/file/f9481eff7100a09d13129.png"
+PM_IMG = "https://telegra.ph/file/1c4df5d90d6e68e417348.png"
 pm_caption = "➥ **FRIDAY IS:** `ONLINE`\n\n"
 pm_caption += "➥ **SYSTEMS STATS**\n"
 pm_caption += "➥ **Telethon Version:** `1.15.0` \n"
