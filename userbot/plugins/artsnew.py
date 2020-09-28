@@ -67,7 +67,7 @@ async def _(event):
     await event.edit(":/")
 
 
-@borg.on(admin_cmd(pattern="emoji ?(.*)"))
+@borg.on(admin_cmd(pattern="emmoji ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

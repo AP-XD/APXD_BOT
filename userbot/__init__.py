@@ -27,13 +27,12 @@ telever = "3.95"
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
-                                  
-                             
-    bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
-                       
-                         
-                                         
-                                         
+    if session_name.endswith("="):                                                           
+        bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
+    else:
+        bot = TelegramClient(
+            "TG_BOT_TOKEN", api_id=Var.APP_ID, api_hash=Var.API_HASH
+        ).start(bot_token=Var.STRING_SESSION)                                                           
 else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
@@ -84,7 +83,7 @@ if bool(ENV):
         pass
 
     # Userbot logging feature switch.
-    BOTLOG = sb(os.environ.get("BOTLOG", "False"))
+    BOTLOG = sb(os.environ.get("BOTLOG", "True"))
     
     # For bit.ly plugin
     BITLY_TOKEN = os.environ.get("BITLY_TOKEN", None)
@@ -205,3 +204,8 @@ CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
 # End of PaperPlaneExtended Support Vars
+# showing imports error
+
+from .helpers import *
+from .helpers import functions as catdef
+from .helpers import memeshelper as memes                    
