@@ -104,7 +104,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
             except:
-            with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
+              with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
                 out_file.name = "{}.txt".format(plugin_name)
                 await bot.send_file(
                     event.chat_id,
