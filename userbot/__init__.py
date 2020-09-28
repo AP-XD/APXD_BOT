@@ -19,11 +19,10 @@ from .function import fridayfunction as topfunc
 from .helpers import fonts as fonts, functions as catdef
 from .helpers import memeshelper as memes
 from .helpers import tempmemes, process as process                             
-StartTime = time.time()                                                 
-catversion = "2.7.2"
+StartTime = time.time()
+catversion = "2.8.0"
 Lastupdate = time.time()
-
-from var import Var
+telever = "3.95"
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
@@ -135,7 +134,7 @@ if bool(ENV):
 
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
-
+    AUTONAME = os.environ.get("AUTONAME", None)
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", True)
 
     # Time & Date - Country and Time Zone
