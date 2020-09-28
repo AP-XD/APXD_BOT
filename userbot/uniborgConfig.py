@@ -159,7 +159,9 @@ if ENV:
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", False))
         NEWS_CHANNEL_ID = int(os.environ.get("NEWS_CHANNEL_ID", False))
-
+        #open load
+        OPEN_LOAD_LOGIN = os.environ.get("OPEN_LOAD_LOGIN", None)
+        OPEN_LOAD_KEY = os.environ.get("OPEN_LOAD_KEY", None)
 
 else:
 
