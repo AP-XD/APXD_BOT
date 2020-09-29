@@ -1,11 +1,13 @@
 """Check if userbot alive. If you change these, you become the gayest gay such that even the gay world will disown you."""
-# IMG CREDITS: @WhySooSerious
+# CREDITS: @WhySooSerious, @Sur_vivor
 import time
-from userbot.__init__ import StartTime
 from uniborg.util import admin_cmd, sudo_cmd
-from telethon import events
 from userbot import ALIVE_NAME
+from datetime import datetime
+from userbot import Lastupdate
+from userbot.plugins import currentversion
 
+#Functions
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -32,22 +34,8 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
-    
-uptime = get_readable_time((time.time() - StartTime))
-issudousing = Config.SUDO_USERS
-islogokay = Config.PRIVATE_GROUP_ID
-currentversion = "3.0"
 
-if issudousing:
-    amiusingsudo = "Active ✅"
-else:
-    amiusingsudo = "Inactive ❌"
-
-if islogokay:
-    logchat = "Connected ✅"
-else:
-    logchat = "Dis-Connected ❌"
-
+uptime = get_readable_time((time.time() - Lastupdate))
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
 PM_IMG = "https://telegra.ph/file/1c4df5d90d6e68e417348.png"
 pm_caption = "➥ **FRIDAY IS:** `ONLINE`\n\n"
@@ -56,16 +44,14 @@ pm_caption += "➥ **Telethon Version:** `1.15.0` \n"
 pm_caption += "➥ **Python:** `3.7.4` \n"
 pm_caption += f"➥ **Uptime** : `{uptime}` \n"
 pm_caption += "➥ **Database Status:**  `Functional`\n"
-pm_caption += "➥ **OS** : `Slim Buster` \n"
-pm_caption += "➥ **Current Branch** : `Master`\n"
+pm_caption += "➥ **Current Branch** : `master`\n"
 pm_caption += f"➥ **Version** : `{currentversion}`\n"
-pm_caption += f"➥ **Sudo** : `{amiusingsudo}`\n"
-pm_caption += f"➥ **Log Connections** : `{logchat}` \n"
 pm_caption += f"➥ **My Boss** : {DEFAULTUSER} \n"
 pm_caption += "➥ **Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "➥ **License** : [GNU General Public License v3.0](github.com/StarkGang/FridayUserbot/blob/master/LICENSE)\n"
 pm_caption += "➥ **Copyright** : By [StarkGang@Github](GitHub.com/StarkGang)\n"
-pm_caption += "[Deploy FridayUserbot 🇮🇳](https://telegra.ph/FRIDAY-06-15)"
+pm_caption += "➥ **Check Stats By Doing** `.stat`. \n\n"
+pm_caption += "[🇮🇳 Deploy FridayUserbot 🇮🇳](https://telegra.ph/FRIDAY-06-15)"
 
 
 @borg.on(admin_cmd(pattern=r"alive"))

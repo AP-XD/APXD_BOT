@@ -65,7 +65,7 @@ pytuneteller
 pytz
 qrcode
 regex
-requests>=2.18.4
+requests
 search-engine-parser>=0.4.2
 selenium
 spamwatch
