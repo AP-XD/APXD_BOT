@@ -18,7 +18,7 @@ async def start(event):
     if vent == bot.uid:
         await tgbot.send_message(
            vent,
-           message="Hi Master, It's Me Your Assistant.",
+           message="Hi Master,\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ \n It's Me Your Assistant.",
            buttons = [
            [Button.url("Repo 🛡️", "https://github.com/StarkGang/FridayUserbot")],
            [Button.url("Join Channel 📃", "t.me/Fridayot")]

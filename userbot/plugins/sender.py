@@ -34,6 +34,6 @@ async def send(event):
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
-    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})\n© @TeleBotSupport")
+    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})")
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()

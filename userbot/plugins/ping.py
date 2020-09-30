@@ -42,4 +42,4 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await event.edit(f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🤖Uptime ->  `{ms}` \n ➲ `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ")
+    await event.edit(f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ")
