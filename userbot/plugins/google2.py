@@ -26,7 +26,7 @@ BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 BOTLOG = True
 
 
-@borg.on(admin_cmd(outgoing=True, pattern=r"gs (.*)"))
+@borg.on(admin_cmd(outgoing=True, pattern=r"go (.*)"))
 async def gsearch(q_event):
     """ For .google command, do a Google search. """
     match = q_event.pattern_match.group(1)
