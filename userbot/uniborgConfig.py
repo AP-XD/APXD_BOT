@@ -162,6 +162,7 @@ if ENV:
         #open load
         OPEN_LOAD_LOGIN = os.environ.get("OPEN_LOAD_LOGIN", None)
         OPEN_LOAD_KEY = os.environ.get("OPEN_LOAD_KEY", None)
+        PM_DATA = os.environ.get("PM_DATA", "ENABLE")
 
 else:
 
