@@ -95,15 +95,3 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 15])
-
-CMD_HELP.update({
-    "hack":
-    ".hack reply to a person\
-    \n USAGE: shows a animation of hacking progess bar\
-    \n\n .thack reply to a person\
-    \n USAGE: shows aanimation of hacking replied person telegram account\
-    \n\n .wahack reply to a person\
-    \n USAGE: shows aanimation of hacking replied person whatsapp account\
-    "
-    "\n\n\n **don't use this animation commands in group i am not responsible for your ban.**"
-})
