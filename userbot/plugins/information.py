@@ -1,6 +1,4 @@
-"""Get Telegram Profile Picture and other information
-Syntax: .infow @username"""
-
+"""Get Telegram Profile Picture and other information"""
 import html
 
 from telethon.tl.functions.photos import GetUserPhotosRequest
