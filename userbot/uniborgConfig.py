@@ -22,6 +22,16 @@ if ENV:
         TMP_DOWNLOAD_DIRECTORY = os.environ.get(
             "TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/"
         )
+        DEEPAI_KEY = os.environ.get("DEEPAI_KEY", None)
+        FIRST_NAME = os.environ.get("FIRST_NAME", None)
+        LAST_NAME = os.environ.get("LAST_NAME", None)
+        DEF_BIO = os.environ.get("DEF_BIO", None)   
+        PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
+        if PLUGIN_GROUP:
+            PLUGIN_GROUP = int(PLUGIN_GROUP)
+        G_BAN_LOGGER_GROUP = os.environ.get("BOTLOG_CHATID", None)
+        if G_BAN_LOGGER_GROUP:
+            G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
         # This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
         IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
         IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)

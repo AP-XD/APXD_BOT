@@ -121,7 +121,6 @@ def load_module(shortname):
         sys.modules["global_variables_sql"] = userbot.plugins.sql_helper.global_variables_sql
         sys.modules["userbot.config"] = heroku_config
         sys.modules["userbot.sample_config"] = heroku_config
-        sys.modules["userbot.uniborgConfig"] = heroku_config
         mod.Config = Config
         mod.borg = bot
         mod.friday = bot
