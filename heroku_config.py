@@ -51,6 +51,7 @@ class Var(object):
     NEWS_CHANNEL_ID = int(os.environ.get("NEWS_CHANNEL_ID", -100))
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ANTISPAM_SYSTEM = os.environ.get("ANTISPAM_SYSTEM", "DISABLE")
+    UB_BLACK_LIST_CHAT = set(int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split())
     WHITE_CHAT = set(int(x) for x in os.environ.get("WHITE_CHAT", "").split())
 
 
