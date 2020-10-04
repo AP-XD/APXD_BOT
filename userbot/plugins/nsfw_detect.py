@@ -5,7 +5,7 @@
 """Detects Nsfw content with the help of A.I."""
 
 import os, requests
-
+import userbot.utils
 @plus_ub(pattern=r"nsfw", from_users=sudo)
 async def detect_(event):
     """detect nsfw"""
