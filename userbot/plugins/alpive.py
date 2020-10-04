@@ -9,7 +9,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet."
 ALIVE_PIC = os.environ.get("ALIVE_PIC", None)
 PLUSPIC = ALIVE_PIC
 
-@plus_ub(pattern="alpive$", from_users=sudo)
+@plus_ub(pattern="alpive$")
 async def iamalive(alive):
     if alive.fwd_from:
         return
