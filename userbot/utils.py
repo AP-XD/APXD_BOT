@@ -87,22 +87,22 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-
         import userbot.utils
-
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        print("Successfully (re)imported " + shortname)
+        print("༒★彡☣️Successfully (re)imported☣️彡★༒ " + shortname)
     else:
+        import heroku_config
         import importlib
         import sys
         from pathlib import Path
-
+        from var import Var, Config
         import userbot.utils
-
+        from userbot.utils import plus_ub
+        import userbot.plugins.sql_helper.global_variables_sql
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
