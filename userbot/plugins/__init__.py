@@ -11,8 +11,27 @@ from .. import StartTime
 from userbot import catdef
 from userbot.uniborgConfig import Config
 from userbot.utils import admin_cmd
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, scoped_session
 from var import Var 
+UP = "**2.1.0**"
+def start() -> scoped_session:
+    engine = create_engine(Var.DB_URI)
+    BASE.metadata.bind = engine
+    BASE.metadata.create_all(engine)
+    return scoped_session(sessionmaker(bind=engine, autoflush=False))
 
+
+try:
+    BASE = declarative_base()
+    SESSION = start()
+except AttributeError as e:
+    # this is a dirty way for the work-around required for #23
+    print("DB_URI is not configured. Features depending on the database might have issues.")
+    print(str(e))
+    
+    
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 idgen = topfunc.id_generator
 findnemo = topfunc.stark_finder
