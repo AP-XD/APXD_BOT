@@ -110,20 +110,81 @@ def load_module(shortname):
         mod.bot = bot
         mod.tgbot = bot.tgbot
         mod.Var = Var
+        mod.plus_ub = plus_ub
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
         sys.modules["uniborg.util"] = userbot.utils
         sys.modules["friday.util"] = userbot.utils
+        sys.modules["plus.utils"] = userbot.utils
+        sys.modules["global_variables"] = userbot.plugins.sql_helper.global_variables_sql
+        sys.modules["global_variables_sql"] = userbot.plugins.sql_helper.global_variables_sql
+        sys.modules["userbot.config"] = heroku_config
+        sys.modules["userbot.sample_config"] = heroku_config
+        sys.modules["userbot.uniborgConfig"] = heroku_config
         mod.Config = Config
         mod.borg = bot
         mod.friday = bot
-        # support for paperplaneextended
+        mod.sudo = Var.SUDO_USERS
+        mod.plus = bot
         sys.modules["userbot.events"] = userbot.utils
+        # support for paperplaneextended
         spec.loader.exec_module(mod)
         # for imports
         sys.modules["userbot.plugins." + shortname] = mod
-        print("Successfully imported " + shortname)
+        print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
+
+def plus_ub(**args):
+    args["func"] = lambda e: e.via_bot_id is None
+    
+    stack = inspect.stack()
+    previous_stack_frame = stack[1]
+    file_test = Path(previous_stack_frame.filename)
+    file_test = file_test.stem.replace(".py", "")
+    pattern = args.get("pattern", None)
+    disable_edited = args.get('disable_edited', True)
+
+    # get the pattern from the decorator
+    if pattern is not None:
+        if pattern.startswith("\#"):
+            # special fix for snip.py
+            args["pattern"] = re.compile(pattern)
+        else:
+            args["pattern"] = re.compile(plug + pattern)
+            cmd = plug + pattern
+            try:
+                CMD_LIST[file_test].append(cmd)
+            except:
+                CMD_LIST.update({file_test: [cmd]})
+                
+
+    # add blacklist chats, UB should not respond in these chats
+    args["blacklist_chats"] = True
+    black_list_chats = list(Var.UB_BLACK_LIST_CHAT)
+    if len(black_list_chats) > 0:
+        args["chats"] = black_list_chats
+
+    # check if the plugin should allow edited updates
+    allow_edited_updates = False
+    if "allow_edited_updates" in args and args["allow_edited_updates"]:
+        allow_edited_updates = args["allow_edited_updates"]
+        del args["allow_edited_updates"]
+
+    # check if the plugin should listen for outgoing 'messages'
+    is_message_enabled = True
+
+    def decorator(func):
+        if not disable_edited:
+            bot.add_event_handler(func, events.MessageEdited(**args))
+        bot.add_event_handler(func, events.NewMessage(**args))
+        try:
+            LOAD_PLUG[file_test].append(func)
+        except Exception as e:
+            LOAD_PLUG.update({file_test: [func]})
+
+        return func
+
+    return decorator
 
 
 def remove_plugin(shortname):
@@ -403,6 +464,22 @@ def humanbytes(size):
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
+async def is_read(borg, entity, message, is_out=None):
+    """
+    Returns True if the given message (or id) has been read
+    if a id is given, is_out needs to be a bool
+    """
+    is_out = getattr(message, "out", is_out)
+    if not isinstance(is_out, bool):
+        raise ValueError(
+            "Message was id but is_out not provided or not a bool")
+    message_id = getattr(message, "id", message)
+    if not isinstance(message_id, int):
+        raise ValueError("Failed to extract id from message")
+
+    dialog = (await borg(GetPeerDialogsRequest([entity]))).dialogs[0]
+    max_id = dialog.read_outbox_max_id if is_out else dialog.read_inbox_max_id
+    return message_id <= max_id
 
 def time_formatter(milliseconds: int) -> str:
     """Inputs time in milliseconds, to get beautified time,
@@ -419,7 +496,33 @@ def time_formatter(milliseconds: int) -> str:
         + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     )
     return tmp[:-2]
+    
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    up_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
 
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        up_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    up_time += ":".join(time_list)
+
+    return up_time
 
 class Loader:
     def __init__(self, func=None, **args):

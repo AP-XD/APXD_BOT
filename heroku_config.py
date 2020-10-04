@@ -8,6 +8,7 @@ class Var(object):
     STRING_SESSION = os.environ.get("STRING_SESSION", None)
     DB_URI = os.environ.get("DATABASE_URL", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", None)
+    DEEPAI_KEY = os.environ.get("DEEPAI_KEY", None)
     LOGGER = True
     GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
     GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
@@ -19,8 +20,18 @@ class Var(object):
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     TG_BOT_TOKEN_BF_HER = os.environ.get("TG_BOT_TOKEN_BF_HER", None)
     # Send .get_id in any channel to fill this value.
+    FIRST_NAME = os.environ.get("FIRST_NAME", None)
+    LAST_NAME = os.environ.get("LAST_NAME", None)
+    DEF_BIO = os.environ.get("DEF_BIO", None)
     PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", -100))
+    PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
+    if PLUGIN_GROUP:
+        PLUGIN_GROUP = int(PLUGIN_GROUP)
     PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", -100))
+    G_BAN_LOGGER_GROUP = os.environ.get("BOTLOG_CHATID", None)
+    if G_BAN_LOGGER_GROUP:
+        G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
+    TG_GLOBAL_ALBUM_LIMIT = int(os.environ.get("TG_GLOBAL_ALBUM_LIMIT", 9))
     TG_BOT_USER_NAME_BF_HER = os.environ.get("TG_BOT_USER_NAME_BF_HER", None)
     NO_SONGS = bool(os.environ.get("NO_SONGS", False))
     DOWNLOAD_PFP_URL_CLOCK = os.environ.get("DOWNLOAD_PFP_URL_CLOCK", None)
