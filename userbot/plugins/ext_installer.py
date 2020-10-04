@@ -6,7 +6,7 @@ from pathlib import Path
 import userbot.utils
 import os
 
-@plus_ub(pattern=r"installall$", from_users=sudo)
+@plus_ub(pattern=r"installall$")
 async def install(event):
 	if event.fwd_from:
 		return
