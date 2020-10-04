@@ -10,7 +10,7 @@
 import userbot.utils
 import asyncio
 
-@plus_ub(pattern="find (.*)", from_users=sudo)
+@plus_ub(pattern="find (.*)")
 async def _(event):
     chat='@songdl_Bot'
     input_str = str(event.text[6:])

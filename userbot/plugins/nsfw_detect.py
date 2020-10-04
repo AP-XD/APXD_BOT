@@ -6,7 +6,7 @@
 
 import os, requests
 import userbot.utils
-@plus_ub(pattern=r"nsfw", from_users=sudo)
+@plus_ub(pattern=r"nsfw")
 async def detect_(event):
     """detect nsfw"""
     reply = await event.client.download_media(await event.get_reply_message(), )

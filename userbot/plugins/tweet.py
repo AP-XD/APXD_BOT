@@ -33,7 +33,7 @@ def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return re.sub(EMOJI_PATTERN, '', inputString)
     
-@plus_ub(pattern="trump ?(.*)", from_users=sudo)
+@plus_ub(pattern="trump ?(.*)")
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
@@ -58,7 +58,7 @@ async def trumptweet(event):
     await b.delete()
 
 
-@plus_ub(pattern="mind ?(.*)", from_users=sudo)
+@plus_ub(pattern="mind ?(.*)")
 async def changemymind(e):
     args = e.pattern_match.group(1)
     if not args and not e.reply_to_msg_id:
@@ -82,7 +82,7 @@ async def changemymind(e):
     await a.delete()
 
 
-@plus_ub(pattern="kanna ?(.*)", from_users=sudo)
+@plus_ub(pattern="kanna ?(.*)")
 async def kannagen(e):
     args = e.pattern_match.group(1)
     if not args and not e.reply_to_msg_id:
@@ -106,7 +106,7 @@ async def kannagen(e):
     await a.delete()
 
 
-@plus_ub(pattern="modi ?(.*)", from_users=sudo)
+@plus_ub(pattern="modi ?(.*)")
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
@@ -130,7 +130,7 @@ async def trumptweet(event):
     await a.delete()
 
 
-@plus_ub(pattern="tweet ?(.*)", from_users=sudo)
+@plus_ub(pattern="tweet ?(.*)")
 async def nekobot(cat):
     kk = cat.pattern_match.group(1)
     replied = await cat.get_reply_message()
@@ -170,7 +170,7 @@ async def tweets(text1, text2):
     return "temp.webp"
 
 
-@plus_ub(pattern="carry ?(.*)", from_users=sudo)
+@plus_ub(pattern="carry ?(.*)")
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
