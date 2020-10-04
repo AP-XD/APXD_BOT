@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 from telethon import events
 from userbot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
+from userbot import *
 from userbot.uniborgConfig import Config
 from userbot import LOAD_PLUG
 from userbot import CMD_LIST, SUDO_LIST, bot
@@ -108,6 +109,7 @@ def load_module(shortname):
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
         mod.tgbot = bot.tgbot
+        mod.plus_ub = plus_ub
         mod.Var = Var
         mod.command = command
         mod.logger = logging.getLogger(shortname)
@@ -122,7 +124,6 @@ def load_module(shortname):
         spec.loader.exec_module(mod)
         mod.plus = bot
         mod.sudo = Var.SUDO_USERS
-        mod.plus_ub = plus_ub
         sys.modules["plus.utils"] = userbot.utils
         sys.modules["global_variables"] = userbot.plugins.sql_helper.global_variables_sql
         sys.modules["global_variables_sql"] = userbot.plugins.sql_helper.global_variables_sql
@@ -181,7 +182,7 @@ def plus_ub(**args):
         return func
 
     return decorator
-
+ 
 
 def remove_plugin(shortname):
     try:
