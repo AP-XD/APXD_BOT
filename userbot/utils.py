@@ -95,14 +95,13 @@ def load_module(shortname):
         spec.loader.exec_module(mod)
         print("༒★彡☣️Successfully (re)imported☣️彡★༒ " + shortname)
     else:
-        import heroku_config
         import importlib
         import sys
         from pathlib import Path
-        from var import Var, Config
-        import userbot.utils
         from userbot.utils import plus_ub
         import userbot.plugins.sql_helper.global_variables_sql
+        import userbot.utils
+
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -110,25 +109,23 @@ def load_module(shortname):
         mod.bot = bot
         mod.tgbot = bot.tgbot
         mod.Var = Var
-        mod.plus_ub = plus_ub
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
         sys.modules["uniborg.util"] = userbot.utils
         sys.modules["friday.util"] = userbot.utils
-        sys.modules["plus.utils"] = userbot.utils
-        sys.modules["global_variables"] = userbot.plugins.sql_helper.global_variables_sql
-        sys.modules["global_variables_sql"] = userbot.plugins.sql_helper.global_variables_sql
-        sys.modules["userbot.config"] = heroku_config
-        sys.modules["userbot.sample_config"] = heroku_config
         mod.Config = Config
         mod.borg = bot
         mod.friday = bot
-        mod.sudo = Var.SUDO_USERS
-        mod.plus = bot
-        sys.modules["userbot.events"] = userbot.utils
         # support for paperplaneextended
+        sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
+        mod.plus = bot
+        mod.sudo = Var.SUDO_USERS
+        mod.plus_ub = plus_ub
+        sys.modules["plus.utils"] = userbot.utils
+        sys.modules["global_variables"] = userbot.plugins.sql_helper.global_variables_sql
+        sys.modules["global_variables_sql"] = userbot.plugins.sql_helper.global_variables_sql
         # for imports
         sys.modules["userbot.plugins." + shortname] = mod
         print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
