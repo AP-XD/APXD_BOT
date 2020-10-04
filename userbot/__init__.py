@@ -12,7 +12,9 @@ from pySmartDL import SmartDL
 from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-
+from logging import basicConfig, getLogger, INFO, DEBUG
+from distutils.util import strtobool as sb
+import asyncio
 from var import Var
 
 from .function import fridayfunction as topfunc
@@ -20,6 +22,7 @@ from .helpers import fonts as fonts, functions as catdef
 from .helpers import memeshelper as memes
 from .helpers import tempmemes, process as process                             
 StartTime = time.time()
+UpTime = time.time()
 catversion = "2.8.0"
 Lastupdate = time.time()
 telever = "3.95"
@@ -116,8 +119,12 @@ if bool(ENV):
     PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
     # PRIVATE_GROUP_ID = os.environ.get("PRIVATE_GROUP_ID", None)
     AUTONAME = os.environ.get("AUTONAME", None)
+    AUTOPIC_COMMENT = os.environ.get("AUTOPIC_COMMENT", "")
+    AUTOPIC_FONT_COLOUR = os.environ.get("AUTOPIC_FONT_COLOUR", "")
+    AUTOPIC_FONT = os.environ.get("AUTOPIC_FONT", "")
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
-
+    CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
+    MASTERS_MSG = os.environ.get("MASTERS_MSG", None)
     # OpenWeatherMap API Key
     OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
 
@@ -140,7 +147,7 @@ if bool(ENV):
     COUNTRY = str(os.environ.get("COUNTRY", ""))
 
     TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
-
+    
     # Clean Welcome
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
