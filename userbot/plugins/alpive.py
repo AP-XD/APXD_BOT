@@ -5,11 +5,12 @@ from platform import python_version
 from . import UP
 from telethon import version
 import userbot.utils
+from uniborg.util import admin_cmd, sudo_cmd
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet."
 ALIVE_PIC = os.environ.get("ALIVE_PIC", None)
 PLUSPIC = ALIVE_PIC
 
-@plus_ub(pattern="alpive$")
+@borg.on(admin_cmd(pattern="alpive$"))
 async def iamalive(alive):
     if alive.fwd_from:
         return
