@@ -12,12 +12,12 @@ from pathlib import Path
 from datetime import datetime
 from userbot.google_images_download import help
 import heroku3, asyncio, os
-
+from uniborg.util import admin_cmd, sudo_cmd
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 plus = bot
 sudo = Var.SUDO_USERS
-@plus_ub(pattern="import", from_users=sudo)
+@borg.on(admin_cmd(pattern="import"))
 async def install(event):
     if event.fwd_from:
         return
@@ -47,7 +47,7 @@ async def install(event):
         	await event.delete()
             
             
-@plus_ub(pattern="load (?P<shortname>\w+)$", from_users=sudo)
+@borg.on(admin_cmd(pattern="load (?P<shortname>\w+)$"))
 async def load(event):
     if event.fwd_from:
         return

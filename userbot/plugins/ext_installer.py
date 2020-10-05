@@ -5,8 +5,8 @@ from ..utils import remove_plugin, load_module
 from pathlib import Path
 import userbot.utils
 import os
-
-@plus_ub(pattern=r"installall$")
+from uniborg.util import admin_cmd, sudo_cmd
+@borg.on(admin_cmd(pattern=r"installall$"))
 async def install(event):
 	if event.fwd_from:
 		return

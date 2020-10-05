@@ -5,7 +5,8 @@ import pygments, os, asyncio
 from pygments.lexers import Python3Lexer
 from pygments.formatters import ImageFormatter
 import userbot.utils
-@plus_ub(pattern=r"pcode")
+from uniborg.util import admin_cmd, sudo_cmd
+@borg.on(admin_cmd(pattern=r"pcode"))
 async def coder_print(event):
 	cmd = event.text
 	a = await event.get_reply_message()

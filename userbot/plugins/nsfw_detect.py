@@ -3,10 +3,10 @@
 # Ported from userge by @buddhhu
 
 """Detects Nsfw content with the help of A.I."""
-
+from uniborg.util import admin_cmd, sudo_cmd
 import os, requests
 import userbot.utils
-@plus_ub(pattern=r"nsfw")
+@borg.on(admin_cmd(pattern=r"nsfw"))
 async def detect_(event):
     """detect nsfw"""
     reply = await event.client.download_media(await event.get_reply_message(), )

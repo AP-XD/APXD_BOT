@@ -7,6 +7,7 @@
 `.mind`
 `.tweet`
 `.carry`"""
+from uniborg.util import admin_cmd, sudo_cmd
 import userbot.utils
 import requests, re
 from asyncio import sleep
@@ -33,7 +34,7 @@ def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return re.sub(EMOJI_PATTERN, '', inputString)
     
-@plus_ub(pattern="trump ?(.*)")
+@borg.on(admin_cmd(pattern="trump ?(.*)"))
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
@@ -58,7 +59,7 @@ async def trumptweet(event):
     await b.delete()
 
 
-@plus_ub(pattern="mind ?(.*)")
+@borg.on(admin_cmd(pattern="mind ?(.*)"))
 async def changemymind(e):
     args = e.pattern_match.group(1)
     if not args and not e.reply_to_msg_id:
@@ -82,7 +83,7 @@ async def changemymind(e):
     await a.delete()
 
 
-@plus_ub(pattern="kanna ?(.*)")
+@borg.on(admin_cmd(pattern="kanna ?(.*)"))
 async def kannagen(e):
     args = e.pattern_match.group(1)
     if not args and not e.reply_to_msg_id:
@@ -106,7 +107,7 @@ async def kannagen(e):
     await a.delete()
 
 
-@plus_ub(pattern="modi ?(.*)")
+@borg.on(admin_cmd(pattern="modi ?(.*)"))
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
@@ -130,7 +131,7 @@ async def trumptweet(event):
     await a.delete()
 
 
-@plus_ub(pattern="tweet ?(.*)")
+@borg.on(admin_cmd(pattern="tweet ?(.*)"))
 async def nekobot(cat):
     kk = cat.pattern_match.group(1)
     replied = await cat.get_reply_message()
@@ -170,7 +171,7 @@ async def tweets(text1, text2):
     return "temp.webp"
 
 
-@plus_ub(pattern="carry ?(.*)")
+@borg.on(admin_cmd(pattern="carry ?(.*)"))
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:

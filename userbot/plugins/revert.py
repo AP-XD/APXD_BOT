@@ -3,11 +3,12 @@
 
 from telethon import functions
 import userbot.utils
+from uniborg.util import admin_cmd, sudo_cmd
 f_name = Var.FIRST_NAME
 l_name = Var.LAST_NAME
 bio = Var.DEF_BIO
 
-@plus_ub(pattern="revert$")
+@borg.on(admin_cmd(pattern="revert$"))
 async def _(event):
     if event.fwd_from:
         return

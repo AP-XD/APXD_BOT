@@ -9,8 +9,8 @@
 
 import userbot.utils
 import asyncio
-
-@plus_ub(pattern="find (.*)")
+from uniborg.util import admin_cmd, sudo_cmd
+@borg.on(admin_cmd(pattern="find (.*)"))
 async def _(event):
     chat='@songdl_Bot'
     input_str = str(event.text[6:])
