@@ -29,6 +29,7 @@ class Var(object):
     if PLUGIN_GROUP:
         PLUGIN_GROUP = int(PLUGIN_GROUP)
     PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", -100))
+    BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", None))
     G_BAN_LOGGER_GROUP = os.environ.get("BOTLOG_CHATID", None)
     if G_BAN_LOGGER_GROUP:
         G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
