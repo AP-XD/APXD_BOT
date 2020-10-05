@@ -99,7 +99,6 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-        from userbot.utils import plus_ub
         import userbot.plugins.sql_helper.global_variables_sql
         import userbot.utils
 
@@ -109,7 +108,6 @@ def load_module(shortname):
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
         mod.tgbot = bot.tgbot
-        mod.plus_ub = plus_ub
         mod.Var = Var
         mod.command = command
         mod.logger = logging.getLogger(shortname)
