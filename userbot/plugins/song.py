@@ -89,7 +89,7 @@ def bruh(name):
     
 
 
-@borg.on(admin_cmd(pattern="^.spd(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="spd ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -109,7 +109,7 @@ async def _(event):
           await event.delete()
           await bot.forward_messages(event.chat_id, respond.message)
 
-@borg.on(admin_cmd(pattern="^.netease(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="netease ?(.*)"))
 async def WooMai(netase):
     if netase.fwd_from:
         return
@@ -137,7 +137,7 @@ async def WooMai(netase):
     await netase.delete()
 
 
-@borg.on(admin_cmd(pattern="^.dzd(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="dzd ?(.*)"))
 async def DeezLoader(Deezlod):
     if Deezlod.fwd_from:
         return
