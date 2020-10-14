@@ -1,5 +1,5 @@
 # FRIDAY-USERBOT 🇮🇳
-## A Bot With Assistant Support 🔥
+## A Bot With Assistant Support 🔥😬
 
 <p align="center">
 <img src="https://telegra.ph/file/1c4df5d90d6e68e417348.png" alt="FRIDAY USERBOT">
