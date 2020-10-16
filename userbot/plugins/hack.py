@@ -7,7 +7,7 @@ from telethon import events
 import asyncio
 from uniborg.util import friday_on_cmd
 from telethon.tl.functions.users import GetFullUserRequest
-
+from ..utils import admin_cmd, sudo_cmd, edit_or_reply
 
 @friday.on(friday_on_cmd(pattern=r"hack"))
 async def _(event):
