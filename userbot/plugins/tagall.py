@@ -1,11 +1,14 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+from uniborg.util import friday_on_cmd
+
 
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern=r"administrator", outgoing=True))
 async def _(event):

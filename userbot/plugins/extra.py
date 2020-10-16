@@ -4,8 +4,9 @@ from collections import deque
 from telethon.tl.functions.channels import LeaveChannelRequest
 from userbot import CMD_HELP, bot
 from userbot.utils import admin_cmd, admin2_cmd
+from userbot.utils import friday_on_cmd
 
-@borg.on(admin_cmd("leave$"))
+@friday.on(friday_on_cmd("leave$"))
 async def leave(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`I iz Leaving dis Lol Group kek!`")
@@ -87,21 +88,21 @@ async def Oof(e):
         await e.edit(t)
 
 
-@borg.on(admin_cmd("ccry$"))
+@friday.on(friday_on_cmd("ccry$"))
 # @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("(;´༎ຶД༎ຶ)")
 
 
-@borg.on(admin_cmd("fp$"))
+@friday.on(friday_on_cmd("fp$"))
 # @register(outgoing=True, pattern="^.fp$")
 async def facepalm(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("🤦‍♂")
 
 
-@borg.on(admin_cmd("moon$"))
+@friday.on(friday_on_cmd("moon$"))
 # @register(outgoing=True, pattern="^.mmoon$")
 async def _(event):
     if event.fwd_from:
@@ -113,21 +114,21 @@ async def _(event):
         deq.rotate(1)
 
 
-@borg.on(admin_cmd("source$"))
+@friday.on(friday_on_cmd("source$"))
 # @register(outgoing=True, pattern="^.source$")
 async def source(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("https://github.com/StarkGang/FridayUserbot")
 
 
-@borg.on(admin_cmd("readme$"))
+@friday.on(friday_on_cmd("readme$"))
 # @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("https://github.com/StarkGang/FRIDAYUSERBOT/blob/master/README.md")
 
 
-@borg.on(admin_cmd("heart$"))
+@friday.on(friday_on_cmd("heart$"))
 # @register(outgoing=True, pattern="^.heart$")
 async def _(event):
     if event.fwd_from:
@@ -139,7 +140,7 @@ async def _(event):
         deq.rotate(1)
 
 
-@borg.on(admin_cmd("fap$"))
+@friday.on(friday_on_cmd("fap$"))
 # @register(outgoing=True, pattern="^.fap$")
 async def _(event):
     if event.fwd_from:

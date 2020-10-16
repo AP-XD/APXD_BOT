@@ -7,10 +7,11 @@ Available Commands:
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from userbot.utils import friday_on_cmd
 
 
-@borg.on(admin_cmd("wttf"))
+
+@friday.on(friday_on_cmd("wtf"))
 async def _(event):
     if event.fwd_from:
         return

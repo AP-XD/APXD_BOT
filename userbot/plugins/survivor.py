@@ -29,7 +29,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 
-from userbot.utils import admin_cmd
+from userbot.utils import friday_on_cmd
 
 
 from contextlib import suppress
@@ -64,7 +64,7 @@ RESTARTING_APP = "re-starting heroku application"
 # -- Constants End -- #
 
 
-@borg.on(admin_cmd(pattern="survivor ?(.*)", outgoing=True))
+@friday.on(friday_on_cmd("update ?(.*)", outgoing=True))
 async def updater(message):
     try:
         repo = git.Repo()

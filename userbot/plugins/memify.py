@@ -16,7 +16,9 @@ from . import (
     grayscale,
     crop,
     add_frame)
-
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.types import MessageMediaPhoto
+from uniborg.util import friday_on_cmd
 
 @borg.on(admin_cmd(outgoing=True, pattern="(mmf|mms) ?(.*)"))
 @borg.on(sudo_cmd(pattern="(mmf|mms) ?(.*)", allow_sudo=True))
@@ -111,7 +113,6 @@ async def memes(cat):
     for files in (catsticker, meme_file):
         if files and os.path.exists(files):
             os.remove(files)
-
 
 @borg.on(admin_cmd(outgoing=True, pattern="invert$"))
 @borg.on(sudo_cmd(pattern="invert$", allow_sudo=True))

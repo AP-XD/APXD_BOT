@@ -11,7 +11,6 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 
 @borg.on(admin_cmd(pattern=r"snkill"))
-
 async def _(event):
 
     if event.fwd_from:

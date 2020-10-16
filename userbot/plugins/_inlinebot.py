@@ -12,14 +12,17 @@ from telethon import custom
 from telethon import events
 from telethon import functions
 from telethon.tl.functions.users import GetFullUserRequest
-
+import os
 from userbot import ALIVE_NAME
 from userbot import CMD_LIST
 from userbot.plugins import inlinestats
-
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
+if PMPERMIT_PIC is None:
+    WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
+else:
+    WARN_PIC = PMPERMIT_PIC
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Friday"
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
-
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
@@ -46,25 +49,25 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                             "Repo 🇮🇳",
                             "https://github.com/StarkGang/FridayUserbot")
                     ],
-                    [Button.url("Join Channel 😬", "t.me/Fridayot")],
+                    [Button.url("Join Channel ❤️", "t.me/Fridayot")],
                 ],
             )
         if event.query.user_id == bot.uid and query.startswith("**Hello"):
-            result = builder.article(
-                title="PM Test",
+            result = builder.photo(
+                file=WARN_PIC,
                 text=query,
                 buttons=[
                     [
-                        custom.Button.inline("I Am Here For Spamming",
+                        custom.Button.inline("❌ I Am Here For Spamming❌ ",
                                              data="dontspamnigga")
                     ],
                     [
                         custom.Button.inline(
-                            "I Here For Talking With Your Master",
+                            "🗣️ I Am Here For Talking With Your Master 🗣️",
                             data="whattalk")
                     ],
                     [
-                        custom.Button.inline("I Am Here For Asking Something",
+                        custom.Button.inline("🙏 I Am Here For Asking Something 🙏",
                                              data="askme")
                     ],
                 ],
@@ -192,7 +195,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
             helpable_plugins.append(p)
     helpable_plugins = sorted(helpable_plugins)
     modules = [
-        custom.Button.inline("{} {} {}".format("🍩", x, "🔥"),
+        custom.Button.inline("{} {} {}".format("🔥", x, "🔥"),
                              data="us_plugin_{}".format(x))
         for x in helpable_plugins
     ]

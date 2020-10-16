@@ -32,8 +32,8 @@ botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 USER_BOT_NO_WARN = (
     "**Hello, This is Friday PM Protection Service ⚠️**\n\n"
     f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
-    f"**I Recommend You To PM My Master Using This Bot ==>** @{botisnoob} \n\n"
-    "__You May Choose A Reason You Have Came For__ 👏 \n\n"
+    f"**I Recommend You To PM My Master Using This Bot -** @{botisnoob} \n"
+    "__Else You May Choose A Reason You Have Came For__ 👏 \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**")
 
 if Var.PRIVATE_GROUP_ID is not None:
@@ -121,7 +121,7 @@ if Var.PRIVATE_GROUP_ID is not None:
 
     @bot.on(events.NewMessage(incoming=True))
     async def on_new_private_message(event):
-        if event.from_id == bot.uid:
+        if event.sender_id == bot.uid:
             return
 
         if Var.PRIVATE_GROUP_ID is None:
@@ -131,7 +131,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             return
 
         message_text = event.message.message
-        chat_id = event.from_id
+        chat_id = event.sender_id
 
         message_text.lower()
         if USER_BOT_NO_WARN == message_text:

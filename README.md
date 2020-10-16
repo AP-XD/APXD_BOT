@@ -1,5 +1,5 @@
 # FRIDAY-USERBOT 🇮🇳
-## A Bot With Assistant Support 🔥😬
+## A Bot With Assistant Support 🔥
 
 <p align="center">
 <img src="https://telegra.ph/file/1c4df5d90d6e68e417348.png" alt="FRIDAY USERBOT">
@@ -12,7 +12,7 @@
 Best User Bot To Manage Your Telegram Account 
 ## Most PowerFul And Better And Secure
 
-## © By Team #SᴛᴀʀᴋGᴀɴɢ™
+## (C) By Team #SᴛᴀʀᴋGᴀɴɢ™
 
 ### For any query or want to know how it works join Group And Channel 
 

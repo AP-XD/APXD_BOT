@@ -12,7 +12,9 @@ import logging
 import inspect
 from var import Var
 
-plug = Var.COMMAND_HAND_LER if Var.COMMAND_HAND_LER else "."
+
+cmdhandler = Config.COMMAND_HAND_LER
+
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
 
@@ -165,7 +167,7 @@ async def is_admin(client, chat_id, user_id):
 
 
 
-def admin_cmd(pattern=None, **args):
+def friday_on_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
 
     stack = inspect.stack()
@@ -225,8 +227,8 @@ def admin2_cmd(pattern=None, **args):
             # special fix for snip.py
             args["pattern"] = re.compile(plug + pattern)
         else:
-            args["pattern"] = re.compile(pattern)
-            cmd = pattern
+            args["pattern"] = re.compile(cmdhandler + pattern)
+            cmd = cmdhandler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
@@ -517,7 +519,7 @@ def sudo_cmd(pattern=None, **args):
 
 
 async def edit_or_reply(event, text):
-    if event.from_id in Config.SUDO_USERS:
+    if event.sender_id in Config.SUDO_USERS:
         reply_to = await event.get_reply_message()
         if reply_to:
             return await reply_to.reply(text)

@@ -6,10 +6,11 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
+from userbot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
 
-@borg.on(admin_cmd("innfo ?(.*)"))
-@borg.on(sudo_cmd("innfo ?(.*)", allow_sudo=True))
+
+@friday.on(friday_on_cmd("innfo ?(.*)"))
+@friday.on(sudo_cmd("innfo ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
