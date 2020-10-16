@@ -11,9 +11,9 @@ from userbot import ALIVE_NAME
 from userbot import CUSTOM_PMPERMIT
 from userbot.uniborgConfig import Config
 
-PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC",None)
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
-    WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
+    WARN_PIC = "https://telegra.ph/file/e8ab615d38cb507faa91b.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
 
@@ -88,7 +88,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                         firstname, chat.id))
                 await event.delete()
 
-    @command(pattern="^.lapp")
+    @command(pattern="^.lapp$")
     async def approve_p_m(event):
         if event.fwd_from:
             return
