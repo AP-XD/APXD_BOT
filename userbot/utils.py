@@ -178,10 +178,10 @@ def admin_cmd(pattern=None, **args):
     if pattern is not None:
         if pattern.startswith("\#"):
             # special fix for snip.py
-            args["pattern"] = re.compile(plug + pattern)
+            args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile(plug + pattern)
-            cmd = plug + pattern
+            args["pattern"] = re.compile(cmdhandler + pattern)
+            cmd = cmdhandler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
@@ -224,10 +224,10 @@ def friday_on_cmd(pattern=None, **args):
     if pattern is not None:
         if pattern.startswith("\#"):
             # special fix for snip.py
-            args["pattern"] = re.compile(plug + pattern)
+            args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile(plug + pattern)
-            cmd = plug + pattern
+            args["pattern"] = re.compile(cmdhandler + pattern)
+            cmd = cmdhandler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
@@ -246,16 +246,14 @@ def friday_on_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
-    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
+        args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
-    is_message_enabled = True
 
     return events.NewMessage(**args)
-    
+   
 def admin2_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
     
@@ -269,7 +267,7 @@ def admin2_cmd(pattern=None, **args):
     if pattern is not None:
         if pattern.startswith("\#"):
             # special fix for snip.py
-            args["pattern"] = re.compile(plug + pattern)
+            args["pattern"] = re.compile(pattern)
         else:
             args["pattern"] = re.compile(cmdhandler + pattern)
             cmd = cmdhandler + pattern
