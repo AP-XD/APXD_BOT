@@ -18,7 +18,7 @@ from userbot import CMD_LIST
 from userbot.plugins import inlinestats
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
-    WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
+    WARN_PIC = "https://telegra.ph/file/e8ab615d38cb507faa91b.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Friday"
