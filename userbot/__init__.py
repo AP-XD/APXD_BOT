@@ -25,7 +25,7 @@ StartTime = time.time()
 UpTime = time.time()
 catversion = "2.8.0"
 Lastupdate = time.time()
-telever = "3.95"
+telever = "4.6"
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
