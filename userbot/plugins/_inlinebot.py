@@ -3,9 +3,6 @@ from math import ceil
 import asyncio
 import json
 import random
-from userbot.plugins import inlinestats
-from userbot import ALIVE_NAME
-from userbot import CMD_LIST
 import io
 from telethon import Button
 from telethon import custom
@@ -18,7 +15,7 @@ from userbot import CMD_LIST
 from userbot.plugins import inlinestats
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
-    WARN_PIC = "https://telegra.ph/file/e8ab615d38cb507faa91b.jpg"
+    WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
 LOG_CHAT = Config.PRIVATE_GROUP_ID
