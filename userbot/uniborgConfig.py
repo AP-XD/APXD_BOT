@@ -173,7 +173,7 @@ if ENV:
         OPEN_LOAD_LOGIN = os.environ.get("OPEN_LOAD_LOGIN", None)
         OPEN_LOAD_KEY = os.environ.get("OPEN_LOAD_KEY", None)
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")
-        TAG_FEATURE = os.environ.get("TAG_FEATURE", "ENABLE")
+        TAG_FEATURE = os.environ.get("TAG_FEATURE", "DISABLE")
         ASSISTANT_LOG = int(os.environ.get("ASSISTANT_LOG", False))
 else:
     class Config(object):
