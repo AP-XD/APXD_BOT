@@ -45,7 +45,7 @@ async def _(event):
             "**Starting process with command** `python3 -m stdborg`",
             "**State changed from starting to up**",
             "__INFO:CrackBot:Logged in as 557667062__",
-            "__INFO:CrackBot:Successfully loaded all plugins__",
+            "__INFO:CrackBot:Successfully loaded all modules__",
             "**Build Succeeded**"
 
  ]

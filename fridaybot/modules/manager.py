@@ -1,6 +1,6 @@
 import asyncio
 import io
-import fridaybot.plugins.sql_helper.no_log_pms_sql as no_log_pms_sql
+import fridaybot.modules.sql_helper.no_log_pms_sql as no_log_pms_sql
 from telethon import events, functions, types
 from fridaybot.utils import admin_cmd
 

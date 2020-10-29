@@ -19,7 +19,7 @@ dont edit credits
 
 from fridaybot import CMD_HELP
 from telethon.tl.functions.users import GetFullUserRequest
-from fridaybot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from fridaybot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
 from fridaybot.utils import sudo_cmd, admin_cmd
 from telethon.tl.types import (
@@ -29,9 +29,9 @@ from telethon.errors import (
     BadRequestError)
 from telethon.tl.functions.channels import EditBannedRequest
 from fridaybot import CAT_ID
-from fridaybot.plugins import admin_groups
+from fridaybot.modules import admin_groups
 from datetime import datetime
-import fridaybot.plugins.sql_helper.gban_sql_helper as gban_sql
+import fridaybot.modules.sql_helper.gban_sql_helper as gban_sql
 import pybase64
 from telethon.tl.functions.messages import ImportChatInviteRequest
 

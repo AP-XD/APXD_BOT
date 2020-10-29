@@ -105,7 +105,7 @@ def check_data_base_heal_th():
     output = "No Database is set"
     if not Var.DB_URI:
         return is_database_working, output
-    from fridaybot.plugins.sql_helper import SESSION
+    from fridaybot.modules.sql_helper import SESSION
 
     try:
         # to check database we will execute raw query

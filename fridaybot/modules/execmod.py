@@ -1,4 +1,4 @@
-"""COMMAND : .cpu, .uptime, .suicide, .env, .pip, .neofetch, .coffeehouse, .date, .stdplugins, .fast, .iwantsex, .telegram, .listpip, .pyfiglet, .kowsay, .name, .faast, .daddyjoke, .fortune, .qquote, .fakeid, .vpn, .kwot, .qpro, .covid"""
+"""COMMAND : .cpu, .uptime, .suicide, .env, .pip, .neofetch, .coffeehouse, .date, .stdmodules, .fast, .iwantsex, .telegram, .listpip, .pyfiglet, .kowsay, .name, .faast, .daddyjoke, .fortune, .qquote, .fakeid, .vpn, .kwot, .qpro, .covid"""
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -100,7 +100,7 @@ async def _(event):
     else:
         await event.edit(OUTPUT)
 	
-@borg.on(admin_cmd(pattern="plugins$"))
+@borg.on(admin_cmd(pattern="modules$"))
 async def _(event):
     if event.fwd_from:
         return
@@ -108,7 +108,7 @@ async def _(event):
     PROCESS_RUN_TIME = 100
 #    dirname = event.pattern_match.group(1)
 #    tempdir = "localdir"
-    cmd = "ls fridaybot/plugins"
+    cmd = "ls fridaybot/modules"
 #    if dirname == tempdir:
 	
     eply_to_id = event.message.id
@@ -120,7 +120,7 @@ async def _(event):
     )
     stdout, stderr = await process.communicate()
     o = stdout.decode()
-    OUTPUT = f"**[Sᴜʀᴠɪᴠᴏʀ's](tg://need_update_for_some_feature/) PLUGINS:**\n{o}\n\n**HELP:** __If you want to know the commands for a plugin, do:-__ \n `.help <plugin name>` **without the < > brackets.**\n__All plugins might not work directly. Visit__ @Sur_vivor __for assistance.__"
+    OUTPUT = f"**[Sᴜʀᴠɪᴠᴏʀ's](tg://need_update_for_some_feature/) PLUGINS:**\n{o}\n\n**HELP:** __If you want to know the commands for a plugin, do:-__ \n `.help <plugin name>` **without the < > brackets.**\n__All modules might not work directly. Visit__ @Sur_vivor __for assistance.__"
     if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(OUTPUT)) as out_file:
             out_file.name = "env.text"

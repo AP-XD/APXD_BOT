@@ -60,7 +60,7 @@ async def get_user_from_id(user, event):
 async def handler(tele): 
    if tele.user_joined or tele.user_added:      
        try:       	
-         from fridaybot.plugins.sql_helper.gmute_sql import is_gmuted
+         from fridaybot.modules.sql_helper.gmute_sql import is_gmuted
          guser = await tele.get_user()      
          gmuted = is_gmuted(guser.id)             
        except:      
@@ -106,7 +106,7 @@ async def gspider(rk):
         if user.id == 1054081968:     
     	             return await rkp.edit("**Lol? Are You Dumb Retard? I Will Never Do Anything Against My Creator**")
         try:
-          from fridaybot.plugins.sql_helper.gmute_sql import gmute            
+          from fridaybot.modules.sql_helper.gmute_sql import gmute            
         except:
    	     pass
         try:
@@ -156,7 +156,7 @@ async def gspider(rk):
         if user.id == 1054081968:     
     	             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-          from fridaybot.plugins.sql_helper.gmute_sql import ungmute
+          from fridaybot.modules.sql_helper.gmute_sql import ungmute
         except:
    	     pass
         try:

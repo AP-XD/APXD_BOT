@@ -1,5 +1,5 @@
 try:
-    from fridaybot.plugins.sql_helper import SESSION, BASE
+    from fridaybot.modules.sql_helper import SESSION, BASE
 except ImportError:
     raise AttributeError
 

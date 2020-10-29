@@ -22,7 +22,7 @@ async def send(event):
     message_id = event.message.id
     thumb = thumb_image_path
     input_str = event.pattern_match.group(1)
-    the_plugin_file = "./fridaybot/plugins/{}.py".format(input_str)
+    the_plugin_file = "./fridaybot/modules/{}.py".format(input_str)
     start = datetime.now()
     pro = await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Numeric
-from fridaybot.plugins.sql_helper import SESSION, BASE
+from fridaybot.modules.sql_helper import SESSION, BASE
 
 
 class NOLogPMs(BASE):

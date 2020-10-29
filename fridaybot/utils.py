@@ -91,8 +91,8 @@ def load_module(shortname):
         import sys
         from pathlib import Path
         import fridaybot.utils
-        path = Path(f"fridaybot/plugins/{shortname}.py")
-        name = "fridaybot.plugins.{}".format(shortname)
+        path = Path(f"fridaybot/modules/{shortname}.py")
+        name = "fridaybot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
@@ -101,11 +101,11 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-        import fridaybot.plugins.sql_helper.global_variables_sql
+        import fridaybot.modules.sql_helper.global_variables_sql
         import fridaybot.utils
 
-        path = Path(f"fridaybot/plugins/{shortname}.py")
-        name = "fridaybot.plugins.{}".format(shortname)
+        path = Path(f"fridaybot/modules/{shortname}.py")
+        name = "fridaybot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
@@ -125,10 +125,10 @@ def load_module(shortname):
         mod.plus = bot
         mod.sudo = Var.SUDO_USERS
         sys.modules["plus.utils"] = fridaybot.utils
-        sys.modules["global_variables"] = fridaybot.plugins.sql_helper.global_variables_sql
-        sys.modules["global_variables_sql"] = fridaybot.plugins.sql_helper.global_variables_sql
+        sys.modules["global_variables"] = fridaybot.modules.sql_helper.global_variables_sql
+        sys.modules["global_variables_sql"] = fridaybot.modules.sql_helper.global_variables_sql
         # for imports
-        sys.modules["fridaybot.plugins." + shortname] = mod
+        sys.modules["fridaybot.modules." + shortname] = mod
         print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
 
 
@@ -140,7 +140,7 @@ def remove_plugin(shortname):
             del LOAD_PLUG[shortname]
 
         except:
-            name = f"fridaybot.plugins.{shortname}"
+            name = f"fridaybot.modules.{shortname}"
 
             for i in reversed(range(len(bot._event_builders))):
                 ev, cb = bot._event_builders[i]
@@ -627,8 +627,8 @@ def start_assistant(shortname):
 
         import fridaybot.utils
 
-        path = Path(f"fridaybot/plugins/assistant/{shortname}.py")
-        name = "fridaybot.plugins.assistant.{}".format(shortname)
+        path = Path(f"fridaybot/modules/assistant/{shortname}.py")
+        name = "fridaybot.modules.assistant.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
@@ -641,11 +641,11 @@ def start_assistant(shortname):
 
         import fridaybot.utils
 
-        path = Path(f"fridaybot/plugins/assistant/{shortname}.py")
-        name = "fridaybot.plugins.assistant.{}".format(shortname)
+        path = Path(f"fridaybot/modules/assistant/{shortname}.py")
+        name = "fridaybot.modules.assistant.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.tgbot = bot.tgbot
         spec.loader.exec_module(mod)
-        sys.modules["fridaybot.plugins.assistant" + shortname] = mod
+        sys.modules["fridaybot.modules.assistant" + shortname] = mod
         print("Assistant Has imported " + shortname)

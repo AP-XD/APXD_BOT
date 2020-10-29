@@ -9,7 +9,7 @@ import re
 from telethon import events
 from fridaybot import bot
 from fridaybot import CMD_HELP  
-from fridaybot.plugins import waifutxt , deEmojify
+from fridaybot.modules import waifutxt , deEmojify
 from fridaybot.utils import admin_cmd
 import pybase64
 

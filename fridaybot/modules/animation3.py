@@ -56,7 +56,7 @@ async def _(event):
             "**Starting process with command** `python3 -m stdborg`",
             "**State changed from starting to up**",
             "__INFO:Userbot:Logged in as 557667062__",
-            "__INFO:Userbot:Successfully loaded all plugins__",
+            "__INFO:Userbot:Successfully loaded all modules__",
             "**Build Succeeded**"
  ]
     for i in animation_ttl:

@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
 from fridaybot.utils import admin_cmd, sudo_cmd
 from fridaybot import CMD_HELP, bot
-from fridaybot.plugins import waifutxt, deEmojify
+from fridaybot.modules import waifutxt, deEmojify
 import pybase64
 # RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
 

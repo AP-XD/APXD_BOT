@@ -5,7 +5,7 @@ from uniborg.util import friday_on_cmd, sudo_cmd
 from fridaybot import ALIVE_NAME
 from datetime import datetime
 from fridaybot import Lastupdate
-from fridaybot.plugins import currentversion
+from fridaybot.modules import currentversion
 
 #Functions
 def get_readable_time(seconds: int) -> str:

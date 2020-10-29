@@ -15,16 +15,16 @@ async def install(event):
 		documentss = await event.client.get_messages(chat, None , filter=InputMessagesFilterDocument)
 		total = int(documentss.total)
 		total_doxx = range(0, total)
-		b = await event.client.send_message(event.chat_id, f"**Installing {total} plugins...**\n`This msg will be deleted after the installation gets completed`")
+		b = await event.client.send_message(event.chat_id, f"**Installing {total} modules...**\n`This msg will be deleted after the installation gets completed`")
 		text =  "**Installing Plugins...**\n\n"
 		a = await event.client.send_message(chat, text)
 		if total == 0:
-			await a.edit("**No plugins to install.**")
+			await a.edit("**No modules to install.**")
 			await event.delete()
 			return
 		for ixo in total_doxx:
 			mxo = documentss[ixo].id
-			downloaded_file_name = await event.client.download_media(await borg.get_messages(chat, ids=mxo), "fridaybot/plugins/")
+			downloaded_file_name = await event.client.download_media(await borg.get_messages(chat, ids=mxo), "fridaybot/modules/")
 			if "(" not in downloaded_file_name:
 				path1 = Path(downloaded_file_name)
 				shortname = path1.stem

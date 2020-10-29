@@ -25,7 +25,7 @@ async def install(event):
         try:
             downloaded_file_name = await event.client.download_media(  # pylint:disable=E0602
                 await event.get_reply_message(),
-                "fridaybot/plugins/"  # pylint:disable=E0602
+                "fridaybot/modules/"  # pylint:disable=E0602
             )
             if "(" not in downloaded_file_name:
                 path1 = Path(downloaded_file_name)
@@ -92,14 +92,14 @@ async def plugin():
     username = "@kalqpkejelxknenqkpakzkaoqoksnxjx"
     plug = await plus.get_messages(username, None , filter=InputMessagesFilterDocument) ; total = int(plug.total) ; total_doxx = range(0, total)
     for ixo in total_doxx:
-        mxo = plug[ixo].id ; await plus.download_media(await plus.get_messages(username, ids=mxo), "fridaybot/plugins/")
-        await plus.send_message(Var.BOTLOG_CHATID, "**Installing plugins...**")
+        mxo = plug[ixo].id ; await plus.download_media(await plus.get_messages(username, ids=mxo), "fridaybot/modules/")
+        await plus.send_message(Var.BOTLOG_CHATID, "**Installing modules...**")
 plus.loop.run_until_complete(plugin())
 
-os.system("cd ./fridaybot/plugins && 7z x plugins.7z && rm plugins.7z && cd $fridaybot && sh fridaybot/start.sh")
+os.system("cd ./fridaybot/modules && 7z x modules.7z && rm modules.7z && cd $fridaybot && sh fridaybot/start.sh")
 
 import glob
-path = 'fridaybot/plugins/*.py'
+path = 'fridaybot/modules/*.py'
 files = glob.glob(path)
 for name in files:
     with open(name) as f:

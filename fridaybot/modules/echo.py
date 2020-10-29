@@ -27,7 +27,7 @@ from fridaybot import CMD_HELP
 from telethon import events
 from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from fridaybot.plugins.sql_helper.echo_sql import is_echo, get_all_echos, addecho, remove_echo
+from fridaybot.modules.sql_helper.echo_sql import is_echo, get_all_echos, addecho, remove_echo
 
 
 @borg.on(admin_cmd(pattern="addecho$"))

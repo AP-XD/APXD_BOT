@@ -2,7 +2,7 @@
 © Sensible Userbot
 added speciality for sudos if u kang give me credits
 '''
-from fridaybot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from fridaybot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
 from fridaybot.utils import admin_cmd
 from telethon import events
