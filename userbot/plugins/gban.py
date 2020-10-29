@@ -1,5 +1,5 @@
-from userbot.events import admin_cmd
-from userbot import bot, BOTLOG_CHATID, CMD_HELP
+from fridaybot.events import admin_cmd
+from fridaybot import bot, BOTLOG_CHATID, CMD_HELP
 import asyncio
 from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
@@ -54,7 +54,7 @@ async def get_user_from_id(user, event):
 async def handler(rkG): 
    if rkG.user_joined or rkG.user_added:      
        try:       	
-         from userbot.plugins.sql_helper.gmute_sql import is_gmuted
+         from fridaybot.plugins.sql_helper.gmute_sql import is_gmuted
          guser = await rkG.get_user()      
          gmuted = is_gmuted(guser.id)             
        except:      
@@ -100,7 +100,7 @@ async def gspider(rk):
         if user.id == 667805879:     
     	             return await rkp.edit("**Error! cant gban this user.**")
         try:
-          from userbot.plugins.sql_helper.gmute_sql import gmute            
+          from fridaybot.plugins.sql_helper.gmute_sql import gmute            
         except:
    	     pass
         try:
@@ -151,7 +151,7 @@ async def gspider(rk):
         if user.id == 667805879:     
     	             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-          from userbot.plugins.sql_helper.gmute_sql import ungmute
+          from fridaybot.plugins.sql_helper.gmute_sql import ungmute
         except:
    	     pass
         try:

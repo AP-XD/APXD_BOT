@@ -3,7 +3,7 @@
 from telethon.tl.types import InputMessagesFilterDocument
 from ..utils import remove_plugin, load_module
 from pathlib import Path
-import userbot.utils
+import fridaybot.utils
 import os
 from uniborg.util import admin_cmd, sudo_cmd
 @borg.on(admin_cmd(pattern=r"installall$"))
@@ -24,7 +24,7 @@ async def install(event):
 			return
 		for ixo in total_doxx:
 			mxo = documentss[ixo].id
-			downloaded_file_name = await event.client.download_media(await borg.get_messages(chat, ids=mxo), "userbot/plugins/")
+			downloaded_file_name = await event.client.download_media(await borg.get_messages(chat, ids=mxo), "fridaybot/plugins/")
 			if "(" not in downloaded_file_name:
 				path1 = Path(downloaded_file_name)
 				shortname = path1.stem

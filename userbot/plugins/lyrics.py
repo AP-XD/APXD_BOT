@@ -1,12 +1,12 @@
-# Ported from catuserbot
+# Ported from catfridaybot
 # For TeleBot
 # Kangers pls keep credits
 
 import os
 import lyricsgenius
 import random
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot import CMD_HELP, LOGS
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot import CMD_HELP, LOGS
 from tswift import Song
 from telethon import events
 import subprocess

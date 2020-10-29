@@ -3,7 +3,7 @@ from telethon import events
 import asyncio
 from base64 import b64decode
 import io
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 

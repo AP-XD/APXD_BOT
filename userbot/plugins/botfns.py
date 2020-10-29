@@ -2,8 +2,8 @@ import asyncio, datetime, asyncio
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError, UserAlreadyParticipantError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from var import Var
 
 @borg.on(admin_cmd(pattern="purl ?(.*)"))

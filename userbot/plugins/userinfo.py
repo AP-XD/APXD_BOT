@@ -9,8 +9,8 @@
 from telethon.events import NewMessage
 from typing import Union
 
-from userbot import CMD_HELP
-from userbot.events import register
+from fridaybot import CMD_HELP
+from fridaybot.events import register
 
 from re import findall, match
 from typing import List

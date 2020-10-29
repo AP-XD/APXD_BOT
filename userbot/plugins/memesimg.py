@@ -1,9 +1,9 @@
 # Created By starkdy And Ported For Type 2 Userbot By StarkxD
-from userbot.events import register
+from fridaybot.events import register
 import requests , re
 from PIL import Image
 from validators.url import url
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 
 
 EMOJI_PATTERN = re.compile(

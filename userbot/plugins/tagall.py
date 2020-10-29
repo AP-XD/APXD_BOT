@@ -7,7 +7,7 @@ from uniborg.util import friday_on_cmd
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"administrator", outgoing=True))

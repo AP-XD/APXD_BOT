@@ -1,6 +1,6 @@
 import subprocess
 import os
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import glob
 
 @borg.on(admin_cmd("song ?(.*)"))

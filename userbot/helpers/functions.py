@@ -6,7 +6,7 @@ import requests
 import PIL.ImageOps                        
 from os.path import basename                            
 from selenium import webdriver                                    
-from userbot.Configs import Config
+from fridaybot.Configs import Config
 from typing import Optional, Tuple
 from bs4 import BeautifulSoup
 from asyncio import sleep

@@ -23,7 +23,7 @@ class Var(object):
     FIRST_NAME = os.environ.get("FIRST_NAME", None)
     LAST_NAME = os.environ.get("LAST_NAME", None)
     DEF_BIO = os.environ.get("DEF_BIO", None)
-    TMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./userbot/DOWNLOADS/")
+    TMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./fridaybot/DOWNLOADS/")
     PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", -100))
     PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
     if PLUGIN_GROUP:

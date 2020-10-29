@@ -8,10 +8,10 @@ from re import findall
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from re import findall
 from search_engine_parser import GoogleSearch
-from userbot.Configs import Config
+from fridaybot.Configs import Config
 
 
 def progress(current, total):

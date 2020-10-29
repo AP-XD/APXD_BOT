@@ -15,9 +15,9 @@ from googletrans import LANGUAGES, Translator
 from gtts.lang import tts_langs
 from emoji import get_emoji_regexp
 from asyncio import sleep
-from userbot import CHROME_DRIVER, GOOGLE_CHROME_BIN
-from userbot.utils import admin_cmd
-from userbot.Configs import Config
+from fridaybot import CHROME_DRIVER, GOOGLE_CHROME_BIN
+from fridaybot.utils import admin_cmd
+from fridaybot.Configs import Config
 
 LANG = "en"
 CARBONLANG = "auto"
@@ -172,7 +172,7 @@ async def translateme(trans):
 
 @borg.on(admin_cmd(pattern="lang (trt|tts) (.*)", outgoing=True))
 async def lang(value):
-    """ For .lang command, change the default langauge of userbot scrapers. """
+    """ For .lang command, change the default langauge of fridaybot scrapers. """
     util = value.pattern_match.group(1).lower()
     if util == "trt":
         scraper = "Translator"

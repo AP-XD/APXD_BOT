@@ -7,7 +7,7 @@
 #
 # All rights reserved
 
-import userbot.utils
+import fridaybot.utils
 import asyncio
 from uniborg.util import admin_cmd, sudo_cmd
 @borg.on(admin_cmd(pattern="find (.*)"))

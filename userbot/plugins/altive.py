@@ -1,15 +1,15 @@
 # For @borgHelp
-"""Check if your userbot is working."""
+"""Check if your fridaybot is working."""
 import os
 import requests
 import time
 from PIL import Image
 from io import BytesIO
-from userbot import ALIVE_NAME, telever
-from userbot.utils import admin_cmd, sudo_cmd
-from userbot.__init__ import StartTime
+from fridaybot import ALIVE_NAME, telever
+from fridaybot.utils import admin_cmd, sudo_cmd
+from fridaybot.__init__ import StartTime
 from datetime import datetime
-from userbot.Configs import Config
+from fridaybot.Configs import Config
 
 ALV_PIC = os.environ.get("ALIVE_PIC" , None)
 

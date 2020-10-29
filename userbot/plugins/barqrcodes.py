@@ -13,8 +13,8 @@ from barcode.writer import ImageWriter
 
 from bs4 import BeautifulSoup
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"decode$", outgoing=True))

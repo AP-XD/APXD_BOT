@@ -10,7 +10,7 @@ import urllib , os
 
 from telethon.tl import functions
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 import asyncio
 

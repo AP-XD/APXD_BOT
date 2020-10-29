@@ -9,7 +9,7 @@ Available Commands:
 
 from telethon import events
 import asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern="botgban ?(.*)"))
 async def _(event):

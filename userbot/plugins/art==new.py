@@ -2,8 +2,8 @@ import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from platform import uname
-from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from fridaybot import ALIVE_NAME
+from fridaybot.utils import admin_cmd
 
 
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"

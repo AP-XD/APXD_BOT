@@ -2,8 +2,8 @@ import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot.utils import admin_cmd
-from userbot import bot 
+from fridaybot.utils import admin_cmd
+from fridaybot import bot 
 
 @borg.on(admin_cmd(pattern="itos ?(.*)"))
 async def _(event):

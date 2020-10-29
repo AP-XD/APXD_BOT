@@ -13,7 +13,7 @@ import sys
 # from git.exc import NoSuchPathError
 
 # from .. import bot
-# from userbot.utils import register
+# from fridaybot.utils import register
 
 import git
 import asyncio
@@ -29,7 +29,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 
-from userbot.utils import friday_on_cmd
+from fridaybot.utils import friday_on_cmd
 
 
 from contextlib import suppress
@@ -45,7 +45,7 @@ IS_SELECTED_DIFFERENT_BRANCH = (
     "please check out to an official branch, and re-start the updater."
 )
 OFFICIAL_UPSTREAM_REPO = "https://github.com/APXD-git/FridayUserbot"
-BOT_IS_UP_TO_DATE = "`The userbot is up-to-date.\nThank you for Using this Service.`"
+BOT_IS_UP_TO_DATE = "`The fridaybot is up-to-date.\nThank you for Using this Service.`"
 NEW_BOT_UP_DATE_FOUND = (
     "new update found for {branch_name}\n"
     "changelog: \n\n{changelog}\n"

@@ -1,7 +1,7 @@
 """COMMAND : .ae"""
 
 from telethon import events
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 PRINTABLE_ASCII = range(0x21, 0x7f)
 

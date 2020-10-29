@@ -5,7 +5,7 @@
 # Creted by @buddhhu, @itzsjdude
 #
 import os, asyncio
-from userbot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd
 
 @borg.on(admin_cmd(pattern="repack ?(.*)", outgoing=True))
 @borg.on(sudo_cmd(pattern="repack ?(.*)", incoming=True, allow_sudo=True))

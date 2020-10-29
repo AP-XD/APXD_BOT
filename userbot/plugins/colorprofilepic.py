@@ -10,9 +10,9 @@ from pySmartDL import SmartDL
 
 from telethon.tl import functions
 
-from userbot import ALIVE_NAME
+from fridaybot import ALIVE_NAME
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 import asyncio
 
@@ -36,7 +36,7 @@ async def autopic(event):
 
     await event.edit("colour profile pic have been enabled") 
 
-    downloaded_file_name = "./userbot/original_pic.png"
+    downloaded_file_name = "./fridaybot/original_pic.png"
 
     downloader = SmartDL(Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False)
 

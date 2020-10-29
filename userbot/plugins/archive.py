@@ -19,13 +19,13 @@ import shutil
 import subprocess
 import time
 from pySmartDL import SmartDL
-from userbot.Configs import Config
+from fridaybot.Configs import Config
 from telethon import events
-from userbot.utils import admin_cmd, humanbytes, progress, time_formatter
+from fridaybot.utils import admin_cmd, humanbytes, progress, time_formatter
 import subprocess
 import patoolib
 import tarfile
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"

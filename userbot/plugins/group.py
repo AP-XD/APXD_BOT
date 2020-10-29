@@ -1,4 +1,4 @@
-from userbot.utils import register
+from fridaybot.utils import register
 
 @register(outgoing=True, pattern="^.group$")
 

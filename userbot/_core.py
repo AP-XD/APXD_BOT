@@ -1,16 +1,16 @@
-from userbot.utils import friday_on_cmd, sudo_cmd, load_module, remove_plugin
+from fridaybot.utils import friday_on_cmd, sudo_cmd, load_module, remove_plugin
 import asyncio
 import os
 from datetime import datetime
 from pathlib import Path
-from userbot import LOAD_PLUG, utils, bot
+from fridaybot import LOAD_PLUG, utils, bot
 from telethon import events
-from userbot.utils import *
+from fridaybot.utils import *
 from var import Var
 import importlib, sys, asyncio, traceback, os
 from pathlib import Path
 from datetime import datetime
-from userbot.google_images_download import help
+from fridaybot.google_images_download import help
 import heroku3, asyncio, os
 from uniborg.util import admin_cmd, sudo_cmd
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -25,7 +25,7 @@ async def install(event):
         try:
             downloaded_file_name = await event.client.download_media(  # pylint:disable=E0602
                 await event.get_reply_message(),
-                "userbot/plugins/"  # pylint:disable=E0602
+                "fridaybot/plugins/"  # pylint:disable=E0602
             )
             if "(" not in downloaded_file_name:
                 path1 = Path(downloaded_file_name)
@@ -92,14 +92,14 @@ async def plugin():
     username = "@kalqpkejelxknenqkpakzkaoqoksnxjx"
     plug = await plus.get_messages(username, None , filter=InputMessagesFilterDocument) ; total = int(plug.total) ; total_doxx = range(0, total)
     for ixo in total_doxx:
-        mxo = plug[ixo].id ; await plus.download_media(await plus.get_messages(username, ids=mxo), "userbot/plugins/")
+        mxo = plug[ixo].id ; await plus.download_media(await plus.get_messages(username, ids=mxo), "fridaybot/plugins/")
         await plus.send_message(Var.BOTLOG_CHATID, "**Installing plugins...**")
 plus.loop.run_until_complete(plugin())
 
-os.system("cd ./userbot/plugins && 7z x plugins.7z && rm plugins.7z && cd $userbot && sh userbot/start.sh")
+os.system("cd ./fridaybot/plugins && 7z x plugins.7z && rm plugins.7z && cd $fridaybot && sh fridaybot/start.sh")
 
 import glob
-path = 'userbot/plugins/*.py'
+path = 'fridaybot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
     with open(name) as f:

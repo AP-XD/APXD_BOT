@@ -15,7 +15,7 @@ from datetime import datetime
 
 from gtts import gTTS
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 

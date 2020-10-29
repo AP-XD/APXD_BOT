@@ -21,9 +21,9 @@ import re
 from re import findall
 from search_engine_parser import GoogleSearch
 from asyncio import sleep
-from userbot.utils import register
+from fridaybot.utils import register
 from telethon.tl.types import DocumentAttributeAudio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(outgoing=True, pattern=r"go (.*)"))
 async def gsearch(q_event):

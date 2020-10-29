@@ -6,8 +6,8 @@ import os
 import time
 from datetime import datetime
 from telethon import events
-from userbot.utils import admin_cmd, progress
-from userbot import CMD_HELP
+from fridaybot.utils import admin_cmd, progress
+from fridaybot import CMD_HELP
 
 @borg.on(admin_cmd(pattern="nfc ?(.*)"))
 async def _(event):

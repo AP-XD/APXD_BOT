@@ -4,11 +4,11 @@ import os
 
 import lyricsgenius
 import random
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP, LOGS
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP, LOGS
 from tswift import Song
-from userbot import CMD_HELP
-from userbot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
+from fridaybot import CMD_HELP
+from fridaybot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 

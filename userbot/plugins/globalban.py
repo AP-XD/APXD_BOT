@@ -1,6 +1,6 @@
 # Imported by @its_xditya
 
-from userbot import bot, BOTLOG_CHATID, ALIVE_NAME, CMD_LIST
+from fridaybot import bot, BOTLOG_CHATID, ALIVE_NAME, CMD_LIST
 import asyncio
 from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
@@ -41,7 +41,7 @@ async def startgban(tb):
         if user.id == 719195224:     
     	             return await tele.edit(f"`{ALIVE_NAME}:`**Error! This Is My Creator How Am i Supposed To Gban him.**")
         try:
-          from userbot.modules.sql_helper.gmute_sql import gmute            
+          from fridaybot.modules.sql_helper.gmute_sql import gmute            
         except:
    	     pass
         try:
@@ -92,7 +92,7 @@ async def regressgban(tb):
         if user.id == 709723121:     
     	             return await tele.edit(f"`{ALIVE_NAME}:`**Error! cant ungban this user.**")
         try:
-          from userbot.modules.sql_helper.gmute_sql import ungmute
+          from fridaybot.modules.sql_helper.gmute_sql import ungmute
         except:
    	     pass
         try:

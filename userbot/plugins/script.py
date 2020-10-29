@@ -6,8 +6,8 @@ from subprocess import PIPE
 from subprocess import run as runapp
 import pybase64
 from sys import executable
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
-from userbot.utils import admin_cmd
+from fridaybot import CMD_HELP, BOTLOG, BOTLOG_CHATID
+from fridaybot.utils import admin_cmd
 import inspect
 running_processes: dict = {}
 
@@ -23,7 +23,7 @@ async def evaluate(event):
     if not cmd:
         await event.edit("``` Give a command or use !help script.```")
         return
-    if cmd in ("userbot.session", "env", "printenv"):
+    if cmd in ("fridaybot.session", "env", "printenv"):
         return await event.edit(f"`AP_XD:` **Privacy Error, This command not permitted**")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
@@ -57,7 +57,7 @@ async def run(run_q):
 execute. Use !help script for an example.**")
         return
 
-    if code in ("userbot.session", "env", "printenv"):
+    if code in ("fridaybot.session", "env", "printenv"):
         await run_q.edit(f"`AP_XD:` **Privacy Error, This command not permitted**")
         return
 
@@ -110,7 +110,7 @@ async def evaluate(query):
         await query.edit(f"`AP_XD:` **Please give command type !help script for more info**")
         return
 
-    if expression in ("userbot.session", "env", "printenv"):
+    if expression in ("fridaybot.session", "env", "printenv"):
         await query.edit(f"`AP_XD:` **Privacy Error, This command not permitted**")
         return
 

@@ -4,7 +4,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 import asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd("smd (.*)"))

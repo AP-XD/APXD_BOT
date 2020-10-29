@@ -8,7 +8,7 @@
 `.tweet`
 `.carry`"""
 from uniborg.util import admin_cmd, sudo_cmd
-import userbot.utils
+import fridaybot.utils
 import requests, re
 from asyncio import sleep
 from global_variables import MODULE

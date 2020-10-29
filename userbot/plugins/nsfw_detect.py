@@ -5,7 +5,7 @@
 """Detects Nsfw content with the help of A.I."""
 from uniborg.util import admin_cmd, sudo_cmd
 import os, requests
-import userbot.utils
+import fridaybot.utils
 @borg.on(admin_cmd(pattern=r"nsfw"))
 async def detect_(event):
     """detect nsfw"""

@@ -7,10 +7,10 @@ from asyncio import sleep
 from random import choice
 import re
 from telethon import events
-from userbot import bot
-from userbot import CMD_HELP  
-from userbot.plugins import waifutxt , deEmojify
-from userbot.utils import admin_cmd
+from fridaybot import bot
+from fridaybot import CMD_HELP  
+from fridaybot.plugins import waifutxt , deEmojify
+from fridaybot.utils import admin_cmd
 import pybase64
 
 @borg.on(admin_cmd(outgoing=True, pattern="sttxt(?: |$)(.*)"))

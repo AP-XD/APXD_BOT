@@ -2,10 +2,10 @@ import re
 import time
 import requests
 from telethon import events
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import asyncio
 import random
-from userbot import CMD_HELP, fonts
+from fridaybot import CMD_HELP, fonts
 
 
 

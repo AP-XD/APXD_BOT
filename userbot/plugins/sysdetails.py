@@ -2,8 +2,8 @@
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 import asyncio
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP, ALIVE_NAME, catdef, StartTime
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP, ALIVE_NAME, catdef, StartTime
 import time
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
@@ -99,7 +99,7 @@ async def sysdetails(sysd):
 
         await sysd.edit("Neofetch Result: `" + result + "`")
     except FileNotFoundError:
-        await sysd.edit("`Hello, on catuserbot  install .neofetch first kthx`")
+        await sysd.edit("`Hello, on catfridaybot  install .neofetch first kthx`")
 
 # uptime idea and credits was from @Sur_vivor
 

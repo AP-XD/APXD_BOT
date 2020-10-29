@@ -2,7 +2,7 @@
 # This software is a part of https://github.com/buddhhu/Plus
 
 from telethon import functions
-import userbot.utils
+import fridaybot.utils
 from uniborg.util import admin_cmd, sudo_cmd
 f_name = Var.FIRST_NAME
 l_name = Var.LAST_NAME

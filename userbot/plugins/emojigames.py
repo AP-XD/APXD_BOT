@@ -2,8 +2,8 @@
 #bug fixed by @d3athwarrior
 
 from telethon.tl.types import InputMediaDice
-from userbot.events import register 
-from userbot import CMD_HELP
+from fridaybot.events import register 
+from fridaybot import CMD_HELP
 
 
 

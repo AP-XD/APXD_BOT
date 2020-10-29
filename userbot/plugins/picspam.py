@@ -6,8 +6,8 @@
 import asyncio
 from asyncio import wait, sleep
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from userbot.utils import admin_cmd
+from fridaybot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern="picspam"))
 async def tiny_pic_spam(e):

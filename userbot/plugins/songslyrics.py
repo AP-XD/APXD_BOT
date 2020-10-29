@@ -2,7 +2,7 @@
 import os
 
 import random
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 from tswift import Song
 from telethon import events

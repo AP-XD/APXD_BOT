@@ -1,6 +1,6 @@
 from telethon import events
 import io
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import asyncio
 
 @borg.on(admin_cmd(pattern="mkc"))

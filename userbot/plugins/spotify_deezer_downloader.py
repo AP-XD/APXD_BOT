@@ -12,7 +12,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd("sdd ?(.*)"))
 
@@ -62,7 +62,7 @@ async def _(event):
 
               songh = await conv.get_response()
 
-              await borg.send_file(event.chat_id, songh, caption="🔆**Here's the requested song!**🔆\n`Check out` [Friday userbot](https://github.com/StarkGang/FridayUserbot)")
+              await borg.send_file(event.chat_id, songh, caption="🔆**Here's the requested song!**🔆\n`Check out` [Friday fridaybot](https://github.com/StarkGang/FridayUserbot)")
 
               await event.delete()
 

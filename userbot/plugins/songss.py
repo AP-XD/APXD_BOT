@@ -5,7 +5,7 @@
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 import asyncio
 

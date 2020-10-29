@@ -8,7 +8,7 @@ from telethon import events
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd("ceowhitehatcracks"))
@@ -24,7 +24,7 @@ async def _(event):
             "@CeoWhiteHatCracks tera baap",
             "@CeoWhiteHatCracks is bot ka creator",
             "@CeoWhiteHatCracks bot ko jaan dene wala",
-            "@CeoWhiteHatCracks owner of @Sensible_userbot ",
+            "@CeoWhiteHatCracks owner of @Sensible_fridaybot ",
             "tujhe aur kya chaiye vo hai mere sath",
             "tera baap",
             "@CeoWhiteHatCracks"

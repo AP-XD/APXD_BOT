@@ -2,11 +2,11 @@
 #
 # You may not use this plugin without proper authorship and consent from @borgSupport
 #
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import os
 from telethon.tl import functions
 from telethon.tl.functions.account import (UpdateProfileRequest)
-from userbot import ALIVE_NAME
+from fridaybot import ALIVE_NAME
 
 TELENAME = ALIVE_NAME if ALIVE_NAME else "borg"
 

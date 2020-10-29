@@ -16,8 +16,8 @@ from telethon.errors import (
     ChannelPrivateError,
     ChannelPublicGroupNaError)
 from telethon.utils import get_input_location
-from userbot import CMD_HELP
-from userbot.events import register
+from fridaybot import CMD_HELP
+from fridaybot.events import register
 
 
 @register(pattern=".chatinfo(?: |$)(.*)", outgoing=True)

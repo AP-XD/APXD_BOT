@@ -12,9 +12,9 @@ Available Commands:
 More cmds are there, me lazy af to type em here 😅"""
 import asyncio
 from collections import deque
-from userbot import ALIVE_NAME
+from fridaybot import ALIVE_NAME
 from uniborg.util import admin_cmd
-from userbot.utils import register
+from fridaybot.utils import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 

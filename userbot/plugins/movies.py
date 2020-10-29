@@ -4,7 +4,7 @@
 
 from typing import Tuple, Optional
 from telethon.tl.types import InputMessagesFilterVideo
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 def get_file_id_and_ref(message) -> Tuple[Optional[str], Optional[str]]:
     """ get file_id and file_ref """

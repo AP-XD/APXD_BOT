@@ -7,8 +7,8 @@ from telethon import events
 import asyncio
 import os
 import sys
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP
 
 async def download_file_from_google_drive(id):
     URL = "https://docs.google.com/uc?export=download"
@@ -127,10 +127,10 @@ import asyncio
 import multiprocessing
 from pySmartDL import SmartDL
 from urllib.error import HTTPError
-from userbot import CMD_HELP, LOGS
+from fridaybot import CMD_HELP, LOGS
 from asyncio.subprocess import PIPE as asyncPIPE
 from asyncio import create_subprocess_shell as asyncSubprocess
-from userbot.utils import humanbytes, time_formatter, admin_cmd
+from fridaybot.utils import humanbytes, time_formatter, admin_cmd
 
 TEMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
 
@@ -275,5 +275,5 @@ CMD_HELP.update({
     "mega":
     ">`.mega <MEGA.nz link>`"
     "\nUsage: Reply to a MEGA.nz link or paste your MEGA.nz link to "
-    "download the file into your userbot server."
+    "download the file into your fridaybot server."
 })

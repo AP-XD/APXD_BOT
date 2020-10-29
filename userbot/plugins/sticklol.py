@@ -7,7 +7,7 @@ Available command(s)
 Generates a. random laughing sticker.
 """
 import random
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from telethon import events, types, functions, utils
 
 

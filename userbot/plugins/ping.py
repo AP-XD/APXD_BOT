@@ -1,8 +1,8 @@
 from telethon import events
 from datetime import datetime
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from userbot.__init__ import StartTime
-from userbot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot.__init__ import StartTime
+from fridaybot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
 import time
 
 def get_readable_time(seconds: int) -> str:

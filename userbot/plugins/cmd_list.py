@@ -1,8 +1,8 @@
 import asyncio
 import time
 import io
-from userbot.utils import admin_cmd
-from userbot.utils import friday_on_cmd
+from fridaybot.utils import admin_cmd
+from fridaybot.utils import friday_on_cmd
 
 
 # @command(pattern="^.cmds", outgoing=True)
@@ -13,7 +13,7 @@ async def install(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    cmd = "ls userbot/plugins"
+    cmd = "ls fridaybot/plugins"
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )

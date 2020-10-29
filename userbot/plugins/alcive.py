@@ -6,7 +6,7 @@ import requests
 from PIL import Image
 from telethon import version
 
-from userbot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion
+from fridaybot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
@@ -29,7 +29,7 @@ async def amireallyalive(alive):
         cat_caption = f"**✮ MY BOT IS RUNNING SUCCESFULLY ✮**\n\n"
         cat_caption += f"**✧ Database :** `{check_sgnirts}`\n"
         cat_caption += f"**✧ Telethon version :** `{version.__version__}\n`"
-        cat_caption += f"**✧ Catuserbot Version :** `{catversion}`\n"
+        cat_caption += f"**✧ Catfridaybot Version :** `{catversion}`\n"
         cat_caption += f"**✧ Python Version :** `{python_version()}\n`"
         cat_caption += f"**✧ Uptime :** `{uptime}\n`"
         cat_caption += f"**✧ My Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
@@ -43,7 +43,7 @@ async def amireallyalive(alive):
             f"**✮ MY BOT IS RUNNING SUCCESFULLY ✮**\n\n"
             f"**✧ Database :** `{check_sgnirts}`\n"
             f"**✧ Telethon Version :** `{version.__version__}\n`"
-            f"**✧ Catuserbot Version :** `{catversion}`\n"
+            f"**✧ Catfridaybot Version :** `{catversion}`\n"
             f"**✧ Python Version :** `{python_version()}\n`"
             f"**✧ Uptime :** `{uptime}\n`"
             f"**✧ My Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n",
@@ -60,9 +60,9 @@ async def amireallyalive(alive):
     if alive.reply_to_msg_id:
         reply_to_id = await alive.get_reply_message()
     hmm = bot.uid
-    cat_caption = f"**Catuserbot is Up and Running**\n"
+    cat_caption = f"**Catfridaybot is Up and Running**\n"
     cat_caption += f"**  -Telethon version :** `{version.__version__}\n`"
-    cat_caption += f"**  -Catuserbot Version :** `{catversion}`\n"
+    cat_caption += f"**  -Catfridaybot Version :** `{catversion}`\n"
     cat_caption += f"**  -Python Version :** `{python_version()}\n`"
     cat_caption += f"**  -My peru Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
     results = await bot.inline_query(tgbotusername, cat_caption)  # pylint:disable=E0602
@@ -105,7 +105,7 @@ def check_data_base_heal_th():
     output = "No Database is set"
     if not Var.DB_URI:
         return is_database_working, output
-    from userbot.plugins.sql_helper import SESSION
+    from fridaybot.plugins.sql_helper import SESSION
 
     try:
         # to check database we will execute raw query

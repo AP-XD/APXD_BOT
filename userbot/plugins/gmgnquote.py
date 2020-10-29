@@ -9,12 +9,12 @@ command .gdm and .gdn
 
 
 from telethon import events
-from userbot import CMD_HELP 
+from fridaybot import CMD_HELP 
 import asyncio
 import os
 import sys
 import random
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 

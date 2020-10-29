@@ -1,6 +1,6 @@
 # Plugin by @xditya for @TeleBotHelp
 # Kangers keep credits 😐
-from userbot.utils import register
+from fridaybot.utils import register
 
 @register(outgoing=True, pattern="^.night$")
 

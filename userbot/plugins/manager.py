@@ -1,8 +1,8 @@
 import asyncio
 import io
-import userbot.plugins.sql_helper.no_log_pms_sql as no_log_pms_sql
+import fridaybot.plugins.sql_helper.no_log_pms_sql as no_log_pms_sql
 from telethon import events, functions, types
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
@@ -12,7 +12,7 @@ if Config.DUAL_LOG:
     async def create_dump_channel(event):
         if Config.PM_LOGGR_BOT_API_ID is None:
             result = await event.client(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
-                title=f"catuserbot-{borg.uid}-PM_LOGGR_BOT_API_ID-data",
+                title=f"catfridaybot-{borg.uid}-PM_LOGGR_BOT_API_ID-data",
                 about=" PM_LOGGR_BOT_API_ID // Do Not Touch",
                 megagroup=False
             ))

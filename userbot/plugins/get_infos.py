@@ -3,7 +3,7 @@ Syntax: .get_admin, .get_bot, .get_id"""
 
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
@@ -56,7 +56,7 @@ async def _(event):
 
 from telethon import events
 from telethon.utils import pack_bot_file_id
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="get_id"))
@@ -77,7 +77,7 @@ async def _(event):
 
 from telethon import events
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="get_bot ?(.*)"))

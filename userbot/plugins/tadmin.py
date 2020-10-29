@@ -11,8 +11,8 @@ from telethon.tl.functions.channels import (
 from telethon.tl.types import (
     ChatBannedRights,
     MessageEntityMentionName)
-from userbot.utils import errors_handler, admin_cmd
-from userbot.plugins import extract_time
+from fridaybot.utils import errors_handler, admin_cmd
+from fridaybot.plugins import extract_time
 
 if Config.PRIVATE_GROUP_BOT_API_ID is None:
     BOTLOG = False

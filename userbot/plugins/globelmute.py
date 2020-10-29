@@ -2,9 +2,9 @@
 © Sensible Userbot
 added speciality for sudos if u kang give me credits
 '''
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from fridaybot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from telethon import events
 #@command(outgoing=True, pattern=r"^.gmuute ?(\d+)?")
 @borg.on(admin_cmd(pattern=r"gmuute ?(\d+)?"))

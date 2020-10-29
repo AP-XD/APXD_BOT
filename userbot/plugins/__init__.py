@@ -1,4 +1,4 @@
-from userbot import topfunc
+from fridaybot import topfunc
 import os
 import re
 import time
@@ -8,13 +8,13 @@ import requests
 import spamwatch as spam_watch
 from ..helpers import *
 from .. import StartTime
-from userbot import catdef
-from userbot.Configs import Config
-from userbot.utils import admin_cmd
+from fridaybot import catdef
+from fridaybot.Configs import Config
+from fridaybot.utils import admin_cmd
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from userbot.utils import friday_on_cmd
+from fridaybot.utils import friday_on_cmd
 from var import Var 
 UP = "**2.1.0**"
 def start() -> scoped_session:
@@ -86,7 +86,7 @@ def check_data_base_heal_th():
     output = "No Database is set"
     if not Config.DB_URI:
         return is_database_working, output
-    from userbot.plugins.sql_helper import SESSION
+    from fridaybot.plugins.sql_helper import SESSION
     try:
         # to check database we will execute raw query
         SESSION.execute("SELECT 1")
@@ -149,7 +149,7 @@ async def catalive():
         dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
     except Exception as e:
         dyno = e
-    conclusion = f"Catuserbot Stats\
+    conclusion = f"Catfridaybot Stats\
                  \n\nDatabase : {check_sgnirts}\
                   \nSudo : {sudo}\
                   \nUptime : {uptime}\

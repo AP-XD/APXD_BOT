@@ -2,9 +2,9 @@ import os
 import pybase64
 import asyncio
 from asyncio import sleep
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon import functions, types
-from userbot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 

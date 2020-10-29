@@ -1,9 +1,9 @@
 from telethon import events
 import asyncio
-from userbot.utils import admin_cmd
-from userbot import ALIVE_NAME
+from fridaybot.utils import admin_cmd
+from fridaybot import ALIVE_NAME
 import random, re
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from collections import deque
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
@@ -103,7 +103,7 @@ async def _(event):
             "😧",
             "😡",
             "😢",
-            "‎**Repo of catuserbot**",
+            "‎**Repo of catfridaybot**",
             "😁",
             "😧",
             "😡",

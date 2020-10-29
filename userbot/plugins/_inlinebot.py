@@ -10,9 +10,9 @@ from telethon import events
 from telethon import functions
 from telethon.tl.functions.users import GetFullUserRequest
 import os
-from userbot import ALIVE_NAME
-from userbot import CMD_LIST
-from userbot.plugins import inlinestats
+from fridaybot import ALIVE_NAME
+from fridaybot import CMD_LIST
+from fridaybot.plugins import inlinestats
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
     WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
@@ -92,7 +92,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             await event.edit("Help Menu Closed.")
         else:
-            reply_pop_up_alert = "Please get your own userbot ,and don't use mine."
+            reply_pop_up_alert = "Please get your own fridaybot ,and don't use mine."
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 

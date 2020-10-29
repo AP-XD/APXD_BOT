@@ -24,7 +24,7 @@ async def sticklet(event):
     # the text on which we would like to do the magic on
     sticktext = event.pattern_match.group(1)
 
-    # delete the userbot command,
+    # delete the fridaybot command,
     await event.delete()
 
     # https://docs.python.org/3/library/textwrap.html#textwrap.wrap

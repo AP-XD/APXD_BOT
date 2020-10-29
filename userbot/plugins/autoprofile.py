@@ -24,8 +24,8 @@ from pySmartDL import SmartDL
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
 
-from userbot import AUTONAME, CMD_HELP, DEFAULT_BIO
-from userbot.utils import admin_cmd
+from fridaybot import AUTONAME, CMD_HELP, DEFAULT_BIO
+from fridaybot.utils import admin_cmd
 
 DEFAULTUSERBIO = str(DEFAULT_BIO) if DEFAULT_BIO else " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
 DEL_TIME_OUT = 60
@@ -37,12 +37,12 @@ FONT_FILE_TO_USE = "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.
 @borg.on(admin_cmd(pattern="autopic$"))
 async def autopic(event):
     await event.edit(f"Autopic has been started by my Master")
-    downloaded_file_name = "userbot/original_pic.png"
+    downloaded_file_name = "fridaybot/original_pic.png"
     downloader = SmartDL(
         Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
     )
     downloader.start(blocking=False)
-    photo = "userbot/photo_pfp.png"
+    photo = "fridaybot/photo_pfp.png"
     while not downloader.isFinished():
         pass
     counter = -60
@@ -71,13 +71,13 @@ async def autopic(event):
 @borg.on(admin_cmd(pattern="digitalpfp$"))
 async def main(event):
     await event.edit("Starting digital Profile Pic see magic in 5 sec.")
-    poto = "userbot/poto_pfp.png"
+    poto = "fridaybot/poto_pfp.png"
     cat = str(
         pybase64.b64decode(
             "aHR0cHM6Ly90ZWxlZ3JhLnBoL2ZpbGUvYWVhZWJlMzNiMWYzOTg4YTBiNjkwLmpwZw=="
         )
     )[2:51]
-    downloaded_file_name = "userbot/digital_pic.png"
+    downloaded_file_name = "fridaybot/digital_pic.png"
     downloader = SmartDL(cat, downloaded_file_name, progress_bar=True)
     downloader.start(blocking=False)
     await asyncio.sleep(5)
@@ -107,12 +107,12 @@ async def main(event):
 @borg.on(admin_cmd(pattern="bloom$"))
 async def autopic(event):
     await event.edit("Bloom colour profile pic have been enabled by my master")
-    downloaded_file_name = "userbot/original_pic.png"
+    downloaded_file_name = "fridaybot/original_pic.png"
     downloader = SmartDL(
         Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=True
     )
     downloader.start(blocking=False)
-    photo = "userbot/photo_pfp.png"
+    photo = "fridaybot/photo_pfp.png"
     while not downloader.isFinished():
         pass
     while True:

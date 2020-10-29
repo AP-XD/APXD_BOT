@@ -3,7 +3,7 @@ import asyncio
 import json
 import requests
 from urllib.parse import quote
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from PIL import Image, ImageColor
 import os
 from datetime import datetime
@@ -11,7 +11,7 @@ import qrcode
 import barcode
 from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 import logging
 logging.basicConfig(
@@ -358,7 +358,7 @@ CMD_HELP.update({
 \n\n`.decode` <reply to barcode/qrcode> \
 \n**USAGE : **to get decoded content of those codes.\
 \n\n`.currency` amount (from currency) (to currency)\
-\n**USAGE : **Currency converter for userbot **Example :** `.currency 10 usd inr`\
+\n**USAGE : **Currency converter for fridaybot **Example :** `.currency 10 usd inr`\
 \n\n`.currencies`\
 \n**USAGE : **Shows you the some list of currencies\
 \n\n`.ifsc` <IFSC code>\

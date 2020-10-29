@@ -12,7 +12,7 @@ recent - userstatusrecently
 bots - bot
 delacc - deleted account"""
 
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon import events
 from datetime import datetime, timedelta
 from telethon.tl.types import UserStatusEmpty, UserStatusLastMonth, UserStatusLastWeek, UserStatusOffline, UserStatusOnline, UserStatusRecently, ChannelParticipantsKicked, ChatBannedRights

@@ -3,10 +3,10 @@
 import random, re
 import asyncio
 from telethon import events
-from userbot.events import register
+from fridaybot.events import register
 from asyncio import sleep
 import time
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 
 
 @register(pattern=".shut")

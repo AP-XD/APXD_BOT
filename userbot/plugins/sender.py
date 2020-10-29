@@ -1,14 +1,14 @@
 # For TeleBot, by @its_xditya, @MrConfused and @Jisan7509. 
 # Kangers keep credits.
 
-from userbot.utils import command, remove_plugin, load_module
+from fridaybot.utils import command, remove_plugin, load_module
 from pathlib import Path
 import asyncio
 import os
-import userbot.utils
+import fridaybot.utils
 from datetime import datetime
 from .. import ALIVE_NAME 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 DELETE_TIMEOUT = 5
 thumb_image_path = "./friday.png"
 
@@ -22,7 +22,7 @@ async def send(event):
     message_id = event.message.id
     thumb = thumb_image_path
     input_str = event.pattern_match.group(1)
-    the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
+    the_plugin_file = "./fridaybot/plugins/{}.py".format(input_str)
     start = datetime.now()
     pro = await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,

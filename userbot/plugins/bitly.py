@@ -7,9 +7,9 @@
 import os
 from bitlyshortener import Shortener
 from re import match
-from userbot import BITLY_TOKEN
-from userbot.events import register
-from userbot.utils import admin_cmd
+from fridaybot import BITLY_TOKEN
+from fridaybot.events import register
+from fridaybot.utils import admin_cmd
 
 BIT_TOKEN = os.environ.get("BITLY_TOKEN", None)
 BOTLOG = True

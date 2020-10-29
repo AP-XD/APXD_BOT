@@ -2,9 +2,9 @@
 
 import asyncio
 from telethon import events
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from platform import uname
-from userbot import ALIVE_NAME
+from fridaybot import ALIVE_NAME
 
 
 F = ("⢀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⣠⣤⣶⣶\n"

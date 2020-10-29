@@ -5,10 +5,10 @@ ported to telethon by @mrconfused and @sandy1709
 
 import os
 from PIL import Image
-from userbot.utils import admin_cmd 
-from userbot import LOGS , CMD_HELP
+from fridaybot.utils import admin_cmd 
+from fridaybot import LOGS , CMD_HELP
 from glitch_this import ImageGlitcher
-from userbot.functions import take_screen_shot ,runcmd
+from fridaybot.functions import take_screen_shot ,runcmd
 
 @borg.on(admin_cmd(pattern="(glitch|glitchs)(?: |$)(.*)"))
 @borg.on(admin_cmd(pattern="(glitch|glitchs)(?: |$)(.*)", allow_sudo=True))

@@ -3,7 +3,7 @@
 from heroku_config import Var
 import asyncio
 from telethon.tl.types import ChannelParticipantsAdmins
-from userbot import ALIVE_NAME, AUTOPIC_FONT_COLOUR, AUTOPIC_FONT, AUTOPIC_COMMENT
+from fridaybot import ALIVE_NAME, AUTOPIC_FONT_COLOUR, AUTOPIC_FONT, AUTOPIC_COMMENT
 	
 AUTO_PIC_FONT = str(AUTOPIC_FONT) if AUTOPIC_FONT else "DejaVuSansMono.ttf"
 FONT_FILE_TO_USE = f"fonts/{AUTO_PIC_FONT}"

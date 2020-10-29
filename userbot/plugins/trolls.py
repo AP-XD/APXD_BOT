@@ -14,9 +14,9 @@ credits to @mrconfused and @sandy1709
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from telegraph import upload_file, exceptions
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 from . import *
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 import os
 import pybase64
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get

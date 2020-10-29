@@ -6,8 +6,8 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME
-from userbot.events import register
+from fridaybot import CMD_HELP, ALIVE_NAME
+from fridaybot.events import register
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node

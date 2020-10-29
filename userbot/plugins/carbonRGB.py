@@ -8,7 +8,7 @@ from urllib.parse import quote_plus
 from time import sleep
 import os
 import random
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 #@borg.on(events.NewMessage(pattern=r"\.karb ", outgoing=True))
 @borg.on(admin_cmd(pattern="karb"))
 async def carbon_api(e):

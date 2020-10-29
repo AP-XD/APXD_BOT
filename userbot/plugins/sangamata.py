@@ -5,7 +5,7 @@ import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import asyncio
 
 @borg.on(admin_cmd(pattern=("sg ?(.*)")))

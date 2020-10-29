@@ -5,8 +5,8 @@
 import sys
 from telethon import events, functions, version, __version__
 import random
-from userbot.utils import register
-from userbot import ALIVE_NAME
+from fridaybot.utils import register
+from fridaybot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet, check pinned in @TeleBotHelp"
 

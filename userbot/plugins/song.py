@@ -11,7 +11,7 @@ import subprocess
 from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
 import io
 import asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 import glob
 import os  
 
@@ -65,9 +65,9 @@ async def _(event):
     subprocess.check_output("rm -rf *.mp3",shell=True)
 import datetime
 import time
-from userbot.utils import friday_on_cmd, sudo_cmd
-from userbot.events import register 
-from userbot import bot, CMD_HELP
+from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot.events import register 
+from fridaybot import bot, CMD_HELP
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 import glob

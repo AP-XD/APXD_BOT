@@ -5,8 +5,8 @@ import datetime
 from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP
 
 
 global USER_AFK  # pylint:disable=E0602
@@ -43,7 +43,7 @@ async def set_not_afk(event):
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` " + \
                 "for the proper functioning of afk functionality " + \
-                "check pinned message in @catuserbot17.\n\n `{}`".format(str(e)),
+                "check pinned message in @catfridaybot17.\n\n `{}`".format(str(e)),
                 reply_to=event.message.id,
                 silent=True
             )
@@ -112,7 +112,7 @@ async def on_afk(event):
     afk_since = "**a while ago**"
     current_message_text = event.message.message.lower()
     if "affk" in current_message_text:
-        # userbot's should not reply to other userbot's
+        # fridaybot's should not reply to other fridaybot's
         # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
         return False
     if USER_AFK and not (await event.get_sender()).bot:  # pylint:disable=E0602

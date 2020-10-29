@@ -7,8 +7,8 @@ import traceback
 from datetime import datetime
 from selenium import webdriver
 from telethon import events
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP
 
 @borg.on(admin_cmd(pattern="ss (.*)"))
 async def _(event):

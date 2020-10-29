@@ -23,11 +23,11 @@ Idea by @BlazingRobonix
 import asyncio
 import pybase64
 import requests
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon import events
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from userbot.plugins.sql_helper.echo_sql import is_echo, get_all_echos, addecho, remove_echo
+from fridaybot.plugins.sql_helper.echo_sql import is_echo, get_all_echos, addecho, remove_echo
 
 
 @borg.on(admin_cmd(pattern="addecho$"))

@@ -1,4 +1,4 @@
-from userbot import bot, BOTLOG_CHATID, ALIVE_NAME, CMD_LIST
+from fridaybot import bot, BOTLOG_CHATID, ALIVE_NAME, CMD_LIST
 import asyncio
 from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
@@ -36,7 +36,7 @@ async def startgban(rk):
         if user.id ==1289422521:     
     	             return await rkp.edit(f"`{JAVES_NNAME}:`**Error! This Is My Creator How Am i Supposed To Gban him.**")
         try:
-          from userbot.modules.sql_helper.gmute_sql import gmute            
+          from fridaybot.modules.sql_helper.gmute_sql import gmute            
         except:
    	     pass
         try:
@@ -87,7 +87,7 @@ async def regressgban(rk):
         if user.id ==1289422521:     
     	             return await rkp.edit(f"`{JAVES_NNAME}:`**Error! cant ungban this user.**")
         try:
-          from userbot.modules.sql_helper.gmute_sql import ungmute
+          from fridaybot.modules.sql_helper.gmute_sql import ungmute
         except:
    	     pass
         try:

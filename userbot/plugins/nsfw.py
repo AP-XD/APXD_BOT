@@ -1,7 +1,7 @@
 # Ported from userge by @buddhhu
 
 import os, urllib, requests, asyncio
-import userbot.utils
+import fridaybot.utils
 from uniborg.util import admin_cmd, sudo_cmd
 @borg.on(admin_cmd(pattern=r"boobs"))
 async def boobs(event):

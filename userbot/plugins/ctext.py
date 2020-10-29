@@ -2,7 +2,7 @@ from telethon import events
 import asyncio
 import os
 import sys
-from userbot import utils
+from fridaybot import utils
 
 
 @borg.on(utils.admin_cmd(pattern="ctext ?(.*)"))

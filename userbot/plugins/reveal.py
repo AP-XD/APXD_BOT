@@ -5,7 +5,7 @@
 # By @buddhhu, @Itzsjdude
 #
 import os
-from userbot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd
 
 @borg.on(admin_cmd(pattern=r"reveal", outgoing=True))
 @borg.on(sudo_cmd(pattern=r"reveal", incoming=True, allow_sudo=True))

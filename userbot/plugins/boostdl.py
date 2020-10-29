@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 import sys
 import asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern="boostdl ?(.*)"))
 async def _(event):

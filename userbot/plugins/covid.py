@@ -1,11 +1,11 @@
 from datetime import datetime
 from covid import Covid
 covid = Covid(source="worldometers")
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="^!corona$"))

@@ -17,21 +17,21 @@ dont edit credits
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon.tl.functions.users import GetFullUserRequest
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from fridaybot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
-from userbot.utils import sudo_cmd, admin_cmd
+from fridaybot.utils import sudo_cmd, admin_cmd
 from telethon.tl.types import (
     ChatBannedRights,
     MessageEntityMentionName)
 from telethon.errors import (
     BadRequestError)
 from telethon.tl.functions.channels import EditBannedRequest
-from userbot import CAT_ID
-from userbot.plugins import admin_groups
+from fridaybot import CAT_ID
+from fridaybot.plugins import admin_groups
 from datetime import datetime
-import userbot.plugins.sql_helper.gban_sql_helper as gban_sql
+import fridaybot.plugins.sql_helper.gban_sql_helper as gban_sql
 import pybase64
 from telethon.tl.functions.messages import ImportChatInviteRequest
 

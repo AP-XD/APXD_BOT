@@ -9,7 +9,7 @@ import os
 import sys
 import random
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=f"hps$", outgoing=True))
 async def _(event):

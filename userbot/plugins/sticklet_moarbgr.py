@@ -21,7 +21,7 @@ async def sticklet(event):
     # the text on which we would like to do the magic on
     sticktext = event.pattern_match.group(1)
 
-    # delete the userbot command,
+    # delete the fridaybot command,
     # i don't know why this is required
     await event.delete()
 

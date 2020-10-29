@@ -2,12 +2,12 @@ import os
 import time
 import asyncio
 from io import BytesIO
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 from telethon import types
 from datetime import datetime
 from telethon.errors import PhotoInvalidDimensionsError
 from telethon.tl.functions.messages import SendMediaRequest
-from userbot.utils import admin_cmd, sudo_cmd, progress, edit_or_reply
+from fridaybot.utils import admin_cmd, sudo_cmd, progress, edit_or_reply
 
 
 @borg.on(admin_cmd(pattern="stoi$"))
