@@ -19,7 +19,7 @@ from telethon.tl.functions.account import UpdateProfileRequest
 
 
 import spotify_token as st
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 
 # =================== CONSTANT ===================
 SPO_BIO_ENABLED = "```Spotify Current Music to Name enabled.```"

@@ -5,7 +5,7 @@ from pathlib import Path
 from telethon import events
 from userbot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from userbot import *
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 from userbot import LOAD_PLUG
 from userbot import CMD_LIST, SUDO_LIST, bot
 import logging

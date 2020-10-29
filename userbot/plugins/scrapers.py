@@ -17,7 +17,7 @@ from emoji import get_emoji_regexp
 from asyncio import sleep
 from userbot import CHROME_DRIVER, GOOGLE_CHROME_BIN
 from userbot.utils import admin_cmd
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 
 LANG = "en"
 CARBONLANG = "auto"

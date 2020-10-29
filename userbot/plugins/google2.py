@@ -11,7 +11,7 @@ from datetime import datetime
 from userbot.utils import admin_cmd
 from re import findall
 from search_engine_parser import GoogleSearch
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 
 
 def progress(current, total):

@@ -9,7 +9,7 @@ from userbot import ALIVE_NAME, telever
 from userbot.utils import admin_cmd, sudo_cmd
 from userbot.__init__ import StartTime
 from datetime import datetime
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 
 ALV_PIC = os.environ.get("ALIVE_PIC" , None)
 

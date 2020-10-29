@@ -9,7 +9,7 @@ import spamwatch as spam_watch
 from ..helpers import *
 from .. import StartTime
 from userbot import catdef
-from userbot.uniborgConfig import Config
+from userbot.Configs import Config
 from userbot.utils import admin_cmd
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
