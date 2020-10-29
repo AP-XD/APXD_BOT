@@ -75,6 +75,28 @@ import os
 
 try:
  import instantmusic , subprocess
+# Originally from Bothub
+# Port to UserBot by @heyworld
+#Copyright (C) 2020 azrim.
+
+
+from telethon import events
+import subprocess
+from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
+import io
+import asyncio
+import datetime
+import time
+from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot.events import register 
+from fridaybot import bot, CMD_HELP
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.account import UpdateNotifySettingsRequest
+import glob
+import os
+
+try:
+ import instantmusic , subprocess
 except:
  os.system("pip install instantmusic")
  
@@ -165,3 +187,20 @@ async def DeezLoader(Deezlod):
                                              [msg_start.id, response.id, r.id, msg.id, details.id, song.id])
           await Deezlod.delete()          
    
+
+CMD_HELP.update({
+        "music":
+        ".spd`<Artist - Song Title>\
+            \nUsage:For searching songs from Spotify.\
+            \n\n`.netease` <Artist - Song Title>\
+            \nUsage:Download music with @WooMaiBot\
+            \n\n`.dzd` <Spotify/Deezer Link>\
+            \nUsage:Download music from Spotify or Deezer.\
+            \n\n`.deezload` <spotify/deezer link> <Format>\
+            \nUsage: Download music from deezer.\
+            \n\n Well deezer is not available in India so create an deezer account using vpn. Set DEEZER_ARL_TOKEN in vars to make this work.\
+            \n\n *Format= `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`.\
+            \n\n\n Guide:Video guide of arl token: [here](https://www.youtube.com/watch?v=O6PRT47_yds&feature=youtu.be) or Read [This](https://notabug.org/RemixDevs/DeezloaderRemix/wiki/Login+via+userToken)."
+})
+
+

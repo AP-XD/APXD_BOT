@@ -28,6 +28,9 @@ from telethon.tl.types import (
     InputPeerChannel,
     InputPeerChat)
 
+from fridaybot import CMD_HELP
+from fridaybot.events import register
+
 
 def parse_arguments(message: str, valid: List[str]) -> (dict, str):
     options = {}

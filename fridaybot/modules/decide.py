@@ -17,3 +17,4 @@ async def _(event):
         event.chat_id, r["answer"], reply_to=message_id, file=r["image"]
     )
     await event.delete()
+

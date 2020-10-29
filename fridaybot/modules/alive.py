@@ -3,6 +3,7 @@
 import time
 from uniborg.util import friday_on_cmd, sudo_cmd
 from fridaybot import ALIVE_NAME
+from fridaybot.Configs import Config
 from datetime import datetime
 from fridaybot import Lastupdate
 from fridaybot.modules import currentversion
@@ -37,7 +38,7 @@ def get_readable_time(seconds: int) -> str:
 
 uptime = get_readable_time((time.time() - Lastupdate))
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
-PM_IMG = "https://telegra.ph/file/1c4df5d90d6e68e417348.png"
+PM_IMG = Config.ALIVE_IMAGE
 pm_caption = "➥ **FRIDAY IS:** `ONLINE`\n\n"
 pm_caption += "➥ **SYSTEMS STATS**\n"
 pm_caption += "➥ **Telethon Version:** `1.15.0` \n"

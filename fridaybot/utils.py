@@ -103,7 +103,7 @@ def load_module(shortname):
         from pathlib import Path
         import fridaybot.modules.sql_helper.global_variables_sql
         import fridaybot.utils
-
+        import fridaybot.utils
         path = Path(f"fridaybot/modules/{shortname}.py")
         name = "fridaybot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -130,6 +130,7 @@ def load_module(shortname):
         # for imports
         sys.modules["fridaybot.modules." + shortname] = mod
         print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
+
 
 
 def remove_plugin(shortname):
