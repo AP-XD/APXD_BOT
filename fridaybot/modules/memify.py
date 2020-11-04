@@ -7,7 +7,7 @@ import os
 import random
 
 from ..utils import admin_cmd, sudo_cmd
-from . import (
+from fridaybot import (
     CMD_HELP,
     LOGS,
     add_frame,
