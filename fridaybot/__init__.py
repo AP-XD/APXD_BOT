@@ -12,21 +12,12 @@ from pySmartDL import SmartDL
 from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-from logging import basicConfig, getLogger, INFO, DEBUG
-from distutils.util import strtobool as sb
-import asyncio
-from var import Var
-
-from .function import fridayfunction as topfunc
-from .helpers import fonts as fonts, functions as catdef
-from .helpers import memeshelper as memes
-from .helpers import tempmemes, process as process                             
+from var import Var                           
 StartTime = time.time()
 UpTime = time.time()
 catversion = "2.9.1"
 Lastupdate = time.time()
 telever = "4.7"
-
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)

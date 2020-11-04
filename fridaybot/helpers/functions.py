@@ -551,6 +551,7 @@ async def sanga_seperator(sanga_list):
     usernames = sanga_list[s:]
     names = sanga_list[:s]
     return names, usernames
+    
 # unziping file
 async def unzip(downloaded_file_name):
     with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
