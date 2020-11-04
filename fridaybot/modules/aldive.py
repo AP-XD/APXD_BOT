@@ -61,8 +61,8 @@ async def amireallyalive(yes):
     await asyncio.sleep(edit_time)
     ok7 = await borg.edit_message(yes.chat_id, ok6, file=file4)
 
-    await aldive.delete()
+    await yes.delete()
     
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(adlive.chat_id, PM_IMG,caption=pm_caption)
-    await aldive.delete()
+    await yes.delete()
