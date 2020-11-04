@@ -22,7 +22,7 @@ from fridaybot import CMD_LIST, SUDO_LIST, bot
 import logging
 import inspect
 from var import Var
-from . import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
+from fridaybot import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
 from .helpers.exceptions import CancelProcess
 
 cmdhandler = Config.COMMAND_HAND_LER
