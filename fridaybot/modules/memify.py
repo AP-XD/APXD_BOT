@@ -6,7 +6,7 @@ import asyncio
 import os
 import random
 
-from ..utils import admin_cmd, sudo_cmd
+from ..utils import admin_cmd, sudo_cmd,edit_or_reply
 from fridaybot import (
     CMD_HELP,
     LOGS,
