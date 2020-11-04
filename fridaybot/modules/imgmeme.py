@@ -8,7 +8,7 @@ import re
 import pybase64
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from userbot.plugins import (
+from fridaybot.modules import (
     changemymind,
     deEmojify,
     fakegs,
