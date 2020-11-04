@@ -17,7 +17,7 @@
 import re
 
 from fridaybot import bot
-from fridaybot.utils import admin_cmd
+from fridaybot.utils import admin_cmd,sudo_cmd
 
 IF_EMOJI = re.compile(
     "["
