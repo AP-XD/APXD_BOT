@@ -12,7 +12,8 @@ from pySmartDL import SmartDL
 from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-from var import Var                           
+from var import Var  
+from .function import fridayfunction as topfunc                         
 StartTime = time.time()
 UpTime = time.time()
 catversion = "2.9.1"
