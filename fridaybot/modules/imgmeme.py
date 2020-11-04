@@ -22,8 +22,8 @@ from fridaybot.modules import (
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="fakegs(?: |$)(.*)", command="fakegs"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="fakegs(?: |$)(.*)", command="fakegs"))
+@bot.on(admin_cmd(outgoing=True, pattern="fakegs(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="fakegs(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     reply_to_id = await reply_id(cat)
@@ -52,8 +52,8 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="trump(?: |$)(.*)", command="trump"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="trump(?: |$)(.*)", command="trump"))
+@bot.on(admin_cmd(outgoing=True, pattern="trump(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="trump(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     text = re.sub("&", "", text)
@@ -80,8 +80,8 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="modi(?: |$)(.*)", command="modi"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="modi(?: |$)(.*)", command="modi"))
+@bot.on(admin_cmd(outgoing=True, pattern="modi(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="modi(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     text = re.sub("&", "", text)
@@ -108,8 +108,8 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="cmm(?: |$)(.*)", command="cmm"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="cmm(?: |$)(.*)", command="cmm"))
+@bot.on(admin_cmd(outgoing=True, pattern="cmm(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="cmm(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     text = re.sub("&", "", text)
@@ -136,8 +136,8 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="kanna(?: |$)(.*)", command="kanna"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="kanna(?: |$)(.*)", command="kanna"))
+@bot.on(admin_cmd(outgoing=True, pattern="kanna(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="kanna(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     text = re.sub("&", "", text)
@@ -164,8 +164,8 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="tweet(?: |$)(.*)", command="tweet"))
-@bot.on(sudo_cmd(allow_sudo=True, pattern="tweet(?: |$)(.*)", command="tweet"))
+@bot.on(admin_cmd(outgoing=True, pattern="tweet(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="tweet(?: |$)(.*)"))
 async def nekobot(cat):
     text = cat.pattern_match.group(1)
     text = re.sub("&", "", text)
