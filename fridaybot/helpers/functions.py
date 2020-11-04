@@ -13,9 +13,10 @@ from asyncio import sleep
 from random import choice
 from telethon import events
 from emoji import get_emoji_regexp
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from validators.url import url
-from telethon.tl.types import Channel
+from .resources.states import states
+from telethon.tl.types import Channel, PollAnswer
 
 async def get_readable_time(seconds: int) -> str:
     count = 0
@@ -49,11 +50,14 @@ async def admin_groups(cat):
     catgroups = []
     async for dialog in cat.client.iter_dialogs():
         entity = dialog.entity  
-        if isinstance(entity, Channel):
-            if entity.megagroup:
-                if entity.creator or entity.admin_rights:
-                   catgroups.append(entity.id)
+        if (
+            isinstance(entity, Channel)
+            and entity.megagroup
+            and (entity.creator or entity.admin_rights)
+        ):
+            catgroups.append(entity.id)
     return catgroups
+
 
 # For using gif , animated stickers and videos in some parts , this
 # function takes  take a screenshot and stores ported from userge
@@ -203,7 +207,12 @@ async def extract_time(cat, time_val):
     cat.edit("Invalid time type specified. Expected m , h , d or w but got: {}".format(
         time_val[-1]))
     return ""
-
+song_dl = "youtube-dl --force-ipv4 --write-thumbnail -o './temp/%(title)s.%(ext)s' --extract-audio --audio-format mp3 --audio-quality {QUALITY} {video_link}"
+thumb_dl = "youtube-dl --force-ipv4 -o './temp/%(title)s.%(ext)s' --write-thumbnail --skip-download {video_link}"
+video_dl = "youtube-dl --force-ipv4 --write-thumbnail  -o './temp/%(title)s.%(ext)s' -f '[filesize<20M]' {video_link}"
+name_dl = (
+    "youtube-dl --force-ipv4 --get-filename -o './temp/%(title)s.%(ext)s' {video_link}"
+)
 # for stickertxt
 
 async def waifutxt(text, chat_id ,reply_to_id , bot, borg):
@@ -235,6 +244,8 @@ EMOJI_PATTERN = re.compile(
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return re.sub(EMOJI_PATTERN, '', inputString)
+def Build_Poll(options):
+    return [PollAnswer(option, bytes(i)) for i, option in enumerate(options, start=1)]
 
 
 def convert_toimage(image):
@@ -244,6 +255,35 @@ def convert_toimage(image):
     img.save("temp.jpg", "jpeg")
     os.remove(image)
     return "temp.jpg"
+async def convert_tosticker(image):
+    img = Image.open(image)
+    if img.mode != "RGB":
+        img = img.convert("RGB")
+    img.save("./temp/temp.webp", "webp")
+    os.remove(image)
+    return "./temp/temp.webp"
+
+async def covidindia(state):
+    url = "https://www.mohfw.gov.in/data/datanew.json"
+    req = requests.get(url).json()
+    for i in states:
+        if i == state:
+            return req[states.index(i)]
+    return None
+async def fakegs(search, result):
+    imgurl = "https://i.imgur.com/wNFr5X2.jpg"
+    with open("./temp/temp.jpg", "wb") as f:
+        f.write(requests.get(imgurl).content)
+    img = Image.open("./temp/temp.jpg")
+    drawing = ImageDraw.Draw(img)
+    blue = (0, 0, 255)
+    black = (0, 0, 0)
+    font1 = ImageFont.truetype("userbot/helpers/styles/ProductSans-BoldItalic.ttf", 20)
+    font2 = ImageFont.truetype("userbot/helpers/styles/ProductSans-Light.ttf", 23)
+    drawing.text((450, 258), result, fill=blue, font=font1)
+    drawing.text((270, 37), search, fill=black, font=font2)
+    img.save("./temp/temp.jpg")
+    return "./temp/temp.jpg"
 
 # for nekobot
     
@@ -312,19 +352,6 @@ async def tweets(text1,text2):
         img = Image.open("temp.png").convert("RGB")
         img.save("temp.webp", "webp")    
         return "temp.webp"
-
-async def tweets(text1, text2):
-    r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
-    sandy = r.get("message")
-    caturl = url(sandy)
-    if not caturl:
-        return "check syntax once more"
-    with open("temp.png", "wb") as f:
-        f.write(requests.get(sandy).content)
-    img = Image.open("temp.png").convert("RGB")
-    img.save("temp.webp", "webp")
-    return "temp.webp"
 
 
 async def iphonex(text):
@@ -494,3 +521,43 @@ async def crop(imagefile, endname, x):
     image = Image.open(imagefile)
     inverted_image = PIL.ImageOps.crop(image, border=x)
     inverted_image.save(endname)
+
+async def yt_search(cat):
+    try:
+        cat = urllib.parse.quote(cat)
+        html = urllib.request.urlopen(
+            "https://www.youtube.com/results?search_query=" + cat
+        )
+        user_data = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+        video_link = None
+        if user_data:
+            video_link = "https://www.youtube.com/watch?v=" + user_data[0]
+        if video_link:
+            return video_link
+        return "Couldnt fetch results"
+    except:
+        return "Couldnt fetch results"
+
+
+async def sanga_seperator(sanga_list):
+    for i in sanga_list:
+        if i.startswith("🔗"):
+            sanga_list.remove(i)
+    s = 0
+    for i in sanga_list:
+        if i.startswith("Username History"):
+            break
+        s += 1
+    usernames = sanga_list[s:]
+    names = sanga_list[:s]
+    return names, usernames
+# unziping file
+async def unzip(downloaded_file_name):
+    with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
+        zip_ref.extractall("./temp")
+    downloaded_file_name = os.path.splitext(downloaded_file_name)[0]
+    return f"{downloaded_file_name}.gif"
+
+
+# https://github.com/pokurt/LyndaRobot/blob/7556ca0efafd357008131fa88401a8bb8057006f/lynda/modules/helper_funcs/string_handling.py#L238
+

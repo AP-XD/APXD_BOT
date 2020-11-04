@@ -17,7 +17,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "DARK COBRA"
 # Kang with credits else gay...
 # alive.py for DC(DARK COBRA)
 
-edit_time = 5
+edit_time = 3
 """ =======================CONSTANTS====================== """
 file1 = "https://telegra.ph/file/6aa39732748ed7c319943.jpg"
 file2 = "https://telegra.ph/file/a6d72504bc09e71484a54.jpg"
@@ -61,8 +61,8 @@ async def amireallyalive(yes):
     await asyncio.sleep(edit_time)
     ok7 = await borg.edit_message(yes.chat_id, ok6, file=file4)
 
-    await yes.delete()
+    await alive.delete()
     
     """ For .alive command, check if the bot is running.  """
-    await borg.send_file(adlive.chat_id, PM_IMG,caption=pm_caption)
-    await yes.delete()
+    await borg.send_file(alive.chat_id, PM_IMG,caption=pm_caption)
+    await alive.delete()

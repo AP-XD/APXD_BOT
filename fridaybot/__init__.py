@@ -23,9 +23,9 @@ from .helpers import memeshelper as memes
 from .helpers import tempmemes, process as process                             
 StartTime = time.time()
 UpTime = time.time()
-catversion = "2.8.0"
+catversion = "2.9.1"
 Lastupdate = time.time()
-telever = "4.6"
+telever = "4.7"
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
@@ -42,6 +42,7 @@ else:
 
 
 CMD_LIST = {}
+SUDO_LIST = {}
 # for later purposes
 CMD_HELP = {}
 INT_PLUG = ""
@@ -181,6 +182,9 @@ if bool(ENV):
     G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA", None)
     GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./downloads")
+    # time.py
+    COUNTRY = str(os.environ.get("COUNTRY", ""))
+    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))         
 else:
     # Put your ppe vars here if you are using local hosting
     PLACEHOLDER = None
@@ -214,5 +218,4 @@ AFKREASON = None
 # showing imports error
 
 from .helpers import *
-from .helpers import functions as catdef
-from .helpers import memeshelper as memes                    
+from .helpers import functions as catdef                   

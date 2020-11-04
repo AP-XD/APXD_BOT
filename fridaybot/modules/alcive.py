@@ -1,9 +1,5 @@
 import time
 from platform import python_version
-
-import nekos
-import requests
-from PIL import Image
 from telethon import version
 
 from fridaybot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion
@@ -14,8 +10,8 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 CAT_IMG = Config.ALIVE_PIC
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="alcive$"))
-@borg.on(sudo_cmd(pattern="alive$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="alcive$"))
+@bot.on(sudo_cmd(pattern="alcive$", allow_sudo=True))
 async def amireallyalive(alive):
     if alive.fwd_from:
         return
@@ -29,11 +25,11 @@ async def amireallyalive(alive):
         cat_caption = f"**✮ MY BOT IS RUNNING SUCCESFULLY ✮**\n\n"
         cat_caption += f"**✧ Database :** `{check_sgnirts}`\n"
         cat_caption += f"**✧ Telethon version :** `{version.__version__}\n`"
-        cat_caption += f"**✧ Catfridaybot Version :** `{catversion}`\n"
+        cat_caption += f"**✧ Catuserbot Version :** `{catversion}`\n"
         cat_caption += f"**✧ Python Version :** `{python_version()}\n`"
         cat_caption += f"**✧ Uptime :** `{uptime}\n`"
-        cat_caption += f"**✧ My Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
-        await borg.send_file(
+        cat_caption += f"**✧ Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
+        await alive.client.send_file(
             alive.chat_id, CAT_IMG, caption=cat_caption, reply_to=reply_to_id
         )
         await alive.delete()
@@ -43,15 +39,16 @@ async def amireallyalive(alive):
             f"**✮ MY BOT IS RUNNING SUCCESFULLY ✮**\n\n"
             f"**✧ Database :** `{check_sgnirts}`\n"
             f"**✧ Telethon Version :** `{version.__version__}\n`"
-            f"**✧ Catfridaybot Version :** `{catversion}`\n"
+            f"**✧ Catuserbot Version :** `{catversion}`\n"
             f"**✧ Python Version :** `{python_version()}\n`"
             f"**✧ Uptime :** `{uptime}\n`"
-            f"**✧ My Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n",
+            f"**✧ Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n",
         )
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="ialive$"))
-@borg.on(sudo_cmd(pattern="ialive$", allow_sudo=True))
+
+@bot.on(admin_cmd(outgoing=True, pattern="ialive$"))
+@bot.on(sudo_cmd(pattern="ialive$", allow_sudo=True))
 async def amireallyalive(alive):
     if alive.fwd_from:
         return
@@ -60,32 +57,14 @@ async def amireallyalive(alive):
     if alive.reply_to_msg_id:
         reply_to_id = await alive.get_reply_message()
     hmm = bot.uid
-    cat_caption = f"**Catfridaybot is Up and Running**\n"
+    cat_caption = f"**Catuserbot is Up and Running**\n"
     cat_caption += f"**  -Telethon version :** `{version.__version__}\n`"
-    cat_caption += f"**  -Catfridaybot Version :** `{catversion}`\n"
+    cat_caption += f"**  -Catuserbot Version :** `{catversion}`\n"
     cat_caption += f"**  -Python Version :** `{python_version()}\n`"
-    cat_caption += f"**  -My peru Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
+    cat_caption += f"**  -Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n"
     results = await bot.inline_query(tgbotusername, cat_caption)  # pylint:disable=E0602
     await results[0].click(alive.chat_id, reply_to=reply_to_id, hide_via=True)
     await alive.delete()
-
-
-@borg.on(admin_cmd(pattern="cat$"))
-@borg.on(sudo_cmd(pattern="cat$", allow_sudo=True))
-async def _(event):
-    try:
-        await event.delete()
-    except BaseException:
-        pass
-    reply_to_id = event.message
-    if event.reply_to_msg_id:
-        reply_to_id = await event.get_reply_message()
-    with open("temp.png", "wb") as f:
-        f.write(requests.get(nekos.cat()).content)
-    img = Image.open("temp.png")
-    img.save("temp.webp", "webp")
-    img.seek(0)
-    await bot.send_file(event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id)
 
 
 # UniBorg Telegram UseRBot
@@ -122,11 +101,10 @@ def check_data_base_heal_th():
 CMD_HELP.update(
     {
         "alive": "**Plugin :** `alive`\
-      \n\n**Syntax : **`.alive` :\
-      \n**Usage : ** status of bot.\
-      \n\n**Syntax : **`.ialive` :\
-      \n**Usage : ** inline alive.\
-      \n\n**Synatx :** `.cat`\
-      \n**Usage : **Random cat stickers"
+      \n\n**Syntax : **`.alive` \
+      \n**Function : **__status of bot will be showed__\
+      \n\n**Syntax : **`.ialive` \
+      \n**Function : **__inline status of bot will be shown.__\
+      \nSet `ALIVE_PIC` var for media in alive message"                                       
     }
 )
