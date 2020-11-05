@@ -8,7 +8,6 @@ from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from .. import LOGS
-from ..utils import is_admin
 from . import spamwatch
 
 if Config.PRIVATE_GROUP_BOT_API_ID is None:
@@ -81,3 +80,18 @@ if Config.ANTISPAMBOT_BAN:
                         f"**Chat :** {event.chat.title} (`{event.chat_id}`)\n"
                         f"**Reason :** {hmm.text}",
                     )
+    # Admin checker by uniborg
+    async def is_admin(client, chat_id, user_id):
+        if not str(chat_id).startswith("-100"):
+            return False
+        try:
+            req_jo = await client(GetParticipantRequest(channel=chat_id, user_id=user_id))
+            chat_participant = req_jo.participant
+            if isinstance(
+                chat_participant, (ChannelParticipantCreator, ChannelParticipantAdmin)
+            ):
+                return True
+        except Exception:
+            return False
+        else:
+            return False
