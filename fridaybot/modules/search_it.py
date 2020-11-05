@@ -24,7 +24,7 @@ def progress(current, total):
 
 
 @borg.on(admin_cmd(pattern="ggs (.*)"))
-@borg.on(sudo_cmd(pattern="gs (.*)", allow_sudo=True))
+@borg.on(sudo_cmd(pattern="ggs (.*)", allow_sudo=True))
 async def _(event):
     lool = await edit_or_reply(event, "`Processing Your Request`")
     if event.fwd_from:
