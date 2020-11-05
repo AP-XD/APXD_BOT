@@ -1,6 +1,7 @@
 from fridaybot import CMD_HELP
 from fridaybot.utils import admin_cmd
 
+
 @borg.on(admin_cmd(outgoing=True, pattern="info(?: |$)(.*)"))
 async def info(event):
     """ For .info command,"""

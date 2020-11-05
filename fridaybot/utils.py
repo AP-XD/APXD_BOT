@@ -1,30 +1,24 @@
 import asyncio
 import datetime
-import importlib              
 import functools
 import inspect
 import logging
 import math
-import os           
 import re
 import sys
 import time
-import traceback          
-from time import gmtime, strftime                
+import traceback
 from pathlib import Path
+from time import gmtime, strftime
+
+from telethon import events
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
-from telethon import events
-from fridaybot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
+
 from fridaybot import *
+from fridaybot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from fridaybot.Configs import Config
-from fridaybot import LOAD_PLUG
-from fridaybot import CMD_LIST, SUDO_LIST, bot
-import logging
-import inspect
 from var import Var
-from fridaybot import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
-from .helpers.exceptions import CancelProcess
 
 cmdhandler = Config.COMMAND_HAND_LER
 bothandler = Config.BOT_HANDLER
@@ -105,7 +99,9 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
+
         import fridaybot.utils
+
         path = Path(f"fridaybot/modules/{shortname}.py")
         name = "fridaybot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -116,9 +112,10 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
+
         import fridaybot.modules.sql_helper.global_variables_sql
         import fridaybot.utils
-        import fridaybot.utils
+
         path = Path(f"fridaybot/modules/{shortname}.py")
         name = "fridaybot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -140,12 +137,15 @@ def load_module(shortname):
         mod.plus = bot
         mod.sudo = Var.SUDO_USERS
         sys.modules["plus.utils"] = fridaybot.utils
-        sys.modules["global_variables"] = fridaybot.modules.sql_helper.global_variables_sql
-        sys.modules["global_variables_sql"] = fridaybot.modules.sql_helper.global_variables_sql
+        sys.modules[
+            "global_variables"
+        ] = fridaybot.modules.sql_helper.global_variables_sql
+        sys.modules[
+            "global_variables_sql"
+        ] = fridaybot.modules.sql_helper.global_variables_sql
         # for imports
         sys.modules["fridaybot.modules." + shortname] = mod
         print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
-
 
 
 def remove_plugin(shortname):
@@ -164,7 +164,8 @@ def remove_plugin(shortname):
                     del bot._event_builders[i]
     except:
         raise ValueError
-        
+
+
 # Admin checker by uniborg
 async def is_admin(client, chat_id, user_id):
     if not str(chat_id).startswith("-100"):
@@ -181,9 +182,10 @@ async def is_admin(client, chat_id, user_id):
     else:
         return False
 
+
 def admin_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
-    
+
     stack = inspect.stack()
     previous_stack_frame = stack[1]
     file_test = Path(previous_stack_frame.filename)
@@ -216,13 +218,11 @@ def admin_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
-    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
+        args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
-    is_message_enabled = True
 
     return events.NewMessage(**args)
 
@@ -313,10 +313,11 @@ def friday_on_cmd(pattern=None, **args):
     # check if the plugin should listen for outgoing 'messages'
 
     return events.NewMessage(**args)
-   
+
+
 def admin2_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
-    
+
     stack = inspect.stack()
     previous_stack_frame = stack[1]
     file_test = Path(previous_stack_frame.filename)
@@ -418,6 +419,8 @@ def register(**args):
         return func
 
     return decorator
+
+
 # from paperplaneextended
 on = bot.on
 
@@ -453,6 +456,7 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
         )
     await asyncio.sleep(time)
     return await catevent.delete()
+
 
 def errors_handler(func):
     async def wrapper(errors):
@@ -545,6 +549,7 @@ def humanbytes(size):
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
+
 async def is_read(borg, entity, message, is_out=None):
     """
     Returns True if the given message (or id) has been read
@@ -552,8 +557,7 @@ async def is_read(borg, entity, message, is_out=None):
     """
     is_out = getattr(message, "out", is_out)
     if not isinstance(is_out, bool):
-        raise ValueError(
-            "Message was id but is_out not provided or not a bool")
+        raise ValueError("Message was id but is_out not provided or not a bool")
     message_id = getattr(message, "id", message)
     if not isinstance(message_id, int):
         raise ValueError("Failed to extract id from message")
@@ -561,6 +565,7 @@ async def is_read(borg, entity, message, is_out=None):
     dialog = (await borg(GetPeerDialogsRequest([entity]))).dialogs[0]
     max_id = dialog.read_outbox_max_id if is_out else dialog.read_inbox_max_id
     return message_id <= max_id
+
 
 def time_formatter(milliseconds: int) -> str:
     """Inputs time in milliseconds, to get beautified time,
@@ -577,7 +582,8 @@ def time_formatter(milliseconds: int) -> str:
         + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     )
     return tmp[:-2]
-    
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
@@ -604,6 +610,7 @@ def get_readable_time(seconds: int) -> str:
     up_time += ":".join(time_list)
 
     return up_time
+
 
 class Loader:
     def __init__(self, func=None, **args):

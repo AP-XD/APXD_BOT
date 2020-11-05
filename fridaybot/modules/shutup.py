@@ -1,16 +1,12 @@
-#ported from X-TRA-TELEGRAM by @Unbornkiller
+# ported from X-TRA-TELEGRAM by @Unbornkiller
 
-import random, re
 import asyncio
-from telethon import events
-from fridaybot.events import register
-from asyncio import sleep
-import time
+
 from fridaybot import CMD_HELP
+from fridaybot.events import register
 
 
 @register(pattern=".shut")
-
 async def _(event):
 
     if event.fwd_from:
@@ -21,46 +17,36 @@ async def _(event):
 
     animation_ttl = range(0, 103)
 
-    #input_str = event.pattern_match.group(1)
+    # input_str = event.pattern_match.group(1)
 
-    #if input_str == "shut":
+    # if input_str == "shut":
 
     await event.edit("Shut up ")
 
     animation_chars = [
-
-            "Shut",
-
-            "Ur mouth",
-
-            "Or else",
-
-            "I will",
-
-            "Kick",
-
-            "Ur",
-
-            "Ass",
-
-            "And will",
-
-            "Ban from",
-
-            "Group",
-        
-            "Shut ur mouth or else i will kick ur ass and will ban from group"
-
-        ]
+        "Shut",
+        "Ur mouth",
+        "Or else",
+        "I will",
+        "Kick",
+        "Ur",
+        "Ass",
+        "And will",
+        "Ban from",
+        "Group",
+        "Shut ur mouth or else i will kick ur ass and will ban from group",
+    ]
 
     for i in animation_ttl:
-        
+
         await asyncio.sleep(animation_interval)
-        
+
         await event.edit(animation_chars[i % 103])
 
-CMD_HELP.update({
-  "shut":
-   "`.shut`\
+
+CMD_HELP.update(
+    {
+        "shut": "`.shut`\
 \nUsage: Plugin for shutting someones mouth."
-})            
+    }
+)

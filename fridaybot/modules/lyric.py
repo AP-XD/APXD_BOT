@@ -3,15 +3,12 @@ import io
 import os
 
 import lyricsgenius
-import random
-from fridaybot.utils import admin_cmd
-from fridaybot import CMD_HELP, LOGS
 from tswift import Song
+
 from fridaybot import CMD_HELP
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
-
 
 
 @friday.on(friday_on_cmd(outgoing=True, pattern="lyrics (.*)"))

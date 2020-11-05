@@ -1,6 +1,5 @@
-﻿import asyncio
-from telethon import events
-from telethon.tl.types import ChannelParticipantsAdmins
+﻿from telethon.tl.types import ChannelParticipantsAdmins
+
 from fridaybot.utils import admin_cmd
 
 
@@ -20,6 +19,7 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 @borg.on(admin_cmd("pay"))
 async def _(event):
     if event.fwd_from:
@@ -35,4 +35,3 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
-

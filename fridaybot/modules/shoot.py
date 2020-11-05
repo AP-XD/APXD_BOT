@@ -1,8 +1,11 @@
-from fridaybot.utils import admin_cmd 
+from fridaybot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern = "shoot$"))
+
+@borg.on(admin_cmd(pattern="shoot$"))
 async def _(cat):
-    await cat.edit("_/﹋\_\
+    await cat.edit(
+        "_/﹋\_\
                            \n(҂`_´)\
                            \n<,︻╦╤─ ҉ - -\
-                           \n_/﹋\_")
+                           \n_/﹋\_"
+    )

@@ -1,5 +1,6 @@
 import time
 from platform import python_version
+
 from telethon import version
 
 from fridaybot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion
@@ -44,7 +45,6 @@ async def amireallyalive(alive):
             f"**✧ Uptime :** `{uptime}\n`"
             f"**✧ Master:** [{DEFAULTUSER}](tg://user?id={hmm})\n",
         )
-
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="ialive$"))
@@ -105,6 +105,6 @@ CMD_HELP.update(
       \n**Function : **__status of bot will be showed__\
       \n\n**Syntax : **`.ialive` \
       \n**Function : **__inline status of bot will be shown.__\
-      \nSet `ALIVE_PIC` var for media in alive message"                                       
+      \nSet `ALIVE_PIC` var for media in alive message"
     }
 )

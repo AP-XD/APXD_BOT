@@ -3,10 +3,10 @@
 # You may not use this plugin without proper authorship and consent from @borgSupport
 #
 
-from telethon import events
-import random, re
-from fridaybot.utils import admin_cmd
 import asyncio
+
+from fridaybot.utils import admin_cmd
+
 
 # By @HeisenbergTheDanger, @its_xditya
 @borg.on(admin_cmd("superfban ?(.*)"))
@@ -27,7 +27,7 @@ async def _(event):
             FBAN = args[0]
             REASON = ""
             for a in args[1:]:
-                REASON += (a + " ")
+                REASON += a + " "
         else:
             FBAN = arg
             REASON = " #TBMassBanned "
@@ -53,14 +53,11 @@ async def _(event):
             await response.click(0)
             fedfile = await bot_conv.get_response()
             if fedfile.media:
-                downloaded_file_name = await telebot.download_media(
-                fedfile,
-                "fedlist"
-                )
-                file = open(downloaded_file_name, 'r')
+                downloaded_file_name = await telebot.download_media(fedfile, "fedlist")
+                file = open(downloaded_file_name, "r")
                 lines = file.readlines()
                 for line in lines:
-                    fedList.append(line[:line.index(":")])
+                    fedList.append(line[: line.index(":")])
             else:
                 return
         if "You can only use fed commands once every 5 minutes" in response.text:
@@ -76,7 +73,7 @@ async def _(event):
                     tempFedId = ""
                 else:
                     In = True
-                    
+
             elif In:
                 tempFedId += x
 
@@ -101,7 +98,11 @@ async def _(event):
         await asyncio.sleep(3)
         await telebot.send_message(chat, f"/fban {FBAN} {REASON}")
         await asyncio.sleep(3)
-    await event.edit(f"SuperFBan Completed. Affected {len(fedList) - exCount} feds.\n#TB")  
+    await event.edit(
+        f"SuperFBan Completed. Affected {len(fedList) - exCount} feds.\n#TB"
+    )
+
+
 # By @HeisenbergTheDanger, @its_xditya
 @borg.on(admin_cmd("superunfban ?(.*)"))
 async def _(event):
@@ -113,7 +114,7 @@ async def _(event):
         FBAN = previous_message.from_id
     else:
         FBAN = event.pattern_match.group(1)
-    
+
     if Config.FBAN_GROUP_ID:
         chat = Config.FBAN_GROUP_ID
     else:
@@ -128,14 +129,11 @@ async def _(event):
             await response.click(0)
             fedfile = await bot_conv.get_response()
             if fedfile.media:
-                downloaded_file_name = await telebot.download_media(
-                fedfile,
-                "fedlist"
-                )
-                file = open(downloaded_file_name, 'r')
+                downloaded_file_name = await telebot.download_media(fedfile, "fedlist")
+                file = open(downloaded_file_name, "r")
                 lines = file.readlines()
                 for line in lines:
-                    fedList.append(line[:line.index(":")])
+                    fedList.append(line[: line.index(":")])
             else:
                 return
         if "You can only use fed commands once every 5 minutes" in response.text:
@@ -151,7 +149,7 @@ async def _(event):
                     tempFedId = ""
                 else:
                     In = True
-                    
+
             elif In:
                 tempFedId += x
 
@@ -167,7 +165,9 @@ async def _(event):
         await asyncio.sleep(3)
         await telebot.send_message(chat, f"/unfban {FBAN}")
         await asyncio.sleep(3)
-    await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n#TB")  
+    await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n#TB")
+
+
 # By @HeisenbergTheDanger, @its_xditya
 
 """

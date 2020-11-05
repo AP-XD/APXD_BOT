@@ -37,9 +37,7 @@ async def _(event):
         # either here, or before translation
         output_str = """**TRANSLATED** from {} to {}
 {}""".format(
-            translated.src,
-            lan,
-            after_tr_text
+            translated.src, lan, after_tr_text
         )
         await edit_or_reply(event, output_str)
     except Exception as exc:

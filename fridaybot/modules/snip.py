@@ -108,7 +108,6 @@ async def on_snip_list(event):
         await event.edit(OUT_STR)
 
 
-
 @friday.on(friday_on_cmd("sipd (\S+)"))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)

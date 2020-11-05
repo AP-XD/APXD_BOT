@@ -3,14 +3,13 @@
 # License: MPL and OSSRPL
 """ Userbot module containing commands related to QR Codes. """
 
-import os
 import asyncio
-import time
+import os
 from datetime import datetime
-import qrcode
-import barcode
-from barcode.writer import ImageWriter
 
+import barcode
+import qrcode
+from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
 
 from fridaybot import CMD_HELP
@@ -21,11 +20,16 @@ from fridaybot.utils import admin_cmd
 async def parseqr(qr_e):
     """ For .decode command, get QR Code/BarCode content from the replied photo. """
     downloaded_file_name = await qr_e.client.download_media(
-        await qr_e.get_reply_message())
+        await qr_e.get_reply_message()
+    )
     # parse the Official ZXing webpage to decode the QRCode
     command_to_exec = [
-        "curl", "-X", "POST", "-F", "f=@" + downloaded_file_name + "",
-        "https://zxing.org/w/decode"
+        "curl",
+        "-X",
+        "POST",
+        "-F",
+        "f=@" + downloaded_file_name + "",
+        "https://zxing.org/w/decode",
     ]
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
@@ -98,6 +102,7 @@ async def _(event):
     await asyncio.sleep(5)
     await event.delete()
 
+
 @borg.on(admin_cmd(pattern=r"makeqr(?: |$)([\s\S]*)", outgoing=True))
 async def make_qr(makeqr):
     """ For .makeqr command, make a QR Code containing the given content. """
@@ -110,8 +115,7 @@ async def make_qr(makeqr):
         previous_message = await makeqr.get_reply_message()
         reply_msg_id = previous_message.id
         if previous_message.media:
-            downloaded_file_name = await makeqr.client.download_media(
-                previous_message)
+            downloaded_file_name = await makeqr.client.download_media(previous_message)
             m_list = None
             with open(downloaded_file_name, "rb") as file:
                 m_list = file.readlines()
@@ -132,20 +136,21 @@ async def make_qr(makeqr):
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
     img.save("img_file.webp", "PNG")
-    await makeqr.client.send_file(makeqr.chat_id,
-                                  "img_file.webp",
-                                  reply_to=reply_msg_id)
+    await makeqr.client.send_file(
+        makeqr.chat_id, "img_file.webp", reply_to=reply_msg_id
+    )
     os.remove("img_file.webp")
     await makeqr.delete()
 
 
-CMD_HELP.update({
-    'barqrcodes':
-    ".makeqr <content>\
+CMD_HELP.update(
+    {
+        "barqrcodes": ".makeqr <content>\
 \nUsage: Make a QR Code from the given content.\
 \nExample: .makeqr www.google.com\n\n"
-".barcode <content>\
+        ".barcode <content>\
 \nUsage: Make a BarCode from the given content.\
 \nExample: .barcode www.google.com\
 \n\n**Note**: use .decode <reply to barcode/qrcode> to get decoded content."
-})
+    }
+)

@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String
-from fridaybot.modules.sql_helper import SESSION, BASE
+
+from fridaybot.modules.sql_helper import BASE, SESSION
 
 
 class ghdb(BASE):

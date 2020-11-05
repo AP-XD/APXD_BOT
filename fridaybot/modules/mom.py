@@ -4,15 +4,12 @@ Available Commands: .mom
 by @KshitijGagan
 inspired from @xcruzhd2 """
 
-from telethon import events
-
 import asyncio
 
-
+from telethon import events
 
 
 @borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
-
 async def _(event):
 
     if event.fwd_from:
@@ -30,7 +27,6 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = [
-        
             "`Ruk jaa , Abhi teri mom ko Fuck karta hu `",
             "`Making your mom warm 🔥`",
             "`Pressing her boobs 🤚😘`",
@@ -51,7 +47,7 @@ async def _(event):
             "`Fucking Your mom😈😈\n\n\nYour mom's Boobs🤚😘 are Awesome\nI am getting ready to cum in her Mouth👄\n\nAlmost Done.......\n\nFucked Percentage... 90%\n██████████████████████▒▒▒ `",
             "`Fucking Your mom😈😈\n\n\nYour mom's Boobs🤚😘 are Awesome\nFinally, I have cummed in her Mouth👅👄\n\nAlmost Done.......\n\nFucked Percentage... 96%\n████████████████████████▒ `",
             "`Fucking Your mom😈😈\n\n\nYour mom's is Awesome\nShe is Licking my Dick🍌 in the Awesome Way✊🤛🤛👅👄\n\nAlmost Done.......\n\nFucked Percentage... 100%\n█████████████████████████ `",
-            "`Fucking Your mom😈😈\n\n\nYour mom's ASS🍑 Get Red\nCummed On her Mouth👅👄\n\nYour mom got Pleasure\n\nResult: Now I Have 1 More SEX Partner 👍👍`"
+            "`Fucking Your mom😈😈\n\n\nYour mom's ASS🍑 Get Red\nCummed On her Mouth👅👄\n\nYour mom got Pleasure\n\nResult: Now I Have 1 More SEX Partner 👍👍`",
         ]
 
         for i in animation_ttl:

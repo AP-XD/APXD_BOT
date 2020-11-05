@@ -7,12 +7,14 @@
 `.mind`
 `.tweet`
 `.carry`"""
-from uniborg.util import admin_cmd, sudo_cmd
-import fridaybot.utils
-import requests, re
+import re
 from asyncio import sleep
+
+import requests
 from global_variables import MODULE
 from PIL import Image
+from uniborg.util import admin_cmd
+
 MODULE.append("tweet")
 
 EMOJI_PATTERN = re.compile(
@@ -28,12 +30,15 @@ EMOJI_PATTERN = re.compile(
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
     "\U00002702-\U000027B0"  # Dingbats
-    "]+")
+    "]+"
+)
+
 
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
-    return re.sub(EMOJI_PATTERN, '', inputString)
-    
+    return re.sub(EMOJI_PATTERN, "", inputString)
+
+
 @borg.on(admin_cmd(pattern="trump ?(.*)"))
 async def trumptweet(event):
     args = event.pattern_match.group(1)
@@ -46,14 +51,17 @@ async def trumptweet(event):
     if not args:
         rep = await event.get_reply_message()
         args = rep.text
-    b=await event.reply("`Trump Tweeting...`")
+    b = await event.reply("`Trump Tweeting...`")
     args = deEmojify(args)
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={args}").json()
+        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={args}"
+    ).json()
     meow = r.get("message")
     if not meow:
         return await b.edit("`Trump not found. He ran away :)`")
-    await event.client.send_file(event.chat_id, file=meow, reply_to=event.reply_to_msg_id)
+    await event.client.send_file(
+        event.chat_id, file=meow, reply_to=event.reply_to_msg_id
+    )
     await sleep(2)
     await event.delete()
     await b.delete()
@@ -73,7 +81,8 @@ async def changemymind(e):
     a = await e.edit("`Creating Banner...`")
     args = deEmojify(args)
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=changemymind&text={args}").json()
+        f"https://nekobot.xyz/api/imagegen?type=changemymind&text={args}"
+    ).json()
     wew = r.get("message")
     if not wew:
         return await e.edit("`Can't able to change Mind :(`")
@@ -96,7 +105,8 @@ async def kannagen(e):
         args = rep.text
     args = deEmojify(args)
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={args}").json()
+        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={args}"
+    ).json()
     kk = r.get("message")
     if not kk:
         return await e.edit("`Nothing found from the API`")
@@ -125,7 +135,9 @@ async def trumptweet(event):
     if not meow:
         return await event.edit("`Modi not found. He ran away :)`")
     a = await event.reply("`Modi is Tweeting`")
-    await event.client.send_file(event.chat_id, file=meow, reply_to=event.reply_to_msg_id)
+    await event.client.send_file(
+        event.chat_id, file=meow, reply_to=event.reply_to_msg_id
+    )
     await sleep(2)
     await event.delete()
     await a.delete()
@@ -151,7 +163,9 @@ async def nekobot(cat):
         a = await cat.reply(f"`Requesting {username} to tweet...`")
         text = deEmojify(text)
         catfile = await tweets(text, username)
-        await cat.client.send_file(cat.chat_id, file=catfile, reply_to=cat.reply_to_msg_id)
+        await cat.client.send_file(
+            cat.chat_id, file=catfile, reply_to=cat.reply_to_msg_id
+        )
         await cat.delete()
         await a.delete()
     except Exception as e:
@@ -160,7 +174,8 @@ async def nekobot(cat):
 
 async def tweets(text1, text2):
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}"
+    ).json()
     pepe = r.get("message")
     if not pepe:
         return "check syntax once more"
@@ -189,7 +204,9 @@ async def trumptweet(event):
     if not meow:
         return await event.edit("`Carryminati not found. He iz Busy :)`")
     a = await event.reply("`Carry Minati is Tweeting for You` 😎")
-    await event.client.send_file(event.chat_id, file=meow, reply_to=event.reply_to_msg_id)
+    await event.client.send_file(
+        event.chat_id, file=meow, reply_to=event.reply_to_msg_id
+    )
     await sleep(2)
     await event.delete()
     await a.delete()

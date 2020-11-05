@@ -1,18 +1,18 @@
-# For TeleBot, by @its_xditya, @MrConfused and @Jisan7509. 
+# For TeleBot, by @its_xditya, @MrConfused and @Jisan7509.
 # Kangers keep credits.
 
-from fridaybot.utils import command, remove_plugin, load_module
-from pathlib import Path
 import asyncio
-import os
-import fridaybot.utils
 from datetime import datetime
-from .. import ALIVE_NAME 
+
 from fridaybot.utils import admin_cmd
+
+from .. import ALIVE_NAME
+
 DELETE_TIMEOUT = 5
 thumb_image_path = "./friday.png"
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+
 
 @borg.on(admin_cmd(pattern="send (?P<shortname>\w+)", outgoing=True))
 async def send(event):
@@ -30,10 +30,12 @@ async def send(event):
         force_document=True,
         allow_cache=False,
         thumb=thumb,
-        reply_to=message_id
+        reply_to=message_id,
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
-    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})")
+    await pro.edit(
+        f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})"
+    )
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()

@@ -1,7 +1,6 @@
 import asyncio
-import time
 import io
-from fridaybot.utils import admin_cmd
+
 from fridaybot.utils import friday_on_cmd
 
 
@@ -31,7 +30,7 @@ async def install(event):
                 force_document=True,
                 allow_cache=False,
                 caption=cmd,
-                reply_to=reply_to_id
+                reply_to=reply_to_id,
             )
             await event.delete()
     await event.edit(OUTPUT)

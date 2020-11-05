@@ -1,10 +1,10 @@
 # For @UniBorg
 # (c) Shrimadhav U K
 
-from telethon import events, functions, types
-import asyncio
+from telethon import functions
 
 from fridaybot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern=r"listmyusernames", outgoing=True))
 async def _(event):

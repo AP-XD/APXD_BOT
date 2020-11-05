@@ -1,7 +1,7 @@
 import os
 
 from telethon.tl.types import ChatBannedRights
-from pymongo import MongoClient
+
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     import os
@@ -25,7 +25,7 @@ if ENV:
         DEEPAI_KEY = os.environ.get("DEEPAI_KEY", None)
         FIRST_NAME = os.environ.get("FIRST_NAME", None)
         LAST_NAME = os.environ.get("LAST_NAME", None)
-        DEF_BIO = os.environ.get("DEF_BIO", None)   
+        DEF_BIO = os.environ.get("DEF_BIO", None)
         PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
         if PLUGIN_GROUP:
             PLUGIN_GROUP = int(PLUGIN_GROUP)
@@ -55,9 +55,11 @@ if ENV:
         SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
         SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
         THUMB_IMAGE = os.environ.get(
-            "THUMB_IMAGE",
-            "https://telegra.ph/file/1959ecf64cbca739ef584.png")                                                            
-        PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", False))
+            "THUMB_IMAGE", "https://telegra.ph/file/1959ecf64cbca739ef584.png"
+        )
+        PRIVATE_GROUP_BOT_API_ID = int(
+            os.environ.get("PRIVATE_GROUP_BOT_API_ID", False)
+        )
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         # DO NOT EDIT BELOW THIS LINE IF YOU DO NOT KNOW WHAT YOU ARE DOING
         # TG API limit. A message can have maximum 4096 characters!
@@ -72,8 +74,10 @@ if ENV:
         ANTI_FLOOD_WARN_MODE = ChatBannedRights(
             until_date=None, view_messages=None, send_messages=True
         )
-        ALIVE_PIC=os.environ.get("ALIVE_PIC","https://telegra.ph/file/1959ecf64cbca739ef584.png")
-        ALIVE_MSG=os.environ.get("ALIVE_MSG",None)
+        ALIVE_PIC = os.environ.get(
+            "ALIVE_PIC", "https://telegra.ph/file/1959ecf64cbca739ef584.png"
+        )
+        ALIVE_MSG = os.environ.get("ALIVE_MSG", None)
         # chat ids or usernames, it is recommended to use chat ids,
         # providing usernames means an additional overhead for the user
         CHATS_TO_MONITOR_FOR_ANTI_FLOOD = []
@@ -90,7 +94,7 @@ if ENV:
         MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 3))
         # set to True if you want to log PMs to your PM_LOGGR_BOT_API_ID
         NC_LOG_P_M_S = bool(os.environ.get("NC_LOG_P_M_S", False))
-        # send .get_id in any channel to forward all your NEW PMs to this group       
+        # send .get_id in any channel to forward all your NEW PMs to this group
         PM_LOG_GRP_ID = os.environ.get("PM_LOG_GRP_ID", None)
         if PM_LOG_GRP_ID:
             PM_LOG_GRP_ID = int(PM_LOG_GRP_ID)
@@ -132,9 +136,13 @@ if ENV:
         )
         TEMP_DIR = os.environ.get("TEMP_DIR", None)
         CHANNEL_ID = int(os.environ.get("CHANNEL_ID", -100))
-        #Google Chrome Stuff
-        CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver")
-        GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
+        # Google Chrome Stuff
+        CHROME_DRIVER = os.environ.get(
+            "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
+        )
+        GOOGLE_CHROME_BIN = os.environ.get(
+            "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
+        )
         CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         # Google Drive ()
         G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
@@ -148,15 +156,15 @@ if ENV:
             t_file.close()
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
-        #MongoDB                       
+        # MongoDB
         MONGO_URI = os.environ.get("MONGO_URI", None)
         # to work manager.py
-        DUAL_LOG = os.environ.get("DUAL_LOG", False) 
-        #Lydia API
-        LYDIA_API = os.environ.get("LYDIA_API",None)
-         # define the "types" that should be uplaoded as streamable
+        DUAL_LOG = os.environ.get("DUAL_LOG", False)
+        # Lydia API
+        LYDIA_API = os.environ.get("LYDIA_API", None)
+        # define the "types" that should be uplaoded as streamable
         TL_VID_STREAM_TYPES = ("MKV", "MP4", "WEBM")
-        TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")                                            
+        TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")
         WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")
         TZ = os.environ.get("TZ", None)
         # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
@@ -166,11 +174,11 @@ if ENV:
         # SpamWatch API you can get it from get api from http://t.me/SpamWatchBot?start=token
         SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
         # SpamWatch, CAS, SpamProtection ban Needed or not
-        ANTISPAMBOT_BAN = os.environ.get("ANTISPAMBOT_BAN", False)                                                    
+        ANTISPAMBOT_BAN = os.environ.get("ANTISPAMBOT_BAN", False)
         PRIVATE_GROUP_ID = int(os.environ.get("PRIVATE_GROUP_ID", False))
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", False))
         NEWS_CHANNEL_ID = int(os.environ.get("NEWS_CHANNEL_ID", False))
-        #open load
+        # open load
         OPEN_LOAD_LOGIN = os.environ.get("OPEN_LOAD_LOGIN", None)
         OPEN_LOAD_KEY = os.environ.get("OPEN_LOAD_KEY", None)
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")

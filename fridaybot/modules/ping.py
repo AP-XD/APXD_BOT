@@ -1,10 +1,8 @@
-from telethon import events
-from datetime import datetime
-from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
-from fridaybot.__init__ import StartTime
-from fridaybot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
 import time
-from fridaybot import Lastupdate
+from datetime import datetime
+
+from fridaybot.__init__ import StartTime
+from fridaybot.utils import friday_on_cmd, sudo_cmd
 
 
 def get_readable_time(seconds: int) -> str:
@@ -45,4 +43,6 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await event.edit(f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ")
+    await event.edit(
+        f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ "
+    )

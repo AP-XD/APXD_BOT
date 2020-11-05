@@ -6,7 +6,6 @@ import asyncio
 import os
 import random
 
-from ..utils import admin_cmd, sudo_cmd,edit_or_reply
 from fridaybot import (
     CMD_HELP,
     LOGS,
@@ -26,6 +25,8 @@ from fridaybot import (
     solarize,
     take_screen_shot,
 )
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 def random_color():

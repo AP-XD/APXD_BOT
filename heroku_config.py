@@ -23,7 +23,9 @@ class Var(object):
     FIRST_NAME = os.environ.get("FIRST_NAME", None)
     LAST_NAME = os.environ.get("LAST_NAME", None)
     DEF_BIO = os.environ.get("DEF_BIO", None)
-    TMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./fridaybot/DOWNLOADS/")
+    TMP_DOWNLOAD_DIRECTORY = os.environ.get(
+        "TEMP_DOWNLOAD_DIRECTORY", "./fridaybot/DOWNLOADS/"
+    )
     PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", -100))
     PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
     if PLUGIN_GROUP:
@@ -53,7 +55,9 @@ class Var(object):
     NEWS_CHANNEL_ID = int(os.environ.get("NEWS_CHANNEL_ID", -100))
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ANTISPAM_SYSTEM = os.environ.get("ANTISPAM_SYSTEM", "DISABLE")
-    UB_BLACK_LIST_CHAT = set(int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split())
+    UB_BLACK_LIST_CHAT = set(
+        int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split()
+    )
     WHITE_CHAT = set(int(x) for x in os.environ.get("WHITE_CHAT", "").split())
 
 

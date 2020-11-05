@@ -5,23 +5,24 @@ import asyncio
 import os
 import time
 from datetime import datetime
-from telethon import events
-from fridaybot.utils import admin_cmd, progress
+
 from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd, progress
+
 
 @borg.on(admin_cmd(pattern="nfc ?(.*)"))
 async def _(event):
     if event.fwd_from:
-        return 
+        return
     if not event.reply_to_msg_id:
-       await event.edit("```Reply to any media file.```")
-       return
-    reply_message = await event.get_reply_message() 
+        await event.edit("```Reply to any media file.```")
+        return
+    reply_message = await event.get_reply_message()
     if not reply_message.media:
-       await event.edit("reply to media file")
-       return
+        await event.edit("reply to media file")
+        return
     input_str = event.pattern_match.group(1)
-    if  input_str is None:
+    if input_str is None:
         await event.edit("try `.nfc voice` or`.nfc mp3`")
         return
     elif input_str == "mp3":
@@ -31,7 +32,7 @@ async def _(event):
     else:
         await event.edit("try `.nfc voice` or`.nfc mp3`")
         return
-        
+
     try:
         start = datetime.now()
         c_time = time.time()
@@ -40,14 +41,16 @@ async def _(event):
             Config.TMP_DOWNLOAD_DIRECTORY,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(d, t, event, c_time, "trying to download")
-            )
+            ),
         )
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
     else:
         end = datetime.now()
         ms = (end - start).seconds
-        await event.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
+        await event.edit(
+            "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
+        )
         new_required_file_name = ""
         new_required_file_caption = ""
         command_to_run = []
@@ -56,7 +59,9 @@ async def _(event):
         supports_streaming = False
         if input_str == "voice":
             new_required_file_caption = "AUDIO_" + str(round(time.time())) + ".opus"
-            new_required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            new_required_file_name = (
+                Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            )
             command_to_run = [
                 "ffmpeg",
                 "-i",
@@ -69,19 +74,21 @@ async def _(event):
                 "100k",
                 "-vbr",
                 "on",
-                new_required_file_name
+                new_required_file_name,
             ]
             voice_note = True
             supports_streaming = True
         elif input_str == "mp3":
             new_required_file_caption = "MP3_" + str(round(time.time())) + ".mp3"
-            new_required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            new_required_file_name = (
+                Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            )
             command_to_run = [
                 "ffmpeg",
                 "-i",
                 downloaded_file_name,
                 "-vn",
-                new_required_file_name
+                new_required_file_name,
             ]
             voice_note = False
             supports_streaming = True
@@ -99,8 +106,8 @@ async def _(event):
         )
         # Wait for the subprocess to finish
         stdout, stderr = await process.communicate()
-        e_response = stderr.decode().strip()
-        t_response = stdout.decode().strip()
+        stderr.decode().strip()
+        stdout.decode().strip()
         os.remove(downloaded_file_name)
         if os.path.exists(new_required_file_name):
             end_two = datetime.now()
@@ -114,13 +121,16 @@ async def _(event):
                 supports_streaming=supports_streaming,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, event, c_time, "trying to upload")
-                )
+                ),
             )
-            ms_two = (end_two - end).seconds
+            (end_two - end).seconds
             os.remove(new_required_file_name)
             await event.delete()
 
-            
-CMD_HELP.update({"filetomp3": "`.nfc voice` or `.nfc mp3` reply to required media to extract voice/mp3 :\
+
+CMD_HELP.update(
+    {
+        "filetomp3": "`.nfc voice` or `.nfc mp3` reply to required media to extract voice/mp3 :\
       \n**USAGE:**Converts the required media file to voice or mp3 file. "
-})
+    }
+)

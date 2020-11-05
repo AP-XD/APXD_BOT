@@ -1,5 +1,6 @@
 ﻿from fridaybot.utils import admin_cmd
 
+
 @borg.on(admin_cmd("pmto ?(.*)"))
 async def pmto(event):
     a = event.pattern_match.group(1)
@@ -11,7 +12,7 @@ async def pmto(event):
         pass
     msg = ""
     for i in b[1:]:
-        msg += (i + " ") 
+        msg += i + " "
     if msg == "":
         return
     try:

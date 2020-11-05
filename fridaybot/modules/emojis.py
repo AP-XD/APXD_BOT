@@ -4,10 +4,10 @@ Available Commands:
 .em apple
 .em :/
 .em -_-"""
-from telethon import events
 import asyncio
 
 from uniborg.util import friday_on_cmd
+
 
 @friday.on(friday_on_cmd(pattern="eem (.*)"))
 async def _(event):

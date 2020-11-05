@@ -15,12 +15,12 @@
 """Remove.BG Plugin for @UniBorg
 Syntax: .rmbg https://link.to/image.extension
 Syntax: .rmbg as reply to a media"""
-from datetime import datetime
 import io
 import os
 from datetime import datetime
+
 import requests
-from fridaybot.utils import admin_cmd
+
 from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
@@ -119,8 +119,9 @@ def ReTrieveURL(input_url):
     return r
 
 
-CMD_HELP.update({
-    "removebg":
-    ".rmbg <Link to Image> or reply to any image (Warning: does not work on stickers.)\
+CMD_HELP.update(
+    {
+        "removebg": ".rmbg <Link to Image> or reply to any image (Warning: does not work on stickers.)\
 \nUsage: Removes the background of images, using remove.bg API"
-})
+    }
+)

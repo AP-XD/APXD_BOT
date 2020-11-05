@@ -1,7 +1,8 @@
 import random
 
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from fridaybot import CMD_HELP, fonts
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="egyptf(?: |$)(.*)"))

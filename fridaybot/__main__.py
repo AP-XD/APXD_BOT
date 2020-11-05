@@ -4,7 +4,7 @@ from sys import argv
 import telethon.utils
 from telethon import TelegramClient
 
-from fridaybot import LOGS, bot
+from fridaybot import bot
 from fridaybot.utils import load_module, start_assistant
 from var import Var
 
@@ -57,5 +57,5 @@ print("You Can Visit @FridayOT For Any Support Or Doubts")
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
-    bot.tgbot = None                
+    bot.tgbot = None
     bot.run_until_disconnected()

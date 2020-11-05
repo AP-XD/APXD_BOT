@@ -3,11 +3,10 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 # Usage:- .picspam <count> <pic link>
-import asyncio
-from asyncio import wait, sleep
 
 from fridaybot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from fridaybot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="picspam"))
 async def tiny_pic_spam(e):
@@ -20,11 +19,13 @@ async def tiny_pic_spam(e):
         await e.client.send_file(e.chat_id, link)
     if BOTLOG:
         await e.client.send_message(
-            BOTLOG_CHATID, "#PICSPAM\n"
-            "PicSpam was executed successfully")
+            BOTLOG_CHATID, "#PICSPAM\n" "PicSpam was executed successfully"
+        )
 
-CMD_HELP.update({
-    "spam":
-".picspam <count> <link to image/gif>\
-\nUsage: As if text spam was not enough !!\""
-})
+
+CMD_HELP.update(
+    {
+        "spam": '.picspam <count> <link to image/gif>\
+\nUsage: As if text spam was not enough !!"'
+    }
+)

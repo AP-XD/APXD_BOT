@@ -1,17 +1,10 @@
+import io
 import os
 import re
 from math import ceil
-import asyncio
-import json
-import random
-import io
-from telethon import Button
-from telethon import custom
-from telethon import events
-from telethon import functions
-from telethon.tl.functions.users import GetFullUserRequest
-import os
+
 from telethon import Button, custom, events, functions
+
 from fridaybot import ALIVE_NAME, CMD_LIST
 from fridaybot.modules import inlinestats
 
@@ -83,15 +76,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-            
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))     
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
             await event.edit("Help Menu Closed.")
         else:
             reply_pop_up_alert = "Please get your own fridaybot ,and don't use mine."
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
 
     @tgbot.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -136,15 +128,15 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
             except:
-              with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
-                out_file.name = "{}.txt".format(plugin_name)
-                await bot.send_file(
-                    event.chat_id,
-                    out_file,
-                    force_document=True,
-                    allow_cache=False,
-                    caption=plugin_name
-                )
+                with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
+                    out_file.name = "{}.txt".format(plugin_name)
+                    await bot.send_file(
+                        event.chat_id,
+                        out_file,
+                        force_document=True,
+                        allow_cache=False,
+                        caption=plugin_name,
+                    )
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
 
@@ -209,24 +201,29 @@ def paginate_help(page_number, loaded_modules, prefix):
         )
         for x in helpable_modules
     ]
-    pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols], modules[2::number_of_cols]))
+    pairs = list(
+        zip(
+            modules[::number_of_cols],
+            modules[1::number_of_cols],
+            modules[2::number_of_cols],
+        )
+    )
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
     max_num_pages = ceil(len(pairs) / number_of_rows)
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
         pairs = pairs[
-            modulo_page * number_of_rows:number_of_rows * (modulo_page + 1)
+            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
         ] + [
             (
                 custom.Button.inline(
                     "⏪Previous", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("⚡Close⚡", data="close"
-                ),                                     
+                custom.Button.inline("⚡Close⚡", data="close"),
                 custom.Button.inline(
                     "Next⏩", data="{}_next({})".format(prefix, modulo_page)
-                )
+                ),
             )
         ]
     return pairs

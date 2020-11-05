@@ -12,14 +12,23 @@ recent - userstatusrecently
 bots - bot
 delacc - deleted account"""
 
-from fridaybot import CMD_HELP
-from telethon import events
-from datetime import datetime, timedelta
-from telethon.tl.types import UserStatusEmpty, UserStatusLastMonth, UserStatusLastWeek, UserStatusOffline, UserStatusOnline, UserStatusRecently, ChannelParticipantsKicked, ChatBannedRights
-from telethon.tl import functions, types
-from time import sleep
 import asyncio
+from time import sleep
+
+from telethon.tl import functions
+from telethon.tl.types import (
+    ChannelParticipantsKicked,
+    ChatBannedRights,
+    UserStatusEmpty,
+    UserStatusLastMonth,
+    UserStatusLastWeek,
+    UserStatusOffline,
+    UserStatusOnline,
+    UserStatusRecently,
+)
 from uniborg.util import admin_cmd
+
+from fridaybot import CMD_HELP
 
 
 @borg.on(admin_cmd("unbanall ?(.*)"))
@@ -34,13 +43,14 @@ async def _(event):
             return False
         await event.edit("Searching Participant Lists.")
         p = 0
-        async for i in borg.iter_participants(event.chat_id, filter=ChannelParticipantsKicked, aggressive=True):
-            rights = ChatBannedRights(
-                until_date=0,
-                view_messages=False
-            )
+        async for i in borg.iter_participants(
+            event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
+        ):
+            rights = ChatBannedRights(until_date=0, view_messages=False)
             try:
-                await borg(functions.channels.EditBannedRequest(event.chat_id, i, rights))
+                await borg(
+                    functions.channels.EditBannedRequest(event.chat_id, i, rights)
+                )
             except FloodWaitError as ex:
                 logger.warn("sleeping for {} seconds".format(ex.seconds))
                 sleep(ex.seconds)
@@ -81,10 +91,7 @@ async def _(event):
         #
         # Note that it's "reversed". You must set to ``True`` the permissions
         # you want to REMOVE, and leave as ``None`` those you want to KEEP.
-        rights = ChatBannedRights(
-            until_date=None,
-            view_messages=True
-        )
+        rights = ChatBannedRights(until_date=None, view_messages=True)
         if isinstance(i.status, UserStatusEmpty):
             nostat = nostat + 1
             if "nostat" in input_str:
@@ -177,9 +184,24 @@ UserStatusOnline: {}
 UserStatusRecently: {}
 Bots: {}
 None: {}"""
-        await event.edit(required_string.format(c, p, delacc, nostat, onemonth, oneweek, offline, online, recent, bots, n))
+        await event.edit(
+            required_string.format(
+                c,
+                p,
+                delacc,
+                nostat,
+                onemonth,
+                oneweek,
+                offline,
+                online,
+                recent,
+                bots,
+                n,
+            )
+        )
         await asyncio.sleep(5)
-    await event.edit("""Total: {} users
+    await event.edit(
+        """Total: {} users
 Deleted Accounts: {}
 UserStatusEmpty: {}
 UserStatusLastMonth: {}
@@ -188,8 +210,12 @@ UserStatusOffline: {}
 UserStatusOnline: {}
 UserStatusRecently: {}
 Bots: {}
-None: {}""".format(p, d, y, m, w, o, q, r, b, n))
-    
+None: {}""".format(
+            p, d, y, m, w, o, q, r, b, n
+        )
+    )
+
+
 async def ban_user(chat_id, i, rights):
     try:
         await borg(functions.channels.EditBannedRequest(chat_id, i, rights))
@@ -197,9 +223,10 @@ async def ban_user(chat_id, i, rights):
     except Exception as exc:
         return False, str(exc)
 
-CMD_HELP.update({
-    'TeleBot':
-    ".unbanall\
+
+CMD_HELP.update(
+    {
+        "TeleBot": ".unbanall\
      \n.kick option\
      \nAvailable Options: \
      \nnostat - userstatusempty\
@@ -210,4 +237,5 @@ CMD_HELP.update({
      \nrecent - userstatusrecently\
      \nbots - bot\
      \ndelacc - deleted account"
-})
+    }
+)

@@ -7,8 +7,9 @@
 
 import os
 
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from fridaybot import CMD_HELP, make_gif, runcmd
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="collage(?: |$)(.*)", outgoing=True))

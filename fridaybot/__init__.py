@@ -12,8 +12,11 @@ from pySmartDL import SmartDL
 from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-from var import Var  
-from .function import fridayfunction as topfunc                         
+
+from var import Var
+
+from .function import fridayfunction as topfunc
+
 StartTime = time.time()
 UpTime = time.time()
 catversion = "2.9.1"
@@ -22,12 +25,12 @@ telever = "4.7"
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
-    if session_name.endswith("="):                                                           
+    if session_name.endswith("="):
         bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
     else:
         bot = TelegramClient(
             "TG_BOT_TOKEN", api_id=Var.APP_ID, api_hash=Var.API_HASH
-        ).start(bot_token=Var.STRING_SESSION)                                                           
+        ).start(bot_token=Var.STRING_SESSION)
 else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
@@ -80,7 +83,7 @@ if bool(ENV):
 
     # Userbot logging feature switch.
     BOTLOG = sb(os.environ.get("BOTLOG", "True"))
-    
+
     # For bit.ly plugin
     BITLY_TOKEN = os.environ.get("BITLY_TOKEN", None)
 
@@ -144,7 +147,7 @@ if bool(ENV):
     COUNTRY = str(os.environ.get("COUNTRY", ""))
 
     TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
-    
+
     # Clean Welcome
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
@@ -180,7 +183,7 @@ if bool(ENV):
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./downloads")
     # time.py
     COUNTRY = str(os.environ.get("COUNTRY", ""))
-    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))         
+    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 else:
     # Put your ppe vars here if you are using local hosting
     PLACEHOLDER = None
@@ -214,4 +217,4 @@ AFKREASON = None
 # showing imports error
 
 from .helpers import *
-from .helpers import functions as catdef                   
+from .helpers import functions as catdef

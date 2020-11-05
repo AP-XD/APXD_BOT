@@ -5,8 +5,9 @@ plugin for Cat_Userbot
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from fridaybot import CMD_HELP
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern=r"score$"))

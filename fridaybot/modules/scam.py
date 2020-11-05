@@ -1,15 +1,10 @@
 """ Userbot module for having some fun with people. """
 
 from asyncio import sleep
-from random import choice, getrandbits, randint
-from re import sub
-import time
-
-from collections import deque
-
-import requests
+from random import choice, randint
 
 from fridaybot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="scam(?: |$)(.*)"))
 async def scam(event):
@@ -18,8 +13,16 @@ async def scam(event):
     Available Actions: typing, contact, game, location, voice, round, video, photo, document, cancel
     """
     options = [
-        'typing', 'contact', 'game', 'location', 'voice', 'round', 'video',
-        'photo', 'document', 'cancel'
+        "typing",
+        "contact",
+        "game",
+        "location",
+        "voice",
+        "round",
+        "video",
+        "photo",
+        "document",
+        "cancel",
     ]
     input_str = event.pattern_match.group(1)
     args = input_str.split()
@@ -40,7 +43,7 @@ async def scam(event):
         await event.edit("`Invalid Syntax !!`")
         return
     try:
-        if (scam_time > 0):
+        if scam_time > 0:
             await event.delete()
             async with event.client.action(event.chat_id, scam_action):
                 await sleep(scam_time)

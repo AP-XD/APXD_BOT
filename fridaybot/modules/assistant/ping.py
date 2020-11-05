@@ -13,8 +13,10 @@
 
 
 import time
-from fridaybot import Lastupdate, bot
 from datetime import datetime
+
+from fridaybot import Lastupdate
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0

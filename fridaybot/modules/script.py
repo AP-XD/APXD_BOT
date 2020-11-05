@@ -1,60 +1,71 @@
-import os
 import asyncio
-from getpass import getuser
+import os
 from os import remove
 from subprocess import PIPE
 from subprocess import run as runapp
-import pybase64
 from sys import executable
-from fridaybot import CMD_HELP, BOTLOG, BOTLOG_CHATID
+
+import pybase64
+
+from fridaybot import CMD_HELP
 from fridaybot.utils import admin_cmd
-import inspect
+
 running_processes: dict = {}
 
 
 @borg.on(admin_cmd(pattern="^\,term(?: |$|\n)([\s\S]*)"))
-async def evaluate(event):  
+async def evaluate(event):
     await event.edit(f"**AP_XD**: `Running Terminal.....`")
-    message = (str(event.chat_id) + ':' + str(event.message.id))
+    message = str(event.chat_id) + ":" + str(event.message.id)
     if running_processes.get(message, False):
         await event.edit("A process for this event is already running!")
         return
-    cmd = event.pattern_match.group(1).strip()    
+    cmd = event.pattern_match.group(1).strip()
     if not cmd:
         await event.edit("``` Give a command or use !help script.```")
         return
     if cmd in ("fridaybot.session", "env", "printenv"):
-        return await event.edit(f"`AP_XD:` **Privacy Error, This command not permitted**")
+        return await event.edit(
+            f"`AP_XD:` **Privacy Error, This command not permitted**"
+        )
     process = await asyncio.create_subprocess_shell(
-        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+        cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+    )
     running_processes.update({message: process})
     stdout, stderr = await process.communicate()
     not_killed = running_processes.get(message, False)
     if not_killed:
-        del running_processes[message]    
+        del running_processes[message]
     text = f"**Terminal Command**: `{cmd}`\n**Return code**: `{process.returncode}`\n\n"
-    if stdout:    	
+    if stdout:
         text += "\n**[stdout]**\n`" + stdout.decode("UTF-8").strip() + "\n`"
     if stderr:
-        text += "\n**[stderr]**\n`" + stderr.decode('UTF-8').strip() + "\n`"   
+        text += "\n**[stderr]**\n`" + stderr.decode("UTF-8").strip() + "\n`"
     if stdout or stderr:
-    	if not len(text) > 4096:    
-            return await event.edit(text)  
+        if not len(text) > 4096:
+            return await event.edit(text)
     output = open("term.txt", "w+")
     output.write(text)
     output.close()
-    await event.client.send_file(event.chat_id, "term.txt", reply_to=event.id, caption=f"`AP_XD:` **Output too large, sending as file**")
-    os.remove("term.txt")           
+    await event.client.send_file(
+        event.chat_id,
+        "term.txt",
+        reply_to=event.id,
+        caption=f"`AP_XD:` **Output too large, sending as file**",
+    )
+    os.remove("term.txt")
     return
-        
- 
+
+
 @borg.on(admin_cmd(pattern=r"^\,exec(?: |$)([\s\S]*)"))
 async def run(run_q):
     code = run_q.pattern_match.group(1)
-    
+
     if not code:
-        await run_q.edit(f"`AP_XD:` **At least a variable is required to \
-execute. Use !help script for an example.**")
+        await run_q.edit(
+            f"`AP_XD:` **At least a variable is required to \
+execute. Use !help script for an example.**"
+        )
         return
 
     if code in ("fridaybot.session", "env", "printenv"):
@@ -65,19 +76,20 @@ execute. Use !help script for an example.**")
         codepre = code
     else:
         clines = code.splitlines()
-        codepre = clines[0] + "\n" + clines[1] + "\n" + clines[2] + \
-            "\n" + clines[3] + "..."
+        codepre = (
+            clines[0] + "\n" + clines[1] + "\n" + clines[2] + "\n" + clines[3] + "..."
+        )
 
     command = "".join(f"\n {l}" for l in code.split("\n.strip()"))
     process = await asyncio.create_subprocess_exec(
         executable,
-        '-c',
+        "-c",
         command.strip(),
         stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE)
+        stderr=asyncio.subprocess.PIPE,
+    )
     stdout, stderr = await process.communicate()
-    result = str(stdout.decode().strip()) \
-        + str(stderr.decode().strip())
+    result = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
     if result:
         if len(result) > 4096:
@@ -92,22 +104,23 @@ execute. Use !help script for an example.**")
             )
             remove("exec.txt")
             return
-        await run_q.edit("**Query: **\n`"
-                         f"{codepre}"
-                         "`\n**Result: **\n`"
-                         f"{result}"
-                         "`")
+        await run_q.edit(
+            "**Query: **\n`" f"{codepre}" "`\n**Result: **\n`" f"{result}" "`"
+        )
     else:
-        await run_q.edit("**Query: **\n`"
-                         f"{codepre}"
-                         "`\n**Result: **\n`No Result Returned/False`")
+        await run_q.edit(
+            "**Query: **\n`" f"{codepre}" "`\n**Result: **\n`No Result Returned/False`"
+        )
+
 
 @borg.on(admin_cmd(pattern="^\,eval(?: |$)(.*)"))
 async def evaluate(query):
     if query.pattern_match.group(1):
         expression = query.pattern_match.group(1)
     else:
-        await query.edit(f"`AP_XD:` **Please give command type !help script for more info**")
+        await query.edit(
+            f"`AP_XD:` **Please give command type !help script for more info**"
+        )
         return
 
     if expression in ("fridaybot.session", "env", "printenv"):
@@ -130,20 +143,24 @@ async def evaluate(query):
                     )
                     remove("eval.txt")
                     return
-                await query.edit("**Query: **\n`"
-                                 f"{expression}"
-                                 "`\n**Result: **\n`"
-                                 f"{evaluation}"
-                                 "`")
+                await query.edit(
+                    "**Query: **\n`"
+                    f"{expression}"
+                    "`\n**Result: **\n`"
+                    f"{evaluation}"
+                    "`"
+                )
         else:
-            await query.edit("**Query: **\n`"
-                             f"{expression}"
-                             "`\n**Result: **\n`No Result Returned/False`")
+            await query.edit(
+                "**Query: **\n`"
+                f"{expression}"
+                "`\n**Result: **\n`No Result Returned/False`"
+            )
     except Exception as err:
-        await query.edit("**Query: **\n`"
-                         f"{expression}"
-                         "`\n**Exception: **\n"
-                         f"`{err}`")
+        await query.edit(
+            "**Query: **\n`" f"{expression}" "`\n**Exception: **\n" f"`{err}`"
+        )
+
 
 @borg.on(admin_cmd(pattern="^\,hash (.*)"))
 async def gethash(hash_q):
@@ -160,8 +177,19 @@ async def gethash(hash_q):
     sha512 = runapp(["sha512sum", "hashdis.txt"], stdout=PIPE)
     runapp(["rm", "hashdis.txt"], stdout=PIPE)
     sha512 = sha512.stdout.decode()
-    ans = ("Text: `" + hashtxt_ + "`\nMD5: `" + md5 + "`SHA1: `" + sha1 +
-           "`SHA256: `" + sha256 + "`SHA512: `" + sha512[:-1] + "`")
+    ans = (
+        "Text: `"
+        + hashtxt_
+        + "`\nMD5: `"
+        + md5
+        + "`SHA1: `"
+        + sha1
+        + "`SHA256: `"
+        + sha256
+        + "`SHA512: `"
+        + sha512[:-1]
+        + "`"
+    )
     if len(ans) > 4096:
         hashfile = open("hashes.txt", "w+")
         hashfile.write(ans)
@@ -170,28 +198,32 @@ async def gethash(hash_q):
             hash_q.chat_id,
             "hashes.txt",
             reply_to=hash_q.id,
-            caption="`It's too big, sending a text file instead. `")
+            caption="`It's too big, sending a text file instead. `",
+        )
         runapp(["rm", "hashes.txt"], stdout=PIPE)
     else:
         await hash_q.reply(ans)
 
+
 @borg.on(admin_cmd(pattern="^\,base64 (en|de) (.*)"))
 async def endecrypt(query):
     if query.pattern_match.group(1) == "en":
-        lething = str(
-            pybase64.b64encode(bytes(query.pattern_match.group(2),
-                                     "utf-8")))[2:]
+        lething = str(pybase64.b64encode(bytes(query.pattern_match.group(2), "utf-8")))[
+            2:
+        ]
         await query.reply("Encoded: `" + lething[:-1] + "`")
     else:
         lething = str(
-            pybase64.b64decode(bytes(query.pattern_match.group(2), "utf-8"),
-                               validate=True))[2:]
+            pybase64.b64decode(
+                bytes(query.pattern_match.group(2), "utf-8"), validate=True
+            )
+        )[2:]
         await query.reply("Decoded: `" + lething[:-1] + "`")
 
 
-CMD_HELP.update({
-    "script":
-    "!term\
+CMD_HELP.update(
+    {
+        "script": "!term\
 \nUsage: run  shell command in javes, Javes's os is alpine so use apline commands like !term apk add < packges>\
 \n\n!exec \
 \nUsage: run python command in javes. like !exec print ('hello')\
@@ -204,11 +236,5 @@ CMD_HELP.update({
 \n\n**Sodo commands ( type !help sudo for more info)**\
 \n .term , .exec , .eval, .base64 en/de , .hash\
 "
-})
-
-
-
-
-
-
-    
+    }
+)

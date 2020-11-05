@@ -1,23 +1,26 @@
 # For @borgHelp
 """Check if your fridaybot is working."""
 import os
-import requests
 import time
-from PIL import Image
-from io import BytesIO
-from fridaybot import ALIVE_NAME, telever
-from fridaybot.utils import admin_cmd, sudo_cmd
-from fridaybot.__init__ import StartTime
 from datetime import datetime
-from fridaybot.Configs import Config
+from io import BytesIO
 
-ALV_PIC = os.environ.get("ALIVE_PIC" , None)
+import requests
+from PIL import Image
+
+from fridaybot import ALIVE_NAME, telever
+from fridaybot.__init__ import StartTime
+from fridaybot.Configs import Config
+from fridaybot.utils import admin_cmd, sudo_cmd
+
+ALV_PIC = os.environ.get("ALIVE_PIC", None)
 
 if Config.SUDO_USERS:
     sudo = "Enabled"
 else:
     sudo = "Disabled"
-    
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -45,7 +48,9 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
+
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
+
 
 @borg.on(admin_cmd(outgoing=True, pattern="altive"))
 @borg.on(sudo_cmd(outgoing=True, pattern="altive", allow_sudo=True))
@@ -71,7 +76,7 @@ async def amireallyalive(alive):
         await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
-        await borg.send_file(alive.chat_id, ALV_PIC,caption=tele, link_preview = False)
+        await borg.send_file(alive.chat_id, ALV_PIC, caption=tele, link_preview=False)
         await alive.delete()
         return
     req = requests.get("https://telegra.ph/file/1c4df5d90d6e68e417348.png")
@@ -99,4 +104,3 @@ async def amireallyalive(alive):
         )
         await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()
-

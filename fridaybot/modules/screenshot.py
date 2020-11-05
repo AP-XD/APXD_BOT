@@ -5,10 +5,12 @@ Syntax: .siteshot <Website URL with http://>
 import io
 import traceback
 from datetime import datetime
+
 from selenium import webdriver
-from telethon import events
-from fridaybot.utils import admin_cmd
+
 from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="ss (.*)"))
 async def _(event):
@@ -21,23 +23,27 @@ async def _(event):
     start = datetime.now()
     try:
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--ignore-certificate-errors')
+        chrome_options.add_argument("--ignore-certificate-errors")
         chrome_options.add_argument("--test-type")
         chrome_options.add_argument("--headless")
         # https://stackoverflow.com/a/53073789/4723940
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.binary_location = Config.GOOGLE_CHROME_BIN
         await event.edit("Starting Google Chrome BIN")
         driver = webdriver.Chrome(chrome_options=chrome_options)
         input_str = event.pattern_match.group(1)
         driver.get(input_str)
         await event.edit("Calculating Page Dimensions")
-        height = driver.execute_script("return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);")
-        width = driver.execute_script("return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);")
+        height = driver.execute_script(
+            "return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);"
+        )
+        width = driver.execute_script(
+            "return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);"
+        )
         await event.edit("Painting web-page")
         driver.set_window_size(width + 100, height + 100)
-        # Add some pixels on top of the calculated dimensions 
+        # Add some pixels on top of the calculated dimensions
         # for good measure to make the scroll bars disappear
         im_png = driver.get_screenshot_as_png()
         # saves screenshot of entire page
@@ -55,7 +61,7 @@ async def _(event):
                 force_document=True,
                 reply_to=message_id,
                 allow_cache=False,
-                silent=True
+                silent=True,
             )
         end = datetime.now()
         ms = (end - start).seconds
@@ -63,10 +69,11 @@ async def _(event):
     except Exception:
         await event.edit(traceback.format_exc())
 
-        
-CMD_HELP.update({
-    "ss":
-    ".ss <url>\
+
+CMD_HELP.update(
+    {
+        "ss": ".ss <url>\
     \nUsage: Takes a screenshot of a website and sends the screenshot.\
     \nExample of a valid URL : `https://www.google.com`"
-})        
+    }
+)
