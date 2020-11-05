@@ -5,6 +5,7 @@
 
 
 import asyncio
+
 from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from uniborg.util import friday_on_cmd
