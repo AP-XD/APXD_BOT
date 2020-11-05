@@ -4,17 +4,30 @@
 # General Public License, v.3.0. If a copy of the GPL was not distributed with this
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-from telethon.sessions import StringSession
-from telethon.sync import TelegramClient
+try:
+    from telethon.sessions import StringSession
+    from telethon.sync import TelegramClient
+except BaseException:
+    print("Telethon Not Found. Installing Now.")
+    import os
 
-print(
-    """Please go-to my.telegram.org
-Login using your Telegram account
-Click on API Development Tools
-Create a new application, by entering the required details"""
-)
-APP_ID = int(input("Enter APP ID here: "))
-API_HASH = input("Enter API HASH here: ")
+    os.system("pip install telethon")
+    from telethon.sessions import StringSession
+    from telethon.sync import TelegramClient
+ok = """ ____  ____  __  ____   __   _  _
+(  __)(  _ \(  )(    \ / o\ ( \/ )
+ ) _)  )   / )(  ) D (/    \ )  /
+(__)  (__\_)(__)(____/\_/\_/(__/
+"""
+print(ok)
+APP_ID = int(input("Enter APP ID here: \n"))
+API_HASH = input("Enter API HASH here: \n")
 
-with TelegramClient(StringSession(), APP_ID, API_HASH) as client:
-    print(client.session.save())
+client = TelegramClient(StringSession(), APP_ID, API_HASH)
+with client:
+    session_str = client.session.save()
+    client.send_message("me", f"`{session_str}`")
+    client.send_message(
+        "THIS IS YOUR STRING SESSION \nJoin @FRIDAYOT For More Support."
+    )
+    print("⬆ Please Check Your Telegram Saved Message For Your String.")

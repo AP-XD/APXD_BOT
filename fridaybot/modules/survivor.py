@@ -6,15 +6,6 @@ Syntax: .update
 from os import remove
 from os import execl
 import sys
-
-# from git import Repo
-# from git.exc import GitCommandError
-# from git.exc import InvalidGitRepositoryError
-# from git.exc import NoSuchPathError
-
-# from .. import bot
-# from fridaybot.utils import register
-
 import git
 import asyncio
 import random
@@ -29,6 +20,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 
+from fridaybot.Configs import Config
 from fridaybot.utils import friday_on_cmd
 
 

@@ -8,7 +8,7 @@ from fridaybot.utils import admin_cmd
 from fridaybot import CMD_HELP, LOGS
 from tswift import Song
 from fridaybot import CMD_HELP
-from fridaybot.utils import friday_on_cmd, edit_or_reply, sudo_cmd
+from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 

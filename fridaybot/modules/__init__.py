@@ -23,7 +23,6 @@ def start() -> scoped_session:
     BASE.metadata.create_all(engine)
     return scoped_session(sessionmaker(bind=engine, autoflush=False))
 
-
 try:
     BASE = declarative_base()
     SESSION = start()
@@ -205,10 +204,13 @@ if isdbfine:
 else:
     dbstats = "Not Fine ❌"
 
-inlinestats = (f"✘ SHOWING FRIDAY STATS ✘\n"
-               f"VERSION = {currentversion} \n"
-               f"DATABASE = {dbstats} \n"
-               f"SUDO = {amiusingsudo} \n"
-               f"LOG-CHAT = {logchat} \n"
-               f"HEROKU = {riplife} \n"
-               f"G-DRIVE = {wearenoob}")
+
+inlinestats = (
+    f"✘ SHOWING FRIDAY STATS ✘\n"
+    f"VERSION = {currentversion} \n"
+    f"DATABASE = {dbstats} \n"
+    f"SUDO = {amiusingsudo} \n"
+    f"LOG-CHAT = {logchat} \n"
+    f"HEROKU = {riplife} \n"
+    f"G-DRIVE = {wearenoob}"
+)

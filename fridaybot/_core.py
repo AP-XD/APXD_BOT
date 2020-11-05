@@ -108,4 +108,4 @@ for name in files:
         load_module(shortname.replace(".py", ""))
         print (f"Successfully installed {shortname}")
 # Copyright (C) By @StarkGang
-# FridayUserbot 🇮🇳 
+# FridayUserbot 🇮🇳
