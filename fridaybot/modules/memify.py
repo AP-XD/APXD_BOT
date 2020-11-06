@@ -4,39 +4,28 @@
 # you may not use this file except in compliance with the License.
 #
 """ Based code + improve from AdekMaulana and aidilaryanto """
-#edited for all by @danish_00
+# edited for all by @danish_00
 
 import asyncio
-import io
 import os
 import random
-import re
 import textwrap
-import time
-import lottie
-from random import randint, uniform
 
-from glitch_this import ImageGlitcher
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
-from telethon import events, functions, types
-from telethon.errors.rpcerrorlist import YouBlockedUserError
+from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import DocumentAttributeFilename
 
 from fridaybot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from fridaybot.events import register
-from fridaybot.helpers import progress
+
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 from fridaybot import (
     CMD_HELP,
     LOGS,
     add_frame,
     asciiart,
-    cat_meeme,
-    cat_meme,
     convert_toimage,
-    convert_tosticker,
     crop,
     flip_image,
     grayscale,
@@ -93,9 +82,7 @@ async def mim(event):
             reply_message,
             downloaded_file_name,
         )
-    await event.edit(
-        "```Memefying 🔸🔸🔸```"
-    )
+    await event.edit("```Memefying 🔸🔸🔸```")
     await asyncio.sleep(0.1)
     text = event.pattern_match.group(1)
     webp_file = await draw_meme_text(dls_loc, text)
@@ -214,6 +201,7 @@ async def draw_meme_text(image_path, text):
     img.save(webp_file, "WebP")
     return webp_file
 
+
 @register(outgoing=True, pattern=r"^\.mms(?: |$)(.*)")
 async def mim(event):
     if not event.reply_to_msg_id:
@@ -254,15 +242,11 @@ async def mim(event):
             reply_message,
             "meme.png",
         )
-    await event.edit(
-        "```Memifying 🔸🔸🔸 ```"
-    )
+    await event.edit("```Memifying 🔸🔸🔸 ```")
     await asyncio.sleep(0.1)
     text = event.pattern_match.group(1)
     photo = await draw_meme(dls_loc, text)
-    await event.client.send_file(
-        event.chat_id, photo, reply_to=event.reply_to_msg_id
-    )
+    await event.client.send_file(event.chat_id, photo, reply_to=event.reply_to_msg_id)
     await event.delete()
     os.system("rm *.tgs *.mp4 *.png")
     os.remove(photo)
@@ -370,14 +354,16 @@ async def draw_meme(image_path, text):
     photo = os.path.join(TEMP_DOWNLOAD_DIRECTORY, photu)
     img.save(photo, "png")
     return photo
-    
+
+
 def random_color():
     number_of_colors = 2
     return [
         "#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)])
         for i in range(number_of_colors)
     ]
-    
+
+
 @bot.on(admin_cmd(outgoing=True, pattern="ascii ?(.*)"))
 @bot.on(sudo_cmd(pattern="ascii ?(.*)", allow_sudo=True))
 async def memes(cat):
