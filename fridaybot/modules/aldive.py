@@ -42,17 +42,17 @@ pm_caption += f"➾ **ᴍʏ ᴍᴀsᴛᴇʀ** ☞ {DEFAULTUSER}\n"
 
 @borg.on(admin_cmd(pattern=r"aldive"))
 async def amireallyalive(yes):
-    await yes.get_chat()
+    chat = await yes.get_chat()
     on = await borg.send_file(yes.chat_id, file=file1, caption=pm_caption)
 
     await asyncio.sleep(edit_time)
-    ok = await borg.edit_message(yes.chat_id, on, file=file1)
+    ok = await borg.edit_message(yes.chat_id, on, file=file2)
 
     await asyncio.sleep(edit_time)
     ok2 = await borg.edit_message(yes.chat_id, ok, file=file4)
 
     await asyncio.sleep(edit_time)
-    ok3 = await borg.edit_message(yes.chat_id, ok2, file=file2)
+    ok3 = await borg.edit_message(yes.chat_id, ok2, file=file7)
 
     await asyncio.sleep(edit_time)
     ok4 = await borg.edit_message(yes.chat_id, ok3, file=file5)
@@ -65,9 +65,11 @@ async def amireallyalive(yes):
 
     await asyncio.sleep(edit_time)
     ok7 = await borg.edit_message(yes.chat_id, ok6, file=file4)
+    
     await asyncio.sleep(edit_time)
-    ok8 = await borg.edit_message(yes.chat_id, ok7, file=file7)
-
+    ok8 = await borg.edit_message(yes.chat_id, ok7, file=file5)
+    
+    await alive.delete()
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
     await alive.delete()
