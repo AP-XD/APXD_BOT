@@ -83,8 +83,8 @@ async def _(event):
         await edit_or_reply(event, OUTPUT)
 
 
-@borg.on(admin_cmd(pattern="eval"))
-@borg.on(sudo_cmd(pattern="eval", allow_sudo=True))
+@borg.on(admin_cmd(pattern="evaluate"))
+@borg.on(sudo_cmd(pattern="evaluate", allow_sudo=True))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return

@@ -22,6 +22,9 @@ file1 = "https://telegra.ph/file/6aa39732748ed7c319943.jpg"
 file2 = "https://telegra.ph/file/a6d72504bc09e71484a54.jpg"
 file3 = "https://telegra.ph/file/3cdbede1d5d85aa2d50fc.jpg"
 file4 = "https://telegra.ph/file/3dae01973943e8b28c931.jpg"
+file5 = "https://telegra.ph/file/1c4df5d90d6e68e417348.png"
+file6 = "https://telegra.ph/file/37a375d57dcfc5f609980.jpg"
+file7 = "https://telegra.ph/file/1ca5834fafa60dc8a817c.png"
 """ =======================CONSTANTS====================== """
 pm_caption = "** 𝙳𝙰𝚁𝙺 𝙲𝙾𝙱𝚁𝙰 𝙸𝚂 𝙾𝙽𝙻𝙸𝙽𝙴**\n\n"
 pm_caption += (
@@ -40,31 +43,30 @@ pm_caption += f"➾ **ᴍʏ ᴍᴀsᴛᴇʀ** ☞ {DEFAULTUSER}\n"
 @borg.on(admin_cmd(pattern=r"aldive"))
 async def amireallyalive(yes):
     await yes.get_chat()
-
     on = await borg.send_file(yes.chat_id, file=file1, caption=pm_caption)
 
     await asyncio.sleep(edit_time)
-    ok = await borg.edit_message(yes.chat_id, on, file=file2)
+    ok = await borg.edit_message(yes.chat_id, on, file=file1)
 
     await asyncio.sleep(edit_time)
-    ok2 = await borg.edit_message(yes.chat_id, ok, file=file3)
+    ok2 = await borg.edit_message(yes.chat_id, ok, file=file4)
 
     await asyncio.sleep(edit_time)
-    ok3 = await borg.edit_message(yes.chat_id, ok2, file=file1)
+    ok3 = await borg.edit_message(yes.chat_id, ok2, file=file2)
 
     await asyncio.sleep(edit_time)
-    ok4 = await borg.edit_message(yes.chat_id, ok3, file=file3)
+    ok4 = await borg.edit_message(yes.chat_id, ok3, file=file5)
 
     await asyncio.sleep(edit_time)
-    ok5 = await borg.edit_message(yes.chat_id, ok4, file=file2)
+    ok5 = await borg.edit_message(yes.chat_id, ok4, file=file3)
 
     await asyncio.sleep(edit_time)
-    ok6 = await borg.edit_message(yes.chat_id, ok5, file=file1)
+    ok6 = await borg.edit_message(yes.chat_id, ok5, file=file6)
 
     await asyncio.sleep(edit_time)
     ok7 = await borg.edit_message(yes.chat_id, ok6, file=file4)
-
-    await alive.delete()
+    await asyncio.sleep(edit_time)
+    ok8 = await borg.edit_message(yes.chat_id, ok7, file=file7)
 
     """ For .alive command, check if the bot is running.  """
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
