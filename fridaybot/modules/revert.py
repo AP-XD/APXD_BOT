@@ -18,11 +18,18 @@ async def _(event):
             await event.client.get_profile_photos("me", limit=1)
         )
     )
+    reply_message = await event.get_reply_message()
+    photo = None
+    photo = await borg.download_media(  # pylint:disable=E0602
+        reply_message, Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
+    )
+    file = await borg.upload_file(photo)  # pylint:disable=E0602
     await event.client(
         functions.account.UpdateProfileRequest(
             first_name=f_name, last_name=l_name, about=bio
         )
     )
+    await borg(functions.photos.UploadProfilePhotoRequest(file))  # pylint:disable=E0602
     await event.reply(
         f"Succesfully reverted to your account back with\n**First Name :-** `{f_name}`\n**Last Name :-** `{l_name}`\n**Bio :-** `{bio}`"
     )
