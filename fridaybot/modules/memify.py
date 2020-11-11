@@ -38,10 +38,16 @@ from fridaybot import (
 )
 
 
-@friday.on(friday_on_cmd("mmf ?(.*)"))
-async def _(event):
-    event.chat_id
-    if event.fwd_from:
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+
+
+@register(outgoing=True, pattern=r"^\.mmf(?: |$)(.*)")
+async def mim(event):
+    if not event.reply_to_msg_id:
+        await event.edit(
+            "`Syntax: reply to an image with .mmf` 'text on top' ; 'text on bottom' "
+        )
         return
 
     reply_message = await event.get_reply_message()
