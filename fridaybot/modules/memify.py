@@ -40,7 +40,7 @@ from fridaybot import (
 
 @friday.on(friday_on_cmd("mmf ?(.*)"))
 async def _(event):
-    hmm = event.chat_id
+    event.chat_id
     if event.fwd_from:
         return
 
