@@ -2,7 +2,7 @@
 # You can use this..but don't edit/remove these comment lines..
 # This module fetches the audio from YouTube for the given query..
 # So wahi...Enjoy
-""" This plugin is the V2 of utube.py in DARK COBRA userbot..which directly fetches the audio..
+""" This plugin is the V2 of utube.py in DARK COBRA fridaybot..which directly fetches the audio..
  it's not necessary for this plugin to always work.. 
  Audios are auto queued for downloads..
  This too made by @hellboi_atul .. """

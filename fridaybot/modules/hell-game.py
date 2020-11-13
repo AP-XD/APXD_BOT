@@ -10,7 +10,7 @@ Command:- .xogame .... By @Kraken_The_BadASS"""
 
 from telethon import events
 import asyncio
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from var import Var
 
 
@@ -45,7 +45,7 @@ async def _(event):
             await event.edit(animation_chars[i % 14])
 
 
-from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from var import Var
 
 @borg.on(admin_cmd(pattern="xogame$"))

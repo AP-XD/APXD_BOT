@@ -6,8 +6,8 @@
 
 import re
 import random
-from userbot import bot
-from userbot.utils import admin_cmd
+from fridaybot import bot
+from fridaybot.utils import admin_cmd
 
 
 IF_EMOJI = re.compile(

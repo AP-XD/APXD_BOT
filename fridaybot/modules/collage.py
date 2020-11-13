@@ -1,4 +1,4 @@
-# collage plugin for catuserbot by @sandy1709
+# collage plugin for catfridaybot by @sandy1709
 
 # Copyright (C) 2020 Alfiananda P.A
 #

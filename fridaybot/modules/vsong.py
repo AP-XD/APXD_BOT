@@ -1,7 +1,7 @@
 # Plugin made by @hellboi_atul and bug fixes By Shivam Patel(Team Cobra)
 # Give credits... Dont remove or edit these lines
 # uses ytdl
-# made for DARK COBRA userbot..
+# made for DARK COBRA fridaybot..
 
 import asyncio
 import json
