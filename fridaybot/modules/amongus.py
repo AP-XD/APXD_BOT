@@ -1,12 +1,12 @@
 # thanks to @Skastickers for stickers....
 # Among us.....
-#credits to catfridaybot
+# credits to catfridaybot
 
 
 import asyncio
 
-from fridaybot.utils import admin_cmd, edit_or_reply
 from fridaybot import ALIVE_NAME, CMD_HELP
+from fridaybot.utils import admin_cmd, edit_or_reply
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
 
