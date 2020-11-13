@@ -18,6 +18,13 @@ from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
 from fridaybot import *
 from fridaybot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from fridaybot.Configs import Config
+from fridaybot.wraptools import (
+    am_i_admin,
+    ignore_bot,
+    ignore_fwd,
+    ignore_grp,
+    ignore_pm,
+)
 from var import Var
 
 cmdhandler = Config.COMMAND_HAND_LER
@@ -129,6 +136,11 @@ def load_module(shortname):
         sys.modules["uniborg.util"] = fridaybot.utils
         sys.modules["friday.util"] = fridaybot.utils
         mod.Config = Config
+        mod.ignore_grp = ignore_grp()
+        mod.ignore_pm = ignore_pm()
+        mod.ignore_bot = ignore_bot()
+        mod.am_i_admin = am_i_admin()
+        mod.ignore_fwd = ignore_fwd()
         mod.borg = bot
         mod.friday = bot
         # support for paperplaneextended
