@@ -38,6 +38,8 @@ async def butts(event):
     os.remove(pic_loc)
     await event.delete()
     await a.delete()
+
+
 #    Copyright (C) Midhun KM 2020
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
