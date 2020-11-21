@@ -7,17 +7,15 @@ from fridaybot.utils import friday_on_cmd, load_module
 DELETE_TIMEOUT = 5
 
 
-@friday.on(friday_on_cmd(pattern="install", outgoing=True))
+@friday.on(friday_on_cmd(pattern="install"))
 async def install(event):
     if event.fwd_from:
         return
     if event.reply_to_msg_id:
         try:
-            downloaded_file_name = (
-                await event.client.download_media(  # pylint:disable=E0602
-                    await event.get_reply_message(),
-                    "fridaybot/modules/",  # pylint:disable=E0602
-                )
+            downloaded_file_name = await event.client.download_media(
+                await event.get_reply_message(),
+                "fridaybot/modules/",
             )
             if "(" not in downloaded_file_name:
                 path1 = Path(downloaded_file_name)
