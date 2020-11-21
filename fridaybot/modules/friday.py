@@ -114,7 +114,7 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("**Error:** `unblock` @FridayUserobot `and retry!`")
     else:
-        await brog.send_message(
+        await borg.send_message(
             event.chat_id, "**INVALID** -- FOR HELP COMMAND IS **hcc help**"
         )
         await event.delete()
