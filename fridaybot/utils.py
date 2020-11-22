@@ -107,6 +107,7 @@ def load_module(shortname):
         import sys
         from pathlib import Path
 
+        import fridaybot.modules
         import fridaybot.utils
 
         path = Path(f"fridaybot/modules/{shortname}.py")
@@ -119,8 +120,8 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-
         import fridaybot.modules.sql_helper.global_variables_sql
+        import fridaybot.modules
         import fridaybot.utils
 
         path = Path(f"fridaybot/modules/{shortname}.py")
@@ -135,6 +136,8 @@ def load_module(shortname):
         # support for uniborg
         sys.modules["uniborg.util"] = fridaybot.utils
         sys.modules["friday.util"] = fridaybot.utils
+        sys.modules["userbot.utils"] = fridaybot.utils
+        sys.modules["userbot.plugins"] = fridaybot.modules
         mod.Config = Config
         mod.ignore_grp = ignore_grp()
         mod.ignore_pm = ignore_pm()
