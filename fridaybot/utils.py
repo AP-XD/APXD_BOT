@@ -120,8 +120,9 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-        import fridaybot.modules.sql_helper.global_variables_sql
+
         import fridaybot.modules
+        import fridaybot.modules.sql_helper.global_variables_sql
         import fridaybot.utils
 
         path = Path(f"fridaybot/modules/{shortname}.py")
