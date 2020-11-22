@@ -3,7 +3,7 @@
 #will be adding more soon
 
 import os, urllib, requests, asyncio
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"boobs"))
 async def boobs(event):
