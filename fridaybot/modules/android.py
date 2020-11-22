@@ -1,7 +1,7 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
-# @MrConfused
+
 """ Userbot module containing commands related to android"""
 
 import json
@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from requests import get
 
 from .. import CMD_HELP
-from ..utils import edit_or_reply, friday_on_cmd, sudo_cmd
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 GITHUB = "https://github.com"
 DEVICES_DATA = (
@@ -20,29 +20,35 @@ DEVICES_DATA = (
 )
 
 
-@friday.on(friday_on_cmd(outgoing=True, pattern="magisk$"))
-@friday.on(sudo_cmd(pattern="magisk$", allow_sudo=True))
-async def magisk(request):
-    """ magisk latest releases """
+@bot.on(admin_cmd(pattern=r"magisk"))
+@bot.on(sudo_cmd(pattern=r"magisk", allow_sudo=True))
+async def kakashi(magisk):
+    magisk_repo = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
     magisk_dict = {
-        "Stable": "https://raw.githubusercontent.com/topjohnwu/magisk_files/master/stable.json",
-        "Beta": "https://raw.githubusercontent.com/topjohnwu/magisk_files/master/beta.json",
-        "Canary (Release)": "https://raw.githubusercontent.com/topjohnwu/magisk_files/canary/release.json",
-        "Canary (Debug)": "https://raw.githubusercontent.com/topjohnwu/magisk_files/canary/debug.json",
+        "⦁ **Stable**": magisk_repo + "master/stable.json",
+        "⦁ **Beta**": magisk_repo + "master/beta.json",
+        "⦁ **Canary**": magisk_repo + "canary/canary.json",
     }
-    releases = "Latest Magisk Releases:\n"
+    releases = "**Latest Magisk Releases**\n\n"
     for name, release_url in magisk_dict.items():
         data = get(release_url).json()
+        if "canary" in release_url:
+            data["app"]["link"] = magisk_repo + "canary/" + data["app"]["link"]
+            data["magisk"]["link"] = magisk_repo + "canary/" + data["magisk"]["link"]
+            data["uninstaller"]["link"] = (
+                magisk_repo + "canary/" + data["uninstaller"]["link"]
+            )
+
         releases += (
             f'{name}: [ZIP v{data["magisk"]["version"]}]({data["magisk"]["link"]}) | '
             f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | '
             f'[Uninstaller]({data["uninstaller"]["link"]})\n'
         )
-    await edit_or_reply(request, releases)
+    await edit_or_reply(magisk, releases)
 
 
-@friday.on(friday_on_cmd(outgoing=True, pattern=r"device(?: |$)(\S*)"))
-@friday.on(sudo_cmd(pattern="device(?: |$)(\S*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern=r"device(?: |$)(\S*)"))
+@bot.on(sudo_cmd(pattern=r"device(?: |$)(\S*)", allow_sudo=True))
 async def device_info(request):
     """ get android device basic info from its codename """
     textx = await request.get_reply_message()
@@ -74,10 +80,8 @@ async def device_info(request):
     await edit_or_reply(request, reply)
 
 
-@friday.on(
-    friday_on_cmd(outgoing=True, pattern=r"codename(?: |)([\S]*)(?: |)([\s\S]*)")
-)
-@friday.on(sudo_cmd(pattern="codename(?: |)([\S]*)(?: |)([\s\S]*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern=r"codename(?: |)([\S]*)(?: |)([\s\S]*)"))
+@bot.on(sudo_cmd(pattern=r"codename(?: |)([\S]*)(?: |)([\s\S]*)", allow_sudo=True))
 async def codename_info(request):
     """ search for android codename """
     textx = await request.get_reply_message()
@@ -121,8 +125,8 @@ async def codename_info(request):
     await edit_or_reply(request, reply)
 
 
-@friday.on(friday_on_cmd(outgoing=True, pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)"))
-@friday.on(sudo_cmd(pattern="specs(?: |)([\S]*)(?: |)([\s\S]*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)"))
+@bot.on(sudo_cmd(pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)", allow_sudo=True))
 async def devices_specifications(request):
     """ Mobile devices specifications """
     textx = await request.get_reply_message()
@@ -184,8 +188,8 @@ async def devices_specifications(request):
     await edit_or_reply(request, reply)
 
 
-@friday.on(friday_on_cmd(outgoing=True, pattern=r"twrp(?: |$)(\S*)"))
-@friday.on(sudo_cmd(pattern="twrp(?: |$)(\S*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern=r"twrp(?: |$)(\S*)"))
+@bot.on(sudo_cmd(pattern=r"twrp(?: |$)(\S*)", allow_sudo=True))
 async def twrp(request):
     """ get android device twrp """
     textx = await request.get_reply_message()
