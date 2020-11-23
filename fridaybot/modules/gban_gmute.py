@@ -2,6 +2,7 @@ from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
@@ -204,3 +205,14 @@ async def handler(rkG):
                         except:
                             rkG.reply("`No Permission To Ban`")
                             return
+
+
+CMD_HELP.update(
+    {
+        "gban_gmute": "**Gban_Gmute**\
+\n\n**Syntax : **`.gban <reply to a user / mention their ID>`\
+\n**Usage :** bans the user in every group where you are admin.\
+\n\n**Syntax : **`.ungban <reply to a user / mention their ID>`\
+\n**Usage :** unbans the user in every group where you are admin."
+    }
+)

@@ -1,6 +1,7 @@
 import asyncio
 import io
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
@@ -34,3 +35,12 @@ async def install(event):
             )
             await event.delete()
     await event.edit(OUTPUT)
+
+
+CMD_HELP.update(
+    {
+        "cmd_list": "**Cmd_list**\
+\n\n**Syntax : **`.cmds`\
+\n**Usage :** This plugin lists all the plugins which are in your userbot."
+    }
+)

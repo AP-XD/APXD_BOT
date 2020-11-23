@@ -2,6 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+from fridaybot import CMD_HELP
+
 
 from telethon.tl.types import ChannelParticipantsAdmins
 
@@ -36,3 +38,12 @@ async def _(event):
         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
     await event.reply(mentions)
     await event.delete()
+
+
+CMD_HELP.update(
+    {
+        "tagall": "**Tagall**\
+\n\n**Syntax : **`.tagall`\
+\n**Usage :** tag everyone in a group"
+    }
+)

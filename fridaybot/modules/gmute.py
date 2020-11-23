@@ -1,5 +1,6 @@
 import asyncio
 
+from fridaybot import CMD_HELP
 from fridaybot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 
 
@@ -133,3 +134,14 @@ async def endgmute(event):
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
+
+
+CMD_HELP.update(
+    {
+        "gmute": "**Gmute**\
+\n\n**Syntax : **`.gmute <reply to a user / mention his ID>`\
+\n**Usage :** mutes user in every group where you are admin.\
+\n\n**Syntax : **`.ungmute <reply to a user / mention his ID>`\
+\n**Usage :** unmute user in every group where you are admin."
+    }
+)

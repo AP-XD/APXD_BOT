@@ -11,6 +11,7 @@ from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
@@ -122,3 +123,12 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
+
+
+CMD_HELP.update(
+    {
+        "clone": "**Clone**\
+\n\n**Syntax : **`.clone <@username/tag anyone>`\
+\n**Usage :** Get Telegram Profile Picture and other information and set as own profile."
+    }
+)
