@@ -4,8 +4,7 @@ PyGithub
 PyLyrics
 PyPDF2
 aiofiles
-aiohttp
-aria2p	  
+aiohttp	  
 async_generator
 asyncurban		  
 beautifulsoup4
