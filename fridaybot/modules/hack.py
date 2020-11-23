@@ -9,8 +9,10 @@ import asyncio
 from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from uniborg.util import friday_on_cmd
-from ..utils import admin_cmd
+
 from fridaybot import CMD_HELP
+
+from ..utils import admin_cmd
 
 
 @friday.on(friday_on_cmd(pattern=r"hack"))
@@ -143,6 +145,7 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 12])
+
 
 CMD_HELP.update(
     {
