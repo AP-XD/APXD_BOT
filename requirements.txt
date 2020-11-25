@@ -8,7 +8,7 @@ aiohttp
 async_generator
 asyncurban		  
 beautifulsoup4
-bitlyshortener			  
+bitlyshortener
 bs4
 bwb==3.0.0
 cairosvg		

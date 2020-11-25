@@ -138,11 +138,9 @@ if ENV:
         TEMP_DIR = os.environ.get("TEMP_DIR", None)
         CHANNEL_ID = int(os.environ.get("CHANNEL_ID", -100))
         # Google Chrome Stuff
-        CHROME_DRIVER = os.environ.get(
-            "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
-        )
+        CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/usr/bin/chromedriver")
         GOOGLE_CHROME_BIN = os.environ.get(
-            "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
+            "GOOGLE_CHROME_BIN", "/usr/bin/google-chrome"
         )
         CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         # Google Drive ()
@@ -193,7 +191,7 @@ if ENV:
             "ALIVE_IMAGE", "https://telegra.ph/file/22535f8051a58af113586.jpg"
         )
         TESSDATA_PREFIX = os.environ.get(
-            "TESSDATA_PREFIX", "./.apt/usr/share/tesseract-ocr/4.00/tessdata"
+            "TESSDATA_PREFIX", "/usr/share/tesseract-ocr/4.00/tessdata"
         )
 
 

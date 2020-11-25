@@ -27,6 +27,7 @@ from fridaybot.wraptools import (
 )
 from var import Var
 
+sedprint = logging.getLogger("PLUGINS")
 cmdhandler = Config.COMMAND_HAND_LER
 bothandler = Config.BOT_HANDLER
 
@@ -115,7 +116,7 @@ def load_module(shortname):
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        print("༒★彡☣️Successfully (re)imported☣️彡★༒ " + shortname)
+        sedprint.info("༒★彡☣️Successfully (re)imported☣️彡★༒ " + shortname)
     else:
         import importlib
         import sys
@@ -161,7 +162,7 @@ def load_module(shortname):
         ] = fridaybot.modules.sql_helper.global_variables_sql
         # for imports
         sys.modules["fridaybot.modules." + shortname] = mod
-        print("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
+        sedprint.info("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
 
 
 def remove_plugin(shortname):
@@ -863,8 +864,8 @@ def start_assistant(shortname):
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        print("Starting Your Assistant Bot.")
-        print("Assistant Sucessfully imported " + shortname)
+        sedprint.info("Starting Your Assistant Bot.")
+        sedprint.info("Assistant Sucessfully imported " + shortname)
     else:
         import importlib
         import sys
@@ -888,4 +889,4 @@ def start_assistant(shortname):
         mod.only_pvt = only_pvt()
         spec.loader.exec_module(mod)
         sys.modules["fridaybot.modules.assistant" + shortname] = mod
-        print("Assistant Has imported " + shortname)
+        sedprint.info("Assistant Has imported " + shortname)
