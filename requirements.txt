@@ -53,6 +53,7 @@ numpy
 oauth2client
 opencv-contrib-python
 patool
+prettytable
 programmingquotes	  
 psutil
 psycopg2		
