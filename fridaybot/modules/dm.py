@@ -1,9 +1,9 @@
 import os
 import re
 from telethon import *
-from userbot import bot
-from userbot.utils import admin_cmd
-from userbot import CMD_HELP
+from fridaybot import bot
+from fridaybot.utils import admin_cmd
+from fridaybot import CMD_HELP
 #Fixed by @NOOBGeng Second Member
 @borg.on(admin_cmd(pattern="dm ?(.*)"))
 async def _(dc):

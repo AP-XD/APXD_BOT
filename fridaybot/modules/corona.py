@@ -1,8 +1,8 @@
 from covid import Covid
 
-from userbot.utils import admin_cmd
+from fridaybot.utils import admin_cmd
 
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 
 @borg.on(admin_cmd(pattern="corona (.*)"))
 

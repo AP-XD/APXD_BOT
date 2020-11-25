@@ -1,7 +1,7 @@
 import os
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"open", outgoing=True))

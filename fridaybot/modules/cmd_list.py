@@ -41,6 +41,6 @@ CMD_HELP.update(
     {
         "cmd_list": "**Cmd_list**\
 \n\n**Syntax : **`.cmds`\
-\n**Usage :** This plugin lists all the plugins which are in your userbot."
+\n**Usage :** This plugin lists all the plugins which are in your fridaybot."
     }
 )

@@ -43,7 +43,7 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             STARTUP,
-            caption="`you will be hacked in a moment by my userbot. thank you..`",
+            caption="`you will be hacked in a moment by my fridaybot. thank you..`",
             voice_note=True,
         ),
 
