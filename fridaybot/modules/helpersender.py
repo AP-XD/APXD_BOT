@@ -1,17 +1,15 @@
-from fridaybot import  *
-from telethon import events
-from fridaybot.events import *
-from telethon import functions, types
-from telethon.tl.types import InputMessagesFilterDocument
-from fridaybot.utils import command, remove_plugin, load_module
-from pathlib import Path
-from fridaybot import LOAD_PLUG
 from datetime import datetime
+
+from fridaybot import *
+from fridaybot.events import *
+
 DELETE_TIMEOUT = 5
-import sys, asyncio, traceback, os, importlib
-import fridaybot.utils
-from fridaybot.utils import *
+import asyncio
+
 from fridaybot import CMD_HELP
+from fridaybot.utils import *
+
+
 @borg.on(admin_cmd(pattern="sqlsend (?P<shortname>\w+)$"))
 async def send(event):
     if event.fwd_from:
@@ -25,7 +23,7 @@ async def send(event):
         the_plugin_file,
         force_document=True,
         allow_cache=False,
-        reply_to=message_id
+        reply_to=message_id,
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
@@ -34,19 +32,12 @@ async def send(event):
     await event.delete()
 
 
-
-
-
-
-
-
-
-        
-CMD_HELP.update({
-    "helpersender":
-    ".hlpsend <sql_helpername>\
+CMD_HELP.update(
+    {
+        "helpersender": ".hlpsend <sql_helpername>\
 \nUsage: send the l helper\
 \n\n``\
 \n****\
 "
-})
+    }
+)

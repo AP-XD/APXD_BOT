@@ -1,12 +1,10 @@
 import asyncio
-from telethon import events
+
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
-from fridaybot.utils import admin_cmd
-import random, re
-import asyncio
-from fridaybot import CMD_HELP
 
+from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="gbun"))
@@ -30,21 +28,24 @@ async def gbun(event):
         usname = replied_user.user.username
         idd = reply_message.from_id
         if idd == 1289422521:
-            await reply_message.reply("`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [✰TEAM COBRA™️✰](tg://user?id=1289422521) __to release your account__😏")
+            await reply_message.reply(
+                "`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [✰TEAM COBRA™️✰](tg://user?id=1289422521) __to release your account__😏"
+            )
         else:
-            jnl=("`Warning!! `"
-                  "[{}](tg://user?id={})"
-                  "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
-                  "**user's Name: ** __{}__\n"
-                  "**ID : ** `{}`\n"
-                ).format(firstname, idd, firstname, idd)
+            jnl = (
+                "`Warning!! `"
+                "[{}](tg://user?id={})"
+                "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
+                "**user's Name: ** __{}__\n"
+                "**ID : ** `{}`\n"
+            ).format(firstname, idd, firstname, idd)
             if usname == None:
                 jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
             elif usname != "None":
                 jnl += "**Victim Nigga's username** : @{}\n".format(usname)
             if len(gbunVar) > 0:
                 gbunm = "`{}`".format(gbunVar)
-                gbunr = "**Reason: **"+gbunm
+                gbunr = "**Reason: **" + gbunm
                 jnl += gbunr
             else:
                 jnl += no_reason
@@ -55,10 +56,9 @@ async def gbun(event):
     await event.delete()
 
 
-
 @borg.on(admin_cmd(pattern="fgben ?(.*)"))
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("Preparing to gban this nub nibba....")
         await asyncio.sleep(2)
         await event.edit("Gbanning user.....")
@@ -145,14 +145,17 @@ async def _(event):
         await asyncio.sleep(2)
         await event.edit("Gbanning user... \n 204 chats")
         await asyncio.sleep(1.5)
-        await event.edit("Gbanned this nub nibba successfully in😏: 204 chats.\nBlocked and added to gban watch!")
-    
-     
-        
+        await event.edit(
+            "Gbanned this nub nibba successfully in😏: 204 chats.\nBlocked and added to gban watch!"
+        )
+
+
 @borg.on(admin_cmd(pattern="fungben ?(.*)"))
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
-        await event.edit("Preparing to Ungban this nub nibba please weit for a while.....")
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+        await event.edit(
+            "Preparing to Ungban this nub nibba please weit for a while....."
+        )
         await asyncio.sleep(2)
         await event.edit("UnGbanning user.....")
         await asyncio.sleep(2)
@@ -238,17 +241,22 @@ async def _(event):
         await asyncio.sleep(2)
         await event.edit("UnGbanning user... \n 204 chats")
         await asyncio.sleep(1.5)
-        await event.edit("UnGbanned this nub nibba successfully in 204 chats.\nUnBlocked and removed from gban watch")
+        await event.edit(
+            "UnGbanned this nub nibba successfully in 204 chats.\nUnBlocked and removed from gban watch"
+        )
 
 
 @borg.on(admin_cmd(pattern="fgmute ?(.*)"))
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("Globally muted this nub nibba successfully..!")
 
+
 borg.on(admin_cmd(pattern="fungmute ?(.*)"))
+
+
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("Globally unmuted successfully..!")
 
 

@@ -1,16 +1,9 @@
 from fridaybot import *
-from telethon import events
-from fridaybot.events import *
-from telethon import functions, types
-from telethon.tl.types import InputMessagesFilterDocument
-from fridaybot.utils import command, remove_plugin, load_module
-from pathlib import Path
-from fridaybot import LOAD_PLUG
-from datetime import datetime
-import sys, asyncio, traceback, os, importlib
-import fridaybot.utils
-from fridaybot.utils import *
 from fridaybot import CMD_HELP
+from fridaybot.events import *
+from fridaybot.utils import *
+
+
 @borg.on(admin_cmd(pattern="sqlsend (?P<shortname>\w+)$"))
 async def send(event):
     if event.fwd_from:
@@ -24,27 +17,19 @@ async def send(event):
         the_plugin_file,
         force_document=True,
         allow_cache=False,
-        reply_to=message_id
+        reply_to=message_id,
     )
-
 
     await event.edit("Uploaded {} ".format(input_str))
     await event.delete()
 
 
-
-
-
-
-
-
-
-        
-CMD_HELP.update({
-    "sqlsender":
-    "`.sqlsend <sql_helpername>`\
+CMD_HELP.update(
+    {
+        "sqlsender": "`.sqlsend <sql_helpername>`\
 \n**Usage:** send the sql helper\
 \n\n``\
 \n****\
 "
-})
+    }
+)

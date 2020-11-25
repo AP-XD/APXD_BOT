@@ -5,7 +5,6 @@ from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"open", outgoing=True))
-
 async def _(event):
     b = await event.client.download_media(await event.get_reply_message())
     a = open(b, "r")
