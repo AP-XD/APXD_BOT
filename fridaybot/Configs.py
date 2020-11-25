@@ -189,6 +189,7 @@ if ENV:
         # define the "types" that should be uplaoded as streamable
         TL_VID_STREAM_TYPES = ("MKV", "MP4", "WEBM")
         TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")
+        DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
         OWNER_ID = os.environ.get("OWNER_ID", None)
         if OWNER_ID:
             OWNER_ID = int(OWNER_ID)
