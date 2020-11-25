@@ -14,6 +14,7 @@ from os import environ, execle, path, remove
 
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
+
 from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 from var import Var
@@ -48,6 +49,7 @@ async def print_changelogs(event, ac_br, changelog):
     else:
         await event.client.send_message(event.chat_id, changelog_str)
     return True
+
 
 async def update_requirements():
     reqs = str(requirements_path)
@@ -192,7 +194,7 @@ async def upstream(event):
             f"**Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!**"
         )
         return repo.__del__()
-        
+
     if conf == "" and force_update is False:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()

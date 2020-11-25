@@ -201,6 +201,7 @@ AFKREASON = None
 
 from .helpers import *
 from .helpers import functions as catdef
+
 link = "https://people.eecs.berkeley.edu/~rich.zhang/projects/2016_colorization/files/demo_v2/colorization_release_v2.caffemodel"
 km = "./resources/imgcolour/colorization_release_v2.caffemodel"
 if os.path.exists(km):
