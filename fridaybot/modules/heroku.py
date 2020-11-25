@@ -12,6 +12,7 @@ import heroku3
 import requests
 from telegraph import Telegraph
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 telegraph = Telegraph()
@@ -226,3 +227,14 @@ async def _(givelogs):
         reply_to=givelogs.id,
         caption=suger,
     )
+
+
+CMD_HELP.update(
+    {
+        "heroku": "**Heroku**\
+\n\n**Syntax : **`.info heroku`\
+\n**Usage :** Gives you information to use other commands of heroku.\
+\n\n**Syntax : **`.logs`\
+\n**Usage :** Gets logs from heroku."
+    }
+)
