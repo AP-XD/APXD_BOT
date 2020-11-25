@@ -3,7 +3,15 @@ from platform import python_version
 
 from telethon import version
 
-from fridaybot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion, mention, reply_id
+from fridaybot import (
+    ALIVE_NAME,
+    CMD_HELP,
+    StartTime,
+    catdef,
+    catversion,
+    mention,
+    reply_id,
+)
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
@@ -21,9 +29,7 @@ async def amireallyalive(alive):
     reply_to_id = await reply_id(alive)
     uptime = await catdef.get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-                 
-                             
-                                                     
+
     if CAT_IMG:
         cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
         cat_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
@@ -55,10 +61,9 @@ async def amireallyalive(alive):
     if alive.fwd_from:
         return
     tgbotusername = Config.TG_BOT_USER_NAME_BF_HER
-                               
-                             
+
     reply_to_id = await reply_id(alive)
-                 
+
     cat_caption = f"**Catuserbot is Up and Running**\n"
     cat_caption += f"**  -Telethon version :** `{version.__version__}\n`"
     cat_caption += f"**  -Catuserbot Version :** `{catversion}`\n"
@@ -110,4 +115,3 @@ CMD_HELP.update(
       \nSet `ALIVE_PIC` var for media in alive message"
     }
 )
-
