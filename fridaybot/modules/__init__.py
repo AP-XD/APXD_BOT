@@ -23,7 +23,7 @@ UP = "**2.1.0**"
 # =================== CONSTANT ===================
 
 
-USERID = Config.OWNER_ID or bot.uid
+USERID = Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO
