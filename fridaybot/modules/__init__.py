@@ -6,6 +6,7 @@ import time
 import heroku3
 import requests
 import spamwatch as spam_watch
+from validators.url import url
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -19,6 +20,18 @@ from .. import StartTime
 from ..helpers import *
 
 UP = "**2.1.0**"
+# =================== CONSTANT ===================
+                       
+
+USERID = Config.OWNER_ID or bot.uid
+ALIVE_NAME = Config.ALIVE_NAME
+AUTONAME = Config.AUTONAME
+DEFAULT_BIO = Config.DEFAULT_BIO
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
+
+# mention user
+mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
+hmention = f"<a href = tg://user?id={USERID}>{DEFAULTUSER}</a>"
 
 
 def start() -> scoped_session:
@@ -85,7 +98,16 @@ def check(cat):
 # ക്രെഡിറ്റ് വെച്ചാൽ സന്തോഷമേ ഉള്ളു..!
 # uniborg
 
-
+def set_key(dictionary, key, value):
+    if key not in dictionary:
+        dictionary[key] = value
+    elif isinstance(dictionary[key], list):
+        if value in dictionary[key]:
+            return
+        dictionary[key].append(value)
+    else:
+        dictionary[key] = [dictionary[key], value]
+        
 def check_data_base_heal_th():
     # https://stackoverflow.com/a/41961968
     is_database_working = False
@@ -106,12 +128,35 @@ def check_data_base_heal_th():
     return is_database_working, output
 
 
+PM_START = []
+PMMESSAGE_CACHE = {}
+PMMENU = "pmpermit_menu" not in Config.NO_LOAD
+
+if Config.PRIVATE_GROUP_BOT_API_ID is None:
+    BOTLOG = False
+    BOTLOG_CHATID = "me"
+else:
+    BOTLOG = True
+    BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+
+# Gdrive
+G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
+G_DRIVE_CLIENT_SECRET = Config.G_DRIVE_CLIENT_SECRET
+G_DRIVE_DATA = Config.G_DRIVE_DATA
+G_DRIVE_FOLDER_ID = Config.G_DRIVE_FOLDER_ID
+TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
+
 # spamwatch support
 if Config.SPAMWATCH_API:
     token = Config.SPAMWATCH_API
     spamwatch = spam_watch.Client(token)
 else:
     spamwatch = None
+
+cat_users = [bot.uid]
+if Config.SUDO_USERS:
+    for user in Config.SUDO_USERS:
+        cat_users.append(user)
 
 
 async def catalive():

@@ -7,6 +7,14 @@ if ENV:
     import os
 
     class Config(object):
+        # Default .alive name
+        ALIVE_NAME = os.environ.get("ALIVE_NAME", None)        
+        # for profile default name
+        AUTONAME = os.environ.get("AUTONAME", None)                 
+        API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
+        STRING_SESSION = os.environ.get("STRING_SESSION", None)
+        # For Databases
+        DB_URI = os.environ.get("DATABASE_URL", None)                                           
         # For customizing there alive message
         CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT", None)
         CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
@@ -32,6 +40,10 @@ if ENV:
         PLUGIN_GROUP = os.environ.get("PLUGIN_GROUP", None)
         if PLUGIN_GROUP:
             PLUGIN_GROUP = int(PLUGIN_GROUP)
+        PRIVATE_CHANNEL_BOT_API_ID = os.environ.get("PRIVATE_CHANNEL_BOT_API_ID", None)
+        if PRIVATE_CHANNEL_BOT_API_ID:
+            PRIVATE_CHANNEL_BOT_API_ID = int(PRIVATE_CHANNEL_BOT_API_ID)                                                                    
+        CLEAN_WELCOME = os.environ.get("CLEAN_WELCOME", True)                  
         G_BAN_LOGGER_GROUP = os.environ.get("BOTLOG_CHATID", None)
         if G_BAN_LOGGER_GROUP:
             G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
@@ -72,12 +84,24 @@ if ENV:
         UB_BLACK_LIST_CHAT = set(
             int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split()
         )
+        NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(
+        os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 7)
+        )
+        # number of rows of buttons to be displayed in .helpme command
+        NO_OF_COLOUMS_DISPLAYED_IN_H_ME_CMD = int(
+            os.environ.get("NO_OF_COLOUMS_DISPLAYED_IN_H_ME_CMD", 3)
+        )
+        # emoji to be displayed in .help
         # maximum number of messages for antiflood
         MAX_ANTI_FLOOD_MESSAGES = 10
         # warn mode for anti flood
         ANTI_FLOOD_WARN_MODE = ChatBannedRights(
             until_date=None, view_messages=None, send_messages=True
         )
+        LOAD = []
+        CHATS_TO_MONITOR_FOR_ANTI_FLOOD = []
+        # specify LOAD and NO_LOAD
+        NO_LOAD = [x for x in os.environ.get("NO_LOAD", "").split()]
         ALIVE_PIC = os.environ.get(
             "ALIVE_PIC", "https://telegra.ph/file/1959ecf64cbca739ef584.png"
         )
@@ -107,8 +131,6 @@ if ENV:
             PM_LOGGR_BOT_API_ID = int(PM_LOGGR_BOT_API_ID)
         # For Databases
         # can be None in which case modules requiring
-        # DataBase would not work
-        DB_URI = os.environ.get("DATABASE_URL", None)
         # number of rows of buttons to be displayed in .helpme command
         NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(
             os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 5)
@@ -167,6 +189,14 @@ if ENV:
         # define the "types" that should be uplaoded as streamable
         TL_VID_STREAM_TYPES = ("MKV", "MP4", "WEBM")
         TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")
+        OWNER_ID = os.environ.get("OWNER_ID", None)
+        if OWNER_ID:
+            OWNER_ID = int(OWNER_ID)
+        # Last.fm plugin
+        LASTFM_API = os.environ.get("LASTFM_API", None)
+        LASTFM_SECRET = os.environ.get("LASTFM_SECRET", None)
+        LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME", None)
+        LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD", None)
         WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")
         TZ = os.environ.get("TZ", None)
         # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
