@@ -3,6 +3,7 @@ Pillow
 PyGithub
 PyLyrics
 PyPDF2
+aria2p
 aiofiles
 aiohttp	  
 async_generator

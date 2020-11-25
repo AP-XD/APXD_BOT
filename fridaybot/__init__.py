@@ -20,7 +20,7 @@ from .function import fridayfunction as topfunc
 
 StartTime = time.time()
 UpTime = time.time()
-catversion = "2.9.1"
+catversion = "2.9.4"
 Lastupdate = time.time()
 telever = "4.7"
 os.system("pip install --upgrade pip")
