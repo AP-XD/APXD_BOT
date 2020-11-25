@@ -1,7 +1,7 @@
 import datetime
 
 from telethon.tl.tlobject import TLObject
-from telethon.tl.types import MessageEntityMentionName,MessageEntityPre
+from telethon.tl.types import MessageEntityMentionName, MessageEntityPre
 from telethon.utils import add_surrogate
 
 from ..Configs import Config
@@ -10,8 +10,11 @@ from ..Configs import Config
 def mentionuser(name, userid):
     return f"[{name}](tg://user?id={userid})"
 
+
 def htmlmentionuser(name, userid):
     return f"<a href='tg://user?id={userid}'>{name}</a>"
+
+
 async def reply_id(event):
     reply_to_id = None
     if event.sender_id in Config.SUDO_USERS:
@@ -19,6 +22,7 @@ async def reply_id(event):
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
     return reply_to_id
+
 
 async def get_user_from_event(event, secondgroup=None):
     if secondgroup:

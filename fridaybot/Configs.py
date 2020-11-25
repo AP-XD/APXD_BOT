@@ -8,13 +8,13 @@ if ENV:
 
     class Config(object):
         # Default .alive name
-        ALIVE_NAME = os.environ.get("ALIVE_NAME", None)        
+        ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
         # for profile default name
-        AUTONAME = os.environ.get("AUTONAME", None)                 
+        AUTONAME = os.environ.get("AUTONAME", None)
         API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
         STRING_SESSION = os.environ.get("STRING_SESSION", None)
         # For Databases
-        DB_URI = os.environ.get("DATABASE_URL", None)                                           
+        DB_URI = os.environ.get("DATABASE_URL", None)
         # For customizing there alive message
         CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT", None)
         CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
@@ -42,8 +42,8 @@ if ENV:
             PLUGIN_GROUP = int(PLUGIN_GROUP)
         PRIVATE_CHANNEL_BOT_API_ID = os.environ.get("PRIVATE_CHANNEL_BOT_API_ID", None)
         if PRIVATE_CHANNEL_BOT_API_ID:
-            PRIVATE_CHANNEL_BOT_API_ID = int(PRIVATE_CHANNEL_BOT_API_ID)                                                                    
-        CLEAN_WELCOME = os.environ.get("CLEAN_WELCOME", True)                  
+            PRIVATE_CHANNEL_BOT_API_ID = int(PRIVATE_CHANNEL_BOT_API_ID)
+        CLEAN_WELCOME = os.environ.get("CLEAN_WELCOME", True)
         G_BAN_LOGGER_GROUP = os.environ.get("BOTLOG_CHATID", None)
         if G_BAN_LOGGER_GROUP:
             G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
@@ -85,7 +85,7 @@ if ENV:
             int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split()
         )
         NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(
-        os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 7)
+            os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 7)
         )
         # number of rows of buttons to be displayed in .helpme command
         NO_OF_COLOUMS_DISPLAYED_IN_H_ME_CMD = int(

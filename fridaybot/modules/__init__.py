@@ -6,10 +6,10 @@ import time
 import heroku3
 import requests
 import spamwatch as spam_watch
-from validators.url import url
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
+from validators.url import url
 
 from fridaybot import catdef, topfunc
 from fridaybot.Configs import Config
@@ -21,7 +21,7 @@ from ..helpers import *
 
 UP = "**2.1.0**"
 # =================== CONSTANT ===================
-                       
+
 
 USERID = Config.OWNER_ID or bot.uid
 ALIVE_NAME = Config.ALIVE_NAME
@@ -98,6 +98,7 @@ def check(cat):
 # ക്രെഡിറ്റ് വെച്ചാൽ സന്തോഷമേ ഉള്ളു..!
 # uniborg
 
+
 def set_key(dictionary, key, value):
     if key not in dictionary:
         dictionary[key] = value
@@ -107,7 +108,8 @@ def set_key(dictionary, key, value):
         dictionary[key].append(value)
     else:
         dictionary[key] = [dictionary[key], value]
-        
+
+
 def check_data_base_heal_th():
     # https://stackoverflow.com/a/41961968
     is_database_working = False
