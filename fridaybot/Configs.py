@@ -169,7 +169,7 @@ if ENV:
         )
         GROUP_REG_SED_EX_BOT_S = os.environ.get(
             "GROUP_REG_SED_EX_BOT_S", r"(regex|moku|BananaButler_|rgx|l4mR)bot"
-        )   
+        )
         HELP_INLINETYPE = os.environ.get("HELP_INLINETYPE", None)
         CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         # Google Drive ()
