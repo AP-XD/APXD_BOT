@@ -156,7 +156,6 @@ else:
     spamwatch = None
 
 
-
 async def catalive():
     _, check_sgnirts = check_data_base_heal_th()
     if Config.SUDO_USERS:
