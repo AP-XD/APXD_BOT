@@ -155,10 +155,6 @@ if Config.SPAMWATCH_API:
 else:
     spamwatch = None
 
-cat_users = [bot.uid]
-if Config.SUDO_USERS:
-    for user in Config.SUDO_USERS:
-        cat_users.append(user)
 
 
 async def catalive():
