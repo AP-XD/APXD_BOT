@@ -30,13 +30,13 @@ CUSTOM_MIDDLE_PMP = (
 USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By Userbot"
 
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
+
 USER_BOT_NO_WARN = (
     "**Hello, This is Friday PM Protection Service ⚠️**\n\n"
     f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
     "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
-
 if Var.PRIVATE_GROUP_ID is not None:
 
     @borg.on(friday_on_cmd(pattern="(a|approve)"))
@@ -200,7 +200,7 @@ if Var.PRIVATE_GROUP_ID is not None:
         tap = await bot.inline_query(botusername, USER_BOT_NO_WARN)
         sed = await tap[0].click(event.chat_id)
         PM_WARNS[chat_ids] += 1
-        if chat_id in PREV_REPLY_MESSAGE:
+        if chat_ids in PREV_REPLY_MESSAGE:
             await PREV_REPLY_MESSAGE[chat_ids].delete()
         PREV_REPLY_MESSAGE[chat_ids] = sed
 

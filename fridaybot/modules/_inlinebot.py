@@ -118,23 +118,20 @@ async def on_plug_in_callback_query_handler(event):
         return
     plugin_name = event.data_match.group(1).decode("UTF-8")
     if plugin_name in CMD_HELP:
-        help_string = f"**PLUGIN NAME :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
-    if help_string is "":
-        reply_pop_up_alert = "{} is useless".format(plugin_name)
-    else:
-        reply_pop_up_alert = help_string
+        help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+    reply_pop_up_alert = help_string
     reply_pop_up_alert += "\n\n**(C) @FRIDAYOT** ".format(plugin_name)
     if len(reply_pop_up_alert) >= 4096:
-        crackexy = "Sir. The String Was Too Big So Me Sending Here As Paste."
+        crackexy = "`Pasting Your Help Menu.`"
         await event.answer(crackexy, cache_time=0, alert=True)
         out_file = reply_pop_up_alert
         url = "https://del.dog/documents"
         r = requests.post(url, data=out_file.encode("UTF-8")).json()
         url = f"https://del.dog/{r['key']}"
         await event.edit(
-            message=f"Pasted {plugin_name} to {url}",
-            buttons=[[custom.Button.inline("Go Back", data="backme")]],
+            f"Pasted {plugin_name} to {url}",
             link_preview=False,
+            buttons=[[custom.Button.inline("Go Back", data="backme")]],
         )
     else:
         await event.edit(
@@ -155,6 +152,10 @@ async def rip(event):
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"dontspamnigga")))
 async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, You Don't Need To Use This."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
     await event.get_chat()
     him_id = event.query.user_id
     text1 = "You Have Chosed A Probhited Option. Therefore, You Have Been Blocked By UserBot. 🇮🇳"
@@ -168,7 +169,7 @@ async def rip(event):
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme")))
-async def rip(event):
+async def sed(event):
     if not event.query.user_id == bot.uid:
         sedok = "Who The Fuck Are You? Get Your Own Friday."
         await event.answer(sedok, cache_time=0, alert=True)
@@ -181,6 +182,10 @@ For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LI
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"whattalk")))
 async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, You Don't Need To Use This."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
     await event.get_chat()
     him_id = event.query.user_id
     await event.edit("Choice Accepted ✔️")
@@ -195,6 +200,10 @@ async def rip(event):
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"askme")))
 async def rip(event):
+    if event.query.user_id == bot.uid:
+        sedok = "Master, You Don't Need To Use This."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
     await event.get_chat()
     him_id = event.query.user_id
     await event.edit("Choice Accepted ✔️")
