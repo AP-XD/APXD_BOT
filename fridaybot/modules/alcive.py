@@ -3,11 +3,10 @@ from platform import python_version
 
 from telethon import version
 
-from fridaybot import CMD_HELP
-
-from fridaybot import ALIVE_NAME,StartTime,catdef,catversion
+from fridaybot import ALIVE_NAME, CMD_HELP, StartTime, catdef, catversion
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 async def reply_id(event):
     reply_to_id = None
@@ -16,7 +15,8 @@ async def reply_id(event):
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
     return reply_to_id
-    
+
+
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 CAT_IMG = Config.ALIVE_PIC
 CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "✮ MY BOT IS RUNNING SUCCESFULLY ✮"
