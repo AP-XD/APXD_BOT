@@ -3,18 +3,20 @@ from platform import python_version
 
 from telethon import version
 
-from fridaybot import (
-    ALIVE_NAME,
-    CMD_HELP,
-    StartTime,
-    catdef,
-    catversion,
-    mention,
-    reply_id,
-)
+from fridaybot import CMD_HELP
+
+from fridaybot import ALIVE_NAME,StartTime,catdef,catversion
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
+async def reply_id(event):
+    reply_to_id = None
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to_id = event.id
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
+    return reply_to_id
+    
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 CAT_IMG = Config.ALIVE_PIC
 CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "✮ MY BOT IS RUNNING SUCCESFULLY ✮"
@@ -37,7 +39,7 @@ async def amireallyalive(alive):
         cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
         cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
         cat_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
-        cat_caption += f"**{EMOJI} Master:** {mention}\n"
+        cat_caption += f"**{EMOJI} Master:** {DEFAULTUSER}\n"
         await alive.client.send_file(
             alive.chat_id, CAT_IMG, caption=cat_caption, reply_to=reply_to_id
         )
