@@ -167,10 +167,15 @@ if ENV:
         GOOGLE_CHROME_BIN = os.environ.get(
             "GOOGLE_CHROME_BIN", "/usr/bin/google-chrome"
         )
+        GROUP_REG_SED_EX_BOT_S = os.environ.get(
+            "GROUP_REG_SED_EX_BOT_S", r"(regex|moku|BananaButler_|rgx|l4mR)bot"
+        )   
+        HELP_INLINETYPE = os.environ.get("HELP_INLINETYPE", None)
         CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
         # Google Drive ()
         G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
         G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
+        G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
         AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
         if AUTH_TOKEN_DATA != None:
