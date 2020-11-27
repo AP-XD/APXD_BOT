@@ -9,8 +9,8 @@ import requests
 from bs4 import BeautifulSoup
 from PIL import Image
 from search_engine_parser import GoogleSearch
+
 from fridaybot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
-from fridaybot.utils import register
 
 from ..utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 
