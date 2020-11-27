@@ -217,6 +217,7 @@ async def rip(event):
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
 
+
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
@@ -242,24 +243,31 @@ async def on_plug_in_callback_query_handler(event):
         await event.edit(
             f"Pasted {plugin_name} to {url}",
             link_preview=False,
-            buttons=[[custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
-                      custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),]],
+            buttons=[
+                [
+                    custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
+                    custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
+                ]
+            ],
         )
     else:
         await event.edit(
             message=reply_pop_up_alert,
-            buttons=[[custom.Button.inline("Go Back", data="backme"),
-                      custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),]],
+            buttons=[
+                [
+                    custom.Button.inline("Go Back", data="backme"),
+                    custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
+                ]
+            ],
         )
+
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
 async def opner(event):
     if event.query.user_id == bot.uid:
         current_page_number = 0
         buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-        await event.edit(
-            "`>>>\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons
-        )
+        await event.edit("`>>>\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons)
     else:
         reply_pop_up_alert = (
             "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
