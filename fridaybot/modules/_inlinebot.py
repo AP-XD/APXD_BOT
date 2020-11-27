@@ -197,7 +197,7 @@ async def on_plug_in_callback_query_handler(event):
     plugin_name = event.data_match.group(1).decode("UTF-8")
     help_string = "Commands found in {}:\n".format(plugin_name)
     for i in CMD_LIST[plugin_name]:
-        help_string += "ℹ️ " + i + "\n"
+        help_string += "✮ " + i + "\n\n"
     if plugin_name in CMD_HELP:
         help_string += (
             f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
@@ -207,7 +207,7 @@ async def on_plug_in_callback_query_handler(event):
 
     reply_pop_up_alert = help_string
     reply_pop_up_alert += (
-        "\n Use .unload {} to remove this plugin\n ©FRIDAY Userbot".format(plugin_name)
+        "\n\n Use .unload {} to remove this plugin\n ©FRIDAY Userbot".format(plugin_name)
     )
     fci = [
         custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
