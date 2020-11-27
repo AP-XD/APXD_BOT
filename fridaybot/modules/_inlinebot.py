@@ -198,7 +198,7 @@ async def on_plug_in_callback_query_handler(event):
     if plugin_name in CMD_HELP:
         help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
     if help_string is "":
-            help_string = " CMD_LIST not set yet 😅😅 try\n .help {}".format(plugin_name)
+        help_string = " CMD_LIST not set yet 😅😅 try\n .help {}".format(plugin_name)
     reply_pop_up_alert = help_string
     reply_pop_up_alert += "\n\n**(C) @FRIDAYOT** ".format(plugin_name)
     fci = [
