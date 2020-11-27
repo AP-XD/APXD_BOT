@@ -197,6 +197,7 @@ async def on_plug_in_callback_query_handler(event):
     plugin_name = event.data_match.group(1).decode("UTF-8")
     help_string = "Commands found in {}:\n".format(plugin_name)
     k="🔥💎✮"
+    u=0
     for i in CMD_LIST[plugin_name]:
         u += 1
         help_string += str(k[u%3]) + " " + i + "\n\n"
