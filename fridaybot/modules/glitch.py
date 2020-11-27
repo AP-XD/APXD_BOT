@@ -7,7 +7,6 @@ import os
 
 from glitch_this import ImageGlitcher
 from PIL import Image
-
 from fridaybot import CMD_HELP, LOGS
 from fridaybot.functions import runcmd, take_screen_shot
 from fridaybot.utils import admin_cmd

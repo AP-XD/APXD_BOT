@@ -1,4 +1,3 @@
-# Api Provided By @PythonvsAno
 #    Copyright (C) Midhun KM 2020
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -18,6 +17,7 @@ import cv2
 import numpy as np
 import requests
 from PIL import Image
+from telegraph import upload_file
 from telethon.tl.types import MessageMediaPhoto
 
 from fridaybot.utils import friday_on_cmd, sudo_cmd
@@ -177,5 +177,31 @@ async def iamthug(event):
     await borg.send_file(event.chat_id, ok)
     await hmm.delete()
     for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+@friday.on(friday_on_cmd(pattern=r"tig"))
+@friday.on(sudo_cmd(pattern=r"tig", allow_sudo=True))
+async def lolmetrg(event):
+    await event.edit("`Triggered This Image`")
+    sed = await event.get_reply_message()
+    if isinstance(sed.media, MessageMediaPhoto):
+        img = await borg.download_media(sed.media, sedpath)
+    elif "image" in sed.media.document.mime_type.split("/"):
+        img = await borg.download_media(sed.media, sedpath)
+    else:
+        await event.edit("Reply To Image")
+        return
+    url_s = upload_file(img)
+    imglink = f"https://telegra.ph{url_s[0]}"
+    lolul = f"https://some-random-api.ml/canvas/triggered?avatar={imglink}"
+    r = requests.get(lolul)
+    open("triggered.gif", "wb").write(r.content)
+    lolbruh = "triggered.gif"
+    await borg.send_file(
+        event.chat_id, lolbruh, caption="You got triggered....", reply_to=sed
+    )
+    for files in (lolbruh, img):
         if files and os.path.exists(files):
             os.remove(files)

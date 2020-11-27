@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
 from requests import get
+from telegraph import Telegraph, exceptions, upload_file
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
@@ -101,12 +102,8 @@ if bool(ENV):
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
 
     # Chrome For Carbon
-    CHROME_DRIVER = os.environ.get(
-        "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
-    )
-    GOOGLE_CHROME_BIN = os.environ.get(
-        "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
-    )
+    CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/usr/bin/chromedriver")
+    GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", "/usr/bin/google-chrome")
 
     # Heroku Credentials for updater.
     HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
@@ -211,3 +208,7 @@ if os.path.exists(km):
 else:
     pathz = "./resources/imgcolour/"
     sedlyf = wget.download(link, out=pathz)
+
+telegraph = Telegraph()
+r = telegraph.create_account(short_name="Friday UserBot Inc.")
+auth_url = r["auth_url"]
