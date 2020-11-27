@@ -207,7 +207,9 @@ async def on_plug_in_callback_query_handler(event):
 
     reply_pop_up_alert = help_string
     reply_pop_up_alert += (
-        "\n\n Use .unload {} to remove this plugin\n ©FRIDAY Userbot".format(plugin_name)
+        "\n\n Use .unload {} to remove this plugin\n ©FRIDAY Userbot".format(
+            plugin_name
+        )
     )
     fci = [
         custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
