@@ -217,61 +217,40 @@ async def rip(event):
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
 
-
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
     )
 )
 async def on_plug_in_callback_query_handler(event):
-
+    if not event.query.user_id == bot.uid:
+        sedok = "Who The Fuck Are You? Get Your Own Friday."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
     plugin_name = event.data_match.group(1).decode("UTF-8")
-    help_string = ""
-    try:
-        for i in CMD_LIST[plugin_name]:
-            help_string += i
-            help_string += "\n"
-    except:
-        pass
-    if help_string is "":
-
-        reply_pop_up_alert = " CMD_LIST not set yet 😅😅 try\n .help {}".format(
-            plugin_name
+    if plugin_name in CMD_HELP:
+        help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+    reply_pop_up_alert = help_string
+    reply_pop_up_alert += "\n\n**(C) @FRIDAYOT** ".format(plugin_name)
+    if len(reply_pop_up_alert) >= 4096:
+        crackexy = "`Pasting Your Help Menu.`"
+        await event.answer(crackexy, cache_time=0, alert=True)
+        out_file = reply_pop_up_alert
+        url = "https://del.dog/documents"
+        r = requests.post(url, data=out_file.encode("UTF-8")).json()
+        url = f"https://del.dog/{r['key']}"
+        await event.edit(
+            f"Pasted {plugin_name} to {url}",
+            link_preview=False,
+            buttons=[[custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
+                      custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),]],
         )
     else:
-        reply_pop_up_alert = help_string
-    reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-        ©FRIDAY Userbot".format(
-        plugin_name
-    )
-    try:
-        # fci = [[Button.inline('Go back', 'back')]]
-        if event.query.user_id == bot.uid:
-            fci = [
-                custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="back"),
-                custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
-            ]
-            await event.edit(reply_pop_up_alert, buttons=fci)
-        else:
-            reply_pop_up_alert = "Please get your own Userbot, and don't use mine for more info visit @FRIDAY SUPPORT!"
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-    except:
-        halps = "Do .help {} to get the list of commands.".format(plugin_name)
-        await event.edit(halps)
-
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"back")))
-async def backr(event):
-    if event.query.user_id == bot.uid:
-        current_page_number = 0
-        buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-        await event.edit("`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons)
-    else:
-        reply_pop_up_alert = (
-            "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
+        await event.edit(
+            message=reply_pop_up_alert,
+            buttons=[[custom.Button.inline("Go Back", data="backme"),
+                      custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),]],
         )
-        await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
 async def opner(event):
@@ -279,7 +258,7 @@ async def opner(event):
         current_page_number = 0
         buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
         await event.edit(
-            "`>>>\n\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons
+            "`>>>\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons
         )
     else:
         reply_pop_up_alert = (
