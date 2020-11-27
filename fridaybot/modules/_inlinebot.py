@@ -2,15 +2,13 @@ import os
 import re
 import urllib
 from math import ceil
-import io
-import asyncio
-import json
-import random
+
 import requests
 from telethon import Button, custom, events, functions
 from youtubesearchpython import SearchVideos
-from fridaybot.Configs import Config
+
 from fridaybot import ALIVE_NAME, CMD_HELP, CMD_LIST
+from fridaybot.Configs import Config
 from fridaybot.modules import inlinestats
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
@@ -107,7 +105,8 @@ async def on_plug_in_callback_query_handler(event):
     else:
         reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-        
+
+
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
@@ -216,15 +215,15 @@ async def rip(event):
         message=f"Hello, A [New User](tg://user?id={him_id}). Wants To Ask You Something.",
         buttons=[Button.url("Contact Him", f"tg://user?id={him_id}")],
     )
-@tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-    data=re.compile(b"us_plugin_(.*)")
-))
 
+
+@tgbot.on(
+    events.callbackquery.CallbackQuery(  # pylint:disable=E0602
+        data=re.compile(b"us_plugin_(.*)")
+    )
+)
 async def on_plug_in_callback_query_handler(event):
-                                      
-                                                        
-                                                       
-          
+
     plugin_name = event.data_match.group(1).decode("UTF-8")
     help_string = ""
     try:
@@ -234,45 +233,59 @@ async def on_plug_in_callback_query_handler(event):
     except:
         pass
     if help_string is "":
-     
-        reply_pop_up_alert = " CMD_LIST not set yet 😅😅 try\n .help {}".format(plugin_name)
+
+        reply_pop_up_alert = " CMD_LIST not set yet 😅😅 try\n .help {}".format(
+            plugin_name
+        )
     else:
         reply_pop_up_alert = help_string
     reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-        ©FRIDAY Userbot".format(plugin_name)
+        ©FRIDAY Userbot".format(
+        plugin_name
+    )
     try:
-        #fci = [[Button.inline('Go back', 'back')]] 
-        if event.query.user_id == bot.uid :
-            fci = [custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="back"),custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close")]
+        # fci = [[Button.inline('Go back', 'back')]]
+        if event.query.user_id == bot.uid:
+            fci = [
+                custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="back"),
+                custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
+            ]
             await event.edit(reply_pop_up_alert, buttons=fci)
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine for more info visit @FRIDAY SUPPORT!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-    except: 
+    except:
         halps = "Do .help {} to get the list of commands.".format(plugin_name)
         await event.edit(halps)
-        
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"back")))
 
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"back")))
 async def backr(event):
-        if event.query.user_id == bot.uid :
-            current_page_number=0
-            buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-            await event.edit("`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons)
-        else:
-            reply_pop_up_alert = "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+    if event.query.user_id == bot.uid:
+        current_page_number = 0
+        buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
+        await event.edit("`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons)
+    else:
+        reply_pop_up_alert = (
+            "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
+        )
+        await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
-
 async def opner(event):
-        if event.query.user_id == bot.uid :
-            current_page_number=0
-            buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
-            await event.edit("`>>>\n\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons)
-        else:
-            reply_pop_up_alert = "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+    if event.query.user_id == bot.uid:
+        current_page_number = 0
+        buttons = paginate_help(current_page_number, CMD_LIST, "helpme")
+        await event.edit(
+            "`>>>\n\nReopened The Main Menu of \n©FRIDAY` ", buttons=buttons
+        )
+    else:
+        reply_pop_up_alert = (
+            "Please get your own Userbot,for more info visit @FRIDAY_SUPPORT!"
+        )
+        await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+
 
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = Config.NO_OF_ROWS_DISPLAYED_IN_H_ME_CMD
