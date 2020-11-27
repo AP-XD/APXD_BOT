@@ -250,17 +250,13 @@ def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = Config.NO_OF_ROWS_DISPLAYED_IN_H_ME_CMD
     number_of_cols = Config.NO_OF_COLUMNS_DISPLAYED_IN_H_ME_CMD
     helpable_modules = []
-    k = "📌🔥💎"
-    u = 0
     for p in loaded_modules:
-        u += 1
         if not p.startswith("_"):
             helpable_modules.append(p)
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format(str(k[u % 3]), x, str(k[u % 3])),
-            data="us_plugin_{}".format(x),
+            "{} {} {}".format("📌", x, "🔥"), data="us_plugin_{}".format(x)
         )
         for x in helpable_modules
     ]
