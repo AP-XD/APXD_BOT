@@ -196,8 +196,8 @@ async def on_plug_in_callback_query_handler(event):
         return
     plugin_name = event.data_match.group(1).decode("UTF-8")
     help_string = "Commands found in {}:\n".format(plugin_name)
-    k="📌🔥💎"
-    u=0
+    k = "📌🔥💎"
+    u = 0
     for i in CMD_LIST[plugin_name]:
         u += 1
         help_string += str(k[u % 3]) + " " + i + "\n\n"
@@ -250,8 +250,8 @@ def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = Config.NO_OF_ROWS_DISPLAYED_IN_H_ME_CMD
     number_of_cols = Config.NO_OF_COLUMNS_DISPLAYED_IN_H_ME_CMD
     helpable_modules = []
-    k="📌🔥💎"
-    u=0
+    k = "📌🔥💎"
+    u = 0
     for p in loaded_modules:
         u += 1
         if not p.startswith("_"):
@@ -259,7 +259,8 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format(str(k[u%3]), x, str(k[u%3])), data="us_plugin_{}".format(x)
+            "{} {} {}".format(str(k[u % 3]), x, str(k[u % 3])),
+            data="us_plugin_{}".format(x),
         )
         for x in helpable_modules
     ]
