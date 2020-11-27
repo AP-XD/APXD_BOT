@@ -132,8 +132,11 @@ if ENV:
         # For Databases
         # can be None in which case modules requiring
         # number of rows of buttons to be displayed in .helpme command
-        NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(
-            os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 5)
+        NO_OF_ROWS_DISPLAYED_IN_H_ME_CMD = int(
+            os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 10)
+        )
+        NO_OF_COLUMNS_DISPLAYED_IN_H_ME_CMD = int(
+            os.environ.get("NO_OF_COLUMNS_DISPLAYED_IN_H_ME_CMD", 3)
         )
         # specify command handler that should be used for the modules
         # this should be a valid "regex" pattern
