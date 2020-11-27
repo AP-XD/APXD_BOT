@@ -126,7 +126,7 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    text1 = "You Have Chosed A Probhited Option. Therefore, You Have Been Blocked By UserBot. 🇮🇳"
+    text1 = "BC You Chose A Probhited Option. Therefore,Nigga You Have Been Blocked By UserBot. 🇮🇳"
     await event.edit("Choice Not Accepted ❌")
     await borg.send_message(event.query.user_id, text1)
     await borg(functions.contacts.BlockRequest(event.query.user_id))
@@ -197,6 +197,8 @@ async def on_plug_in_callback_query_handler(event):
     plugin_name = event.data_match.group(1).decode("UTF-8")
     if plugin_name in CMD_HELP:
         help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+    if help_string is "":
+            help_string = " CMD_LIST not set yet 😅😅 try\n .help {}".format(plugin_name)
     reply_pop_up_alert = help_string
     reply_pop_up_alert += "\n\n**(C) @FRIDAYOT** ".format(plugin_name)
     fci = [
