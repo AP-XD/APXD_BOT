@@ -19,7 +19,6 @@ else:
 LOG_CHAT = Config.PRIVATE_GROUP_ID
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Friday"
 
-
 @tgbot.on(events.InlineQuery)
 async def inline_handler(event):
     builder = event.builder
@@ -63,15 +62,14 @@ async def inline_handler(event):
         )
         await event.answer([result])
 
-
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == bot.uid:
-        await event.edit("Help Menu Closed.")
+        fci = custom.Button.inline("Open Main Menu Again", data="open")
+        await event.edit("`Help Menu Closed...!`", buttons=fci)
     else:
         reply_pop_up_alert = "Please get your own fridaybot ,and don't use mine."
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
 
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
