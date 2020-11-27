@@ -107,6 +107,7 @@ async def on_plug_in_callback_query_handler(event):
         reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -198,7 +199,10 @@ async def on_plug_in_callback_query_handler(event):
         help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
     reply_pop_up_alert = help_string
     reply_pop_up_alert += "\n\n**(C) @FRIDAYOT** ".format(plugin_name)
-    fci = [custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close")]
+    fci = [
+        custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
+        custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
+    ]
     if len(reply_pop_up_alert) >= 4096:
         crackexy = "`Pasting Your Help Menu.`"
         await event.answer(crackexy, cache_time=0, alert=True)
@@ -206,17 +210,12 @@ async def on_plug_in_callback_query_handler(event):
         url = "https://del.dog/documents"
         r = requests.post(url, data=out_file.encode("UTF-8")).json()
         url = f"https://del.dog/{r['key']}"
-        
+
         await event.edit(
-            f"Pasted {plugin_name} to {url}",
-            link_preview=False,
-            buttons=fci
+            f"Pasted {plugin_name} to {url}", link_preview=False, buttons=fci
         )
     else:
-        await event.edit(
-            message=reply_pop_up_alert,
-            buttons=fci
-        )
+        await event.edit(message=reply_pop_up_alert, buttons=fci)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
