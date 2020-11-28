@@ -1,13 +1,6 @@
-<p align="center"><a href="https://t.me/fridayot"><img src="https://telegra.ph/file/22535f8051a58af113586.jpg" width="5000"></a></p> 
+<p align="center"><a href="https://t.me/fridayot"><img src="https://telegra.ph/file/1c4df5d90d6e68e417348.png" width="5000"></a></p> 
 <h1 align="center"><b>FRIDAY-USERBOT 🇮🇳 </b></h1>
 <h4 align="center">A Powerful, Smart And Simple Userbot In Telethon.</h4>
-
-<p align="center">
-<img src="https://telegra.ph/file/1c4df5d90d6e68e417348.png" alt="FRIDAY USERBOT">
-
-
-
-
 
 
 

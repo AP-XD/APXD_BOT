@@ -1,31 +1,41 @@
+# For TeleBot, by @its_xditya, @MrConfused and @Jisan7509.
+# Kangers keep credits.
+
 import asyncio
 from datetime import datetime
 
-from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd
 
-fridaythumb = "./resources/IMG_20200929_103719_628.jpg"
+from .. import ALIVE_NAME
+
+DELETE_TIMEOUT = 5
+thumb_image_path = "./friday.png"
+
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 
 
-@friday.on(friday_on_cmd(pattern="send ?(.*)"))
-@friday.on(sudo_cmd(pattern="send ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="send (?P<shortname>\w+)", outgoing=True))
 async def send(event):
     if event.fwd_from:
         return
+    hmm = bot.uid
     message_id = event.message.id
+    thumb = thumb_image_path
     input_str = event.pattern_match.group(1)
-    start = datetime.now()
     the_plugin_file = "./fridaybot/modules/{}.py".format(input_str)
-    end = datetime.now()
-    (end - start).seconds
-    men = f"Plugin Name - {input_str}.py \nUploaded By Friday"
-    await event.client.send_file(  # pylint:disable=E0602
+    start = datetime.now()
+    pro = await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,
         the_plugin_file,
-        thumb=fridaythumb,
-        caption=men,
         force_document=True,
         allow_cache=False,
+        thumb=thumb,
         reply_to=message_id,
     )
-    await asyncio.sleep(5)
+    end = datetime.now()
+    time_taken_in_ms = (end - start).seconds
+    await pro.edit(
+        f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})"
+    )
+    await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
