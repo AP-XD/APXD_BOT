@@ -53,7 +53,7 @@ async def _(event):
 CMD_HELP.update(
     {
         "sangmata": "__**PLUGIN NAME :** sangmata__\
-    \n\n📌** CMD ★** `.sg`\
+    \n\n📌** CMD ★** `.sangu`\
     \n**USAGE   ★  **Retrieves the name and username history of the replied user even if he has forwarded message privacy..! This may not always work as perfect it should be..if doesn't then try once again.."
     }
 )

@@ -27,7 +27,6 @@ fonttools
 gTTS-token>=1.1.3
 gTTS>=2.0.1
 geopy
-git+https://github.com/Starkgangs/pydl.git
 gitpython
 glitch_this
 google-api-python-client==1.8.0
