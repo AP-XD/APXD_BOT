@@ -7,8 +7,9 @@ import asyncio
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from fridaybot.utils import admin_cmd
+
 from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=("sg ?(.*)")))
