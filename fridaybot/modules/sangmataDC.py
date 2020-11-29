@@ -4,8 +4,8 @@
 # Retrieves the name history and the username history of the replied user..
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="sangu ?(.*)"))
