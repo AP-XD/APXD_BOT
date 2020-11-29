@@ -8,7 +8,7 @@ from userbot import CMD_HELP
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="sg ?(.*)"))
+@borg.on(admin_cmd(pattern="sangu ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
