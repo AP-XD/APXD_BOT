@@ -8,6 +8,7 @@ Available Commands:
 import os
 import sys
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
@@ -34,3 +35,14 @@ async def _(event):
         return
     await event.edit("Turning off ...Manually turn me on later")
     await borg.disconnect()
+
+
+CMD_HELP.update(
+    {
+        "power_tools": "**Power Tools**\
+\n\n**Syntax : **`.restart`\
+\n**Usage :** restarts your Friday userbot.\
+\n\n**Syntax : **`.shutdown`\
+\n**Usage :** Shuts down your Friday userbot."
+    }
+)

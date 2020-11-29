@@ -9,10 +9,12 @@ from datetime import datetime
 
 from uniborg.util import friday_on_cmd
 
+from fridaybot import CMD_HELP
+
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@friday.on(friday_on_cmd(pattern="rnupload (.*)"))
+@friday.on(friday_on_cmd(pattern="rnup (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -58,3 +60,12 @@ async def _(event):
             await event.edit("File Not Found {}".format(input_str))
     else:
         await event.edit("Syntax // .rnupload file.name as reply to a Telegram media")
+
+
+CMD_HELP.update(
+    {
+        "rename": "**Rename**\
+\n\n**Syntax : **`.rnupload <reply to filet> <new name>`\
+\n**Usage :** replyed file is renamed with new name."
+    }
+)
