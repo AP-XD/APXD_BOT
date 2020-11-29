@@ -97,3 +97,4 @@ youtube-dl
 youtube-search
 youtube-search-python
 password_strength
+pyjokes

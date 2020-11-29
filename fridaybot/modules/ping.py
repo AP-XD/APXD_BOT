@@ -1,8 +1,7 @@
 import time
 from datetime import datetime
-
-from fridaybot.__init__ import StartTime
-from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot import CMD_HELP, Lastupdate
+from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 
 def get_readable_time(seconds: int) -> str:
@@ -46,3 +45,12 @@ async def _(event):
     await event.edit(
         f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ "
     )
+
+
+CMD_HELP.update(
+    {
+        "ping": "**Ping**\
+\n\n**Syntax : **`.pin`\
+\n**Usage :** Get uptime and speed of your bot."
+    }
+)
