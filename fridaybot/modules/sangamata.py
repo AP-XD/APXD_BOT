@@ -84,7 +84,7 @@ async def _(event):
             mail = k[0].text
             # print(k[0].text)
         except YouBlockedUserError:
-            await event.reply("```Please unblock @fakemailbot and try again```")
+            await event.reply("```Please unblock @uploadbot and try again```")
             return
         await event.edit(mail)
 
@@ -114,7 +114,7 @@ async def _(event):
             await borg.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await event.reply("```Please unblock @uploadbot and try again```")
+            await event.reply("```Please unblock @getidsbot and try again```")
             return
         if response.text.startswith("Hi!,"):
             await event.edit(
@@ -149,7 +149,7 @@ async def _(event):
             await borg.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await event.reply("```you blocked bot```")
+            await event.reply("```Please unblock @UrbanDictionaryBot and try again```")
             return
         if response.text.startswith("Hello,"):
             await event.edit(
