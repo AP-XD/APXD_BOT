@@ -135,19 +135,6 @@ async def rip(event):
         f"Hello, A Noob [Nibba](tg://user?id={him_id}) Selected Probhited Option, Therefore Blocked.",
     )
 
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme")))
-async def sed(event):
-    if not event.query.user_id == bot.uid:
-        sedok = "Who The Fuck Are You? Get Your Own Friday."
-        await event.answer(sedok, cache_time=0, alert=True)
-        return
-    buttons = paginate_help(0, CMD_HELP, "helpme")
-    sed = f"""Friday Userbot Modules Are Listed Here !\n
-For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}"""
-    await event.edit(message=sed, buttons=buttons)
-
-
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"whattalk")))
 async def rip(event):
     if event.query.user_id == bot.uid:
@@ -196,7 +183,7 @@ async def on_plug_in_callback_query_handler(event):
         return
     plugin_name = event.data_match.group(1).decode("UTF-8")
     help_string = "Commands found in {}:\n".format(plugin_name)
-    k = "📌🔥💎"
+    k = "💠🔮💎"
     u = 0
     for i in CMD_LIST[plugin_name]:
         u += 1
@@ -214,10 +201,16 @@ async def on_plug_in_callback_query_handler(event):
             plugin_name
         )
     )
-    fci = [
-        custom.Button.inline("◤✞ 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 ✞◥", data="backme"),
-        custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
-    ]
+    try:
+        if event.query.user_id == bot.uid :
+            fci = [custom.Button.inline("◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥",data="back({})".format(shivam)),custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close")]
+            await event.edit(reply_pop_up_alert, buttons=fci)
+        else:
+            reply_pop_up_alert = "Please get your own Userbot, and don't use mine for more info visit @DARK_COBRA_SUPPORT!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+    except: 
+        halps = "Do .help {} to get the list of commands.".format(plugin_name)
+        await event.edit(halps)
     if len(reply_pop_up_alert) >= 4096:
         crackexy = "`Pasting Your Help Menu.`"
         await event.answer(crackexy, cache_time=0, alert=True)
@@ -231,6 +224,22 @@ async def on_plug_in_callback_query_handler(event):
         )
     else:
         await event.edit(message=reply_pop_up_alert, buttons=fci)
+        
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme\((.+?)\)")))
+   
+async def on_plug_in_callback_query_handler(event):
+        
+        if event.query.user_id == bot.uid :
+            try:
+                current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+                buttons = paginate_help(current_page_number, CMD_HELP, "helpme")
+                await event.edit("`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons)
+            except:
+                buttons = paginate_help(0, CMD_HELP, "helpme")
+                await event.edit("`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons)
+        else:
+            reply_pop_up_alert = "Please get your own Userbot,for more info visit @FRIDAYOT !"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"open")))
@@ -270,7 +279,9 @@ def paginate_help(page_number, loaded_modules, prefix):
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
     max_num_pages = ceil(len(pairs) / number_of_rows)
+    global shivam
     modulo_page = page_number % max_num_pages
+    shivam=modulo_page
     if len(pairs) > number_of_rows:
         pairs = pairs[
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)

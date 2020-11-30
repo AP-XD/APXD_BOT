@@ -38,32 +38,6 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 14])
 
-
-@borg.on(admin_cmd(pattern="ding$"))
-async def _(event):
-    animation_interval = 0.3
-    animation_ttl = range(0, 30)
-    animation_chars = [
-        "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-        "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
-        "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
-        "⬜⬜⬛⬜⬜\n⬜⬜⬜⬛⬜\n⬜⬜⬜⬜🔴",
-        "⬜⬜⬛⬛🔴\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-        "⬜⬜⬛⬜⬜\n⬜⬜⬜⬛⬜\n⬜⬜⬜⬜🔴",
-        "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
-        "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
-        "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-        "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜\n⬜  [Hêllẞø† ¡§ Ø¶](https://github.com/HellBoy-OP/HellBot) ⬜\n⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜",
-    ]
-    if event.fwd_from:
-        return
-    await event.edit("ding..dong..ding..dong ...")
-    await asyncio.sleep(4)
-    for i in animation_ttl:
-        await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 10])
-
-
 @borg.on(admin_cmd(pattern=f"charging$"))
 async def timer_blankx(e):
     txt = (
