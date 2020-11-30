@@ -3,11 +3,11 @@
 
 import asyncio
 from datetime import datetime
+
+from fridaybot import CMD_HELP
 from fridaybot.utils import admin_cmd
 
 from .. import ALIVE_NAME
-from fridaybot import CMD_HELP
-from fridaybot.utils import friday_on_cmd, sudo_cmd
 
 DELETE_TIMEOUT = 5
 thumb_image_path = "./friday.png"
