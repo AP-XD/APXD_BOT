@@ -38,6 +38,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 14])
 
+
 @borg.on(admin_cmd(pattern=f"charging$"))
 async def timer_blankx(e):
     txt = (
