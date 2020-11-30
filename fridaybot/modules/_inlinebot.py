@@ -205,7 +205,7 @@ async def on_plug_in_callback_query_handler(event):
     try:
         if event.query.user_id == bot.uid:
             fci = [
-                custom.Button.inline("◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥", data="back({})".format(shivam)),
+                custom.Button.inline("◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥", data="backme({})".format(shivam)),
                 custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
             ]
             await event.edit(reply_pop_up_alert, buttons=fci)
