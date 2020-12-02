@@ -9,13 +9,8 @@ import time as t
 import zipfile
 from datetime import datetime
 
-from fridaybot.utils import admin_cmd
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from telethon.tl.types import DocumentAttributeVideo
-
 from fridaybot import CMD_HELP
-from fridaybot.utils import friday_on_cmd
+from fridaybot.utils import admin_cmd
 
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
