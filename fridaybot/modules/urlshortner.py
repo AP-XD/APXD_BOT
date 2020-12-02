@@ -1,5 +1,6 @@
 import pyshorteners
 
+from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd, sudo_cmd
 
 
@@ -17,3 +18,12 @@ async def vom(event):
         await event.edit(bestisbest, parse_mode="HTML")
     except Exception as e:
         await event.edit("SomeThing Went Wrong. \nError : " + e)
+
+
+CMD_HELP.update(
+    {
+        "urlshortner": "**URL shortner**\
+\n\n**Syntax : **`.urlshort <url link>`\
+\n**Usage :** Shortens the given URL."
+    }
+)

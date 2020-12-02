@@ -211,7 +211,3 @@ else:
         sedlyf = wget.download(link, out=pathz)
     except:
         print("I Wasn't Able To Download Cafee Model. Skipping")
-
-telegraph = Telegraph()
-r = telegraph.create_account(short_name="Friday UserBot Inc.")
-auth_url = r["auth_url"]
