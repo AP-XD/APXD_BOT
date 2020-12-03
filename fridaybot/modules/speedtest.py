@@ -29,7 +29,7 @@ async def _(event):
     s.download()
     s.upload()
     end = datetime.now()
-    ms = (end - start).microseconds / 1000
+    ms = (end - start).seconds
     response = s.results.dict()
     download_speed = response.get("download")
     upload_speed = response.get("upload")
