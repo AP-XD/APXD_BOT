@@ -239,13 +239,15 @@ async def on_plug_in_callback_query_handler(event):
             buttons = paginate_help(current_page_number, CMD_HELP, "helpme")
             await event.edit(
                 f"""Friday Userbot Modules Are Listed Here !\n
-For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""", buttons=buttons
+For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""",
+                buttons=buttons,
             )
         except:
             buttons = paginate_help(0, CMD_HELP, "helpme")
             await event.edit(
                 f"""Friday Userbot Modules Are Listed Here !\n
-For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""", buttons=buttons
+For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""",
+                buttons=buttons,
             )
     else:
         reply_pop_up_alert = (
