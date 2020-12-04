@@ -40,7 +40,7 @@ async def inline_handler(event):
             title="Stats",
             text=f"**Showing Stats For {DEFAULTUSER}'s Friday** \nNote --> Only Owner Can Check This \n(C) @FridayOT",
             buttons=[
-                [custom.Button.inline("Show Stats ", data="terminator")],
+                [custom.Button.inline("Show Stats ?", data="terminator")],
                 [Button.url("Repo 🇮🇳", "https://github.com/StarkGang/FridayUserbot")],
                 [Button.url("Join Channel ❤️", "t.me/Fridayot")],
             ],
@@ -238,12 +238,14 @@ async def on_plug_in_callback_query_handler(event):
             current_page_number = int(event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(current_page_number, CMD_HELP, "helpme")
             await event.edit(
-                "`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons
+                f"""Friday Userbot Modules Are Listed Here !\n
+For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""", buttons=buttons
             )
         except:
             buttons = paginate_help(0, CMD_HELP, "helpme")
             await event.edit(
-                "`>>>\n\nHere Is The Main Menu Of\n©FRIDAY`", buttons=buttons
+                f"""Friday Userbot Modules Are Listed Here !\n
+For More Help or Support Visit @FridayOT \nCurrently Loaded Plugins: {len(CMD_LIST)}""", buttons=buttons
             )
     else:
         reply_pop_up_alert = (
