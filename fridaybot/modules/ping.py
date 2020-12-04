@@ -1,8 +1,8 @@
 import time
 from datetime import datetime
 
-from fridaybot import CMD_HELP
-from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot import CMD_HELP, Lastupdate
+from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 
 def get_readable_time(seconds: int) -> str:
@@ -36,14 +36,14 @@ def get_readable_time(seconds: int) -> str:
 @friday.on(friday_on_cmd(pattern="ping$"))
 @friday.on(sudo_cmd(pattern="ping$", allow_sudo=True))
 async def _(event):
+    AP = await edit_or_reply(event, "🏓 Pong!")
     if event.fwd_from:
         return
     start = datetime.now()
-    await event.edit("🏓 Pong!")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    uptime = get_readable_time((time.time() - StartTime))
-    await event.edit(
+    uptime = get_readable_time((time.time() - Lastupdate))
+    await AP.edit(
         f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ "
     )
 
