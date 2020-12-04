@@ -1,7 +1,7 @@
-#Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+# Made By Sh1vam  Donot KANG
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
@@ -10,20 +10,21 @@
 # Kepp Credits
 
 import os
-import numpy as np
-import requests, re
-from PIL import Image
+
+import requests
 from telegraph import upload_file
 from telethon.tl.types import MessageMediaPhoto
-from fridaybot import bot, CMD_HELP
+
+from fridaybot import CMD_HELP, bot
 from fridaybot.utils import admin_cmd, sudo_cmd
+
 pathdc = "./shivam/"
 if not os.path.isdir(pathdc):
     os.makedirs(pathdc)
-    #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
@@ -33,7 +34,7 @@ if not os.path.isdir(pathdc):
 @bot.on(admin_cmd(pattern=r"rmbw"))
 @bot.on(sudo_cmd(pattern=r"rmbw", allow_sudo=True))
 async def dc(event):
-    await event.edit("Filling This img with Colors 😊")    
+    await event.edit("Filling This img with Colors 😊")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -50,15 +51,17 @@ async def dc(event):
     hehe = "shivam.png"
     await borg.send_file(
         event.chat_id, hehe, caption="Wow Its a Ranbow🌈 😂", reply_to=dc
-     )
+    )
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-    #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
@@ -68,7 +71,7 @@ async def dc(event):
 @bot.on(admin_cmd(pattern=r"bow"))
 @bot.on(sudo_cmd(pattern=r"bow", allow_sudo=True))
 async def dc(event):
-    await event.edit("Adding Filter 😎")    
+    await event.edit("Adding Filter 😎")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -83,29 +86,30 @@ async def dc(event):
     r = requests.get(hehe)
     open("shivam.png", "wb").write(r.content)
     hehe = "shivam.png"
-    await borg.send_file(
-        event.chat_id, hehe, reply_to=dc
-     )
+    await borg.send_file(event.chat_id, hehe, reply_to=dc)
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-    
-            #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
 # Kangers Keep Credits
 
 # Kepp Credits
-            
+
+
 @bot.on(admin_cmd(pattern=r"sepia"))
 @bot.on(sudo_cmd(pattern="sepia", allow_sudo=True))
 async def dc(event):
-    await event.edit("Adding Filter 😎")    
+    await event.edit("Adding Filter 😎")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -120,28 +124,29 @@ async def dc(event):
     r = requests.get(hehe)
     open("shivam.png", "wb").write(r.content)
     hehe = "shivam.png"
-    await borg.send_file(
-        event.chat_id, hehe, reply_to=dc
-     )
+    await borg.send_file(event.chat_id, hehe, reply_to=dc)
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-            #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
 # Kangers Keep Credits
 
 # Kepp Credits
-           
+
+
 @bot.on(admin_cmd(pattern=r"red"))
 @bot.on(sudo_cmd(pattern=r"red", allow_sudo=True))
 async def dc(event):
-    await event.edit("Adding Filter 😎")    
+    await event.edit("Adding Filter 😎")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -156,28 +161,29 @@ async def dc(event):
     r = requests.get(hehe)
     open("shivam.png", "wb").write(r.content)
     hehe = "shivam.png"
-    await borg.send_file(
-        event.chat_id, hehe, reply_to=dc
-     )
+    await borg.send_file(event.chat_id, hehe, reply_to=dc)
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-            #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
 # Kangers Keep Credits
 
 # Kepp Credits
-            
+
+
 @bot.on(admin_cmd(pattern=r"green"))
 @bot.on(sudo_cmd(pattern=r"green", allow_sudo=True))
 async def dc(event):
-    await event.edit("Adding Filter 😎")    
+    await event.edit("Adding Filter 😎")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -192,17 +198,17 @@ async def dc(event):
     r = requests.get(hehe)
     open("shivam.png", "wb").write(r.content)
     hehe = "shivam.png"
-    await borg.send_file(
-        event.chat_id, hehe, reply_to=dc
-     )
+    await borg.send_file(event.chat_id, hehe, reply_to=dc)
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-            #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
@@ -212,7 +218,7 @@ async def dc(event):
 @bot.on(admin_cmd(pattern=r"blue"))
 @bot.on(sudo_cmd(pattern=r"blue", allow_sudo=True))
 async def dc(event):
-    await event.edit("Adding Filter 😎")    
+    await event.edit("Adding Filter 😎")
     dc = await event.get_reply_message()
     if isinstance(dc.media, MessageMediaPhoto):
         img = await borg.download_media(dc.media, pathdc)
@@ -227,27 +233,23 @@ async def dc(event):
     r = requests.get(hehe)
     open("shivam.png", "wb").write(r.content)
     hehe = "shivam.png"
-    await borg.send_file(
-        event.chat_id, hehe, reply_to=dc
-     )
+    await borg.send_file(event.chat_id, hehe, reply_to=dc)
     for files in (hehe, img):
         if files and os.path.exists(files):
             os.remove(files)
     await event.delete()
-    #Made By Sh1vam  Donot KANG
-# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT 
-#I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
-# DARKCOBRA ORIGINAL 
+    # Made By Sh1vam  Donot KANG
+
+
+# ME MADE MORE THAN ONE AND MORE COMPLEX ONE WAS YT COMMENT
+# I REMOVED COLOUR CAUSE ALL NEED TO REMEMBER HEX COLOUR CODES # replaced by %23
+# DARKCOBRA ORIGINAL
 # by @shivam_patel , fix nd edited by @danish_00
 # by #team dc
 
 # Kangers Keep Credits
 
 # Kepp Credits
-
-
-
-
 
 
 CMD_HELP.update(
@@ -262,11 +264,10 @@ CMD_HELP.update(
     \n\n📌** CMD ★** `.red / .blue /.green`\
     \ncheck them on ur own 😁😁\
     \n(Note:- it work only on images, u can use .stoi to convert a sticker info image then u can use😁😁) "
-      
     }
 )
 
 
-#gtfo
+# gtfo
 
-#nikal mc
+# nikal mc
