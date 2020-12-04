@@ -126,7 +126,7 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    text1 = "BC You have Chosen A Probhited Option. Therefore, Nigga You Have Been Blocked By UserBot. 🇮🇳"
+    text1 = "BC You have Chosen A Prohibited Option. Therefore, Nigga You Have Been Blocked By UserBot. 🇮🇳"
     await event.edit("Choice Not Accepted ❌")
     await borg.send_message(event.query.user_id, text1)
     await borg(functions.contacts.BlockRequest(event.query.user_id))

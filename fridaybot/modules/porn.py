@@ -12,7 +12,7 @@ import asyncio
 from fridaybot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="porn"))
+@borg.on(admin_cmd(pattern="prn"))
 async def _(event):  # @danish_00 original
 
     if event.fwd_from:
