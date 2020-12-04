@@ -14,11 +14,9 @@ import time
 from collections import deque
 
 """ Plugin By @chsaiujwal on telegram """
-from asyncio import wait
 
 import requests
 from cowpy import cow
-from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from uniborg.util import friday_on_cmd
@@ -1436,7 +1434,6 @@ async def hi(event):
     await event.edit(
         "┏┓┈╭━━╮╭━━╮╭━━╮\n┃┃┈┃┃┃┃┃╭╮┃┃╭╮┃\n┃┗┓┃┃┃┃┃┏┓┃┃╰╯┃\n┗━┛┗┻┻┛┗┛┗┛╰━━╯"
     )
-
 
 
 @friday.on(friday_on_cmd(pattern=r"no"))
