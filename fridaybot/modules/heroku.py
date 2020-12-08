@@ -217,6 +217,17 @@ async def _(givelogs):
         log.write(app.get_log())
     hmm = app.get_log()
     message = hmm
+    
+    data = hmm
+    key = (
+        requests.post("https://nekobin.com/api/documents", json={"content": data})
+        .json()
+        .get("result")
+        .get("key")
+    )
+    url2 = f"https://nekobin.com/{key}"
+    raw2 = f"https://nekobin.com/raw/{key}"
+    
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
@@ -225,7 +236,7 @@ async def _(givelogs):
     title_of_page = "Friday UserBot Logs"
     response = telegraph.create_page(title_of_page, html_content=starky)
     km = response["path"]
-    suger = f"`**Heroku** Logs Can Be Found`\nPasted [DOGBIN]({url})   [TELEGRAPH](https://telegra.ph/{km})"
+    suger = f"**Heroku** Logs Can Be Found Here.\nPasted [DOGBIN]({url})   [TELEGRAPH](https://telegra.ph/{km})\n [neko]({url2}) Raw: [View Raw]({raw2})"
     await givelogs.client.send_file(
         givelogs.chat_id,
         "logs.txt",
