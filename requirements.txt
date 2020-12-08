@@ -90,6 +90,7 @@ spotify_token
 sqlalchemy>=1.2
 telegraph
 telethon>=1.17
+textblob
 the-python-bay
 tswift
 urbandict>=0.5
