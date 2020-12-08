@@ -1,6 +1,5 @@
-# For @borgHelp
-"""Check if your fridaybot is working."""
-import os
+# For @TeleBotHelp
+"""Check if your userbot is working."""
 import time
 from datetime import datetime
 from io import BytesIO
@@ -8,17 +7,23 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-from fridaybot import ALIVE_NAME, telever
+from fridaybot import ALIVE_NAME, CMD_HELP, telever
 from fridaybot.__init__ import StartTime
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, sudo_cmd
-
-ALV_PIC = os.environ.get("ALIVE_PIC", None)
-
+# ======CONSTANTS=========#
+CUSTOM_ALIVE = (
+    Config.CUSTOM_ALIVE
+    if Config.CUSTOM_ALIVE
+    else "Hey! I'm alive. All systems online and functioning normally!"
+)
+ALV_PIC = Config.ALIVE_PIC if Config.ALIVE_PIC else None
+telemoji = Config.CUSTOM_ALIVE_EMOJI if Config.CUSTOM_ALIVE_EMOJI else "**✵**"
 if Config.SUDO_USERS:
     sudo = "Enabled"
 else:
     sudo = "Disabled"
+# ======CONSTANTS=========#
 
 
 def get_readable_time(seconds: int) -> str:
@@ -52,8 +57,8 @@ def get_readable_time(seconds: int) -> str:
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="altive"))
-@borg.on(sudo_cmd(outgoing=True, pattern="altive", allow_sudo=True))
+@borg.on(admin_cmd(outgoing=True, pattern="alive"))
+@borg.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
 async def amireallyalive(alive):
     start = datetime.now()
     myid = bot.uid
@@ -63,23 +68,26 @@ async def amireallyalive(alive):
     uptime = get_readable_time((time.time() - StartTime))
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
-        tele += "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-        tele += "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
-        tele += f"` 🔸 TeleBot Version:` **{telever}**\n"
-        tele += "` 🔹 More Info:` **@TeleBotSupport**\n"
-        tele += f"` 🔸 Sudo :` **{sudo}**\n"
-        tele += f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
-        tele += "` 🔸 Database Status:` **All OK 👌!**\n"
-        tele += f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
+        tele += f"`{CUSTOM_ALIVE}`\n\n"
+        tele += (
+            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+        )
+        tele += f"{telemoji} **TeleBot Version**: `{telever}`\n"
+        tele += f"{telemoji} **More Info**: @TeleBotSupport\n"
+        tele += f"{telemoji} **Sudo** : `{sudo}`\n"
+        tele += f"{telemoji} **TeleBot Uptime**: `{uptime}`\n"
+        tele += f"{telemoji} **Database Status**: `All OK 👌!`\n"
+        tele += (
+            f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+        )
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
-
         await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
         await borg.send_file(alive.chat_id, ALV_PIC, caption=tele, link_preview=False)
         await alive.delete()
         return
-    req = requests.get("https://telegra.ph/file/1c4df5d90d6e68e417348.png")
+    req = requests.get("https://telegra.ph/file/0670190de8e3bddea6d95.png")
     req.raise_for_status()
     file = BytesIO(req.content)
     file.seek(0)
@@ -91,16 +99,19 @@ async def amireallyalive(alive):
         await borg.send_message(
             alive.chat_id,
             f"**Welcome To TeleBot **\n\n"
-            "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-            "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
-            f"` 🔸 TeleBot Version:` **{telever}**\n"
-            "` 🔹 More Info:` **@TeleBotSupport**\n"
-            f"` 🔸 Sudo :` **{sudo}**\n"
-            f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
-            "` 🔸 Database Status:` **All OK 👌!**\n"
-            f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
+            f"`{CUSTOM_ALIVE}`\n\n"
+            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+            f"{telemoji} **TeleBot Version**: `{telever}`\n"
+            f"{telemoji} **More Info**: @TeleBotSupport\n"
+            f"{telemoji} **Sudo** : `{sudo}`\n"
+            f"{telemoji} **TeleBot Uptime**: `{uptime}`\n"
+            f"{telemoji} **Database Status**: `All OK 👌!`\n"
+            f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
             "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)",
             link_preview=False,
         )
         await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()
+
+
+CMD_HELP.update({"altive": "➟ `.alive`\nUse - Check if your bot is working."})

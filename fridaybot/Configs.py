@@ -16,6 +16,9 @@ if ENV:
         # For Databases
         DB_URI = os.environ.get("DATABASE_URL", None)
         # For customizing there alive message
+        CUSTOM_ALIVE = os.environ.get("CUSTOM_ALIVE", None)
+        CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
+        CUSTOM_STICKER_PACK_NAME = os.environ.get("CUSTOM_STICKER_PACK_NAME", None)
         CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT", None)
         CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
         LOGGER = True

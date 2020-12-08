@@ -26,7 +26,7 @@ StartTime = time.time()
 UpTime = time.time()
 catversion = "2.9.4"
 Lastupdate = time.time()
-telever = "4.7"
+telever = "5.0"
 os.system("pip install --upgrade pip")
 sedprint = logging.getLogger("WARNING")
 from var import Var
