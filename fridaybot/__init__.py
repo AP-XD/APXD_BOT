@@ -30,6 +30,7 @@ telever = "4.7"
 os.system("pip install --upgrade pip")
 sedprint = logging.getLogger("WARNING")
 from var import Var
+
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
     if session_name.endswith("="):
