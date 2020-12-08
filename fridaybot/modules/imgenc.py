@@ -11,7 +11,7 @@ from fridaybot import ALIVE_NAME, CMD_HELP
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd
 
-DARKCOBRA = Config.DEEP_AI if Config.DEEP_AI else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
+DARKCOBRA = Config.DEEPAI_KEY if Config.DEEPAI_KEY else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
 
 
 KANG_KAREGA_MC = str(ALIVE_NAME) if ALIVE_NAME else "THIS NOOB"
@@ -81,7 +81,7 @@ async def _(event):
 CMD_HELP.update(
     {
         "imgenc": ".enc <reply to any anime media> "
-        "\nIt enhancerize any anime pic (Note :-if its not working then go to deepai.org then get api and set var DEEP_AI nd key.)"
+        "\nIt enhancerize any anime pic (Note :-if its not working then go to deepai.org then get api and set var DEEPAI_KEY .)"
     }
 )
 
