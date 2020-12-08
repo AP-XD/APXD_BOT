@@ -1632,7 +1632,7 @@ async def bluedevilhmf(hmf):
     await hmf.edit(E)
 
 
-from userbot import CMD_HELP
+from fridaybot import CMD_HELP
 
 
 @borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
