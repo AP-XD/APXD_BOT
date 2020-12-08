@@ -217,7 +217,7 @@ async def _(givelogs):
         log.write(app.get_log())
     hmm = app.get_log()
     message = hmm
-    
+
     data = hmm
     key = (
         requests.post("https://nekobin.com/api/documents", json={"content": data})
@@ -227,7 +227,7 @@ async def _(givelogs):
     )
     url2 = f"https://nekobin.com/{key}"
     raw2 = f"https://nekobin.com/raw/{key}"
-    
+
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
