@@ -21,7 +21,7 @@ from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
 
 from fridaybot import CMD_HELP
-from fridaybot.uniborgConfig import Config
+from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, progress
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"

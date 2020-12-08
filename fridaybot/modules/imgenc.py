@@ -6,7 +6,7 @@
 import os
 
 import requests
-
+from fridaybot.Configs import Config
 from fridaybot import ALIVE_NAME, CMD_HELP
 from fridaybot.utils import admin_cmd
 
