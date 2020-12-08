@@ -4,7 +4,7 @@ import random
 import re
 
 from fridaybot import CMD_HELP, bot
-from fridaybot.utils import admin_cmd,sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
