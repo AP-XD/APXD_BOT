@@ -220,7 +220,7 @@ async def _(givelogs):
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
-    
+
     starky = f"<code> {hmm} </code>"
     title_of_page = "Friday UserBot Logs"
     response = telegraph.create_page(title_of_page, html_content=starky)
@@ -232,6 +232,7 @@ async def _(givelogs):
         reply_to=givelogs.id,
         caption=suger,
     )
+
 
 CMD_HELP.update(
     {
