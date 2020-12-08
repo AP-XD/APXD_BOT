@@ -196,11 +196,11 @@ async def progress_status(gid, event, previous):
             logger.info(str(e))
             await event.edit("Error :\n`{}`".format(str(e)))
             return
-            
+
+
 from the_python_bay import tpb
 
 from fridaybot import CMD_HELP
-
 
 
 @friday.on(admin_cmd(pattern="torrent (.*)"))
