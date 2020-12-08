@@ -11,7 +11,9 @@ from fridaybot import ALIVE_NAME, CMD_HELP
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd
 
-DARKCOBRA = Config.DEEPAI_KEY if Config.DEEPAI_KEY else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
+DARKCOBRA = (
+    Config.DEEPAI_KEY if Config.DEEPAI_KEY else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
+)
 
 
 KANG_KAREGA_MC = str(ALIVE_NAME) if ALIVE_NAME else "THIS NOOB"
