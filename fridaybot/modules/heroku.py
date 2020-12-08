@@ -216,18 +216,22 @@ async def _(givelogs):
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
     hmm = app.get_log()
+    message = hmm
+    url = "https://del.dog/documents"
+    r = requests.post(url, data=message.encode("UTF-8")).json()
+    url = f"https://del.dog/{r['key']}"
+    
     starky = f"<code> {hmm} </code>"
     title_of_page = "Friday UserBot Logs"
     response = telegraph.create_page(title_of_page, html_content=starky)
     km = response["path"]
-    suger = f"`Logs Can Be Found` [Here](https://telegra.ph/{km})"
+    suger = f"`**Heroku** Logs Can Be Found`\nPasted [DOGBIN]({url})   [TELEGRAPH](https://telegra.ph/{km})"
     await givelogs.client.send_file(
         givelogs.chat_id,
         "logs.txt",
         reply_to=givelogs.id,
         caption=suger,
     )
-
 
 CMD_HELP.update(
     {
