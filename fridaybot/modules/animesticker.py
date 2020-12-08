@@ -4,7 +4,7 @@ import random
 import re
 
 from fridaybot import CMD_HELP, bot
-from fridaybot.utils import admin_cmd
+from fridaybot.utils import admin_cmd,sudo_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -28,8 +28,8 @@ def deEmojify(inputString: str) -> str:
     return re.sub(EMOJI_PATTERN, "", inputString)
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern="waifu(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="waifu(?: |$)(.*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern="waifut(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="waifut(?: |$)(.*)"))
 async def waifu(animu):
     # """Creates random anime sticker!"""
 

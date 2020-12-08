@@ -5,7 +5,7 @@ from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
 from shutil import which
-
+from fridaybot.utils import admin_cmd
 from fridaybot import ALIVE_NAME, CMD_HELP, telever
 
 # ================= CONSTANT =================

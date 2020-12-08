@@ -20,7 +20,7 @@ import os
 
 import spamwatch
 from telethon.tl.functions.users import GetFullUserRequest
-
+from fridaybot.utils import admin_cmd,sudo_cmd
 swapi = os.environ.get("SPAMWATCH_API_KEY", None)
 
 

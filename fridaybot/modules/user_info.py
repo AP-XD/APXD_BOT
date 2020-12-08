@@ -23,7 +23,7 @@ from telethon.tl.types import (
 )
 
 from fridaybot import CMD_HELP
-from fridaybot.utils import admin_cmd
+from fridaybot.utils import admin_cmd,sudo_cmd
 
 
 def parse_arguments(message: str, valid: List[str]) -> (dict, str):

@@ -10,7 +10,7 @@ from telethon.errors.rpcerrorlist import (
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
 from fridaybot import CMD_HELP
-from fridaybot.utils import admin_cmd
+from fridaybot.utils import admin_cmd,sudo_cmd
 
 
 @borg.on(admin_cmd(pattern="sdd2 ?(.*)"))
