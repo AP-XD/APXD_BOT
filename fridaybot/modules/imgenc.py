@@ -6,8 +6,9 @@
 import os
 
 import requests
-from fridaybot.Configs import Config
+
 from fridaybot import ALIVE_NAME, CMD_HELP
+from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd
 
 DARKCOBRA = Config.DEEP_AI if Config.DEEP_AI else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
