@@ -11,43 +11,34 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import requests
-from uniborg.util import friday_on_cmd
+
+from quote import quote
 
 from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
-@friday.on(friday_on_cmd(pattern="ifsc (.*)"))
+@friday.on(admin_cmd(pattern="qs (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
+    result = quote(input_str, limit=3)
+    sed = ""
 
-    IFSC_Code = input_str
-
-    URL = "https://ifsc.razorpay.com/"
-
-    data = requests.get(URL + IFSC_Code).json()
-
-    a = data["ADDRESS"]
-    b = data["CENTRE"]
-    c = data["BRANCH"]
-    d = data["CITY"]
-    e = data["STATE"]
-    f = data["BANK"]
-    g = data["BANKCODE"]
-    h = data["IFSC"]
+    for quotes in result:
+        sed += str(quotes["quote"]) + "\n\n"
 
     await event.edit(
-        f"<b><u>INFORMATION GATHERED SUCCESSFULLY</b></u>\n\n<b>Bank Name :-</b><code>{f}</code>\n<b>Bank Address:- </b> <code>{a}</code>\n<b>Centre :-</b><code>{b}</code>\n<b>Branch :- </b><code>{c}</code>\n<b> City :-</b><code>{d}</code>\n<b>State:- </b> <code>{e}</code>\n<b>Bank Code :- </b><code>{g}</code>\n<b>Ifsc :-</b><code>{h}</code>",
+        f"<b><u>Quotes Successfully Gathered for given word </b></u><code>{input_str}</code>\n\n\n<code>{sed}</code>",
         parse_mode="HTML",
     )
 
 
 CMD_HELP.update(
     {
-        "ifsc": "**IFSC**\
-\n\n**Syntax : **`.ifsc <IFSC code>`\
-\n**Usage :** gives you details about the bank."
+        "quotes": "**Quotes**\
+\n\n**Syntax : **`.qs <text>`\
+\n**Usage :** Automatically gets quotes for given plugin."
     }
 )

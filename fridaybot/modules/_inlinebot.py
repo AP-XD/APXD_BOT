@@ -80,7 +80,7 @@ async def on_plug_in_callback_query_handler(event):
     )
 )
 async def on_plug_in_callback_query_handler(event):
-    if event.query.user_id == bot.uid:  # pylint:disable=E0602
+    if event.query.user_id == bot.uid:
         current_page_number = int(event.data_match.group(1).decode("UTF-8"))
         buttons = paginate_help(current_page_number + 1, CMD_HELP, "helpme")
         # https://t.me/TelethonChat/115200

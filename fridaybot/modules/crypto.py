@@ -11,43 +11,41 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import requests
-from uniborg.util import friday_on_cmd
+
+import cryptocompare
 
 from fridaybot import CMD_HELP
+from fridaybot.utils import admin_cmd
 
 
-@friday.on(friday_on_cmd(pattern="ifsc (.*)"))
+@friday.on(admin_cmd(pattern="crypto (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-
-    IFSC_Code = input_str
-
-    URL = "https://ifsc.razorpay.com/"
-
-    data = requests.get(URL + IFSC_Code).json()
-
-    a = data["ADDRESS"]
-    b = data["CENTRE"]
-    c = data["BRANCH"]
-    d = data["CITY"]
-    e = data["STATE"]
-    f = data["BANK"]
-    g = data["BANKCODE"]
-    h = data["IFSC"]
+    stark = input_str.split(" ", 1)
+    curreo = stark[0]
+    currency1 = stark[1]
+    curre = curreo.upper()
+    currency = currency1.upper()
+    take = ""
+    take = cryptocompare.get_price(currency, curr=curre)
+    t = take.get(currency)
+    k = curre
+    q = str(t.get(curre))
 
     await event.edit(
-        f"<b><u>INFORMATION GATHERED SUCCESSFULLY</b></u>\n\n<b>Bank Name :-</b><code>{f}</code>\n<b>Bank Address:- </b> <code>{a}</code>\n<b>Centre :-</b><code>{b}</code>\n<b>Branch :- </b><code>{c}</code>\n<b> City :-</b><code>{d}</code>\n<b>State:- </b> <code>{e}</code>\n<b>Bank Code :- </b><code>{g}</code>\n<b>Ifsc :-</b><code>{h}</code>",
+        f"<b><u>Conversion complete</b></u> \n<b>cryptocurrency</b>:-  <code>{currency}</code> \n<b>cryptocurrency value in </b> <code>{k}</code> <b> is :- </b> <code> {q}</code>",
         parse_mode="HTML",
     )
 
 
 CMD_HELP.update(
     {
-        "ifsc": "**IFSC**\
-\n\n**Syntax : **`.ifsc <IFSC code>`\
-\n**Usage :** gives you details about the bank."
+        "crypto": "**Cryptocurrency**\
+\n\n**Syntax : **`.crypto <currency to give value in> <Cryptocurrency shortname>`\
+\n**Usage :** Shows cryptocurrency value in given currency.\
+\n\n**Example : **`.crypto inr btc`\
+\nThis above syntax gives bitcoin's current value in INR."
     }
 )

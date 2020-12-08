@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import os
 import sys
 import time
@@ -7,6 +8,7 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 
 import pylast
 import wget
+from antispaminc.connect import Connect, TokenNotFound
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
@@ -17,6 +19,7 @@ from telethon.sessions import StringSession
 
 from var import Var
 
+from .Configs import Config
 from .function import fridayfunction as topfunc
 
 StartTime = time.time()
@@ -25,6 +28,8 @@ catversion = "2.9.4"
 Lastupdate = time.time()
 telever = "4.7"
 os.system("pip install --upgrade pip")
+sedprint = logging.getLogger("WARNING")
+from var import Var
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
     if session_name.endswith("="):
@@ -210,4 +215,14 @@ else:
     try:
         sedlyf = wget.download(link, out=pathz)
     except:
-        print("I Wasn't Able To Download Cafee Model. Skipping")
+        sedprint.info("I Wasn't Able To Download Cafee Model. Skipping")
+
+if Config.ANTI_SPAMINC_TOKEN == None:
+    sclient = None
+    sedprint.info("[Warning] - AntispamInc is None")
+else:
+    try:
+        sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
+    except TokenNotFound:
+        sclient = None
+        sedprint.info("[Warning] - Invalid AntispamInc Key")
