@@ -11,6 +11,7 @@ from fridaybot import ALIVE_NAME, CMD_HELP, telever
 from fridaybot.__init__ import StartTime
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, sudo_cmd
+
 # ======CONSTANTS=========#
 CUSTOM_ALIVE = (
     Config.CUSTOM_ALIVE
