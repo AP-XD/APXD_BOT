@@ -5,7 +5,7 @@
 # credits to @AvinashReddy3108
 #
 """
-This module updates the fridaybot based on upstream revision
+This module updates the userbot based on upstream revision
 """
 
 import asyncio
@@ -75,7 +75,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         if HEROKU_APP_NAME is None:
             await event.edit(
                 "**Please set up the** `HEROKU_APP_NAME` **variable"
-                " to be able to deploy your fridaybot.**"
+                " to be able to deploy your userbot.**"
             )
             repo.__del__()
             return
@@ -85,8 +85,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n"
-                "**Invalid Heroku credentials for deploying fridaybot dyno.**"
+                f"{txt}\n" "**Invalid Heroku credentials for deploying userbot dyno.**"
             )
             return repo.__del__()
         ups_rem.fetch(ac_br)
@@ -155,7 +154,7 @@ async def upstream(event):
             return await event.edit(
                 f"**Unfortunately, the directory {error} "
                 "does not seem to be a git repository.\n"
-                "But we can fix that by force updating the fridaybot using **"
+                "But we can fix that by force updating the userbot using **"
                 "`.update now.`"
             )
         repo = Repo.init()
@@ -192,7 +191,7 @@ async def upstream(event):
 
     if changelog == "" and not force_update:
         await event.edit(
-            f"**Your fridaybot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!**"
+            f"**Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!**"
         )
         return repo.__del__()
 
@@ -205,7 +204,7 @@ async def upstream(event):
 
     if force_update:
         await event.edit(
-            "**Force-syncing to latest stable fridaybot code, please wait...**"
+            "**Force-syncing to latest stable userbot code, please wait...**"
         )
 
     if conf == "now":
@@ -217,7 +216,7 @@ async def upstream(event):
 CMD_HELP.update(
     {
         "update": ">`.update`"
-        "\nUsage: Checks if the main fridaybot repository has any updates "
+        "\nUsage: Checks if the main userbot repository has any updates "
         "and shows a changelog if so."
         "\n\n>`.update now`"
         "\nUsage: Performs a quick update."
