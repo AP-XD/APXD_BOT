@@ -12,7 +12,6 @@ from fridaybot import CMD_HELP, LOGS
 from fridaybot.functions import runcmd, take_screen_shot
 from fridaybot.utils import admin_cmd
 
-
 @borg.on(admin_cmd(pattern="(glitch|glitchs)(?: |$)(.*)"))
 @borg.on(admin_cmd(pattern="(glitch|glitchs)(?: |$)(.*)", allow_sudo=True))
 async def glitch(cat):
