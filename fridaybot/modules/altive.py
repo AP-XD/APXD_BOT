@@ -58,8 +58,8 @@ def get_readable_time(seconds: int) -> str:
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
 
-@borg.on(admin_cmd(outgoing=True, pattern="alive"))
-@borg.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
+@borg.on(admin_cmd(outgoing=True, pattern="altive"))
+@borg.on(sudo_cmd(outgoing=True, pattern="altive", allow_sudo=True))
 async def amireallyalive(alive):
     start = datetime.now()
     myid = bot.uid
@@ -115,4 +115,4 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-CMD_HELP.update({"altive": "➟ `.alive`\nUse - Check if your bot is working."})
+CMD_HELP.update({"altive": "➟ `.altive`\nUse - Check if your bot is working."})
