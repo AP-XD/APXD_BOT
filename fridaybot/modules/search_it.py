@@ -10,8 +10,7 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
-from google_images_download import google_images_download
-
+from fridaybot.googol_images import googleimagesdownload
 from fridaybot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -62,7 +61,7 @@ async def _(event):
     start = datetime.now()
     await event.edit("Processing ...")
     input_str = event.pattern_match.group(1)
-    response = google_images_download.googleimagesdownload()
+    response = googleimagesdownload()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     arguments = {
