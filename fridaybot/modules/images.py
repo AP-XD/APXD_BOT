@@ -7,9 +7,10 @@ import os
 import shutil
 from re import findall
 
+from fridaybot import CMD_HELP
 from fridaybot.googol_images import googleimagesdownload
 from fridaybot.utils import admin_cmd
-from fridaybot import CMD_HELP
+
 
 @borg.on(admin_cmd(pattern="img ?(.*)"))
 async def img_sampler(event):
@@ -50,6 +51,7 @@ async def img_sampler(event):
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await event.delete()
 
+
 @borg.on(admin_cmd(pattern="image ?(.*)"))
 async def img_sampler(event):
     await event.edit("`Processing...`")
@@ -88,7 +90,8 @@ async def img_sampler(event):
     )
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await event.delete()
-    
+
+
 CMD_HELP.update(
     {
         "img": "Syntax: `.img <Name>` or `.img (replied message)` or `.img l=limit <Name>`\

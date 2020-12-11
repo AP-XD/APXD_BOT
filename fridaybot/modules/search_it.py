@@ -10,6 +10,7 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
+
 from fridaybot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -51,6 +52,7 @@ async def _(event):
     )
     await asyncio.sleep(5)
     await lool.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
+
 
 @borg.on(admin_cmd(pattern="ggrs"))
 async def _(event):
