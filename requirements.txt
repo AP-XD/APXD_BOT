@@ -27,7 +27,6 @@ deep_translator
 dnspython
 emoji
 faker
-fontTools
 fontTools	 
 fonttools		   
 gTTS-token>=1.1.3
@@ -40,7 +39,6 @@ google-auth-oauthlib
 google_images_download>=2.7.1
 google_trans_new
 googletrans
-googletrans==3.1.0a0
 gsearch
 hachoir
 heroku3
