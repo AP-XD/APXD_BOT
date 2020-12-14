@@ -151,11 +151,6 @@ async def iamthug(event):
             os.remove(files)
 
 
-import os
-
-import cv2
-
-
 @friday.on(friday_on_cmd(pattern=r"tni"))
 @friday.on(sudo_cmd(pattern=r"tni", allow_sudo=True))
 async def toony(event):
