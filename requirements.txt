@@ -27,7 +27,6 @@ deep_translator
 dnspython
 emoji
 faker
-fontTools
 fontTools	 
 fonttools		   
 gTTS-token>=1.1.3
