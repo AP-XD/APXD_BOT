@@ -3,7 +3,6 @@ import io
 import os
 import re
 import urllib
-from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
