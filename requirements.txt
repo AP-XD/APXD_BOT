@@ -59,7 +59,6 @@ jotquote
 justwatch
 kwot		 
 langdetect
-lottie
 lottie	   
 lxml
 lyricsgenius
@@ -84,7 +83,6 @@ pyfiglet
 pygments		  
 pyjokes
 pylast
-pymediainfo
 pymediainfo	   
 pymongo
 pyshorteners
