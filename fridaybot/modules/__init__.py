@@ -218,7 +218,7 @@ gdriveisshit = Config.AUTH_TOKEN_DATA
 wttrapi = Config.OPEN_WEATHER_MAP_APPID
 rmbg = Config.REM_BG_API_KEY
 hmmok = Config.LYDIA_API
-currentversion = "4.0"
+currentversion = "5.0"
 if issudousing:
     amiusingsudo = "Active ✅"
 else:

@@ -60,7 +60,7 @@ def zipdir(path, ziph):
             os.remove(os.path.join(root, file))
 
 
-@command(pattern="^.unnzip")
+@borg.on(admin_cmd(pattern="unnzip"))
 async def _(event):
     if event.fwd_from:
         return
