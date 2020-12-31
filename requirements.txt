@@ -22,6 +22,7 @@ cairosvg
 cfscrape
 coffeehouse
 colour	  
+countryinfo
 covid	 
 cowpy
 cryptg
@@ -31,8 +32,10 @@ csvfaker
 deep_translator
 dnspython
 emoji
+emoji-country-flag
 faker
 flask
+fontTools
 fontTools	 
 fonttools		   
 gTTS-token>=1.1.3
@@ -59,10 +62,12 @@ jotquote
 justwatch
 kwot		 
 langdetect
+lottie
 lottie	   
 lxml
 lyricsgenius
 nekos.py		
+nospamplus
 numpy
 oauth2client
 opencv-contrib-python
@@ -83,8 +88,10 @@ pyfiglet
 pygments		  
 pyjokes
 pylast
+pymediainfo
 pymediainfo	   
 pymongo
+pyseoanalyzer
 pyshorteners
 pytesseract
 python-barcode
