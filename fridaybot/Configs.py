@@ -29,6 +29,7 @@ if ENV:
         VIRUSTOTAL_API_KEY = os.environ.get("VIRUSTOTAL_API_KEY", None)
         SUPERHERO_API_KEY = os.environ.get("SUPERHERO_API_KEY", None)
         FOOTBALL_API_KEY = os.environ.get("FOOTBALL_API_KEY", None)
+        SUB_TO_MSG_ASSISTANT = os.environ.get("SUB_TO_MSG_ASSISTANT", False)
         AUTO_SPELL_FIX = os.environ.get("AUTO_SPELL_FIX", False)
         # Get your own ACCESS_KEY from http://api.screenshotlayer.com/api/capture
         SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get(
@@ -232,6 +233,8 @@ if ENV:
         # open load
         OPEN_LOAD_LOGIN = os.environ.get("OPEN_LOAD_LOGIN", None)
         OPEN_LOAD_KEY = os.environ.get("OPEN_LOAD_KEY", None)
+        JTM_CHANNEL_ID = int(os.environ.get("JTM_CHANNEL_ID", False))
+        JTM_CHANNEL_USERNAME = os.environ.get("JTM_CHANNEL_USERNAME", None)
         FBAN_GROUP = int(os.environ.get("FBAN_GROUP", False))
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")
         ENABLE_ASSISTANTBOT = os.environ.get("ENABLE_ASSISTANTBOT", "ENABLE")
