@@ -19,7 +19,7 @@ from fridaybot import CMD_HELP
 from fridaybot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="fake ?(.*)"))
+@borg.on(admin_cmd(pattern="faker ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
