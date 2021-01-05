@@ -18,6 +18,7 @@ beautifulsoup4
 bitlyshortener
 bs4
 bwb==3.0.0
+cairosvg
 cairosvg		
 cfscrape
 coffeehouse
@@ -73,6 +74,7 @@ pandas
 password_strength
 patool
 pokedex.py
+pornhub-api
 prettytable
 programmingquotes	  
 psutil
