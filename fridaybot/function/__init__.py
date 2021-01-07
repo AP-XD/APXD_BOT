@@ -1,6 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
-
+from telethon.tl.types import DocumentAttributeAudio
+from youtube_dl import YoutubeDL
+from youtube_dl.utils import (
+    ContentTooShortError,
+    DownloadError,
+    ExtractorError,
+    GeoRestrictedError,
+    MaxDownloadsReached,
+    PostProcessingError,
+    UnavailableVideoError,
+    XAttrMetadataError,
+)
 import asyncio
 import json
 import math
@@ -362,3 +373,90 @@ async def check_if_subbed(channel_id, event, bot):
                 return True
     except telethon.errors.rpcerrorlist.UserNotParticipantError:
         return False
+    
+async def _ytdl(url, is_it, event, tgbot):
+    await event.edit("`Ok Downloading This Video / Audio - Please Wait.` \n**Powered By @FridayOT**")
+    if is_it:
+        opts = {
+            "format": "bestaudio",
+            "addmetadata": True,
+            "key": "FFmpegMetadata",
+            "writethumbnail": True,
+            "prefer_ffmpeg": True,
+            "geo_bypass": True,
+            "nocheckcertificate": True,
+            "postprocessors": [
+                {
+                    "key": "FFmpegExtractAudio",
+                    "preferredcodec": "mp3",
+                    "preferredquality": "480",
+                }
+            ],
+            "outtmpl": "%(id)s.mp3",
+            "quiet": True,
+            "logtostderr": False,
+        }
+        video = False
+        song = True
+    else:
+        opts = {
+            "format": "best",
+            "addmetadata": True,
+            "key": "FFmpegMetadata",
+            "prefer_ffmpeg": True,
+            "geo_bypass": True,
+            "nocheckcertificate": True,
+            "postprocessors": [
+                {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
+            ],
+            "outtmpl": "%(id)s.mp4",
+            "logtostderr": False,
+            "quiet": True,
+        }
+        song = False
+        video = True
+    try:
+        with YoutubeDL(opts) as ytdl:
+            ytdl_data = ytdl.extract_info(url)
+    except Exception as e:
+        await event.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
+        return
+    c_time = time.time()
+    if song:
+        await event.edit(
+            f"**Uploading Audio**\
+        \n**Title :** `{ytdl_data['title']}`\
+        \n**Video Uploader :** `{ytdl_data['uploader']}`"
+        )
+        lol_m = await tgbot.upload_file(
+            file=f"{ytdl_data['id']}.mp3",
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "**Uploading Audio To TG**", f"{ytdl_data['title']}.mp3"
+                )
+            ),
+        )
+        await event.edit(
+            file=lol_m,
+            text=f"{ytdl_data['title']} \n**Uploaded Using @FRidayOt**"
+        )
+        os.remove(f"{ytdl_data['id']}.mp3")
+    elif video:
+        await event.edit(
+            f"**Uploading Video**\
+        \n**Title :** `{ytdl_data['title']}`\
+        \n**Video Uploader :** `{ytdl_data['uploader']}`"
+        )
+        hmmo = await tgbot.upload_file(
+            file=f"{ytdl_data['id']}.mp4",
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "**Uploading Video To TG**", f"{ytdl_data['title']}.mp4"
+                )
+            ),
+        )
+        await event.edit(
+            file=hmmo,
+            text=f"{ytdl_data['title']} \n**Uploaded Using @FRidayOt**"
+        )
+        os.remove(f"{ytdl_data['id']}.mp4")
