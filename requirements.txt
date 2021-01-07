@@ -19,7 +19,6 @@ bitlyshortener
 bs4
 bwb==3.0.0
 cairosvg
-cairosvg	
 cfscrape
 coffeehouse
 colour	  
