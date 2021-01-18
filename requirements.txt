@@ -46,6 +46,7 @@ gitpython
 glitch_this
 google-api-python-client==1.8.0
 google-auth-oauthlib
+google-trans-new
 google_images_download>=2.7.1
 google_trans_new
 googletrans
@@ -53,6 +54,7 @@ grapheme
 gsearch
 hachoir
 heroku3
+howdoi
 html-telegraph-poster
 httplib2
 humanize
@@ -65,6 +67,7 @@ langdetect
 lottie
 lxml
 lyricsgenius
+mal-api
 nekos.py		
 nospamplus
 numpy

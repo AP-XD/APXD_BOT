@@ -39,12 +39,17 @@ async def _(event):
     AP = await edit_or_reply(event, "🏓 Pong!")
     if event.fwd_from:
         return
+    hmm = await bot.get_me()
+    if not hmm.username:
+        hmm.username = hmm.id
+    bothmm = await tgbot.get_me()
+    bot_u = bothmm.username
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - Lastupdate))
     await AP.edit(
-        f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ "
+        f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ` \n➲ `@{hmm.username}` \n➲ `@{bot_u}`"
     )
 
 
