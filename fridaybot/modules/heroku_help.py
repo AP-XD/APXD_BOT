@@ -12,8 +12,8 @@ Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 
-@friday.on(friday_on_cmd(pattern="(logs|log)"))
-@friday.on(sudo_cmd(pattern="(logs|log)", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="(loogs|loog)"))
+@friday.on(sudo_cmd(pattern="(loogs|loog)", allow_sudo=True))
 async def giblog(event):
     herokuHelper = HerokuHelper(Var.HEROKU_APP_NAME, Var.HEROKU_API_KEY)
     logz = herokuHelper.getLog()
@@ -32,8 +32,8 @@ async def restart_me(event):
     herokuHelper.restart()
 
 
-@friday.on(friday_on_cmd(pattern="usage$"))
-@friday.on(sudo_cmd(pattern="usage$", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="usg$"))
+@friday.on(sudo_cmd(pattern="usg$", allow_sudo=True))
 async def dyno_usage(dyno):
     """
     Get your account Dyno Usage
@@ -96,10 +96,10 @@ async def dyno_usage(dyno):
 
 
 @friday.on(
-    friday_on_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
+    friday_on_cmd(pattern="(seet|geet|deel) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
 )
 @friday.on(
-    sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
+    sudo_cmd(pattern="(seet|geet|deel) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
 )
 async def variable(var):
     """
