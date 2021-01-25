@@ -110,6 +110,7 @@ quote
 regex
 requests
 requests_html
+scapy
 search-engine-parser>=0.4.2
 selenium
 spamwatch		 
