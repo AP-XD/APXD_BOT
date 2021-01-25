@@ -9,6 +9,8 @@ class Var(object):
     DB_URI = os.environ.get("DATABASE_URL", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", None)
     DEEPAI_KEY = os.environ.get("DEEPAI_KEY", None)
+    # Deepai value can get from https://deepai.org/
+    DEEP_AI = os.environ.get("DEEP_AI", None)
     LOGGER = True
     GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
     GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)

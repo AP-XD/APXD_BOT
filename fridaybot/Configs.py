@@ -14,6 +14,8 @@ if ENV:
         API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
         STRING_SESSION = os.environ.get("STRING_SESSION", None)
         # For Databases
+        # Deepai value can get from https://deepai.org/
+        DEEP_AI = os.environ.get("DEEP_AI", None)
         DB_URI = os.environ.get("DATABASE_URL", None)
         # For customizing there alive message
         CUSTOM_ALIVE = os.environ.get("CUSTOM_ALIVE", None)
