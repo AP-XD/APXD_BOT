@@ -1,3 +1,4 @@
+
 DateTime		
 Pillow
 PyDictionary
@@ -30,9 +31,11 @@ cryptocompare
 cryptosteganography
 csvfaker		
 deep_translator
+deezer-python
 dnspython
 emoji
 emoji-country-flag
+emoji==0.6.0
 faker
 flask
 fontTools
@@ -76,6 +79,7 @@ opencv-contrib-python
 pandas
 password_strength
 patool
+pdf2docx
 pokedex.py
 pornhub-api
 prettytable

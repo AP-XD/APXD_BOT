@@ -25,8 +25,22 @@ async def gen_chlog(repo, diff):
     ch_log = ""
     d_form = "%d/%m/%y"
     for c in repo.iter_commits(diff):
-        ch_log += (
-            f"•[{c.committed_datetime.strftime(d_form)}]: {c.summary} by <{c.author}>\n"
+        ch_log += f"🔨 **#{c.count()} :** [{c.summary}]({UPSTREAM_REPO_URL}/commit/{c}) 👷 __{c.author}__ \n"
+    return ch_log
+
+
+async def print_changelogs(event, ac_br, changelog):
+    changelog_str = f"**Updates available in {ac_br} branch!**\n\n{changelog}"
+    if len(changelog_str) > 4096:
+        await event.edit("**Changelog is too big, sending as a file.**")
+        file = open("output.txt", "w+")
+        file.write(changelog_str)
+        file.close()
+        await event.client.send_file(event.chat_id, "output.txt")
+        remove("output.txt")
+    else:
+        await event.client.send_message(
+            event.chat_id, changelog_str, link_preview=False
         )
     return ch_log
 

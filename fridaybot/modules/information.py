@@ -1,5 +1,6 @@
 import html
-
+from fridaybot.modules.sql_helper.gmute_sql import is_gmuted
+from fridaybot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
@@ -46,6 +47,14 @@ async def _(event):
         dc_id = "Unknown."
         str(e)
     shazam = replied_user_profile_photos_count
+    if is_gmuted(user_id):
+        is_gbanned = "This User Is Gbanned"
+    elif not is_gmuted(user_id):
+        is_gbanned = False
+    if is_muted(user_id, "gmute"):
+        is_gmutted = "User is Tapped."
+    elif not is_muted(user_id, "gmute"):
+        is_gmutted = False
     caption = f"""<b>INFO<b>
 <b>Telegram ID</b>: <code>{user_id}</code>
 <b>Permanent Link</b>: <a href='tg://user?id={user_id}'>Click Here</a>
@@ -58,6 +67,8 @@ async def _(event):
 <b>VERIFIED</b>: <code>{replied_user.user.verified}</code>
 <b>IS A BOT</b>: <code>{replied_user.user.bot}</code>
 <b>Groups in Common</b>: <code>{common_chats}</code>
+<b>Is Gbanned</b>: <code>{is_gbanned}</code>
+<b>Is Gmutted</b>: <code>{is_gmutted}</code>
 """
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
@@ -80,14 +91,14 @@ async def get_full_user(event):
         if previous_message.forward:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.forward.from_id
+                    previous_message.forward.sender_id
                     or previous_message.forward.channel_id
                 )
             )
             return replied_user, None
         else:
             replied_user = await event.client(
-                GetFullUserRequest(previous_message.from_id)
+                GetFullUserRequest(previous_message.sender_id)
             )
             return replied_user, None
     else:
@@ -96,7 +107,14 @@ async def get_full_user(event):
             input_str = event.pattern_match.group(1)
         except IndexError as e:
             return None, e
-        if event.message.entities is not None:
+        if event.is_private:
+            try:
+                user_id = event.chat_id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
+        elif event.message.entities is not None:
             mention_entity = event.message.entities
             probable_user_mention_entity = mention_entity[0]
             if isinstance(probable_user_mention_entity, MessageEntityMentionName):
@@ -111,13 +129,6 @@ async def get_full_user(event):
                     return replied_user, None
                 except Exception as e:
                     return None, e
-        elif event.is_private:
-            try:
-                user_id = event.chat_id
-                replied_user = await event.client(GetFullUserRequest(user_id))
-                return replied_user, None
-            except Exception as e:
-                return None, e
         else:
             try:
                 user_object = await event.client.get_entity(int(input_str))
@@ -152,12 +163,15 @@ async def gibinfo(event):
         reason = f"<i>True</i>"
     else:
         reason = f"<i>False</i>"
-    hmmyes = sclient.is_banned(lolu.user.id)
-    if hmmyes:
-        oki = f"""<i>True</i>
+    if sclient is None:
+        oki = "<i>Token Invalid</i>"
+    elif sclient:
+        hmmyes = sclient.is_banned(lolu.user.id)
+        if hmmyes:
+            oki = f"""<i>True</i>
 <b>~ Reason :</b> <i>{hmmyes.reason}</i>"""
-    else:
-        oki = "<i>False</i>"
+        else:
+            oki = "<i>False</i>"
     infomsg = (
         f"<b>Info Of</b> <a href=tg://user?id={lolu.user.id}>{lolu.user.first_name}</a>: \n"
         f"<b>- Username :</b> <i>{lolu.user.username}</i>\n"

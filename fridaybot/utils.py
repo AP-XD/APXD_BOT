@@ -26,11 +26,9 @@ from fridaybot.wraptools import (
     ignore_pm,
 )
 from var import Var
-
 sedprint = logging.getLogger("PLUGINS")
 cmdhandler = Config.COMMAND_HAND_LER
 bothandler = Config.BOT_HANDLER
-
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -141,6 +139,11 @@ def load_module(shortname):
         sys.modules["friday.util"] = fridaybot.utils
         sys.modules["userbot.utils"] = fridaybot.utils
         sys.modules["userbot.plugins"] = fridaybot.modules
+        sys.modules["plugins"] = fridaybot.modules
+        sys.modules["userbot"] = fridaybot
+        mod.admin_cmd = friday_on_cmd
+        mod.sudo_cmd = sudo_cmd
+        mod.friday_on_cmd = friday_on_cmd
         mod.Config = Config
         mod.ignore_grp = ignore_grp()
         mod.ignore_pm = ignore_pm()
@@ -766,10 +769,8 @@ def only_pro():
         @functools.wraps(func)
         async def wrapper(event):
             kek = list(Config.SUDO_USERS)
-            mm = bot.uid
-            if event.sender_id == mm:
-                await func(event)
-            elif event.sender_id == kek:
+            kek.append(bot.uid)
+            if event.sender_id in kek:
                 await func(event)
             else:
                 await event.reply("Only Owners, Sudo Users Can Use This Command.")
@@ -827,10 +828,8 @@ def peru_only():
         @functools.wraps(func)
         async def wrapper(event):
             kek = list(Config.SUDO_USERS)
-            mm = bot.uid
-            if event.sender_id == mm:
-                await func(event)
-            elif event.sender_id == kek:
+            kek.append(bot.uid)
+            if event.sender_id in kek:
                 await func(event)
             else:
                 pass

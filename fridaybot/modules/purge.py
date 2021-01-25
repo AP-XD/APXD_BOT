@@ -10,11 +10,10 @@ from asyncio import sleep
 from telethon.errors import rpcbaseerrors
 
 from fridaybot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from fridaybot.utils import errors_handler, register
+from fridaybot.utils import errors_handler, register, friday_on_cmd
 
 
-@register(outgoing=True, pattern="^.purge$")
-@errors_handler
+@friday.on(friday_on_cmd(pattern="purge$"))
 async def fastpurger(purg):
     """ For .purge command, purge all messages starting from the reply. """
     chat = await purg.get_input_chat()
@@ -37,8 +36,7 @@ async def fastpurger(purg):
         )
 
 
-@register(outgoing=True, pattern="^.purgeme")
-@errors_handler
+@friday.on(friday_on_cmd(pattern="purgeme"))
 async def purgeme(delme):
     """ For .purgeme, delete x count of your latest message."""
     message = delme.text
@@ -57,8 +55,7 @@ async def purgeme(delme):
     i = 1
 
 
-@register(outgoing=True, pattern="^.del$")
-@errors_handler
+@friday.on(friday_on_cmd(pattern="del"))
 async def delete_it(delme):
     """ For .del command, delete the replied message. """
     msg_src = await delme.get_reply_message()
@@ -77,10 +74,8 @@ async def delete_it(delme):
                 )
 
 
-@register(outgoing=True, pattern="^.edit")
-@errors_handler
+@friday.on(friday_on_cmd(pattern="edit"))
 async def editer(edit):
-    """ For .editme command, edit your last message. """
     message = edit.text
     chat = await edit.get_input_chat()
     self_id = await edit.client.get_peer_id("me")
@@ -98,8 +93,7 @@ async def editer(edit):
         )
 
 
-@register(outgoing=True, pattern="^.sd")
-@errors_handler
+@friday.on(friday_on_cmd(pattern="sd"))
 async def selfdestruct(destroy):
 
     """ For .sd command, make seflf-destructable messages. """

@@ -27,7 +27,7 @@
 
 # Deploying To Heroku
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/StarkGang/FridayUserbot)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DevsExpo/FridayUserbot)
 
 
 
@@ -48,7 +48,7 @@
 Simply clone the repository and run the main file:
 ```sh
 # Install Git First.
-git clone https://github.com/starkGang/FridayUserbot
+git clone https://github.com/DevsExpo/FridayUserbot
 # Open Git Cloned File
 cd FridayUserbot
 # Config Virtual Env
@@ -82,6 +82,11 @@ python3 -m fridaybot
 
 
 
+# Developers
+
+* @Chsaiujwal
+* @Meisnub
+* @Midhun_xD
 
 
 
@@ -93,3 +98,4 @@ will. Specifically you can redistribute and/or modify it under the terms of the
 [GNU General Public License](https://www.gnu.org/licenses/gpl.html) as
 published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version. 
+

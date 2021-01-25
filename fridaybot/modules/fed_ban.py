@@ -1,3 +1,16 @@
+#    Copyright (C) Midhun KM 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from fridaybot.function import fetch_feds
 from fridaybot.modules.sql_helper.feds_sql import (
     add_fed,
@@ -5,6 +18,7 @@ from fridaybot.modules.sql_helper.feds_sql import (
     is_fed_indb,
     rmfed,
 )
+import asyncio
 from fridaybot.utils import friday_on_cmd
 
 chnnl_grp = Config.FBAN_GROUP
@@ -25,14 +39,11 @@ async def _(event):
     elif lol_s == "all":
         hmm = await fetch_feds(event, borg)
         for i in hmm:
-            try:
-                if is_fed_indb(i):
-                    nolol += 1
-                elif not is_fed_indb(i):
-                    add_fed(i)
-                    yeslol += 1
-            except:
-                pass
+            if is_fed_indb(i):
+                nolol += 1
+            elif not is_fed_indb(i):
+                add_fed(i)
+                yeslol += 1
         await event.edit(f"`Added {yeslol} Feds To DB, Failed To Add {nolol} Feds.`")
     elif is_fed_indb(lol_s):
         await event.edit("`Fed Already Found On DataBase.`")
@@ -56,7 +67,7 @@ async def _(event):
     elif lol_s == "all":
         for sedm in lol:
             rmfed(sedm.feds)
-        await event.edit("`Done, Cleared. All Fed Database.")
+        await event.edit("`Done, Cleared. All Fed Database.`")
     elif is_fed_indb(lol_s):
         rmfed(lol_s)
         await event.edit("`Done, Removed This FeD From DB`")
@@ -64,9 +75,9 @@ async def _(event):
         await event.edit("`This Fed Not Found On Db.`")
 
 
-@friday.on(friday_on_cmd(pattern="fban ?(.*)"))
+@friday.on(friday_on_cmd(pattern="fban"))
 async def _(event):
-    lol_s = event.pattern_match.group(1)
+    lol_s = event.text.split(" ", maxsplit=1)[1]
     if lol_s == None:
         await event.edit("`No user Found To Fban.`")
         return
@@ -74,7 +85,7 @@ async def _(event):
     errors = 0
     len_feds = len(all_fed)
     if len_feds == 0:
-        await event.edit("`No Fed IN DB, Add One To Do So.`")
+        await event.edit("`No Fed IN DB, Add One To Do So. Please Do .fadd all to Add All Feds IN Database`")
         return
     await event.edit(f"`FBanning in {len_feds} Feds.`")
     try:
@@ -85,7 +96,9 @@ async def _(event):
     for teamz in all_fed:
         try:
             await borg.send_message(chnnl_grp, "/joinfed " + teamz.feds)
+            await asyncio.sleep(2)
             await borg.send_message(chnnl_grp, "/fban " + lol_s)
+            await asyncio.sleep(5)
         except:
             errors += 1
     await event.edit(
@@ -97,7 +110,7 @@ async def _(event):
 async def _(event):
     lol_s = event.pattern_match.group(1)
     if lol_s == None:
-        await event.edit("`No user Found To Fban.`")
+        await event.edit("`No User Found To Fban.`")
         return
     all_fed = get_all_feds()
     errors = 0
@@ -111,7 +124,9 @@ async def _(event):
     for teamz in all_fed:
         try:
             await borg.send_message(chnnl_grp, "/joinfed " + teamz.feds)
+            await asyncio.sleep(2)
             await borg.send_message(chnnl_grp, "/unfban " + lol_s)
+            await asyncio.sleep(5)
         except:
             errors += 1
     await event.edit(

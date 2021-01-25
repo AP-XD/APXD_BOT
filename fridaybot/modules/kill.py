@@ -1,6 +1,3 @@
-"""Emoji
-Available Commands:
-.kill"""
 
 
 import asyncio
@@ -9,7 +6,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern=r"kill"))
+@borg.on(admin_cmd(pattern=r"maro"))
 async def _(event):
 
     if event.fwd_from:

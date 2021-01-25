@@ -2,12 +2,9 @@
 import io
 import sys
 import traceback
+from fridaybot.utils import friday_on_cmd
 
-from fridaybot import CMD_HELP
-from fridaybot.utils import admin_cmd
-
-
-@borg.on(admin_cmd(pattern="calc"))
+@friday.on(friday_on_cmd(pattern="exec"))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
@@ -15,9 +12,7 @@ async def _(event):
     cmd = event.text.split(" ", maxsplit=1)[1]
     event.message.id
     if event.reply_to_msg_id:
-        event.reply_to_msg_id
-
-    san = f"print({cmd})"
+        reply_to_id = event.reply_to_msg_id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -55,7 +50,7 @@ async def aexec(code, event):
 
 CMD_HELP.update(
     {
-        "calc": "`.calc` your equation :\
+        "exec": "`.exec` your equation :\
       \nUSAGE: solves the given maths equation by bodmass rule. "
     }
 )

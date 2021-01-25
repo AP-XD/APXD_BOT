@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 import hachoir
+import asyncio
+import os
+from pathlib import Path
+from fridaybot.utils import load_module
 from telethon.tl.types import DocumentAttributeAudio
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (
@@ -30,7 +34,7 @@ from bs4 import BeautifulSoup
 import requests
 from bs4 import BeautifulSoup as bs
 import re
-
+from telethon.tl.types import InputMessagesFilterDocument
 import telethon
 from telethon import Button, custom, events, functions
 from pymediainfo import MediaInfo
@@ -107,6 +111,50 @@ def humanbytes(size):
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
+async def get_all_modules(event, borg, channel_id):
+    await event.edit(f"Ìnstalling All Plugins from {channel_id}")
+    try:
+        a_plugins = await borg.get_messages(
+            entity=channel_id,
+            filter=InputMessagesFilterDocument,
+            limit=None,
+            search=".py",
+        )
+    except:
+        await event.edit("`Failed To Retrieve Modules. Please Check Channel Username / Id. Make Sure You Are On That Channel`")
+        return
+    yesm = 0
+    nom = 0
+    len_p = int(a_plugins.total)
+    if len_p == 0:
+        await event.edit("**No PLugins Found To Load !**")
+        return
+    await event.edit(f"**Found : {len_p} Plugins. Trying To Install**")
+    for sed in a_plugins:
+        try:
+            downloaded_file_name = await borg.download_media(sed, "fridaybot/modules/")
+            if "(" not in downloaded_file_name:
+                path1 = Path(downloaded_file_name)
+                shortname = path1.stem
+                load_module(shortname.replace(".py", ""))
+                await event.edit("**Installed :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
+            else:
+                nom += 1
+                await event.edit("**Failed to Install [PLugin Already Found] :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
+                os.remove(downloaded_file_name)
+        except:
+                await event.edit("**Failed To Install :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
+                os.remove(downloaded_file_name)
+                nom += 1
+                pass
+    yesm = len_p - nom
+    return yesm, nom, len_p
 
 def time_formatter(milliseconds: int) -> str:
     """Inputs time in milliseconds, to get beautified time,
@@ -240,6 +288,20 @@ async def take_screen_shot(
 async def fetch_feds(event, borg):
     fedList = []
     await event.edit("`Fetching Your FeD List`, This May Take A While.")
+    reply_s = await event.get_reply_message()
+    if reply_s and reply_s.media:
+        downloaded_file_name = await borg.download_media(reply_s.media, "fedlist.txt")
+        await asyncio.sleep(1)
+        file = open(downloaded_file_name, "r")
+        lines = file.readlines()
+        for line in lines:
+            try:
+                fedList.append(line[:36])
+            except:
+                pass
+                # CleanUp
+        os.remove(downloaded_file_name)
+        return fedList
     async with borg.conversation("@MissRose_bot") as bot_conv:
         await bot_conv.send_message("/start")
         await bot_conv.send_message("/myfeds")
@@ -253,14 +315,14 @@ async def fetch_feds(event, borg):
             await event.edit(
                 "`Boss, You Real Peru. You Are Admin in So Many Feds. WoW!`"
             )
-            await asyncio.sleep(6)
+            await asyncio.sleep(2)
             await response.click(0)
             await asyncio.sleep(6)
             fedfile = await bot_conv.get_response()
-            await asyncio.sleep(3)
+            await asyncio.sleep(2)
             if fedfile.media:
-                downloaded_file_name = await borg.download_media(fedfile, "fedlist")
-                await asyncio.sleep(6)
+                downloaded_file_name = await borg.download_media(fedfile, "fedlist.txt")
+                await asyncio.sleep(1)
                 file = open(downloaded_file_name, "r")
                 lines = file.readlines()
                 for line in lines:
@@ -463,3 +525,26 @@ async def _ytdl(url, is_it, event, tgbot):
             text=f"{ytdl_data['title']} \n**Uploaded Using @FRidayOt**"
         )
         os.remove(f"{ytdl_data['id']}.mp4")
+                  
+async def get_all_admin_chats(event):
+    lul_stark = []
+    all_chats = [
+        d.entity
+            for d in await event.client.get_dialogs()
+            if (d.is_group or d.is_channel)
+        ]
+    for i in all_chats:
+        if i.creator or i.admin_rights:
+            lul_stark.append(i.id)
+    return lul_stark
+
+                  
+async def is_admin(event, user):
+    sed = await event.client.get_permissions(event.chat_id, user)
+    if sed.is_admin:
+        is_mod = True
+    else:
+        is_mod = False
+    return is_mod
+                  
+                  

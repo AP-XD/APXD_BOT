@@ -20,7 +20,6 @@ from telethon.sessions import StringSession
 from var import Var
 
 from .Configs import Config
-from .function import fridayfunction as topfunc
 
 StartTime = time.time()
 UpTime = time.time()
