@@ -11,7 +11,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from validators.url import url
 
-from fridaybot import catdef, topfunc
+from fridaybot import catdef
+from .function import fridayfunction as topfunc
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, friday_on_cmd
 from var import Var
