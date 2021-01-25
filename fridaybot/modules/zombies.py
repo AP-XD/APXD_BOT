@@ -47,7 +47,7 @@ UNBAN_RIGHTS = ChatBannedRights(
 )
 
 
-@friday.on(friday_on_cmd(pattern=f"zombies ?(.*)"))
+@friday.on(friday_on_cmd(pattern=f"delac ?(.*)"))
 async def rm_deletedacc(show):
     """ For .zombies command, list all the ghost/deleted/zombie accounts in a chat. """
 
@@ -187,7 +187,7 @@ async def rm_deletedacc(show):
 
 CMD_HELP.update(
     {
-        "zombies": ".zombies\
+        "delac": ".delac\
 \nUsage: Searches for deleted accounts in a group. Use .delusers clean to remove deleted accounts from the group.\
 "
     }

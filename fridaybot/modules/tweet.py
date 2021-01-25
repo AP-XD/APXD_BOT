@@ -117,7 +117,7 @@ async def kannagen(e):
     await a.delete()
 
 
-@borg.on(admin_cmd(pattern="modi ?(.*)"))
+@borg.on(admin_cmd(pattern="mmodi ?(.*)"))
 async def trumptweet(event):
     args = event.pattern_match.group(1)
     if not args and not event.reply_to_msg_id:
