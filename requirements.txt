@@ -139,6 +139,6 @@ wheel
 wikipedia>=1.4.0
 yahoo_fin
 youtube-search
-youtube-search-python==1.3.2
-youtube_dl>=2020.11.26
+youtube-search-python
+youtube_dl
 youtube_search
