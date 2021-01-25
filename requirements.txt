@@ -11,10 +11,12 @@ aiofiles
 aiohttp
 anime_downloader
 antispaminc
+appdirs
 apscheduler
 aria2p
 async_generator
-asyncurban		  
+asyncurban	
+backports.lzma	  
 beautifulsoup4
 bitlyshortener
 bs4
@@ -65,12 +67,15 @@ iplookup
 jikanpy
 jotquote		
 justwatch
-kwot		 
+keyboard	 
+kwot	
 langdetect
 lottie
 lxml
+lyrics_extractor
 lyricsgenius
 mal-api
+moviepy
 nekos.py		
 nospamplus
 numpy
@@ -92,6 +97,7 @@ pySmartDL
 pybase64>=0.4.0
 pydub
 pyfiglet
+pygame	  
 pygments		  
 pyjokes
 pylast
@@ -103,6 +109,7 @@ pytesseract
 python-barcode
 python-dotenv
 python-magic
+pytube>=9.5.1
 pytuneteller
 pytz
 qrcode
@@ -111,6 +118,7 @@ regex
 requests
 requests_html
 scapy
+scipy
 search-engine-parser>=0.4.2
 selenium
 spamwatch		 
@@ -132,6 +140,7 @@ wget
 wheel
 wikipedia>=1.4.0
 yahoo_fin
-youtube-dl
 youtube-search
-youtube-search-python
+youtube-search-python==1.3.2
+youtube_dl>=2020.11.26
+youtube_search
