@@ -87,8 +87,8 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@friday.on(friday_on_cmd(pattern="yt(a|v) (.*)"))
-@friday.on(sudo_cmd(pattern="yt(a|v) (.*)", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="yt(a|v|hq) (.*)"))
+@friday.on(sudo_cmd(pattern="yt(a|v|hq) (.*)", allow_sudo=True))
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
@@ -118,10 +118,28 @@ async def download_video(v_url):
         }
         video = False
         song = True
-
+        
     elif type == "v":
         opts = {
             "format": "best",
+            "addmetadata": True,
+            "key": "FFmpegMetadata",
+            "prefer_ffmpeg": True,
+            "geo_bypass": True,
+            "nocheckcertificate": True,
+            "postprocessors": [
+                {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
+            ],
+            "outtmpl": "%(id)s.mp4",
+            "logtostderr": False,
+            "quiet": True,
+        }
+        song = False
+        video = True
+        
+    elif type == "hq":
+        opts = {
+            "format": "bestvideo[height=720]+bestaudio/best[height=720]",
             "addmetadata": True,
             "key": "FFmpegMetadata",
             "prefer_ffmpeg": True,
@@ -220,7 +238,7 @@ async def download_video(v_url):
 CMD_HELP.update(
     {
         "ytdl": "**Ytdl**\
-\n\n**Syntax : **`.yta <song link> OR .ytv <video link>`\
-\n**Usage :** download songs or videos from YouTube just with a link"
+\n\n**Syntax : **`.yta <song link> OR .ytv <video link> OR .ythq <video link>`\
+\n**Usage :** download songs or videos from YouTube just with a link, hq stands for 720p"
     }
 )

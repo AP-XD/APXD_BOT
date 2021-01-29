@@ -116,7 +116,7 @@ async def download_video(v_url):
     await dc.edit("`Ok downloading your song🤓...`")
     if type == "audio":
         opts = {
-            "format": "best",
+            "format": "bestvideo[height<=720]+bestaudio/best[height<=720]",
             "addmetadata": True,
             "key": "FFmpegMetadata",
             "prefer_ffmpeg": True,
