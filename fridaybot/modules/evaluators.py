@@ -10,8 +10,8 @@ from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
-@borg.on(admin_cmd(pattern="bash ?(.*)"))
-@borg.on(sudo_cmd(pattern="bash ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="bsh ?(.*)"))
+@borg.on(sudo_cmd(pattern="bsh ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
