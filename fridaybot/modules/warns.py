@@ -1,9 +1,27 @@
+#    Copyright (C) Midhun Km 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from fridaybot.modules.sql_helper import warns_sql as sql
 from fridaybot.utils import friday_on_cmd
 from fridaybot import CMD_HELP
 
 @friday.on(friday_on_cmd(pattern="warn(?: |$)(.*)"))
 async def _s(event):
+    if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("This Command is Meant To Be Used in Chats/Groups")
+        return
     user, reason = await get_user_from_event(event)
     sed = await friday.get_permissions(event.chat_id, user.id)
     if sed.is_admin:
@@ -38,6 +56,11 @@ async def _s(event):
 
 @friday.on(friday_on_cmd(pattern="rwarn(?: |$)(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("This Command is Meant To Be Used in Chats/Groups")
+        return
     user, reason = await get_user_from_event(event)
     sed = await friday.get_permissions(event.chat_id, user.id)
     if sed.is_admin:
@@ -53,6 +76,11 @@ async def _(event):
 
 @friday.on(friday_on_cmd(pattern="allwarns(?: |$)(.*)"))
 async def __(event):
+    if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("This Command is Meant To Be Used in Chats/Groups")
+        return
     user, reason = await get_user_from_event(event)
     result = sql.get_warns(user.id, event.chat_id)
     if result and result[0] != 0:
@@ -79,6 +107,11 @@ async def __(event):
 
 @friday.on(friday_on_cmd(pattern="slimit ?(.*)"))
 async def m_(event):
+    if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("This Command is Meant To Be Used in Chats/Groups")
+        return
     args = event.pattern_match.group(1)
     if args:
         if args.isdigit():
@@ -96,6 +129,11 @@ async def m_(event):
 
 @friday.on(friday_on_cmd(pattern="wap ?(.*)"))
 async def m_(event):
+    if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("This Command is Meant To Be Used in Chats/groups")
+        return
     args = event.pattern_match.group(1)
     if args:
         if args.lower() in ("on", "yes"):

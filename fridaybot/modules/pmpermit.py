@@ -11,7 +11,7 @@ from fridaybot.Configs import Config
 from fridaybot.utils import friday_on_cmd
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
-if PMPERMIT_PIC is None:
+if not PMPERMIT_PIC:
     WARN_PIC = "https://telegra.ph/file/53aed76a90e38779161b1.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
@@ -39,8 +39,7 @@ USER_BOT_NO_WARN = (
     "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
-if Var.PRIVATE_GROUP_ID is not None:
-    
+if PM_ON_OFF != "DISABLE":
     @borg.on(events.NewMessage(outgoing=True))
     async def auto_approve_for_out_going(event):
         if event.fwd_from:
@@ -200,7 +199,12 @@ if Var.PRIVATE_GROUP_ID is not None:
         chat_ids = event.sender_id
         if USER_BOT_NO_WARN == message_text:
             return
-        sender = await event.client(GetFullUserRequest(chat_ids))
+        # low Level Hacks
+        if event.sender_id == event.chat_id:
+            pass
+        else:
+            return
+        sender = await event.client(GetFullUserRequest(await event.get_input_chat()))
         if chat_ids == bot.uid:
             return
         if sender.user.bot:

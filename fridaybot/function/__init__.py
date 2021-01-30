@@ -1,3 +1,16 @@
+#    Copyright (C) Midhun KM 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import requests
 from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
@@ -6,6 +19,7 @@ import hachoir
 import asyncio
 import os
 from pathlib import Path
+import wget
 from fridaybot.utils import load_module
 from telethon.tl.types import DocumentAttributeAudio
 from youtube_dl import YoutubeDL
@@ -27,6 +41,7 @@ import re
 import shlex
 import subprocess
 import time
+import eyed3
 from os.path import basename
 from typing import List, Optional, Tuple
 import webbrowser
@@ -39,11 +54,15 @@ import telethon
 from telethon import Button, custom, events, functions
 from pymediainfo import MediaInfo
 from telethon.tl.types import MessageMediaPhoto
-
+from typing import Union
+SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 BASE_URL = "https://isubtitles.org"
 from fridaybot.Configs import Config
 import zipfile
 import os
+import aiohttp
+from fridaybot.function.FastTelethon import upload_file
+
 
 sedpath = Config.TMP_DOWNLOAD_DIRECTORY
 from fridaybot import logging
@@ -51,8 +70,46 @@ from fridaybot import logging
 logger = logging.getLogger("[--WARNING--]")
 if not os.path.isdir(sedpath):
     os.makedirs(sedpath)
+    
+# Deethon // @aykxt
+session = aiohttp.ClientSession()
+
+async def fetch_json(link):
+    async with session.get(link) as resp:
+        return await resp.json()
+    
+    
+def get_readable_file_size(size_in_bytes: Union[int, float]) -> str:
+    if size_in_bytes is None:
+        return "0B"
+    index = 0
+    while size_in_bytes >= 1024:
+        size_in_bytes /= 1024
+        index += 1
+    try:
+        return f"{round(size_in_bytes, 2)}{SIZE_UNITS[index]}"
+    except IndexError:
+        return "File too large"
 
 
+def get_readable_time(secs: float) -> str:
+    result = ""
+    (days, remainder) = divmod(secs, 86400)
+    days = int(days)
+    if days != 0:
+        result += f"{days}d"
+    (hours, remainder) = divmod(remainder, 3600)
+    hours = int(hours)
+    if hours != 0:
+        result += f"{hours}h"
+    (minutes, seconds) = divmod(remainder, 60)
+    minutes = int(minutes)
+    if minutes != 0:
+        result += f"{minutes}m"
+    seconds = int(seconds)
+    result += f"{seconds}s"
+    return result
+    
 # Thanks To Userge-X
 async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     """ run command in terminal """
@@ -74,27 +131,49 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for uploads and downloads."""
     now = time.time()
     diff = now - start
-    if round(diff % 10.00) == 0 or current != total:
+    if round(diff % 10.00) == 0 or current == total:
         percentage = current * 100 / total
         speed = current / diff
         elapsed_time = round(diff) * 1000
+        if elapsed_time == 0:
+            return
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
-        progress_str = "[{0}{1}] {2}%\n".format(
-            "".join(["■" for i in range(math.floor(percentage / 5))]),
-            "".join(["▢" for i in range(20 - math.floor(percentage / 5))]),
+        progress_str = "{0}{1} {2}%\n".format(
+            "".join(["▰" for i in range(math.floor(percentage / 10))]),
+            "".join(["▱" for i in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2),
         )
         tmp = progress_str + "{0} of {1}\nETA: {2}".format(
             humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
         )
         if file_name:
-            await event.edit(
-                "{}\nFile Name: `{}`\n{}".format(type_of_ps, file_name, tmp)
-            )
+            try:
+                await event.edit(
+                    "{}\n**File Name:** `{}`\n{}".format(type_of_ps, file_name, tmp)
+                    
+                )
+            except:
+                pass
         else:
-            await event.edit("{}\n{}".format(type_of_ps, tmp))
-
+            try:
+                await event.edit("{}\n{}".format(type_of_ps, tmp))
+            except:
+                pass
+async def all_pro_s(Config, client2, client3, bot):
+    if not Config.SUDO_USERS:
+        lmao_s = []
+    else:
+        lmao_s = list(Config.SUDO_USERS)
+    sed1 = await bot.get_me()
+    lmao_s.append(sed1.id)
+    if client2:
+        sed2 = await client2.get_me()
+        lmao_s.append(sed2.id)
+    if client3:
+        sed3 = await client3.get_me()
+        lmao_s.append(sed3.id)
+    return lmao_s
 
 def humanbytes(size):
     """Input size in bytes,
@@ -305,9 +384,7 @@ async def fetch_feds(event, borg):
     async with borg.conversation("@MissRose_bot") as bot_conv:
         await bot_conv.send_message("/start")
         await bot_conv.send_message("/myfeds")
-        await asyncio.sleep(3)
         response = await bot_conv.get_response(timeout=300)
-        await asyncio.sleep(3)
         if "You can only use fed commands once every 5 minutes" in response.text:
             await event.edit("`Try again after 5 mins.`")
             return
@@ -315,13 +392,14 @@ async def fetch_feds(event, borg):
             await event.edit(
                 "`Boss, You Real Peru. You Are Admin in So Many Feds. WoW!`"
             )
-            await asyncio.sleep(2)
             await response.click(0)
-            await asyncio.sleep(6)
             fedfile = await bot_conv.get_response()
             await asyncio.sleep(2)
+            if "You can only use fed commands once every 5 minutes" in fedfile.text:
+                await event.edit("`Try again after 5 mins.`")
+                return
             if fedfile.media:
-                downloaded_file_name = await borg.download_media(fedfile, "fedlist.txt")
+                downloaded_file_name = await borg.download_media(fedfile.media, "fedlist.txt")
                 await asyncio.sleep(1)
                 file = open(downloaded_file_name, "r")
                 lines = file.readlines()
@@ -330,7 +408,6 @@ async def fetch_feds(event, borg):
                         fedList.append(line[:36])
                     except BaseException:
                         pass
-                # CleanUp
                 os.remove(downloaded_file_name)
         else:
             In = False
@@ -457,7 +534,7 @@ async def _ytdl(url, is_it, event, tgbot):
                     "preferredquality": "480",
                 }
             ],
-            "outtmpl": "%(id)s.mp3",
+            "outtmpl": "%(title)s.mp3",
             "quiet": True,
             "logtostderr": False,
         }
@@ -474,7 +551,7 @@ async def _ytdl(url, is_it, event, tgbot):
             "postprocessors": [
                 {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
             ],
-            "outtmpl": "%(id)s.mp4",
+            "outtmpl": "%(title)s.mp4",
             "logtostderr": False,
             "quiet": True,
         }
@@ -488,16 +565,14 @@ async def _ytdl(url, is_it, event, tgbot):
         return
     c_time = time.time()
     if song:
-        await event.edit(
-            f"**Uploading Audio**\
-        \n**Title :** `{ytdl_data['title']}`\
-        \n**Video Uploader :** `{ytdl_data['uploader']}`"
-        )
-        lol_m = await tgbot.upload_file(
-            file=f"{ytdl_data['id']}.mp3",
+        file_stark = f"{ytdl_data['title']}.mp3"
+        lol_m = await upload_file(
+            file_name=file_stark,
+            client=tgbot,
+            file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "**Uploading Audio To TG**", f"{ytdl_data['title']}.mp3"
+                    d, t, event, c_time, "Uploading Youtube Audio..", file_stark
                 )
             ),
         )
@@ -505,26 +580,67 @@ async def _ytdl(url, is_it, event, tgbot):
             file=lol_m,
             text=f"{ytdl_data['title']} \n**Uploaded Using @FRidayOt**"
         )
-        os.remove(f"{ytdl_data['id']}.mp3")
+        os.remove(file_stark)
     elif video:
-        await event.edit(
-            f"**Uploading Video**\
-        \n**Title :** `{ytdl_data['title']}`\
-        \n**Video Uploader :** `{ytdl_data['uploader']}`"
-        )
-        hmmo = await tgbot.upload_file(
-            file=f"{ytdl_data['id']}.mp4",
+        file_stark = f"{ytdl_data['title']}.mp4"
+        lol_m = await upload_file(
+            file_name=file_stark,
+            client=tgbot,
+            file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "**Uploading Video To TG**", f"{ytdl_data['title']}.mp4"
+                    d, t, event, c_time, "Uploading Youtube Video..", file_stark
                 )
             ),
         )
         await event.edit(
-            file=hmmo,
+            file=lol_m,
             text=f"{ytdl_data['title']} \n**Uploaded Using @FRidayOt**"
         )
-        os.remove(f"{ytdl_data['id']}.mp4")
+        os.remove(file_stark)
+
+
+async def _deezer_dl(word, event, tgbot):
+    await event.edit("`Ok Downloading This Audio - Please Wait.` \n**Powered By @FridayOT**")
+    urlp = f"https://starkapi.herokuapp.com/deezer/{word}"
+    datto = requests.get(url=urlp).json()
+    mus = datto.get("url")
+    mello = datto.get("artist")
+    #thums = urlhp["album"]["cover_medium"]
+    sname = f'''{datto.get("title")}.mp3'''
+    doc = requests.get(mus)
+    with open(sname, 'wb') as f:
+      f.write(doc.content)
+    car = f"""
+**Song Name :** {datto.get("title")}
+**Duration :** {datto.get('duration')} Seconds
+**Artist :** {mello}
+
+Music Downloaded And Uploaded By Friday Userbot
+
+Get Your Friday From @FridayOT"""
+    await event.edit("Song Downloaded.  Waiting To Upload. 🥳🤗")
+    c_time = time.time()
+    uploaded_file = await upload_file(
+        	file_name=sname,
+            client=tgbot,
+            file=open(sname, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading..", sname
+                )
+            ),
+        )
+    
+    await event.edit(
+            file=uploaded_file,
+            text=car
+    )
+    os.remove(sname)
+
+
+
+
                   
 async def get_all_admin_chats(event):
     lul_stark = []

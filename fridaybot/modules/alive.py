@@ -47,6 +47,8 @@ PM_IMG = Config.ALIVE_IMAGE
 @friday.on(friday_on_cmd(pattern=r"alive"))
 @friday.on(sudo_cmd(pattern=r"alive", allow_sudo=True))
 async def friday(alive):
+    if alive.fwd_from:
+        return
     await alive.get_chat()
     uptime = get_readable_time((time.time() - Lastupdate))
     repo = Repo()
@@ -66,7 +68,14 @@ async def friday(alive):
                   "➥ **Check Stats By Doing** `.stat`. \n\n"
                   "[🇮🇳 Deploy FridayUserbot 🇮🇳](https://telegra.ph/FRIDAY-06-15)")
     
-    await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
+    await borg.send_message(
+        alive.chat_id,
+        pm_caption,
+        reply_to=alive.message.reply_to_msg_id,
+        file=PM_IMG,
+        force_document=False,
+        silent=True,
+    )
     await alive.delete()
 
 

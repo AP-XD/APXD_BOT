@@ -14,9 +14,8 @@ from time import gmtime, strftime
 from telethon import events
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
-
 from fridaybot import *
-from fridaybot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
+from fridaybot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot, client2, client3, CMD_HELP
 from fridaybot.Configs import Config
 from fridaybot.wraptools import (
     am_i_admin,
@@ -86,15 +85,14 @@ def command(**args):
             del args["allow_edited_updates"]
 
         def decorator(func):
-            if allow_edited_updates:
+            if not allow_edited_updates:
                 bot.add_event_handler(func, events.MessageEdited(**args))
             bot.add_event_handler(func, events.NewMessage(**args))
             try:
                 LOAD_PLUG[file_test].append(func)
-            except:
+            except Exception:
                 LOAD_PLUG.update({file_test: [func]})
             return func
-
         return decorator
 
 
@@ -144,6 +142,7 @@ def load_module(shortname):
         mod.admin_cmd = friday_on_cmd
         mod.sudo_cmd = sudo_cmd
         mod.friday_on_cmd = friday_on_cmd
+        mod.CMD_HELP = CMD_HELP
         mod.Config = Config
         mod.ignore_grp = ignore_grp()
         mod.ignore_pm = ignore_pm()
@@ -168,6 +167,63 @@ def load_module(shortname):
         sys.modules["fridaybot.modules." + shortname] = mod
         sedprint.info("༒★彡☣️Successfully imported ☣️彡★༒" + shortname)
 
+def load_module_dclient(shortname, client):
+    if shortname.startswith("__"):
+        pass
+    elif shortname.endswith("_"):
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import fridaybot.modules
+        import fridaybot.utils
+
+        path = Path(f"fridaybot/modules/{shortname}.py")
+        name = "fridaybot.modules.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    else:
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import fridaybot.modules
+        import fridaybot.utils
+
+        path = Path(f"fridaybot/modules/{shortname}.py")
+        name = "fridaybot.modules.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        mod.bot = client
+        mod.tgbot = bot.tgbot
+        mod.Var = Var
+        mod.command = command
+        sedlu = str(shortname) + "- MClient -"
+        mod.logger = logging.getLogger(sedlu)
+        # support for uniborg
+        sys.modules["uniborg.util"] = fridaybot.utils
+        sys.modules["friday.util"] = fridaybot.utils
+        sys.modules["userbot.utils"] = fridaybot.utils
+        sys.modules["userbot.plugins"] = fridaybot.modules
+        sys.modules["plugins"] = fridaybot.modules
+        sys.modules["userbot"] = fridaybot
+        mod.admin_cmd = friday_on_cmd
+        mod.sudo_cmd = sudo_cmd
+        mod.friday_on_cmd = friday_on_cmd
+        mod.Config = Config
+        mod.ignore_grp = ignore_grp()
+        mod.ignore_pm = ignore_pm()
+        mod.ignore_bot = ignore_bot()
+        mod.am_i_admin = am_i_admin()
+        mod.ignore_fwd = ignore_fwd()
+        mod.borg = client
+        mod.friday = client
+        mod.CMD_HELP = CMD_HELP
+        # support for paperplaneextended
+        sys.modules["fridaybot.events"] = fridaybot.utils
+        spec.loader.exec_module(mod)
+        sys.modules["fridaybot.modules." + shortname] = mod
 
 def remove_plugin(shortname):
     try:
@@ -286,11 +342,8 @@ def admin_cmd(pattern=None, **args):
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
         args["allow_edited_updates"]
         del args["allow_edited_updates"]
-
     # check if the plugin should listen for outgoing 'messages'
-
     return events.NewMessage(**args)
-
 
 def friday_on_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -330,9 +383,6 @@ def friday_on_cmd(pattern=None, **args):
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
         args["allow_edited_updates"]
         del args["allow_edited_updates"]
-
-    # check if the plugin should listen for outgoing 'messages'
-
     return events.NewMessage(**args)
 
 

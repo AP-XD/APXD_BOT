@@ -1,15 +1,15 @@
 import asyncio
 import time
 from collections import deque
-
 from telethon.tl.functions.channels import LeaveChannelRequest
-
 from fridaybot import CMD_HELP, bot
 from fridaybot.utils import admin2_cmd, friday_on_cmd
 
 
 @friday.on(friday_on_cmd("leave$"))
 async def leave(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`I iz Leaving dis Lol Group kek!`")
         time.sleep(3)
@@ -19,7 +19,7 @@ async def leave(e):
             await e.edit("`But Boss! This is Not A Chat`")
 
 
-@borg.on(admin2_cmd("Lol$"))
+@borg.on(admin2_cmd("Loll$"))
 # @register(outgoing=True, pattern="^;__;$")
 async def lolo(e):
     animation_ttl = range(0, 8)
@@ -34,6 +34,8 @@ async def lolo(e):
 @borg.on(admin2_cmd("Sed$"))
 # @register(outgoing=True, pattern="^;__;$")
 async def fun(e):
+    if e.fwd_from:
+        return
     t = ";__;"
     for j in range(10):
         t = t[:-1] + "_;"
@@ -49,7 +51,7 @@ async def Ooo(e):
         await e.edit(t)
 
 
-@borg.on(admin2_cmd("Hmmm$"))
+@borg.on(admin2_cmd("Hmm$"))
 # @register(outgoing=True, pattern="^Hmm$")
 async def Mmm(e):
     t = "Hmmm"
@@ -88,6 +90,8 @@ async def Binod(e):
 @borg.on(admin2_cmd("Oof$"))
 # @register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
+    if e.fwd_from:
+        return
     t = "Oof"
     for j in range(6):
         t = t[:-1] + "of"
@@ -97,6 +101,8 @@ async def Oof(e):
 @friday.on(friday_on_cmd("ccry$"))
 # @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("(;´༎ຶД༎ຶ)")
 
@@ -104,6 +110,8 @@ async def cry(e):
 @friday.on(friday_on_cmd("fp$"))
 # @register(outgoing=True, pattern="^.fp$")
 async def facepalm(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("🤦‍♂")
 
@@ -123,6 +131,8 @@ async def _(event):
 @friday.on(friday_on_cmd("source$"))
 # @register(outgoing=True, pattern="^.source$")
 async def source(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("https://github.com/StarkGang/FridayUserbot")
 
@@ -130,6 +140,8 @@ async def source(e):
 @friday.on(friday_on_cmd("readme$"))
 # @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
+    if e.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("https://github.com/StarkGang/FRIDAYUSERBOT/blob/master/README.md")
 

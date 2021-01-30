@@ -1,3 +1,16 @@
+#    Copyright (C) @chsaiujwal 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import asyncio
 import math
 import os
@@ -80,6 +93,8 @@ if not os.path.isdir(sedpath):
 @friday.on(friday_on_cmd(pattern="vt(?: |$)(.*)", outgoing=True))
 @friday.on(sudo_cmd(pattern="vt(?: |$)(.*)", allow_sudo=True))
 async def download(target_file):
+    if target_file.fwd_from:
+        return
     friday = await edit_or_reply(target_file, "`Processing ...`")
     if Config.VIRUSTOTAL_API_KEY is None:
         await friday.edit(

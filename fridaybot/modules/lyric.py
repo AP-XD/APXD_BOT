@@ -55,6 +55,8 @@ async def _(event):
 
 @friday.on(friday_on_cmd(outgoing=True, pattern="glyrics(?: |$)(.*)"))
 async def lyrics(lyric):
+    if lyric.fwd_from:
+        return
     if r"-" in lyric.text:
         pass
     else:

@@ -6,6 +6,7 @@ PyLyrics
 PyPDF2
 PyProxyToolkit
 QScintilla
+Telethon==1.19.0
 aiofiles
 aiohttp
 anime_downloader
@@ -36,6 +37,7 @@ dnspython
 emoji
 emoji-country-flag
 emoji==0.6.0
+eyed3
 faker
 flask
 fontTools
@@ -138,7 +140,9 @@ wget
 wheel
 wikipedia>=1.4.0
 yahoo_fin
+youtube-dl
 youtube-search
+youtube-search-python
 youtube-search-python==1.3.9
 youtube_dl==2021.1.24.1
 youtube_search

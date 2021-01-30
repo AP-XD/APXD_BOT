@@ -16,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 from PIL import Image
 
-from fridaybot import CMD_HELP, bot
+from fridaybot import CMD_HELP
 from fridaybot.utils import errors_handler, register, friday_on_cmd
 
 opener = urllib.request.build_opener()
@@ -26,6 +26,8 @@ opener.addheaders = [("User-agent", useragent)]
 
 @friday.on(friday_on_cmd(pattern=r"reverse(?: |$)(\d*)"))
 async def okgoogle(img):
+    if img.fwd_from:
+        return
     """ For .reverse command, Google search images and stickers. """
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")

@@ -1,17 +1,35 @@
 import html
-from fridaybot.modules.sql_helper.gmute_sql import is_gmuted
+from fridaybot.modules.sql_helper.gban_sql import is_gbanned
 from fridaybot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-
+from telethon.tl.functions.messages import GetCommonChatsRequest
+from telethon.tl.functions.users import GetFullUserRequest
 from fridaybot import CMD_HELP, sclient
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
-
-@friday.on(friday_on_cmd("innfo ?(.*)"))
-@friday.on(sudo_cmd("innfo ?(.*)", allow_sudo=True))
+@friday.on(friday_on_cmd("showcc(?: |$)(.*)"))
+async def _(event):
+    user_s, error = await get_full_user(event)
+    if user_s is None:
+        await event.edit("`Something Went Really Wrong !`")
+        return
+    if user_s.common_chats_count == 0:
+        await event.edit("**No Chats in Common !**")
+        return
+    sed = await event.client(GetCommonChatsRequest(user_id=user_s.user.id, max_id=0, limit=100))
+    lol = f"**User-ID :** `{user_s.user.id}` \n**First-Name :** `{user_s.user.first_name}` \n**Total Groups In Common :** `{user_s.common_chats_count}` \n\n"
+    for stark in sed.chats:
+        try:
+            lol += f"**Chat ID :** `{stark.id}` \n**Chat Name :** `{stark.title}` \n**Chat-UserName :** `{stark.username}` \n\n"
+        except:
+            lol += f"**Chat ID :** `{stark.id}` \n**Chat Name :** `{stark.title}` \n\n"
+    await event.edit(lol) 
+    
+@friday.on(friday_on_cmd("innfo(?: |$)(.*)"))
+@friday.on(sudo_cmd("innfo(?: |$)(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -47,10 +65,10 @@ async def _(event):
         dc_id = "Unknown."
         str(e)
     shazam = replied_user_profile_photos_count
-    if is_gmuted(user_id):
-        is_gbanned = "This User Is Gbanned"
-    elif not is_gmuted(user_id):
-        is_gbanned = False
+    if is_gbanned(user_id):
+        is_gbanned_s = f"This User Is Gbanned For Reason : {is_gbanned}"
+    elif not is_gbanned(user_id):
+        is_gbanned_s = False
     if is_muted(user_id, "gmute"):
         is_gmutted = "User is Tapped."
     elif not is_muted(user_id, "gmute"):
@@ -67,7 +85,7 @@ async def _(event):
 <b>VERIFIED</b>: <code>{replied_user.user.verified}</code>
 <b>IS A BOT</b>: <code>{replied_user.user.bot}</code>
 <b>Groups in Common</b>: <code>{common_chats}</code>
-<b>Is Gbanned</b>: <code>{is_gbanned}</code>
+<b>Is Gbanned</b>: <code>{is_gbanned_s}</code>
 <b>Is Gmutted</b>: <code>{is_gmutted}</code>
 """
     message_id_to_reply = event.message.reply_to_msg_id

@@ -20,12 +20,14 @@ from fridaybot.modules.sql_helper.feds_sql import (
 )
 import asyncio
 from fridaybot.utils import friday_on_cmd
-
+from fridaybot import CMD_HELP
 chnnl_grp = Config.FBAN_GROUP
 
 
 @friday.on(friday_on_cmd(pattern="fadd ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     nolol = 0
     yeslol = 0
     await event.edit("`Processing..`")
@@ -55,6 +57,8 @@ async def _(event):
 
 @friday.on(friday_on_cmd(pattern="frm ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.pattern_match.group(1)
     await event.edit("`Processing..`")
     lol = get_all_feds()
@@ -77,6 +81,8 @@ async def _(event):
 
 @friday.on(friday_on_cmd(pattern="fban"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.text.split(" ", maxsplit=1)[1]
     if lol_s == None:
         await event.edit("`No user Found To Fban.`")
@@ -108,6 +114,8 @@ async def _(event):
 
 @friday.on(friday_on_cmd(pattern="unfban ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.pattern_match.group(1)
     if lol_s == None:
         await event.edit("`No User Found To Fban.`")
@@ -132,3 +140,23 @@ async def _(event):
     await event.edit(
         f"**Un-Fban Completed** \nTotal Sucess : `{len_feds - errors}` \nTotal Errors : `{errors}` \nTotal Fed Len : `{len_feds}`"
     )
+
+
+CMD_HELP.update(
+    {
+        "fed_ban": "**Fed Ban**\
+\n\n**Syntax : **`.fadd <fed-id>`\
+\n**Usage :** Adds The Given Fed In Fban database.\
+\n\n**Syntax : **`.fadd all`\
+\n**Usage :** Adds All The Feds In The Database Where You Are Admin.\
+\n\n**Syntax : **`.frm <fed-id>`\
+\n**Usage :** Removes The Given Fed From The Fban database.\
+\n**Example :** `.frm add`\
+\n**Note** :** Removes All The Feds From The Database.\
+\n**Example :** `.fban <username/User-ID>`\
+\n**Note** :** FBans The User.\
+\n**Example :** `.unfban <username/User-ID>`\
+\n**Note** :** UnFbans The User."
+    }
+)
+

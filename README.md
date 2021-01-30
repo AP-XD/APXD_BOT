@@ -23,7 +23,15 @@
 
 
 
+# KeyFeatures
 
+* Multiple Client Support.
+* AssistantBot Support.
+* Channel Sticker / Post Appender Support.
+* Smart / Fast - Powered By FastTelethon.
+* Smart & Powerfull Tools.
+* Customizable.
+* Much Cleaner And Stable.
 
 # Deploying To Heroku
 
