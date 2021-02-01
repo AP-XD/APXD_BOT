@@ -11,7 +11,7 @@ from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
-@friday.on(friday_on_cmd("wtf"))
+@friday.on(friday_on_cmd("wttf"))
 async def _(event):
     if event.fwd_from:
         return
