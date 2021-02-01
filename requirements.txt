@@ -49,10 +49,11 @@ git+https://github.com/cher-nov/cryptg
 git+https://github.com/gleitz/howdoi
 gitpython
 glitch_this
+google
 google-api-python-client==1.8.0
 google-auth-oauthlib
 google-trans-new
-google_images_download>=2.7.1
+google_images_download>=2.8.0
 google_trans_new
 googletrans
 grapheme
