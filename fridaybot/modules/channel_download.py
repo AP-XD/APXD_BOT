@@ -7,7 +7,7 @@ By: @Zero_cool7870
 import os
 import subprocess
 from fridaybot.Configs import Config
-from fridaybot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd,edit_or_reply
 location = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "temp")
 
 from fridaybot import CMD_HELP

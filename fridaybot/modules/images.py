@@ -3,7 +3,7 @@ import os
 import shutil
 
 from fridaybot.helpers.google_image_download import googleimagesdownload
-from fridaybot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from fridaybot import CMD_HELP
 @bot.on(admin_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)"))
 @bot.on(sudo_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)", allow_sudo=True))
@@ -47,7 +47,14 @@ async def img_sampler(event):
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await cat.delete()
 
-
+async def reply_id(event):
+    reply_to_id = None
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to_id = event.id
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
+    return reply_to_id
+    
 CMD_HELP.update(
     {
         "images": "**Plugin :**`images`\

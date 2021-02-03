@@ -5,7 +5,7 @@ from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from fridaybot import CMD_HELP
-from fridaybot.utils import admin_cmd, sudo_cmd
+from fridaybot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from fridaybot import CMD_HELP
 if Config.PRIVATE_GROUP_BOT_API_ID is None:
     BOTLOG = False
@@ -28,6 +28,7 @@ async def spammer(event):
     else:
         sleeptimet = 0.1
         sleeptimem = 0.3
+    await event.delete()
     await event.delete()
     await spam_function(event, sandy, cat, sleeptimem, sleeptimet)
 
@@ -124,7 +125,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
                 )
 
 
-@bot.on(admin_cmd(pattern="spspam$"))
+@bot.on(admin_cmd(pattern="spsspam$"))
 @bot.on(sudo_cmd(pattern="spspam$", allow_sudo=True))
 async def stickerpack_spam(event):
     if event.fwd_from:
@@ -133,7 +134,7 @@ async def stickerpack_spam(event):
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
         return await edit_delete(
             event, "`reply to any sticker to send all stickers in that pack`"
-        )
+        )    
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
         stickerset_attr = reply.document.attributes[1]
@@ -245,8 +246,47 @@ async def spammer(event):
     cat = input_str[1:]
     await event.delete()
     await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+    
+def media_type(message):
+    if message and message.photo:
+        return "Photo"
+    elif message and message.audio:
+        return "Audio"
+    elif message and message.voice:
+        return "Voice"
+    elif message and message.video_note:
+        return "Round Video"
+    elif message and message.gif:
+        return "Gif"
+    elif message and message.sticker:
+        return "Sticker"
+    elif message and message.video:
+        return "Video"
+    elif message and message.document:
+        return "Document"
+    else:
+        return None
 
-
+async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None):
+    parse_mode = parse_mode or "md"
+    link_preview = link_preview or False
+    time = time or 5
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to = await event.get_reply_message()
+        catevent = (
+            await reply_to.reply(text, link_preview=link_preview, parse_mode=parse_mode)
+            if reply_to
+            else await event.reply(
+                text, link_preview=link_preview, parse_mode=parse_mode
+            )
+        )
+    else:
+        catevent = await event.edit(
+            text, link_preview=link_preview, parse_mode=parse_mode
+        )
+    await asyncio.sleep(time)
+    return await catevent.delete()
+    
 CMD_HELP.update(
     {
         "spam": "**Plugin : **`spam`\
