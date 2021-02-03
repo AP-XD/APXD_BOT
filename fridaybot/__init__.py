@@ -23,7 +23,7 @@ from .Configs import Config
 
 StartTime = time.time()
 UpTime = time.time()
-catversion = "2.9.4"
+catversion = "2.10.2"
 Lastupdate = time.time()
 telever = "5.0"
 os.system("pip install --upgrade pip")

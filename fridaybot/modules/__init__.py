@@ -4,6 +4,7 @@ import re
 import time
 
 import heroku3
+import lottie             
 import requests
 import spamwatch as spam_watch
 from sqlalchemy import create_engine
@@ -18,18 +19,18 @@ from fridaybot.utils import admin_cmd, friday_on_cmd
 from fridaybot.Configs import Config
 
 from .. import StartTime
-from ..helpers import *
+from ..helpers import *                                                 
 
 UP = "**2.1.0**"
 # =================== CONSTANT ===================
 
 
-USERID = Config.OWNER_ID
+USERID = Config.OWNER_ID or bot.uid
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
-
+BOT_USERNAME = Config.TG_BOT_USER_NAME_BF_HER
 # mention user
 mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
 hmention = f"<a href = tg://user?id={USERID}>{DEFAULTUSER}</a>"
@@ -155,14 +156,13 @@ if Config.SPAMWATCH_API:
     spamwatch = spam_watch.Client(token)
 else:
     spamwatch = None
-
-
+cat_users = [bot.uid]
+if Config.SUDO_USERS:
+    for user in Config.SUDO_USERS:
+        cat_users.append(user)
 async def catalive():
     _, check_sgnirts = check_data_base_heal_th()
-    if Config.SUDO_USERS:
-        sudo = "Enabled"
-    else:
-        sudo = "Disabled"
+    sudo = "Enabled" if Config.SUDO_USERS else "Disabled"
     uptime = await get_readable_time((time.time() - StartTime))
     try:
         useragent = (
@@ -202,13 +202,12 @@ async def catalive():
         dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
     except Exception as e:
         dyno = e
-    conclusion = f"Catfridaybot Stats\
+    return f"Catfridaybot Stats\
                  \n\nDatabase : {check_sgnirts}\
                   \nSudo : {sudo}\
                   \nUptime : {uptime}\
                   \nDyno : {dyno}\
                   "
-    return conclusion
 
 
 
@@ -271,3 +270,14 @@ inlinestats = (
     f"HEROKU = {riplife} \n"
     f"G-DRIVE = {wearenoob}"
 )
+async def make_gif(event, reply, quality=None, fps=None):
+    fps = fps or 1
+    quality = quality or 256
+    result_p = os.path.join("temp", "animation.gif")
+    animation = lottie.parsers.tgs.parse_tgs(reply)
+    with open(result_p, "wb") as result:
+        await _catutils.run_sync(
+            lottie.exporters.gif.export_gif, animation, result, quality, fps
+        )
+    return result_p
+               

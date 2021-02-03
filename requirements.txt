@@ -1,4 +1,4 @@
-DateTime		
+DateTime
 Pillow
 PyDictionary
 PyGithub
@@ -51,13 +51,14 @@ gitpython
 glitch_this
 google
 google-api-python-client==1.8.0
+google-auth-httplib2					
 google-auth-oauthlib
 google-trans-new
-google_images_download>=2.8.0
+google_images_download
 google_trans_new
-googletrans
+googletrans==4.0.0-rc1
 grapheme
-gsearch
+gsearch	
 hachoir
 heroku3
 howdoi
@@ -66,10 +67,10 @@ httplib2
 humanize
 iplookup
 jikanpy
-jotquote		
+jotquote
 justwatch
 keyboard	 
-kwot	
+kwot
 langdetect
 lottie
 lxml
@@ -77,7 +78,7 @@ lyrics_extractor
 lyricsgenius
 mal-api
 moviepy
-nekos.py		
+nekos.py
 nospamplus
 numpy
 oauth2client
@@ -89,7 +90,7 @@ pdf2docx
 pokedex.py
 pornhub-api
 prettytable
-programmingquotes	  
+programmingquotes
 psutil
 psycopg2
 psycopg2-binary
@@ -122,6 +123,7 @@ scapy
 scipy
 search-engine-parser>=0.4.2
 selenium
+setuptools		  
 spamwatch		 
 speedtest-cli>=2.0.2
 spotdl
@@ -135,8 +137,8 @@ the_python_bay
 tswift
 urbandict>=0.5
 validators
-vcsi	
-wand	
+vcsi
+wand
 wget
 wheel
 wikipedia>=1.4.0
