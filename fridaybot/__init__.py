@@ -55,7 +55,7 @@ CMD_HELP = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
 CAT_ID = ["1035034432", "551290198"]
-# PaperPlaneExtended Support Vars
+# PaperPlaneExtended Support Configs
 ENV = os.environ.get("ENV", False)
 """ PPE initialization. """
 
@@ -205,7 +205,7 @@ CUSTOM_PMPERMIT_MSG = {}
 CUSTOM_BOTSTART = {}
 ISAFK = False
 AFKREASON = None
-# End of PaperPlaneExtended Support Vars
+# End of PaperPlaneExtended Support Configs
 # showing imports error
 
 from .helpers import *

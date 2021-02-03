@@ -134,7 +134,7 @@ def load_module(shortname):
         mod.telebot = bot
         mod.tgbot = bot.tgbot
         mod.Config = Config
-        mod.Var = Config
+        mod.Config = Config
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
@@ -160,7 +160,7 @@ def load_module(shortname):
         sys.modules["fridaybot.events"] = fridaybot.utils
         spec.loader.exec_module(mod)
         mod.plus = bot
-        mod.sudo = Var.SUDO_USERS
+        mod.sudo = Config.SUDO_USERS
         sys.modules["plus.utils"] = fridaybot.utils
         sys.modules[
             "global_variables"
@@ -203,7 +203,7 @@ def load_module_dclient(shortname, client):
         mod.bot = client
         mod.tgbot = bot.tgbot
         mod.Config = Config
-        mod.Var = Config
+        mod.Config = Config
         mod.command = command
         sedlu = str(shortname) + "- MClient -"
         mod.logger = logging.getLogger(sedlu)

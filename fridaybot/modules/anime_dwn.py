@@ -1,5 +1,5 @@
 """
-Anime Batch Downloader Plugin for fridaybot. //set TEMP_DIR Env Var first.
+Anime Batch Downloader Plugin for fridaybot. //set TEMP_DIR Env Config first.
 usage:- get a link of Animefrenzy.net Anime page and use in cmd.
 cmd:- .anime page_link
 By:- @Zero_cool7870	  
@@ -42,7 +42,7 @@ async def anime_download(event):
     if event.fwd_from:
         return
     if Config.TEMP_DIR is None:
-        await event.edit("Please Set Required ENV Variables First.")
+        await event.edit("Please Set Required ENV Configiables First.")
         return
     download_dir = Config.TEMP_DIR
     try:

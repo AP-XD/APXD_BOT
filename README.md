@@ -79,7 +79,7 @@ $ python(3) -m fridaybot
 
 # Mandatory Configs
 ```
-[+] If You Running Friday On A Deploy Services With Config Env Support Like Heroku, Zeet.co, Please Set "ENV" To True , Else For Self Host Services Like Digital Ocean Just Make A Local Config And Put Vars Given Below.
+[+] If You Running Friday On A Deploy Services With Config Env Support Like Heroku, Zeet.co, Please Set "ENV" To True , Else For Self Host Services Like Digital Ocean Just Make A Local Config And Put Configs Given Below.
     [-] APP_ID:   You can get this value from https://my.telegram.org
     [-] API_HASH :   You can get this value from https://my.telegram.org
     [-] STRING_SESSION : Your String Session, You can get this From Repl or BY running StringGen File Locally

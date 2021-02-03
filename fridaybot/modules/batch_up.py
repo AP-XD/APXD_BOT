@@ -1,7 +1,7 @@
 """
 Files Batch Uploader Plugin for fridaybot.
 usage:- .upb 
-Note:- set TEMP_DIR in Your ENV Vars First.
+Note:- set TEMP_DIR in Your ENV Configs First.
 By:-@Zero_cool7870	
 
 """

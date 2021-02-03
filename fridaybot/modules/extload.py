@@ -11,7 +11,7 @@ from fridaybot.Configs import Config
 async def install(event):
     if event.fwd_from:
         return
-    chat = Var.PLUGIN_CHANNEL
+    chat = Config.PLUGIN_CHANNEL
     documentss = await borg.get_messages(chat, None, filter=InputMessagesFilterDocument)
     total = int(documentss.total)
     total_doxx = range(0, total)

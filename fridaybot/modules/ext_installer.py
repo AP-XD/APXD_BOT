@@ -13,7 +13,7 @@ from ..utils import load_module
 async def install(event):
     if event.fwd_from:
         return
-    chat = Var.PLUGIN_GROUP
+    chat = Config.PLUGIN_GROUP
     if chat:
         documentss = await event.client.get_messages(
             chat, None, filter=InputMessagesFilterDocument

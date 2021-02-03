@@ -14,7 +14,7 @@ from fridaybot.utils import admin_cmd
 @borg.on(admin_cmd(pattern="encode ?(.*)"))
 async def coder_print(event):
     a = await event.client.download_media(
-        await event.get_reply_message(), Var.TEMP_DOWNLOAD_DIRECTORY
+        await event.get_reply_message(), Config.TEMP_DOWNLOAD_DIRECTORY
     )
     s = open(a, "r")
     c = s.read()

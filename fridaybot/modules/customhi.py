@@ -3,11 +3,11 @@ from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"hhi ?(.*)"))
 async def hhi(event):
-    giveVar = event.text
-    cat = giveVar[5:6]
+    giveConfig = event.text
+    cat = giveConfig[5:6]
     if not cat:
         cat = "🌺"
-    ct = giveVar[7:8]
+    ct = giveConfig[7:8]
     if not ct:
         ct = "✨"
     await event.edit(

@@ -18,7 +18,7 @@ from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 telegraph = Telegraph()
 tgnoob = telegraph.create_account(short_name="Friday 🇮🇳")
 
-Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 
@@ -30,11 +30,11 @@ heroku_api = "https://api.heroku.com"
 )
 async def variable(var):
     """
-    Manage most of ConfigVars setting, set new var, get current var,
+    Manage most of ConfigConfigs setting, set new var, get current var,
     or delete var...
     """
-    if Var.HEROKU_APP_NAME is not None:
-        app = Heroku.app(Var.HEROKU_APP_NAME)
+    if Config.HEROKU_APP_NAME is not None:
+        app = Heroku.app(Config.HEROKU_APP_NAME)
     else:
         return await edit_or_reply(
             var, "`[HEROKU]:" "\nPlease setup your` **HEROKU_APP_NAME**"
@@ -49,11 +49,11 @@ async def variable(var):
             if variable in heroku_var:
                 return await edit_or_reply(
                     var,
-                    "**ConfigVars**:" f"\n\n`{variable} = {heroku_var[variable]}`\n",
+                    "**ConfigConfigs**:" f"\n\n`{variable} = {heroku_var[variable]}`\n",
                 )
             else:
                 return await edit_or_reply(
-                    var, "**ConfigVars**:" f"\n\n`Error:\n-> {variable} don't exists`"
+                    var, "**ConfigConfigs**:" f"\n\n`Error:\n-> {variable} don't exists`"
                 )
         except IndexError:
             configs = prettyjson(heroku_var.to_dict(), indent=2)
@@ -71,7 +71,7 @@ async def variable(var):
                 else:
                     await edit_or_reply(
                         var,
-                        "`[HEROKU]` ConfigVars:\n\n"
+                        "`[HEROKU]` ConfigConfigs:\n\n"
                         "================================"
                         f"\n```{result}```\n"
                         "================================",
@@ -82,14 +82,14 @@ async def variable(var):
         await edit_or_reply(var, "`Setting information...`")
         variable = var.pattern_match.group(2)
         if not variable:
-            return await edit_or_reply(var, ">`.set var <ConfigVars-name> <value>`")
+            return await edit_or_reply(var, ">`.set var <ConfigConfigs-name> <value>`")
         value = var.pattern_match.group(3)
         if not value:
             variable = variable.split()[0]
             try:
                 value = var.pattern_match.group(2).split()[1]
             except IndexError:
-                return await edit_or_reply(var, ">`.set var <ConfigVars-name> <value>`")
+                return await edit_or_reply(var, ">`.set var <ConfigConfigs-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
             await edit_or_reply(
@@ -106,7 +106,7 @@ async def variable(var):
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
             return await edit_or_reply(
-                var, "`Please specify ConfigVars you want to delete`"
+                var, "`Please specify ConfigConfigs you want to delete`"
             )
         await asyncio.sleep(1.5)
         if variable in heroku_var:
@@ -131,7 +131,7 @@ async def dyno_usage(dyno):
     user_id = Heroku.account().id
     headers = {
         "User-Agent": useragent,
-        "Authorization": f"Bearer {Var.HEROKU_API_KEY}",
+        "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
         "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
     path = "/accounts/" + user_id + "/actions/get-quota"
@@ -169,7 +169,7 @@ async def dyno_usage(dyno):
     return await edit_or_reply(
         dyno,
         "**Dyno Usage Data**:\n\n"
-        f"✗ **APP NAME =>** `{Var.HEROKU_APP_NAME}` \n"
+        f"✗ **APP NAME =>** `{Config.HEROKU_APP_NAME}` \n"
         f"✗ **Usage in Hours And Minutes =>** `{AppHours}h`  `{AppMinutes}m`"
         f"✗ **Usage Percentage =>** [`{AppPercentage} %`]\n"
         "\n\n"
@@ -206,8 +206,8 @@ def prettyjson(obj, indent=2, maxlinelength=80):
 @friday.on(sudo_cmd(pattern="logs$", allow_sudo=True))
 async def _(givelogs):
     try:
-        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
-        app = Heroku.app(Var.HEROKU_APP_NAME)
+        Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
+        app = Heroku.app(Config.HEROKU_APP_NAME)
     except:
         return await givelogs.reply(
             " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !"

@@ -4,9 +4,9 @@
 from telethon import functions
 from uniborg.util import admin_cmd
 
-f_name = Var.FIRST_NAME
-l_name = Var.LAST_NAME
-bio = Var.DEF_BIO
+f_name = Config.FIRST_NAME
+l_name = Config.LAST_NAME
+bio = Config.DEF_BIO
 
 
 @borg.on(admin_cmd(pattern="revert$"))
@@ -35,5 +35,5 @@ async def _(event):
     )
     await event.delete()
     await event.client.send_message(
-        Var.BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
+        Config.BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
     )

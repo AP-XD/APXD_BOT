@@ -13,9 +13,9 @@ from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"boobs"))
 async def boobs(event):
-    if not os.path.isdir(Var.TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Var.TEMP_DOWNLOAD_DIRECTORY)
-    pic_loc = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, "bobs.jpg")
+    if not os.path.isdir(Config.TEMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(Config.TEMP_DOWNLOAD_DIRECTORY)
+    pic_loc = os.path.join(Config.TEMP_DOWNLOAD_DIRECTORY, "bobs.jpg")
     a = await event.reply("Finding some big boobs for u 🧐")
     await asyncio.sleep(0.5)
     await a.edit("Sending some big boobs🤪")
@@ -29,9 +29,9 @@ async def boobs(event):
 
 @borg.on(admin_cmd(pattern=r"butts"))
 async def butts(event):
-    if not os.path.isdir(Var.TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Var.TEMP_DOWNLOAD_DIRECTORY)
-    pic_loc = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, "butts.jpg")
+    if not os.path.isdir(Config.TEMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(Config.TEMP_DOWNLOAD_DIRECTORY)
+    pic_loc = os.path.join(Config.TEMP_DOWNLOAD_DIRECTORY, "butts.jpg")
     a = await event.reply("Finding some beautiful butts for u🧐")
     await asyncio.sleep(0.5)
     await a.edit("Sending some beautiful butts🤪")

@@ -1,7 +1,7 @@
 """
 Pulls Up A Random Chant From Harry Potter Series...
 Syntax: .hp
-    orginal author : AlenPaulVarghese(@STARKTM1)
+    orginal author : AlenPaulConfigghese(@STARKTM1)
     custom editing : @pureindialover
 """
 import random

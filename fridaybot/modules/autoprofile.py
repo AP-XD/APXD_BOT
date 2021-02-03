@@ -39,7 +39,7 @@ async def autopic(event):
     await event.edit(f"Autopic has been started by my Master")
     downloaded_file_name = "fridaybot/original_pic.png"
     downloader = SmartDL(
-        Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
+        Config.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
     )
     downloader.start(blocking=False)
     photo = "fridaybot/photo_pfp.png"
@@ -109,7 +109,7 @@ async def autopic(event):
     await event.edit("Bloom colour profile pic have been enabled by my master")
     downloaded_file_name = "fridaybot/original_pic.png"
     downloader = SmartDL(
-        Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=True
+        Config.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=True
     )
     downloader.start(blocking=False)
     photo = "fridaybot/photo_pfp.png"

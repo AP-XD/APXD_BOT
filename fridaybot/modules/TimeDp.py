@@ -15,7 +15,7 @@ FONT_FILE_TO_USE = "Fonts/digital.ttf"
 async def seconddp(event):
     downloaded_file_name = "fridaybot/original_pic.png"
     downloader = SmartDL(
-        Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
+        Config.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
     )
     downloader.start(blocking=False)
     photo = "fridaybot/photo_pfp.png"

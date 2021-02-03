@@ -3,8 +3,8 @@ from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"bid ?(.*)"))
 async def bid(event):
-    giveVar = event.text
-    bid = giveVar[4:5]
+    giveConfig = event.text
+    bid = giveConfig[4:5]
     if not bid:
         bid = "😂"
     await event.edit(

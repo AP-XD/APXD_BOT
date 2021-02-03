@@ -11,8 +11,8 @@ from fridaybot.utils import admin_cmd
 async def gbun(event):
     if event.fwd_from:
         return
-    gbunVar = event.text
-    gbunVar = gbunVar[6:]
+    gbunConfig = event.text
+    gbunConfig = gbunConfig[6:]
     mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
     no_reason = "__Reason: Potential spammer. __"
     await event.edit("**Summoning out le Gungnir ❗️⚜️☠️**")
@@ -43,8 +43,8 @@ async def gbun(event):
                 jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
             elif usname != "None":
                 jnl += "**Victim Nigga's username** : @{}\n".format(usname)
-            if len(gbunVar) > 0:
-                gbunm = "`{}`".format(gbunVar)
+            if len(gbunConfig) > 0:
+                gbunm = "`{}`".format(gbunConfig)
                 gbunr = "**Reason: **" + gbunm
                 jnl += gbunr
             else:

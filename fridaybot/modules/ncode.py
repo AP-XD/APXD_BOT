@@ -12,7 +12,7 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern=r"ncode$"))
 async def coder_print(event):
     a = await event.client.download_media(
-        await event.get_reply_message(), Var.TEMP_DOWNLOAD_DIRECTORY
+        await event.get_reply_message(), Config.TEMP_DOWNLOAD_DIRECTORY
     )
     s = open(a, "r")
     c = s.read()

@@ -1,7 +1,7 @@
 # global variables will be assigned here
 # can be imported in any module to make life easier.
 from fridaybot import AUTOPIC_COMMENT, AUTOPIC_FONT, AUTOPIC_FONT_COLOUR
-from heroku_config import Var
+from heroku_config import Config
 
 AUTO_PIC_FONT = str(AUTOPIC_FONT) if AUTOPIC_FONT else "DejaVuSansMono.ttf"
 FONT_FILE_TO_USE = f"fonts/{AUTO_PIC_FONT}"
@@ -18,10 +18,10 @@ LIKE = "👍🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿
 LOL = "｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥•°\n╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ \n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ \n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ \n╱┗━━━┛╰━━━╯┗━━━┛╱\n｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥°•"
 
 
-LOGGER = Var.PRIVATE_GROUP_BOT_API_ID
-BLACKLIST = Var.UB_BLACK_LIST_CHAT
+LOGGER = Config.PRIVATE_GROUP_BOT_API_ID
+BLACKLIST = Config.UB_BLACK_LIST_CHAT
 SYNTAX = {}
-SUDO_USERS = Var.SUDO_USERS
+SUDO_USERS = Config.SUDO_USERS
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}

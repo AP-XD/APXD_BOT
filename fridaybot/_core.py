@@ -10,10 +10,10 @@ from fridaybot.utils import *
 from fridaybot.utils import load_module, remove_plugin
 from fridaybot.Configs import Config
 
-Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 plus = bot
-sudo = Var.SUDO_USERS
+sudo = Config.SUDO_USERS
 
 
 @borg.on(admin_cmd(pattern="import"))
@@ -90,14 +90,14 @@ async def fonts():
     plug = await plus.get_messages(username, None, filter=InputMessagesFilterDocument)
     total = int(plug.total)
     total_doxx = range(0, total)
-    g = Var.COMMAND_HAND_LER
-    Var.BOTLOG_CHATID
+    g = Config.COMMAND_HAND_LER
+    Config.BOTLOG_CHATID
     bcd = "**Downloaded fonts successfully. Now extracting...**\n"
     cde = f"**Extracted fonts successfully. Now Do** `{g}ping`"
     for ixo in total_doxx:
         mxo = plug[ixo].id
         await plus.download_media(await plus.get_messages(username, ids=mxo), "fonts")
-        l_a = await plus.send_message(Var.BOTLOG_CHATID, bcd)
+        l_a = await plus.send_message(Config.BOTLOG_CHATID, bcd)
         await l_a.edit(bcd + cde)
 
 
@@ -116,7 +116,7 @@ async def plugin():
         await plus.download_media(
             await plus.get_messages(username, ids=mxo), "fridaybot/modules/"
         )
-        await plus.send_message(Var.BOTLOG_CHATID, "**Installing modules...**")
+        await plus.send_message(Config.BOTLOG_CHATID, "**Installing modules...**")
 
 
 plus.loop.run_until_complete(plugin())

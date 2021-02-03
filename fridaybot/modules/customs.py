@@ -3,11 +3,11 @@ from fridaybot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"hhii ?(.*)"))  # initially made by @NOOB_GUY_OP
 async def hhi(event):
-    giveVar = event.text
-    a = giveVar[5:6]
+    giveConfig = event.text
+    a = giveConfig[5:6]
     if not a:
         a = "🌺"
-    b = giveVar[7:8]
+    b = giveConfig[7:8]
     if not b:
         b = "✨"
     await event.edit(
@@ -18,11 +18,11 @@ async def hhi(event):
 # later made by me
 @borg.on(admin_cmd(pattern=r"gws?(.*)"))
 async def gws(event):
-    giveVar = event.text
-    """m = giveVar[5:-1]
+    giveConfig = event.text
+    """m = giveConfig[5:-1]
     if not m:"""
     m = " Get Well Soon ! "
-    a = giveVar[-1:]
+    a = giveConfig[-1:]
     if a == "s":
         a = "🌹"
     elif not a:
@@ -32,11 +32,11 @@ async def gws(event):
 
 @borg.on(admin_cmd(pattern=r"hii ?(.*)"))
 async def hii(event):
-    giveVar = event.text
-    a = giveVar[5:6]
+    giveConfig = event.text
+    a = giveConfig[5:6]
     if not a:
         a = "🌺"
-    b = giveVar[7:8]
+    b = giveConfig[7:8]
     if not b:
         b = "✨"
     await event.edit(
@@ -46,11 +46,11 @@ async def hii(event):
 
 @borg.on(admin_cmd(pattern=r"hlo ?(.*)"))
 async def hlo(event):
-    giveVar = event.text
-    a = giveVar[5:6]
+    giveConfig = event.text
+    a = giveConfig[5:6]
     if not a:
         a = "🌺"
-    b = giveVar[7:8]
+    b = giveConfig[7:8]
     if not b:
         b = "✨"
     await event.edit(
@@ -60,11 +60,11 @@ async def hlo(event):
 
 @borg.on(admin_cmd(pattern=r"bye ?(.*)"))
 async def bye(event):
-    giveVar = event.text
-    a = giveVar[5:6]
+    giveConfig = event.text
+    a = giveConfig[5:6]
     if not a:
         a = "🌺"
-    b = giveVar[7:8]
+    b = giveConfig[7:8]
     if not b:
         b = "✨"
     await event.edit(

@@ -19,11 +19,11 @@ async def detect_(event):
         await event.reply("reply to media !")
         await event.delete()
         return
-    if Var.DEEPAI_KEY is None:
+    if Config.DEEPAI_KEY is None:
         await event.reply("add VAR `DEEPAI_KEY` get Api Key from https://deepai.org/")
         await event.delete()
         return
-    api_key = Var.DEEPAI_KEY
+    api_key = Config.DEEPAI_KEY
     photo = reply
     r = requests.post(
         "https://api.deepai.org/api/nsfw-detector",

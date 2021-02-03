@@ -1,7 +1,7 @@
 """
 inspired from @Deonnn @Mayur_Karaniya
 Quotes credits: Being Biblical Channel : @BeingBiblical
-AlenPaulVarghese(@STARKTM1)[h[p]
+AlenPaulConfigghese(@STARKTM1)[h[p]
 """
 
 import asyncio

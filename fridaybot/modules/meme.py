@@ -13,39 +13,39 @@ from uniborg.util import admin_cmd
 async def meme(event):
     if event.fwd_from:
         return
-    memeVar = event.text
+    memeConfig = event.text
     sleepValue = 3
-    memeVar = memeVar[6:]
+    memeConfig = memeConfig[6:]
 
-    await event.edit("-------------" + memeVar)
+    await event.edit("-------------" + memeConfig)
     await asyncio.sleep(sleepValue)
-    await event.edit("------------" + memeVar + "-")
+    await event.edit("------------" + memeConfig + "-")
     await asyncio.sleep(sleepValue)
-    await event.edit("-----------" + memeVar + "--")
+    await event.edit("-----------" + memeConfig + "--")
     await asyncio.sleep(sleepValue)
-    await event.edit("----------" + memeVar + "---")
+    await event.edit("----------" + memeConfig + "---")
     await asyncio.sleep(sleepValue)
-    await event.edit("---------" + memeVar + "----")
+    await event.edit("---------" + memeConfig + "----")
     await asyncio.sleep(sleepValue)
-    await event.edit("--------" + memeVar + "-----")
+    await event.edit("--------" + memeConfig + "-----")
     await asyncio.sleep(sleepValue)
-    await event.edit("-------" + memeVar + "------")
+    await event.edit("-------" + memeConfig + "------")
     await asyncio.sleep(sleepValue)
-    await event.edit("------" + memeVar + "-------")
+    await event.edit("------" + memeConfig + "-------")
     await asyncio.sleep(sleepValue)
-    await event.edit("-----" + memeVar + "--------")
+    await event.edit("-----" + memeConfig + "--------")
     await asyncio.sleep(sleepValue)
-    await event.edit("----" + memeVar + "---------")
+    await event.edit("----" + memeConfig + "---------")
     await asyncio.sleep(sleepValue)
-    await event.edit("---" + memeVar + "----------")
+    await event.edit("---" + memeConfig + "----------")
     await asyncio.sleep(sleepValue)
-    await event.edit("--" + memeVar + "-----------")
+    await event.edit("--" + memeConfig + "-----------")
     await asyncio.sleep(sleepValue)
-    await event.edit("-" + memeVar + "------------")
+    await event.edit("-" + memeConfig + "------------")
     await asyncio.sleep(sleepValue)
-    await event.edit(memeVar + "-------------")
+    await event.edit(memeConfig + "-------------")
     await asyncio.sleep(sleepValue)
-    await event.edit(memeVar)
+    await event.edit(memeConfig)
     await asyncio.sleep(sleepValue)
 
 
