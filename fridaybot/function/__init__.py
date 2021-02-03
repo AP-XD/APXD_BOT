@@ -20,6 +20,7 @@ import asyncio
 import os
 from pathlib import Path
 import wget
+import lottie
 from fridaybot.utils import load_module
 from telethon.tl.types import DocumentAttributeAudio
 from youtube_dl import YoutubeDL
@@ -34,6 +35,7 @@ from youtube_dl.utils import (
     XAttrMetadataError,
 )
 import asyncio
+from fridaybot.function.FastTelethon import download_file
 import json
 import math
 import os
@@ -662,5 +664,41 @@ async def is_admin(event, user):
     else:
         is_mod = False
     return is_mod
-                  
-                  
+    
+# By @Krishna_Singhal 
+def tgs_to_gif(sticker_path: str, quality: int = 256) -> str:                  
+    dest = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "animation.gif")
+    with open(dest, 'wb') as t_g:
+        lottie.exporters.gif.export_gif(lottie.parsers.tgs.parse_tgs(sticker_path), t_g, quality, 1)
+    os.remove(sticker_path)
+    return dest
+   
+# Ye Bhi Kang Karlega Kya? White eye madarchod   
+
+async def fetch_audio(event, ws):
+    if not event.reply_to_msg_id:
+        await event.edit("`Reply To A Video / Audio.`")
+        return
+    c_time = time.time()
+    warner_stark = await event.get_reply_message()    
+    if not warner_stark.audio or warner_stark.video:
+        await event.edit("`Format Not Supported`")
+        return
+    if warner_stark.video:
+        await event.edit("`Video Detected, Converting To Audio !`")
+        wst = open("friday.mp4", "wb")
+        warner_bros = await download_file(client=borg, location=warner_stark.media, out=wst, progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, event, c_time, "Downloading This Media...")
+                ),
+        )
+        stark_cmd = f"ffmpeg -i {warner_bros} -map 0:a friday.mp3"
+        stdout, stderr = (await runcmd(cmd))[:2]
+        final_warner = "friday.mp3"
+    elif warner_stark.audio:
+        wst = open("friday.mp3", "wb")
+        final_warner = await download_file(client=borg, location=warner_stark.media, out=wst, progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, event, c_time, "Downloading This Media...")
+                ),
+        )
+    await event.edit("`Almost Done!`")    
+    return final_warner

@@ -8,7 +8,7 @@ Userbot module to help you manage a group
 
 from asyncio import sleep
 from os import remove
-
+from fridaybot.function import is_admin
 from telethon.errors import (
     BadRequestError,
     ChatAdminRequiredError,
@@ -32,7 +32,7 @@ from telethon.tl.types import (
 )
 
 from fridaybot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from fridaybot.utils import admin_cmd, errors_handler, sudo_cmd
+from fridaybot.utils import friday_on_cmd, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"
@@ -81,8 +81,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 # @register(outgoing=True, pattern="^.setevent$")
-@borg.on(admin_cmd(pattern=r"setgpic$"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern="setgpic$"))
 async def set_group_photo(event):
     if event.fwd_from:
         return
@@ -95,11 +94,9 @@ async def set_group_photo(event):
     admin = chat.admin_rights
     creator = chat.creator
     photo = None
-
     if not admin and not creator:
         await event.edit(NO_ADMIN)
         return
-
     if replyevent and replyevent.media:
         if isinstance(replyevent.media, MessageMediaPhoto):
             photo = await event.client.download_media(message=replyevent.photo)
@@ -122,10 +119,12 @@ async def set_group_photo(event):
 
 
 # @register(outgoing=True, pattern="^.promote(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"promote(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"promote(?: |$)(.*)"))
 async def promote(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .promote command, promotes the replied/tagged person """
     # Get targeted chat
@@ -178,10 +177,12 @@ async def promote(event):
 
 
 # @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"demote(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"demote(?: |$)(.*)"))
 async def demote(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .demote command, demotes the replied/tagged person """
     # Admin right check
@@ -233,10 +234,12 @@ async def demote(event):
 
 
 # @register(outgoing=True, pattern="^.ban(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"ban(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"ban(?: |$)(.*)"))
 async def ban(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .ban command, bans the replied/tagged person """
     # Here laying the sanity check
@@ -290,10 +293,12 @@ async def ban(event):
 
 
 # @register(outgoing=True, pattern="^.unban(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"unban(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"unban(?: |$)(.*)"))
 async def nothanos(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .unban command, unbans the replied/tagged person """
     # Here laying the sanity check
@@ -331,10 +336,12 @@ async def nothanos(event):
         await event.edit("`Uh oh my unban logic broke!`")
 
 
-@borg.on(admin_cmd(pattern=r"mute(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"mute(?: |$)(.*)"))
 async def spider(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """
     This function is basically muting peeps
@@ -395,10 +402,12 @@ async def spider(event):
 
 
 # @register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"unmute(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"unmute(?: |$)(.*)"))
 async def unmoot(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .unmute command, unmute the replied/tagged person """
     # Admin or creator check
@@ -448,10 +457,12 @@ async def unmoot(event):
 
 
 # @register(outgoing=True, pattern="^.adminlist$")
-@borg.on(admin_cmd(pattern=r"adminlist"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"adminlist"))
 async def get_admin(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .admins command, list all of the admins of the chat. """
     info = await event.client.get_entity(event.chat_id)
@@ -473,23 +484,19 @@ async def get_admin(event):
 
 
 # @register(outgoing=True, pattern="^.pin(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"pin(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"pin(?: |$)(.*)"))
 async def pin(event):
     if event.fwd_from:
         return
     """ For .pin command, pins the replied/tagged message on the top the chat. """
-    # Admin or creator check
     chat = await event.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
-
     # If not admin and not creator, return
     if not admin and not creator:
         await event.edit(NO_ADMIN)
         return
-
-    to_pin = event.reply_to_event_id
+    to_pin = event.reply_to_msg_id
 
     if not to_pin:
         await event.edit("`Reply to a message to pin it.`")
@@ -522,10 +529,12 @@ async def pin(event):
 
 
 # @register(outgoing=True, pattern="^.kick(?: |$)(.*)")
-@borg.on(admin_cmd(pattern=r"kick(?: |$)(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"kick(?: |$)(.*)"))
 async def kick(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .kick command, kicks the replied/tagged person from the group. """
     # Admin or creator check
@@ -569,10 +578,12 @@ async def kick(event):
 
 
 # @register(outgoing=True, pattern="^.users ?(.*)")
-@borg.on(admin_cmd(pattern=r"users ?(.*)"))
-@errors_handler
+@friday.on(friday_on_cmd(pattern=r"users ?(.*)"))
 async def get_users(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     """ For .users command, list all of the users in a chat. """
     info = await event.client.get_entity(event.chat_id)
@@ -616,9 +627,12 @@ async def get_users(event):
         remove("userslist.txt")
 
 
-@borg.on(admin_cmd(pattern="zombies(?: |$)(.*)"))
+@friday.on(friday_on_cmd(pattern="zombies(?: |$)(.*)"))
 async def rm_deletedacc(event):
     if event.fwd_from:
+        return
+    if not event.is_group:
+        await event.edit("`I don't think this is a group.`")
         return
     con = event.pattern_match.group(1).lower()
     del_u = 0
@@ -674,7 +688,7 @@ async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
     args = event.pattern_match.group(1).split(" ", 1)
     extra = None
-    if event.reply_to_event_id:
+    if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.sender_id)
         extra = event.pattern_match.group(1)

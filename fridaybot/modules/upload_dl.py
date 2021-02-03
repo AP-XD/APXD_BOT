@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 import asyncio
 import json
 import math
+import requests
 import os
 import subprocess
 import time
@@ -12,7 +13,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
-
+from fridaybot.function.FastTelethon import upload_file
 from fridaybot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
 from fridaybot.events import register
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
@@ -22,13 +23,15 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for uploads and downloads."""
     now = time.time()
     diff = now - start
-    if round(diff % 10.00) == 0 or current != total:
+    if round(diff % 10.00) == 0 or current == total:
         percentage = current * 100 / total
         speed = current / diff
         elapsed_time = round(diff) * 1000
+        if elapsed_time == 0:
+            return
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
-        progress_str = "[{0}{1}] {2}%\n".format(
+        progress_str = "{0}{1} {2}%\n".format(
             "".join(["▰" for i in range(math.floor(percentage / 10))]),
             "".join(["▱" for i in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2),
@@ -37,11 +40,18 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
             humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
         )
         if file_name:
-            await event.edit(
-                "{}\nFile Name: `{}`\n{}".format(type_of_ps, file_name, tmp)
-            )
+            try:
+                await event.edit(
+                    "{}\n**File Name:** `{}`\n{}".format(type_of_ps, file_name, tmp)
+                    
+                )
+            except:
+                pass
         else:
-            await event.edit("{}\n{}".format(type_of_ps, tmp))
+            try:
+                await event.edit("{}\n{}".format(type_of_ps, tmp))
+            except:
+                pass
 
 
 def humanbytes(size):
@@ -86,24 +96,28 @@ async def download(target_file):
     await friday.edit("Processing using fridaybot server ( ◜‿◝ )♡")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
-    if target_file.reply_to_msg_id:
-        try:
-            c_time = time.time()
-            downloaded_file_name = await target_file.client.download_media(
+    if not target_file.reply_to_msg_id:
+        await friday.edit("`Reply to a message to download to my local server.`")
+        return
+    sedd = await target_file.get_reply_message()
+    if not sedd.media:
+        await event.edit("`I Can Only Download Media As For Now.`")
+        return
+    try:
+        c_time = time.time()
+        downloaded_file_name = await target_file.client.download_media(
                 await target_file.get_reply_message(),
                 TEMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, target_file, c_time, "Downloading...")
+                    progress(d, t, target_file, c_time, "Downloading This Media...")
                 ),
             )
-        except Exception as e:  # pylint:disable=C0103,W0703
-            await friday.edit(str(e))
-        else:
-            await friday.edit(
+    except Exception as e:  # pylint:disable=C0103,W0703
+        await friday.edit(str(e))
+    else:
+        await friday.edit(
                 "Downloaded to `{}` successfully !!".format(downloaded_file_name)
             )
-    else:
-        await friday.edit("Reply to a message to download to my local server.")
 
 
 @friday.on(friday_on_cmd(pattern=r"uploadir (.*)"))
@@ -412,27 +426,60 @@ async def lul(event):
     if downloader.isSuccessful():
         c_time = time.time()
         lul = await mone.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
+        lol_m = await upload_file(
+            file_name=file_name,
+            client=borg,
+            file=open(downloaded_file_name, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading This File.", downloaded_file_name
+                )
+            ),
+        )
         await borg.send_file(event.chat_id,
-                        downloaded_file_name,
+                        lol_m,
                         caption=file_name,
                         force_document=False,
                         allow_cache=False,
-                        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                            progress(
-                                d,
-                                t,
-                                event,
-                                c_time,
-                                "Uploading in Progress.......",
-                                downloaded_file_name,
-                            )
-                        ),
                     )
         await lul.delete()
         os.remove(downloaded_file_name)
     else:
         await mone.edit("Incorrect URL\n {}".format(input_str))
     
+#    Copyright (C) Midhun Km 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+@friday.on(friday_on_cmd(pattern="zeelink"))
+async def lol_kangers(event):
+    if event.fwd_from:
+        return
+    input_str = event.raw_text.split(" ", maxsplit=1)[1]
+    if 'zee' in input_str:
+        url = "http://devsexpo.me/zee/"
+        sed = {
+        'url': input_str
+        }
+        lmao = requests.get(url=url, headers=sed).json()
+    else:
+        await event.edit("Only Zee Videos Supported.")
+        return
+    if lmao['success'] is False:
+        await event.edit("Task Failed Due To " + str(lmao['error']))
+        return
+    await event.edit("Direct Link Fetched \nURL : " + str(lmao['url']))
+        
+        
 CMD_HELP.update(
     {
         "download": ".dl <link|filename> or reply to media\

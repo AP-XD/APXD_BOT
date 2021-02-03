@@ -29,8 +29,6 @@ CUSTOM_MIDDLE_PMP = (
 )
 USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By Userbot"
 
-botisnoob = Var.TG_BOT_USER_NAME_BF_HER
-
 devs_id = [1263617196, 573738900, 1315076555]
 
 USER_BOT_NO_WARN = (
@@ -39,6 +37,33 @@ USER_BOT_NO_WARN = (
     "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
+
+@borg.on(friday_on_cmd(pattern="block$"))
+async def approve_p_m(event):
+    if event.fwd_from:
+        return
+    if event.is_private:
+        replied_user = await event.client(GetFullUserRequest(await event.get_input_chat()))
+        firstname = replied_user.user.first_name
+        if pmpermit_sql.is_approved(event.chat_id):
+            pmpermit_sql.disapprove(event.chat_id)
+        await event.edit("Blocked [{}](tg://user?id={})".format(firstname, event.chat_id))
+        await event.client(functions.contacts.BlockRequest(event.chat_id))
+    elif event.is_group:
+        reply_s = await event.get_reply_message()
+        if not reply_s:
+            await event.edit('`Reply To User To Block Him !`')
+            return
+        replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
+        firstname = replied_user.user.first_name
+        if pmpermit_sql.is_approved(event.chat_id):
+            pmpermit_sql.disapprove(event.chat_id)
+        await event.edit("Blocked [{}](tg://user?id={})".format(firstname, reply_s.sender_id))
+        await event.client(functions.contacts.BlockRequest(reply_s.sender_id))
+        await asyncio.sleep(3)
+        await event.delete()
+        
+        
 if PM_ON_OFF != "DISABLE":
     @borg.on(events.NewMessage(outgoing=True))
     async def auto_approve_for_out_going(event):
@@ -105,18 +130,6 @@ if PM_ON_OFF != "DISABLE":
             elif pmpermit_sql.is_approved(reply_s.sender_id):
                 await event.edit('`User Already Approved !`')
                 await event.delete()
-                
-    @borg.on(friday_on_cmd(pattern="block$"))
-    async def approve_p_m(event):
-        if event.fwd_from:
-            return
-        replied_user = await event.client(GetFullUserRequest(await event.get_input_chat()))
-        firstname = replied_user.user.first_name
-        if event.is_private:
-            if pmpermit_sql.is_approved(event.chat_id):
-                pmpermit_sql.disapprove(event.chat_id)
-            await event.edit("Blocked [{}](tg://user?id={})".format(firstname, event.chat_id))
-            await borg(functions.contacts.BlockRequest(event.chat_id))
 
     @borg.on(friday_on_cmd(pattern="(da|disapprove)$"))
     async def dapprove(event):
@@ -188,30 +201,25 @@ if PM_ON_OFF != "DISABLE":
 
     @borg.on(events.NewMessage(incoming=True))
     async def on_new_private_message(event):
+        if not event.is_private:
+            return
         if event.sender_id == bot.uid:
             return
-        if Var.PRIVATE_GROUP_ID is None:
+        if Config.PRIVATE_GROUP_ID is None:
             await borg.send_message(bot.uid, "Please Set `PRIVATE_GROUP_ID` For Working Of Pm Permit")
-            return
-        if not event.is_private:
             return
         message_text = event.message.raw_text
         chat_ids = event.sender_id
         if USER_BOT_NO_WARN == message_text:
             return
-        # low Level Hacks
-        if event.sender_id == event.chat_id:
-            pass
-        else:
-            return
-        sender = await event.client(GetFullUserRequest(await event.get_input_chat()))
+        sender = await event.client.get_entity(await event.get_input_chat())
         if chat_ids == bot.uid:
             return
-        if sender.user.bot:
+        if sender.bot:
             return
         if event.sender_id in devs_id:
             return
-        if sender.user.verified:
+        if sender.verified:
             return
         if PM_ON_OFF == "DISABLE":
             return
@@ -236,7 +244,7 @@ if PM_ON_OFF != "DISABLE":
             the_message += f"Message Counts: {PM_WARNS[chat_ids]}\n"
             try:
                 await borg.send_message(
-                    entity=Var.PRIVATE_GROUP_ID,
+                    entity=Config.PRIVATE_GROUP_ID,
                     message=the_message,
                     link_preview=False,
                     silent=True,
@@ -244,7 +252,8 @@ if PM_ON_OFF != "DISABLE":
                 return
             except BaseException:
                 return
-        botusername = Var.TG_BOT_USER_NAME_BF_HER
+        trap_m = await tgbot.get_me()
+        botusername = trap_m.username
         tap = await bot.inline_query(botusername, USER_BOT_NO_WARN)
         sed = await tap[0].click(event.chat_id)
         PM_WARNS[chat_ids] += 1

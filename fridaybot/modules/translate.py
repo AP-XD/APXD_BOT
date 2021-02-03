@@ -63,8 +63,33 @@ async def _(event):
         else:
             starky = output_str
         await edit_or_reply(event, starky)
-    except Exception as e:
-      print(e)
+    except:
+        translator = google_translator()
+        translated = translator.translate(text ,lang_tgt=lan)
+        lmao_bruh = text
+        lmao = translator.detect(text)
+        after_tr_text = lmao
+        source_lano = translator.detect(text)
+        try:
+           source_lan = source_lano[1]
+        except:
+           source_lan = source_lano[0]
+        output_str = f"""**TRANSLATED SUCCESSFULLY**
+**Source ({source_lan})**:
+`{text}`
+
+**Translation ({lan})**:
+`{translated}`"""
+      
+        if len(output_str) >= 4096:
+            out_file = output_str
+            url = "https://del.dog/documents"
+            r = requests.post(url, data=out_file.encode("UTF-8")).json()
+            url2 = f"https://del.dog/{r['key']}"
+            starky = f"Translated Text Was Too Big, Never Mind I Have Pasted It [Here]({url2})"
+        else:
+            starky = output_str
+        await edit_or_reply(event, starky)
 
 CMD_HELP.update(
     {

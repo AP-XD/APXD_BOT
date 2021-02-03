@@ -24,7 +24,7 @@ from fridaybot.wraptools import (
     ignore_grp,
     ignore_pm,
 )
-from var import Var
+from fridaybot.Configs import Config
 sedprint = logging.getLogger("PLUGINS")
 cmdhandler = Config.COMMAND_HAND_LER
 bothandler = Config.BOT_HANDLER
@@ -88,6 +88,10 @@ def command(**args):
             if not allow_edited_updates:
                 bot.add_event_handler(func, events.MessageEdited(**args))
             bot.add_event_handler(func, events.NewMessage(**args))
+            if client2:
+                client2.add_event_handler(func, events.NewMessage(**args))
+            if client3:
+                client3.add_event_handler(func, events.NewMessage(**args))
             try:
                 LOAD_PLUG[file_test].append(func)
             except Exception:
@@ -129,7 +133,8 @@ def load_module(shortname):
         mod.bot = bot
         mod.telebot = bot
         mod.tgbot = bot.tgbot
-        mod.Var = Var
+        mod.Config = Config
+        mod.Var = Config
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
@@ -197,7 +202,8 @@ def load_module_dclient(shortname, client):
         mod = importlib.util.module_from_spec(spec)
         mod.bot = client
         mod.tgbot = bot.tgbot
-        mod.Var = Var
+        mod.Config = Config
+        mod.Var = Config
         mod.command = command
         sedlu = str(shortname) + "- MClient -"
         mod.logger = logging.getLogger(sedlu)
@@ -482,13 +488,15 @@ def register(**args):
         if not disable_edited:
             bot.add_event_handler(func, events.MessageEdited(**args))
         bot.add_event_handler(func, events.NewMessage(**args))
+        if client2:
+            client2.add_event_handler(func, events.NewMessage(**args))
+        if client3:
+            client3.add_event_handler(func, events.NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
         except Exception:
             LOAD_PLUG.update({file_test: [func]})
-
         return func
-
     return decorator
 
 
@@ -685,7 +693,7 @@ def get_readable_time(seconds: int) -> str:
 
 class Loader:
     def __init__(self, func=None, **args):
-        self.Var = Var
+        self.Config = Config
         bot.add_event_handler(func, events.NewMessage(**args))
 
 
