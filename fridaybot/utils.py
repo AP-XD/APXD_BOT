@@ -133,7 +133,7 @@ def load_module(shortname):
         mod.bot = bot
         mod.telebot = bot
         mod.tgbot = bot.tgbot
-        mod.Config = Config
+        mod.Var = Config
         mod.Config = Config
         mod.command = command
         mod.logger = logging.getLogger(shortname)

@@ -8,8 +8,8 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "Var"
-          replace: "Config"
+          find: "heroku_config import Config"
+          replace: "fridaybot.Configs import Config"
       - name: Pull All Updates
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
