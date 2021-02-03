@@ -1,7 +1,7 @@
 # global variables will be assigned here
 # can be imported in any module to make life easier.
 from fridaybot import AUTOPIC_COMMENT, AUTOPIC_FONT, AUTOPIC_FONT_COLOUR
-from heroku_config import Config
+from fridaybot.Configs import Config
 
 AUTO_PIC_FONT = str(AUTOPIC_FONT) if AUTOPIC_FONT else "DejaVuSansMono.ttf"
 FONT_FILE_TO_USE = f"fonts/{AUTO_PIC_FONT}"
