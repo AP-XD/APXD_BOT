@@ -8,7 +8,7 @@ from uniborg.util import admin_cmd
 from fridaybot import bot
 from fridaybot.utils import *
 from fridaybot.utils import load_module, remove_plugin
-from var import Var
+from fridaybot.Configs import Config
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"

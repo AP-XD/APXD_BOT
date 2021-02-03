@@ -15,7 +15,7 @@ from fridaybot import catdef
 from fridaybot.function import fridayfunction as topfunc
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, friday_on_cmd
-from var import Var
+from fridaybot.Configs import Config
 
 from .. import StartTime
 from ..helpers import *

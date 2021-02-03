@@ -4,7 +4,7 @@ from pathlib import Path
 from telethon.tl.types import InputMessagesFilterDocument
 
 from fridaybot.utils import admin_cmd, load_module
-from var import Var
+from fridaybot.Configs import Config
 
 
 @borg.on(admin_cmd(pattern="extdl$", outgoing=True))

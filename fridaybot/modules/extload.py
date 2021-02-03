@@ -4,7 +4,7 @@ from pathlib import Path
 from telethon.tl.types import InputMessagesFilterDocument
 
 from fridaybot.utils import command, load_module
-from var import Var
+from fridaybot.Configs import Config
 
 
 @command(pattern="^.extload", outgoing=True)

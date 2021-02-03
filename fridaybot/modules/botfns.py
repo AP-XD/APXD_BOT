@@ -2,7 +2,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from fridaybot.utils import admin_cmd, sudo_cmd
-from var import Var
+from fridaybot.Configs import Config
 
 
 @borg.on(admin_cmd(pattern="purl ?(.*)"))
