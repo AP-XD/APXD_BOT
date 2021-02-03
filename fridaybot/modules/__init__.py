@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from validators.url import url
-
+from fridaybot import bot, client2, client3
 from fridaybot import catdef
 from fridaybot.function import fridayfunction as topfunc
 from fridaybot.Configs import Config
@@ -19,8 +19,7 @@ from fridaybot.utils import admin_cmd, friday_on_cmd
 from fridaybot.Configs import Config
 
 from .. import StartTime
-from ..helpers import *                                                 
-
+from ..helpers import *
 UP = "**2.1.0**"
 # =================== CONSTANT ===================
 
