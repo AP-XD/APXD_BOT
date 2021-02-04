@@ -137,9 +137,9 @@ if Config.ENABLE_ASSISTANTBOT == "ENABLE":
             path1 = Path(f.name)
             shortname = path1.stem
             start_assistant(shortname.replace(".py", ""))
-    fridaydevs.info("Friday And Assistant Bot Have Been Installed Successfully !")
+    fridaydevs.info("༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Assistant Bot Have Been Installed Successfully !")
 else:
-    fridaydevs.info("Friday Has Been Installed Sucessfully !")
+    fridaydevs.info("༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Has Been Installed Sucessfully !")
     fridaydevs.info("You Can Visit @FridayOT For Any Support Or Doubts.")
         
 bot.tgbot.loop.run_until_complete(check_inline_on_warner(bot.tgbot))
