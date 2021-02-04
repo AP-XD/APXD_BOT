@@ -12,8 +12,8 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.executors.asyncio import AsyncIOExecutor
 import requests
-import urllib.parse
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 from fridaybot.modules.sql_helper import server_pinger_sql as warnerstark
 
@@ -23,8 +23,7 @@ if Config.PING_SERVERS:
         if event.fwd_from:
             return
         await event.edit("`Processing..`")
-        url_s = event.text.split(" ", maxsplit=1)[1]
-        url = parse.quote(url_s)
+        url = event.text.split(" ", maxsplit=1)[1]
         if warnerstark.is_ping_indb(str(url)):
             await event.edit("**Server Already Found In Db !**")
             return
@@ -35,8 +34,7 @@ if Config.PING_SERVERS:
         if event.fwd_from:
             return
         await event.edit("`Processing..`")
-        url_s = event.text.split(" ", maxsplit=1)[1]
-        url = parse.quote(url_s)
+        url = event.text.split(" ", maxsplit=1)[1]
         if not warnerstark.is_ping_indb(str(url)):
             await event.edit("**Server Not Found In Db !**")
             return
@@ -57,13 +55,13 @@ if Config.PING_SERVERS:
               hmm_p += 1
         success_l = len(url_s) - hmm_p
         logger.info(f"Sucessfully Pinged {success_l} Urls Out Of {len(url_s)}")
+        return
     
     
     scheduler = AsyncIOScheduler(
         executors={
-        'threadpool': ThreadPoolExecutor(max_workers=9),
-        'processpool': ProcessPoolExecutor(max_workers=3)
+    'default': AsyncIOExecutor(),
         }
     )
-    scheduler.add_job(ping_servers, 'interval', minutes=60, executor='threadpool')
+    scheduler.add_job(ping_servers, 'interval', minutes=30, executor='threadpool')
     scheduler.start()
