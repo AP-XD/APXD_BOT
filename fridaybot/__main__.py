@@ -154,11 +154,9 @@ if failed3 is None:
 
 fridaydevs.info(f"""{wsta}
 -------------------------------------------
-Friday-Userbot Based On Telethon V{tv}
+☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Based On Telethon V{tv}
 Python Version : {platform.python_version()}
-Friday-Userbot Version : V{friday_version}
-Support Chat : @FridayChat
-Updates Channel : @FridaySupportOfficial
+☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Version : V{friday_version}
 Total Clients : {total_clients}
 -------------------------------------------""")
         

@@ -87,8 +87,8 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@friday.on(friday_on_cmd(pattern="yt(a|v|hq) (.*)"))
-@friday.on(sudo_cmd(pattern="yt(a|v|hq) (.*)", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="yt(a|v|h) (.*)"))
+@friday.on(sudo_cmd(pattern="yt(a|v|h) (.*)", allow_sudo=True))
 async def download_video(v_url):
     if v_url.fwd_from:
         return
@@ -139,7 +139,7 @@ async def download_video(v_url):
         song = False
         video = True
         
-    elif type == "hq":
+    elif type == "h":
         opts = {
             "format": "bestvideo[height=720]+bestaudio/best[height=720]",
             "addmetadata": True,
