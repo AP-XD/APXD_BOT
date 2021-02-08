@@ -1,11 +1,13 @@
+
 """Check if fridaybot alive. If you change these, you become the gayest gay such that even the gay world will disown you."""
 # CREDITS: @WhySooSerious, @Sur_vivor
 import time
 from telethon import __version__ as tv
 import sys
 import platform
+from git import Repo
 from uniborg.util import friday_on_cmd, sudo_cmd
-from fridaybot import ALIVE_NAME, CMD_HELP, Lastupdate
+from fridaybot import ALIVE_NAME, CMD_HELP, Lastupdate, friday_version
 from fridaybot.Configs import Config
 from fridaybot.modules import currentversion
 
@@ -50,6 +52,8 @@ async def friday(alive):
         return
     await alive.get_chat()
     uptime = get_readable_time((time.time() - Lastupdate))
+    repo = Repo()
+    branch_name = repo.active_branch.name
     pm_caption = ("➥ **FRIDAY IS:** `ONLINE`\n\n"
                   "➥ **SYSTEMS STATS**\n"
                   f"➥ **Telethon Version:** `{tv}` \n"
@@ -57,7 +61,7 @@ async def friday(alive):
                   f"➥ **Uptime** : `{uptime}` \n"
                   "➥ **Database Status:**  `Functional`\n"
                   f"➥ **Current Branch** : `{branch_name}`\n"
-                  f"➥ **Version** : `6.5`\n"
+                  f"➥ **Version** : `{friday_version}`\n"
                   f"➥ **My Boss** : {DEFAULTUSER} \n"
                   "➥ **Heroku Database** : `AWS - Working Properly`\n\n"
                   "➥ **License** : [GNU General Public License v3.0](github.com/StarkGang/FridayUserbot/blob/master/LICENSE)\n"

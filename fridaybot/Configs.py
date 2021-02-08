@@ -81,6 +81,7 @@ elif ENV:
         LOGGER = True
         APP_ID = int(os.environ.get("APP_ID", 6))
         API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
+        CLEAN_GROUPS = os.environ.get("CLEAN_GROUPS", False)
         STRING_SESSION = os.environ.get("STRING_SESSION", None)
         DB_URI = os.environ.get("DATABASE_URL", None)
         TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", './fridaybot/DOWNLOADS/')
@@ -124,6 +125,7 @@ elif ENV:
         STRING_SESSION_3 = os.environ.get("STRING_SESSION_3", None)
         VIRUSTOTAL_API_KEY = os.environ.get("VIRUSTOTAL_API_KEY", None)
         GPLINKS_API_KEY = os.environ.get("GPLINKS_API_KEY", None)
+        NSFW_FILTER_PM = os.environ.get("NSFW_FILTER_PM", True)
         SUPERHERO_API_KEY = os.environ.get("SUPERHERO_API_KEY", None)
         FOOTBALL_API_KEY = os.environ.get("FOOTBALL_API_KEY", None)
         SUB_TO_MSG_ASSISTANT = os.environ.get("SUB_TO_MSG_ASSISTANT", False)
@@ -165,6 +167,7 @@ elif ENV:
         # Get a Free API Key from OCR.Space
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         DEEP_API_KEY = os.environ.get("DEEP_API_KEY", None)
+        PING_SERVER_EVERY_MINUTE_VALUE = int(os.environ.get("PING_SERVER_EVERY_MINUTE_VALUE", 30))
         DEEZER_ARL_TOKEN = os.environ.get("DEEZER_ARL_TOKEN", None)
         NOSPAMPLUS_TOKEN = os.environ.get("NOSPAMPLUS_TOKEN", None)
         # Send .get_id in any group with all your administration bots (added)

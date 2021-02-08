@@ -15,6 +15,7 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler 
 from telethon import functions
 from fridaybot.function import get_all_admin_chats, is_admin
+from fridaybot.modules.sql_helper.night_mode_sql import add_nightmode, rmnightmode, get_all_chat_id, is_nightmode_indb
 from telethon.tl.types import ChatBannedRights
 
 
@@ -49,17 +50,13 @@ async def close_ws(event):
     if not event.is_group:
         await event.edit("You Can Only Enable Night Mode in Groups.")
         return
-    try:
-        from fridaybot.modules.sql_helper import night_mode_sql as ws
-    except:
-        logger.info("Hehe, Kanger")
     if not await is_admin(event, bot.uid): 
         await event.edit("`You Should Be Admin To Do This!`")
         return
-    if ws.is_nightmode_indb(event.chat_id):
+    if is_nightmode_indb(str(event.chat_id)):
         await event.edit("This Chat is Has Already Enabled Night Mode.")
         return
-    ws.add_nightmode(event.chat_id)
+    add_nightmode(str(event.chat_id))
     await event.edit(f"**Added Chat {event.chat.title} With Id {event.chat_id} To Database. This Group Will Be Closed On 12Am(IST) And Will Opened On 06Am(IST)**")
 
 @friday.on(friday_on_cmd(pattern="rsgrp$"))
@@ -67,68 +64,60 @@ async def disable_ws(event):
     if not event.is_group:
         await event.edit("You Can Only Disable Night Mode in Groups.")
         return
-    try:
-        from fridaybot.modules.sql_helper import night_mode_sql as ws
-    except:
-        logger.info("Hehe, Kanger")
     if not await is_admin(event, bot.uid): 
         await event.edit("`You Should Be Admin To Do This!`")
         return
-    if not ws.is_nightmode_indb(event.chat_id):
+    if not is_nightmode_indb(str(event.chat_id)):
         await event.edit("This Chat is Has Not Enabled Night Mode.")
         return
-    ws.rmnightmode(event.chat_id)
+    rmnightmode(str(event.chat_id))
     await event.edit(f"**Removed Chat {event.chat.title} With Id {event.chat_id} From Database. This Group Will Be No Longer Closed On 12Am(IST) And Will Opened On 06Am(IST)**")
 
 
 async def job_close():
-    try:
-        from fridaybot.modules.sql_helper import night_mode_sql as ws
-    except:
-        logger.info("Hehe, Kanger")
-    ws_chats = ws.get_all_chat_id()
-    if len(ws_chats.chat_id) == 0:
+    ws_chats = get_all_chat_id()
+    if len(ws_chats) == 0:
         return
-    for warner in ws_chats.chat_id:
+    for warner in ws_chats:
         try:
             await friday.send_message(
-              warner, "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @FRidayOT**"
+              int(warner.chat_id), "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @FRidayOT**"
             )
             await friday(
             functions.messages.EditChatDefaultBannedRightsRequest(
-                peer=warner, banned_rights=hehes
+                peer=int(warner.chat_id), banned_rights=hehes
             )
-        )
-        except:
-            pass
+            )
+            if Config.CLEAN_GROUPS:
+                async for user in friday.iter_participants(int(warner.chat_id)):
+                    if user.deleted:
+                        await friday.edit_permissions(int(warner.chat_id), user.id, view_messages=False)
+        except Exception as e:
+            logger.info(f"Unable To Open Group {warner} - {e}")
 
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
+scheduler.add_job(job_close, trigger="cron", hour=23, minute=55)
 scheduler.start()
 
 
 async def job_open():
-    try:
-        from fridaybot.modules.sql_helper import night_mode_sql as ws
-    except:
-        logger.info("Hehe, Kanger")
-    ws_chats = ws.get_all_chat_id()
-    if len(ws_chats.chat_id) == 0:
+    ws_chats = get_all_chat_id()
+    if len(ws_chats) == 0:
         return
-    for warner in ws_chats.chat_id:
+    for warner in ws_chats:
         try:
             await friday.send_message(
-              warner, "`06:00 Am, Group Is Opening.`\n**Powered By @FRidayOT**"
+              int(warner.chat_id), "`06:00 Am, Group Is Opening.`\n**Powered By @FRidayOT**"
             )
             await friday(
             functions.messages.EditChatDefaultBannedRightsRequest(
-                peer=warner, banned_rights=openhehe
+                peer=int(warner.chat_id), banned_rights=openhehe
             )
         )
-        except:
-            pass
+        except Exception as e:
+            logger.info(f"Unable To Open Group {warner.chat_id} - {e}")
 
 # Run everyday at 06
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_open, trigger="cron", hour=6)
+scheduler.add_job(job_open, trigger="cron", hour=6, minute=10)
 scheduler.start()

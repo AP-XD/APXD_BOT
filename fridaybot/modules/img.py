@@ -1,29 +1,32 @@
+"""Download & Upload Images on Telegram\n
+Syntax: `.img <Name>` or `.img (replied message)`
+\n Upgraded and Google Image Error Fixed
+"""
+
 import os
 import shutil
 from re import findall
 
 from fridaybot import CMD_HELP
-from fridaybot.helpers.google_image_download import googleimagesdownload
+from fridaybot.googol_images import googleimagesdownload
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 
-@friday.on(friday_on_cmd(pattern="(wpaper|wallpaper|wp) ?(.*)"))
-@friday.on(sudo_cmd(pattern="(wpaper|wallpaper|wp) ?(.*)", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="(img|image|googleimage|gi) ?(.*)"))
+@friday.on(sudo_cmd(pattern="(img|image|googleimage|gi) ?(.*)", allow_sudo=True))
 async def img_sampler(event):
-    if event.fwd_from:
-        return
     await edit_or_reply(event, "`Processing...`")
     reply = await event.get_reply_message()
     if event.pattern_match.group(2):
-        queryo = event.pattern_match.group(2)
+        query = event.pattern_match.group(2)
     elif reply:
-        queryo = reply.message
+        query = reply.message
     else:
         await edit_or_reply(
             event, "`um, mind mentioning what I actually need to search for ;_;`"
         )
         return
-    query = queryo + "hd wallpaper"
+
     lim = findall(r"lim=\d+", query)
     # lim = event.pattern_match.group(1)
     try:
@@ -31,9 +34,8 @@ async def img_sampler(event):
         lim = lim.replace("lim=", "")
         query = query.replace("lim=" + lim[0], "")
     except IndexError:
-        lim = 10
+        lim = 5
     response = googleimagesdownload()
-
     # creating list of arguments
     arguments = {
         "keywords": query,
@@ -41,7 +43,6 @@ async def img_sampler(event):
         "format": "jpg",
         "no_directory": "no_directory",
     }
-
     # passing the arguments to the function
     paths = response.download(arguments)
     lst = paths[0][query]
@@ -51,10 +52,11 @@ async def img_sampler(event):
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await event.delete()
 
+
 CMD_HELP.update(
     {
-        "wallpaper": "**Wallpaper**\
-\n\n**Syntax : **`.wpaper <query>`\
-\n**Usage :** get wallpapers just with a query."
+        "img": "**Img**\
+\n\n**Syntax : **`.img <query>`\
+\n**Usage :** get images just with a query"
     }
 )

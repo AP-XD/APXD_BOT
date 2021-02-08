@@ -17,8 +17,10 @@ from sys import argv
 import os
 import telethon.utils
 from telethon import TelegramClient
-
-from fridaybot import bot, client2, client3
+from telethon import __version__ as tv
+import sys
+import platform
+from fridaybot import bot, client2, client3, friday_version
 from fridaybot.Configs import Config
 from telethon.tl.types import InputMessagesFilterDocument
 from fridaybot.utils import load_module, start_assistant, load_module_dclient
@@ -31,6 +33,7 @@ async def add_bot(bot_token):
     bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
    
+        
 # Bleck Megic         
 async def check_inline_on_warner(ws):
     w_s = await ws.get_me()
@@ -108,6 +111,7 @@ import glob
 
 path = "fridaybot/modules/*.py"
 files = glob.glob(path)
+failed_warner = 0
 for name in files:
     with open(name) as f:
         path1 = Path(f.name)
@@ -115,6 +119,7 @@ for name in files:
         try:
             load_module(shortname.replace(".py", ""))    
         except Exception as e:
+            failed_warner += 1
             fridaydevs.info("------------------------")
             fridaydevs.info("Failed To Load : " + str(shortname.replace(".py", "")) + f" Error : {str(e)}")
             fridaydevs.info("------------------------")
@@ -137,10 +142,25 @@ if Config.ENABLE_ASSISTANTBOT == "ENABLE":
             path1 = Path(f.name)
             shortname = path1.stem
             start_assistant(shortname.replace(".py", ""))
-    fridaydevs.info("༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Assistant Bot Have Been Installed Successfully !")
+    wsta = "༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Assistant Bot Have Been Installed Successfully !"
 else:
-    fridaydevs.info("༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Has Been Installed Sucessfully !")
-    fridaydevs.info("You Can Visit @FridayOT For Any Support Or Doubts.")
+    wsta = "༒ 彡 ☣️𝔸ℙ 𝕏𝔻 ☣️ 彡 ༒ BOT Has Been Installed Sucessfully !"
+
+total_clients = 1
+if failed2 is None:
+    total_clients += 1
+if failed3 is None:
+    total_clients += 1
+
+fridaydevs.info(f"""{wsta}
+-------------------------------------------
+Friday-Userbot Based On Telethon V{tv}
+Python Version : {platform.python_version()}
+Friday-Userbot Version : V{friday_version}
+Support Chat : @FridayChat
+Updates Channel : @FridaySupportOfficial
+Total Clients : {total_clients}
+-------------------------------------------""")
         
 bot.tgbot.loop.run_until_complete(check_inline_on_warner(bot.tgbot))
 

@@ -1,3 +1,4 @@
+
 DateTime
 Pillow
 PyDictionary
@@ -58,6 +59,7 @@ google_images_download
 google_trans_new
 googletrans==4.0.0-rc1
 grapheme
+gsearch
 gsearch	
 hachoir
 heroku3
@@ -134,6 +136,7 @@ telethon
 textblob
 the-python-bay
 the_python_bay
+tracemoepy
 tswift
 urbandict>=0.5
 validators

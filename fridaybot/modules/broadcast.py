@@ -23,12 +23,13 @@ from fridaybot.modules.sql_helper.broadcast_sql import (
     get_all_chnnl,
     rm_channel,
 )
-from fridaybot.utils import friday_on_cmd
+from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
 loggy_grp = Config.PRIVATE_GROUP_ID
 
 
 @friday.on(friday_on_cmd(pattern="badd ?(.*)"))
+@friday.on(sudo_cmd(pattern="badd ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -36,7 +37,7 @@ async def _(event):
     sed = 0
     oks = 0
     if input_chnnl == "all":
-        await event.edit("`Adding All Channel TO DB.`")
+        poppo = await edit_or_reply(event, "`Adding All Channel TO DB.`")
         addall = [
             d.entity
             for d in await event.client.get_dialogs()
@@ -53,26 +54,27 @@ async def _(event):
                             sed += 1
             except BaseException:
                 pass
-        await event.edit(
-            f"Process Completed. Added {sed} Channel To List. Failed {oks} Due to already Added !"
-        )
+        await poppo.edit(f"Process Completed. Added {sed} Channel To List. Failed {oks} Due to already Added !")
         return
     elif input_chnnl == "":
         if event.is_channel and event.is_group:
             input_chnnl = event.chat_id
         else:
-            await event.edit("Please Give Group / Channel ID !")
+            await edit_or_reply(event, "Please Give Group / Channel ID !")
             return
     if already_added(input_chnnl):
-        await event.edit("This Channel Already Found in Database.")
+        await edit_or_reply(event, "This Channel Already Found in Database.")
         return
     if not already_added(input_chnnl):
         add_chnnl_in_db(input_chnnl)
-        await event.edit(f"Fine. I have Added {input_chnnl} To DataBase.")
-        await borg.send_message(loggy_grp, f"Added {input_chnnl} To DB")
+        M = f"Fine. I have Added {input_chnnl} To DataBase."
+        Ml = f"Added {input_chnnl} To DB"
+        await edit_or_reply(event, M)
+        await borg.send_message(loggy_grp, Ml)
 
 
 @friday.on(friday_on_cmd(pattern="brm ?(.*)"))
+@friday.on(sudo_cmd(pattern="brm ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -81,33 +83,34 @@ async def _(event):
     if input_chnnl == "all":
         for channelz in all_chnnl:
             rm_channel(channelz.chat_id)
-        await event.edit("Fine. Cleared All Channel Database")
+        await edit_or_reply(event, "Fine. Cleared All Channel Database")
         return
-    if input_chnnl is "":
+    if input_chnnl == "":
         if event.is_channel and event.is_group:
             input_chnnl = event.chat_id
         else:
-            await event.edit("Please Give Group / Channel ID")
+            await edit_or_reply(event, "Please Give Group / Channel ID")
             return
     if already_added(input_chnnl):
         rm_channel(input_chnnl)
-        await event.edit(f"Fine. I have Removed {input_chnnl} From DataBase.")
+        await edit_or_reply(event, f"Fine. I have Removed {input_chnnl} From DataBase.")
         await borg.send_message(loggy_grp, f"Removed {input_chnnl} From DB")
     elif not already_added(input_chnnl):
-        await event.edit(
+        await edit_or_reply(event, 
             "Are You Sure? , You Haven't Added This Group / Channel To Database"
         )
 
 
 @friday.on(friday_on_cmd(pattern="broadcast"))
+@friday.on(sudo_cmd(pattern="broadcast", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("**Fine. Broadcasting in Progress. Kindly Wait !**")
+    poppo = await edit_or_reply(event, "**Fine. Broadcasting in Progress. Kindly Wait !**")
     sedpath = Config.TMP_DOWNLOAD_DIRECTORY
     all_chnnl = get_all_chnnl()
     if len(all_chnnl) == 0:
-        await event.edit("No Channel Or Group Found On Database. Please Check Again")
+        await poppo.edit("No Channel Or Group Found On Database. Please Check Again")
         return
     total_errors = 0
     total_count = 0
@@ -116,7 +119,7 @@ async def _(event):
     if event.reply_to_msg_id:
         hmm = await event.get_reply_message()
     else:
-        event.edit("Reply To Some Message.")
+        await poppo.edit("Reply To Some Message.")
         return
     if hmm and hmm.media:
         ok = await borg.download_media(hmm.media, sedpath)
@@ -141,9 +144,9 @@ async def _(event):
             except Exception as e:
                 total_errors += 1
     elif hmm.message.poll:
-        await event.edit("Bruh, This Can't Be Broadcasted.")
+        await poppo.edit("Bruh, This Can't Be Broadcasted.")
         return
-    await event.edit(
+    await poppo.edit(
         f"BroadCast Success In : {total_count} \nFailed In : {total_errors} \nTotal Channel In DB : {total_chnnl}"
     )
     await borg.send_message(
@@ -153,12 +156,13 @@ async def _(event):
 
 
 @friday.on(friday_on_cmd(pattern="bforward"))
+@friday.on(sudo_cmd(pattern="bforward", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     all_chnnl = get_all_chnnl()
     if len(all_chnnl) == 0:
-        await event.edit("No Channel Or Group Found On Database. Please Check Again")
+        await edit_or_reply(event, "No Channel Or Group Found On Database. Please Check Again")
         return
     total_errors = 0
     total_count = 0
@@ -167,7 +171,7 @@ async def _(event):
     if event.reply_to_msg_id:
         hmm = await event.get_reply_message()
     else:
-        event.edit("Reply To Some Message.")
+        await edit_or_reply(event, "Reply To Some Message.")
         return
     try:
         for forbard in all_chnnl:
@@ -180,7 +184,7 @@ async def _(event):
         loggy_grp,
         f"Failed in {forbard.chat_id} Because Of Error : `{errorno}` \n\n",
     )
-    await event.edit(
+    poppo = await edit_or_reply(event, 
         f"Forward Success in {total_count} And Failed In {total_errors} And Total Channel In Db is {total_chnnl}"
     )
     await borg.send_message(
@@ -190,6 +194,7 @@ async def _(event):
 
 
 @friday.on(friday_on_cmd(pattern="bstat"))
+@friday.on(sudo_cmd(pattern="bstat", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

@@ -53,6 +53,8 @@
 * [@S_n_a_p_s](https://telegram.dog/s_n_a_p_s)
 * [@RaphielScape](https://github.com/raphielscape)
 * [@Nitin1818](https://github.com/Nitin1818)
+* [@PureIndiaLover](https://telegram.dog/PureIndiaLover)
+* [@BLUE-DEVIL1134](https://github.com/BLUE-DEVIL1134)
 
 
 # String Session
