@@ -1,4 +1,4 @@
-#    Copyright (C) Midhun KM 2020-2021
+#    Copyright (C) DevsExpo 2020-2021
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -18,12 +18,15 @@ from shutil import rmtree
 import cv2
 import cv2 as cv
 import numpy as np
+import asyncio
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
 from fridaybot import CMD_HELP
-from fridaybot.function import convert_to_image, crop_vid, runcmd, tgs_to_gif
-from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot.function import convert_to_image, crop_vid, runcmd, tgs_to_gif, progress, humanbytes, time_formatter
+import time
+from fridaybot.function.FastTelethon import upload_file as uf
+from fridaybot.utils import friday_on_cmd, sudo_cmd, edit_or_reply
 import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
@@ -579,31 +582,31 @@ async def warnerstark_s(event):
     await event.edit("`Processing..`")
     if ws == "flip":
         flipped = cv2.flip(image, 0)
-        file_name = "Flipped.png"
+        file_name = "Flipped.webp"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, flipped)
         warnerstark = "Hehe, Flipped"
     elif ws == "blur":
         blurred = cv2.blur(image, (8,8))
-        file_name = "Blurred.png"
+        file_name = "Blurred.webp"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, blurred)
         warnerstark = "Hehe, Blurred"
     elif ws == "tresh":
         treshold, fridaydevs = cv2.threshold(image, 150, 225, cv2.THRESH_BINARY)
-        file_name = "Tresh.png"
+        file_name = "Tresh.webp"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, fridaydevs)
         warnerstark = "Hehe, TreshHolded."
     elif ws == "hsv":
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        file_name = "Hsv.png"
+        file_name = "Hsv.webp"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, hsv)
         warnerstark = "Hehe, Hsv"
     elif ws == "lab":
         lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
-        file_name = "Lab.png"
+        file_name = "Lab.webp"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, lab)
         warnerstark = "Hehe, Lab"
@@ -642,7 +645,109 @@ async def warnerstarkgangz(event):
     lol_m = await kk.edit("`Converting This Tgs To Gif Now !`")
     await lol_m.delete()
     await borg.send_file(event.chat_id, file=ok_stark, caption=so)
-        
+    
+@friday.on(friday_on_cmd(pattern="cimage ?(.*)"))
+@friday.on(sudo_cmd(pattern="cimage ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        ommhg = await edit_or_reply(event, "Reply To Any Image.")
+        return
+    reply_message = await event.get_reply_message()
+    ommhg = await edit_or_reply(event, "Processing. please wait.")
+    img = await convert_to_image(event, borg)
+    image = open(img, 'rb')
+    url_s = upload_file(image)
+    link = f"https://telegra.ph{url_s[0]}"
+    c = {
+      "Type":"CaptionRequest",
+      "Content":link
+    }
+    h = {
+      "Content-Type":"application/json"
+    }
+    r = requests.post("https://captionbot.azurewebsites.net/api/messages", headers = h, json = c)
+    endard = r.text.replace('"', "")
+    await ommhg.edit(endard)
+    
+@friday.on(friday_on_cmd(pattern="speedup$"))
+async def fasty(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("Reply To Any Video.")
+        return
+    kk = await event.get_reply_message()
+    if not kk.video or kk.video_note:
+        await event.edit("`Oho, Reply To Video Only`")
+        return
+    hmm = await event.client.download_media(kk.media)
+    c_time = time.time()
+    cmd = f'ffmpeg -i {hmm} -vf  "setpts=0.25*PTS" FastMotionBy@FridayOT.mp4'
+    await runcmd(cmd)
+    filem = "FastMotionBy@FridayOT.mp4"
+    if not os.path.exists(filem):
+        await event.edit("**Process, Failed !**")
+        return
+    final_file = await uf(
+            file_name=filem,
+            client=bot,
+            file=open(filem, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading Fast Motion Image..", filem
+                )
+            ),
+        )
+    await event.delete()
+    await borg.send_file(
+        event.chat_id,
+        final_file,
+        caption="**Fast Motion** - Powered By @FridayOT")
+    for files in (filem, hmm):
+        if files and os.path.exists(files):
+            os.remove(files)
+            
+@friday.on(friday_on_cmd(pattern="slowdown$"))
+async def fasty(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("Reply To Any Video.")
+        return
+    kk = await event.get_reply_message()
+    if not kk.video or kk.video_note:
+        await event.edit("`Oho, Reply To Video Only`")
+        return
+    hmm = await event.client.download_media(kk.media)
+    c_time = time.time()
+    cmd = f'ffmpeg -i {hmm} -vf  "setpts=4*PTS" SlowMotionBy@FridayOT.mp4'
+    await runcmd(cmd)
+    filem = "SlowMotionBy@FridayOT.mp4"
+    if not os.path.exists(filem):
+        await event.edit("**Process, Failed !**")
+        return
+    final_file = await uf(
+            file_name=filem,
+            client=bot,
+            file=open(filem, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading Slow Motion Video..", filem
+                )
+            ),
+        )
+    await borg.send_file(
+        event.chat_id,
+        final_file,
+        caption="**Slow Motion** - Powered By @FridayOT")
+    await event.delete()
+    for files in (filem, hmm):
+        if files and os.path.exists(files):
+            os.remove(files)
+    
+    
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\

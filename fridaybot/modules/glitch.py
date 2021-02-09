@@ -3,7 +3,26 @@
 import os
 
 from glitch_this import ImageGlitcher
-from PIL import Image
+from telethon.tl.types import MessageMediaPhoto
+from pygifsicle import optimize
+from fridaybot import CMD_HELP
+import asyncio
+import math
+import os
+import time
+from fridaybot.function import progress, humanbytes, time_formatter
+from fridaybot.function.FastTelethon import upload_file
+from fridaybot.utils import friday_on_cmd, sudo_cmd
+from fridaybot.function import convert_to_image
+
+glitcher = ImageGlitcher()
+DURATION = 200  # Set this to however many centiseconds each frame should be visible for
+LOOP = 0  # Set this to how many times the gif should loop
+# LOOP = 0 means infinite loop
+
+sedpath = "./starkgangz/"
+if not os.path.isdir(sedpath):
+    os.makedirs(sedpath)
 
 from fridaybot import CMD_HELP, LOGS
 from fridaybot.functions import runcmd, take_screen_shot
@@ -19,79 +38,38 @@ async def glitch(cat):
     if not (reply and (reply.media)):
         await cat.reply("`Media not found...`")
         return
-    if not os.path.isdir("./temp/"):
-        os.mkdir("./temp/")
-    catid = cat.reply_to_msg_id
-    catsticker = await reply.download_media(file="./temp/")
-    if not catsticker.endswith((".mp4", ".webp", ".tgs", ".png", ".jpg")):
-        os.remove(catsticker)
-        await cat.reply("`Media not found...`")
-        return
-    os.path.join("./temp/", "glitch.png")
-    if catinput:
-        if not catinput.isdigit():
-            await cat.reply("`You input is invalid, check help`")
-            return
-        catinput = int(catinput)
-        if not 0 < catinput < 9:
-            await cat.reply("`Invalid Range...`")
-            return
-    else:
-        catinput = 2
-    if catsticker.endswith(".tgs"):
-        catfile = os.path.join("./temp/", "glitch.png")
-        catcmd = (
-            f"lottie_convert.py --frame 0 -if lottie -of png {catsticker} {catfile}"
+    sed = await event.get_reply_message()
+    okbruh = await event.edit("`Gli, Glitchiiingggg.....`")
+    photolove = await convert_to_image(event, friday)
+    pathsn = f"./starkgangz/@fridayot.gif"
+    glitch_imgs = glitcher.glitch_image(photolove, 2, gif=True, color_offset=True)
+    glitch_imgs[0].save(
+        pathsn,
+        format="GIF",
+        append_images=glitch_imgs[1:],
+        save_all=True,
+        duration=DURATION,
+        loop=LOOP,
+    )
+    c_time = time.time()
+    optimize(pathsn)
+    stark_m = await upload_file(
+        	file_name="Glitched@FridayOt.gif",
+            client=borg,
+            file=open(pathsn, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading..", pathsn
+                )
+            ),
         )
-        stdout, stderr = (await runcmd(catcmd))[:2]
-        if not os.path.lexists(catfile):
-            await cat.reply("`catsticker not found...`")
-            LOGS.info(stdout + stderr)
-        glitch_file = catfile
-    elif catsticker.endswith(".webp"):
-        catfile = os.path.join("./temp/", "glitch.png")
-        os.rename(catsticker, catfile)
-        if not os.path.lexists(catfile):
-            await cat.reply("`catsticker not found... `")
-            return
-        glitch_file = catfile
-    elif catsticker.endswith(".mp4"):
-        catfile = os.path.join("./temp/", "glitch.png")
-        await take_screen_shot(catsticker, 0, catfile)
-        if not os.path.lexists(catfile):
-            await cat.reply("```catsticker not found...```")
-            return
-        glitch_file = catfile
-    else:
-        glitch_file = catsticker
-    glitcher = ImageGlitcher()
-    img = Image.open(glitch_file)
-    if cmd == "glitchs":
-        glitched = "./temp/" + "glitched.webp"
-        glitch_img = glitcher.glitch_image(img, catinput, color_offset=True)
-        glitch_img.save(glitched)
-        await cat.client.send_file(cat.chat_id, glitched, reply_to_message_id=catid)
-        os.remove(glitched)
-        await cat.delete()
-    elif cmd == "glitch":
-        Glitched = "./temp/" + "glitch.gif"
-        glitch_img = glitcher.glitch_image(img, catinput, color_offset=True, gif=True)
-        DURATION = 200
-        LOOP = 0
-        glitch_img[0].save(
-            Glitched,
-            format="GIF",
-            append_images=glitch_img[1:],
-            save_all=True,
-            duration=DURATION,
-            loop=LOOP,
-        )
-        await cat.client.send_file(cat.chat_id, Glitched, reply_to_message_id=catid)
-        os.remove(Glitched)
-        await cat.delete()
-    for files in (catsticker, glitch_file):
-        if files and os.path.exists(files):
-            os.remove(files)
+    await borg.send_file(event.chat_id,
+                         stark_m,
+                         caption="Powered By @FridayOT")
+    await okbruh.delete()
+    for starky in (pathsn, photolove):
+        if starky and os.path.exists(starky):
+            os.remove(starky)
 
 
 CMD_HELP.update(

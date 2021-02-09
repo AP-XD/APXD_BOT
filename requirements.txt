@@ -101,6 +101,7 @@ pybase64>=0.4.0
 pydub
 pyfiglet
 pygame	  
+pygifsicle
 pygments		  
 pyjokes
 pylast

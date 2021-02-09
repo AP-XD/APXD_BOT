@@ -18,7 +18,6 @@ from fridaybot.function import get_all_admin_chats, is_admin
 from fridaybot.modules.sql_helper.night_mode_sql import add_nightmode, rmnightmode, get_all_chat_id, is_nightmode_indb
 from telethon.tl.types import ChatBannedRights
 
-
 hehes = ChatBannedRights(
     until_date=None,
     send_messages=True,
@@ -76,7 +75,7 @@ async def disable_ws(event):
 
 async def job_close():
     ws_chats = get_all_chat_id()
-    if len(ws_chats) == 0:
+    if len(ws_chats.chat_id) == 0:
         return
     for warner in ws_chats:
         try:

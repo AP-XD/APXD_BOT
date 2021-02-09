@@ -10,10 +10,10 @@
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import shutil
 import asyncio
 import os
-
+import glob
 import wget
 from youtubesearchpython import SearchVideos
 import asyncio
@@ -47,6 +47,7 @@ async def _(event):
     if event.fwd_from:
         return
     urlissed = event.pattern_match.group(1)
+    print(urlissed)
     myself_stark = await edit_or_reply(
         event, f"`Getting {urlissed} From Youtube Servers. Please Wait.`"
     )
@@ -54,18 +55,18 @@ async def _(event):
     mi = search.result()
     mio = mi["search_result"]
     mo = mio[0]["link"]
+    dur = mio[0]["duration"]
     thum = mio[0]["title"]
     fridayz = mio[0]["id"]
     thums = mio[0]["channel"]
     kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
     await asyncio.sleep(0.6)
-    if not os.path.isdir("./music/"):
-        os.makedirs("./music/")
     path = Config.TMP_DOWNLOAD_DIRECTORY
     url = mo
     sedlyf = wget.download(kekme, out=path)
     opts = {
             "format": "bestaudio",
+            "download": True,
             "addmetadata": True,
             "key": "FFmpegMetadata",
             "writethumbnail": True,
@@ -76,29 +77,29 @@ async def _(event):
                 {
                     "key": "FFmpegExtractAudio",
                     "preferredcodec": "mp3",
-                    "preferredquality": "480",
+                    "preferredquality": "720",
                 }
             ],
-            "outtmpl": "%(title)s.mp3",
+            "outtmpl": "%(id)s.mp3",
             "quiet": True,
             "logtostderr": False,
         }
     try:
         with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url)
+            ytdl_data = ytdl.extract_info(mo)
     except Exception as e:
         await event.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
         return
     await asyncio.sleep(20)
     c_time = time.time()
-    file_stark = f"{ytdl_data['title']}.mp3"
+    file_stark = f"{ytdl_data['id']}.mp3"
     lol_m = await upload_file(
-            file_name=file_stark,
+            file_name=f"{ytdl_data['title']}.mp3",
             client=borg,
             file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "Uploading Your Song!", file_stark
+                    d, t, event, c_time, "Uploading Your Song!", str(ytdl_data["title"])
                 )
             ),
         )
@@ -142,8 +143,6 @@ async def _(event):
     thums = mio[0]["channel"]
     kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
     await asyncio.sleep(0.6)
-    if not os.path.isdir("./music/"):
-        os.makedirs("./music/")
     path = Config.TMP_DOWNLOAD_DIRECTORY
     url = mo
     sedlyf = wget.download(kekme, out=path)
@@ -157,7 +156,7 @@ async def _(event):
             "postprocessors": [
                 {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
             ],
-            "outtmpl": "%(title)s.mp4",
+            "outtmpl": "%(id)s.mp4",
             "logtostderr": False,
             "quiet": True,
         }
@@ -168,14 +167,14 @@ async def _(event):
         await event.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
         return
     c_time = time.time()
-    file_stark = f"{ytdl_data['title']}.mp4"
+    file_stark = f"{ytdl_data['id']}.mp4"
     lol_m = await upload_file(
-            file_name=file_stark,
+            file_name=f"{ytdl_data['title']}.mp4",
             client=borg,
             file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "Uploading Your Video!", file_stark
+                    d, t, event, c_time, "Uploading Your Video!", str(ytdl_data["title"])
                 )
             ),
         )
@@ -238,7 +237,7 @@ async def _(event):
                     "preferredquality": "720",
                 }
             ],
-            "outtmpl": "%(title)s.m4a",
+            "outtmpl": "%(id)s.m4a",
             "quiet": True,
             "logtostderr": False,
         }
@@ -250,14 +249,14 @@ async def _(event):
         return
     await asyncio.sleep(20)
     c_time = time.time()
-    file_stark = f"{ytdl_data['title']}.m4a"
+    file_stark = f"{ytdl_data['id']}.m4a"
     lol_m = await upload_file(
-            file_name=file_stark,
+            file_name=f"{ytdl_data['title']}.m4a",
             client=borg,
             file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "Uploading Your Song!", file_stark
+                    d, t, event, c_time, "Uploading Your Song!", str(ytdl_data['title'])
                 )
             ),
         )
