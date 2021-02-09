@@ -70,7 +70,7 @@ async def hmm(yes):
     global ghanti
     ghanti = borg.uid
     await yes.delete()
-    uptime = await get_readable_time((time.time() - Lastupdate))
+    uptime = get_readable_time((time.time() - Lastupdate))
     pm_caption = "** 𝙳𝙰𝚁𝙺 𝙲𝙾𝙱𝚁𝙰 𝙸𝚂 𝙾𝙽𝙻𝙸𝙽𝙴**\n\n"
     pm_caption += "**Yes Master, Am Alive And Systems Are Working Perfectly As It Should Be...**\n\n"
     pm_caption += "✘ About My System ✘\n\n"
