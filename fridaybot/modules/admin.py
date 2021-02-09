@@ -535,8 +535,8 @@ async def get_admin(event):
 
 
 # @register(outgoing=True, pattern="^.pin(?: |$)(.*)")
-@friday.on(friday_on_cmd(pattern="pin(?: |$)(.*)"))
-@friday.on(sudo_cmd(pattern="pin(?: |$)(.*)", allow_sudo=True))
+@friday.on(friday_on_cmd(pattern="gpin(?: |$)(.*)"))
+@friday.on(sudo_cmd(pattern="gpin(?: |$)(.*)", allow_sudo=True))
 async def pin(event):
     if event.fwd_from:
         return

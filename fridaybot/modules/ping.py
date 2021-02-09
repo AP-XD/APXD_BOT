@@ -50,7 +50,7 @@ async def _(event):
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - Lastupdate))
     await AP.edit(
-        f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n༒★彡☣️ 🇦 🇵 🇽 🇩 ☣️彡★༒ ` \n➲ {rip} \n➲ {botrip}"
+        f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ 🏓Ping speed: `{ms}` \n ➲🤖Uptime ->  `{uptime}`\n Bot of PERU Master\n➲ `{rip}` \n➲ `{botrip}`"
     )
 
 
