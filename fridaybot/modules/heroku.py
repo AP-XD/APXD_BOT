@@ -225,11 +225,7 @@ async def _(givelogs):
     )
     url2 = f"https://nekobin.com/{key}"
     raw2 = f"https://nekobin.com/raw/{key}"
-    starky = f"<code> {hmm} </code>"
-    title_of_page = "Friday UserBot Logs"
-    response = telegraph.create_page(title_of_page, html_content=starky)
-    km = response["path"]
-    suger = f"**Heroku** Logs.\nPasted to [Nekobin]({url2}) Raw: [View Raw]({raw2}) \n [TELEGRAPH](https://telegra.ph/{km})"
+    suger = f"**Heroku** Logs.\nPasted to [Nekobin]({url2}) Raw: [View Raw]({raw2})"
     await givelogs.client.send_file(
         givelogs.chat_id,
         "logs.txt",
