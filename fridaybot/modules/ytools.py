@@ -66,7 +66,6 @@ async def _(event):
     sedlyf = wget.download(kekme, out=path)
     opts = {
             "format": "bestaudio",
-            "download": True,
             "addmetadata": True,
             "key": "FFmpegMetadata",
             "writethumbnail": True,
@@ -86,7 +85,7 @@ async def _(event):
         }
     try:
         with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(mo)
+            ytdl_data = ytdl.extract_info(mo, download=True)
     except Exception as e:
         await event.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
         return
@@ -162,7 +161,7 @@ async def _(event):
         }
     try:
         with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url)
+            ytdl_data = ytdl.extract_info(url, download=True)
     except Exception as e:
         await event.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
         return
@@ -288,6 +287,8 @@ CMD_HELP.update(
         "ytmusic": "**Ytmusic**\
 \n\n**Syntax : **`.ytmusic <song name>`\
 \n**Usage :** Downloads songs from ytmusic\
+\n\n**Syntax : **`.utubevid <video name>`\
+\n**Usage :** Downloads video from ytmusic\
 \n\n**Syntax : **`.ytm4a <song name>`\
 \n**Usage :** Downloads songs from ytmusic with best quality"
     }

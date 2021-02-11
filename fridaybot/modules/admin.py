@@ -516,6 +516,7 @@ async def get_admin(event):
         poppo = await edit_or_reply(event, "`I don't think this is a group.`")
         return
     """ For .admins command, list all of the admins of the chat. """
+    poppo = await edit_or_reply(event, "processing...")
     info = await event.client.get_entity(event.chat_id)
     title = info.title if info.title else "this chat"
     mentions = f"<b>Admins in {title}:</b> \n"
@@ -531,7 +532,7 @@ async def get_admin(event):
                 mentions += f"\nDeleted Account <code>{user.id}</code>"
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
-    poppo = await edit_or_reply(event, mentions, parse_mode="html")
+    await poppo.edit(mentions, parse_mode="html")
 
 
 # @register(outgoing=True, pattern="^.pin(?: |$)(.*)")
@@ -566,8 +567,8 @@ async def pin(event):
     except BadRequestError:
         poppo = await edit_or_reply(event, NO_PERM)
         return
-
-    poppo = await edit_or_reply(event, f"I Have Pinned This [Message](http://t.me/c/{event.chat_id}/{to_pin})")
+    h = str(event.chat_id).replace("-100", "")
+    poppo = await edit_or_reply(event, f"I Have Pinned This [Message](http://t.me/c/{h}/{to_pin})")
     user = await get_user_sender_id(event.sender_id, event)
 
     if BOTLOG:
@@ -758,8 +759,8 @@ CMD_HELP.update(
 \n**Usage:** Mutes the person in all groups you have in common with them.\
 \n\n.ungmute <username/reply>\
 \n**Usage:** Reply someone's message with .ungmute to remove them from the gmuted list.\
-\n\n.delusers\
-\n**Usage:** Searches for deleted accounts in a group. Use .delusers clean to remove deleted accounts from the group.\
+\n\n.zombies\
+\n**Usage:** Searches for deleted accounts in a group. Use .zombies clean to remove deleted accounts from the group.\
 \n\n.adminlist\
 \n**Usage:** Retrieves a list of admins in the chat.\
 \n\n.users or .users <name of member>\

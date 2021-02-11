@@ -9,6 +9,7 @@ RUN apt-get install -y\
     apt-utils \
     bash \
     bzip2 \
+    imagemagick \
     build-essential \
     cmake \
     curl \
@@ -19,6 +20,7 @@ RUN apt-get install -y\
     gcc \
     g++ \
     git \
+    espeak \
     libevent-dev \
     libjpeg-dev \
     libffi-dev \

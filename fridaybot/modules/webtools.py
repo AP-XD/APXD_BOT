@@ -11,11 +11,13 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import random
+import socket
 import requests
 from iplookup import iplookup
 from selenium import webdriver
 from youtube_search import YoutubeSearch
-from fridaybot.function import apk_dl
+from fridaybot.function import apk_dl, Track_Mobile_Number
 from fridaybot import CMD_HELP
 from fridaybot.utils import edit_or_reply, friday_on_cmd, sudo_cmd
 
@@ -181,7 +183,6 @@ async def _(event):
         await event.edit("Some Thing Went Wrong.")
         
 @friday.on(friday_on_cmd(pattern="apk ?(.*)"))
-@friday.on(sudo_cmd(pattern="apk ?(.*)", allow_sudo=True))
 async def _(event):
     akkad = event.pattern_match.group(1)
     if event.fwd_from:
@@ -189,24 +190,73 @@ async def _(event):
     pathz, name = await apk_dl(akkad, Config.TMP_DOWNLOAD_DIRECTORY, event)
     await borg.send_file(event.chat_id, pathz, caption='Uploaded By @FRidayOT')
     
-@friday.on(friday_on_cmd(pattern="amazon ?(.*)"))
-async def _m(event):
+@friday.on(friday_on_cmd(pattern="(numberlookup|nl) ?(.*)"))
+async def _(event):
     if event.fwd_from:
         return
-    sel = "**Amazon Search Result** \n\n"
-    warner_inc = event.pattern_match.group(1)
-    base_url = "http://devsexpo.me/amazon/" + warner_inc
-    stark = requests.get(url=base_url).json()
-    if stark['success'] is False:
-        await event.edit("Search Failed.")
+    hmm = "<b>Phone Info Powered By @FridayOT</b> \n\n"
+    phonenumber = event.pattern_match.group(2)
+    try:
+        warner = Track_Mobile_Number(phonenumber).track
+    except:
+        await event.edit("`Failed, Please Check Phone Number.`")
         return
-    if stark['result'] is None:
-        await event.edit("Search Failed. Please Try Again.")
+    for i in warner:
+        hmm += f"<u><b>{i}</u></b> ➠ <code>{warner[i]}</code> \n"
+    await event.edit(hmm, parse_mode="HTML")
+    
+@friday.on(friday_on_cmd(pattern="(comedyme|jokes)$"))
+async def hehe(event):
+    if event.fwd_from:
         return
-    for i in stark['result']:
-        sel += "👉 [{}]({}) \n`{}` \n".format(i['title'], i['link'], i['price'])
-    sel += "\n\n**Powered By @FridayOT**"
-    await event.edit(sel)
+    r = requests.get("https://icanhazdadjoke.com/", headers={"Accept": "application/json"}).json()
+    await event.edit(r['joke'])
+    
+@friday.on(friday_on_cmd(pattern="randomgif ?(.*)"))
+async def gif_world(event):
+    if event.fwd_from:
+        return
+    hu = event.pattern_match.group(2).replace(' ', '+')
+    url = f"https://api.tenor.com/v1/random?q={hu}&contentfilter=medium"
+    r = requests.get(url=url).json()
+    await event.delete()
+    giff = r["results"][random.randint(0, len(r["results"]) - 1)]["media"][0]["gif"]["url"]
+    await borg.send_file(event.chat_id, giff, caption="Powered By @FridayOT")
+    
+@friday.on(friday_on_cmd(pattern="(randomeme|memegen)$"))
+async def meme_world(event):
+    if event.fwd_from:
+        return
+    url = f"https://some-random-api.ml/meme"
+    r = requests.get(url=url).json()
+    await event.delete()
+    await borg.send_file(event.chat_id, r['image'], caption="**Meme Gen** - Powered By @FridayOT")
+    
+@friday.on(friday_on_cmd(pattern="genderguess (.*)"))
+async def what(event):
+    if event.fwd_from:
+        return
+    starky = event.pattern_match.group(1)
+    url = f"https://api.diversitydata.io/?fullname={starky}"
+    r = requests.get(url=url).json()
+    hmm = (f"**Name :** `{r['fullname']}` \n"
+           f"**Gender :** `{r['gender']}` \n"
+           f"**Ethnicity :** `{r['ethnicity']}` \n"
+           f"**Probability :** `{r['gender probability']}`")
+    await event.edit(hmm)
+     
+     
+@friday.on(friday_on_cmd(pattern="hostlookup (.*)"))
+async def hecks(event):
+    if event.fwd_from:
+        return
+    starky = event.pattern_match.group(1)
+    try:
+        kk = socket.gethostbyaddr(starky)[0]
+    except:
+        await event.edit("Check Your Fking IP")
+        return
+    await event.edit(f"**Host Name :** `{kk}`")
     
 CMD_HELP.update(
     {

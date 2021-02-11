@@ -17,7 +17,11 @@ import wget
 from shutil import rmtree
 import cv2
 import cv2 as cv
+import random
 import numpy as np
+from datetime import datetime
+from PIL import Image, ImageDraw, ImageFont
+import pytz 
 import asyncio
 import requests
 from PIL import Image, ImageDraw, ImageFont
@@ -570,9 +574,72 @@ async def hmm(event):
     for files in (ok, img):
         if files and os.path.exists(files):
             os.remove(files)
-
-
-@friday.on(friday_on_cmd(pattern="(flip|blur|tresh|hsv|lab)"))
+            
+@friday.on(friday_on_cmd(pattern="(genca|gencertificate) ?(.*)"))
+async def holastark2(event):
+    if event.fwd_from:
+        return
+    famous_people = ['modi', 'trump', 'albert', 'tony stark']
+    await event.edit("`Processing..`")
+    text = event.pattern_match.group(2)
+    img = Image.open('./resources/CERTIFICATE_TEMPLATE_IMAGE.png')
+    d1 = ImageDraw.Draw(img)
+    myFont = ImageFont.truetype('Fonts/impact.ttf', 200)
+    myFont2 = ImageFont.truetype('Fonts/impact.ttf', 70)
+    myFont3 = ImageFont.truetype('Fonts/sign.otf', 195)
+    d1.text((1433, 1345), text, font=myFont, fill=(51, 51, 51))
+    TZ = pytz.timezone(Config.TZ)
+    datetime_tz = datetime.now(TZ)
+    oof = datetime_tz.strftime(f"%Y/%m/%d")
+    d1.text((961, 2185), oof, font=myFont2, fill=(51, 51, 51))
+    d1.text((2441, 2113), random.choice(famous_people), font=myFont3, fill=(51, 51, 51))
+    file_name = "certificate.png"
+    ok = sedpath + "/" + file_name
+    img.save(ok, "PNG")
+    await borg.send_file(event.chat_id, ok)
+    if os.path.exists(ok):
+        os.remove(ok)
+    
+    
+    
+@friday.on(friday_on_cmd(pattern="(certificategen|cg) ?(.*)"))
+async def holastark(event):
+    if event.fwd_from:
+        return
+    await event.edit("`Processing..`")
+    text = event.pattern_match.group(2)
+    font_size = 3.6
+    font_color = (51, 51, 51)
+    coordinate_y_adjustment = -120
+    coordinate_x_adjustment = 7
+    img = cv2.imread('./resources/CERTIFICATE_TEMPLATE_IMAGE.png')
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    textsize = cv2.getTextSize(text, font, font_size, 10)[0]
+    text_x = (img.shape[1] - textsize[0]) / 2 \
+            + coordinate_x_adjustment
+    text_y = (img.shape[0] + textsize[1]) / 2 \
+            - coordinate_y_adjustment
+    text_x = int(text_x)
+    text_y = int(text_y)
+    cv2.putText(
+            img,
+            text,
+            (text_x, text_y),
+            font,
+            font_size,
+            font_color,
+            10,
+        )
+    file_name = "CertificateGenBy@FridayOt.png"
+    ok = sedpath + "/" + file_name
+    cv2.imwrite(ok, img)
+    await event.delete()
+    await borg.send_file(event.chat_id, file=ok, caption="Powered By @FridayOT")
+    if os.path.exists(ok):
+        os.remove(ok)
+    
+    
+@friday.on(friday_on_cmd(pattern="(flip|blur|tresh|hsv|lab|sketch)"))
 async def warnerstark_s(event):
     if event.fwd_from:
         return
@@ -610,6 +677,24 @@ async def warnerstark_s(event):
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, lab)
         warnerstark = "Hehe, Lab"
+    elif ws == "sketch":
+        scale_percent = 0.60
+        width = int(image.shape[1] * scale_percent)
+        height = int(image.shape[0] * scale_percent)
+        dim = (width, height)
+        resized = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
+        kernel_sharpening = np.array([[-1, -1, -1],
+                              [-1, 9, -1],
+                              [-1, -1, -1]])
+        sharpened = cv2.filter2D(resized, -1, kernel_sharpening)
+        gray = cv2.cvtColor(sharpened, cv2.COLOR_BGR2GRAY)
+        inv = 255 - gray
+        gauss = cv2.GaussianBlur(inv, ksize=(15, 15), sigmaX=0, sigmaY=0)
+        pencil_image = dodgeV2(gray, gauss)
+        file_name = "Drawn.webp"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, pencil_image)
+        warnerstark = "Hehe, Drawn By @FridayOT"
     await event.delete()
     await borg.send_file(event.chat_id, file=ok, caption=warnerstark)
     for files in (ok, img):
@@ -651,6 +736,7 @@ async def warnerstarkgangz(event):
 async def _(event):
     if event.fwd_from:
         return
+    await event.edit("Oh Wait Let Me Get Wear Glasses")
     if not event.reply_to_msg_id:
         ommhg = await edit_or_reply(event, "Reply To Any Image.")
         return
@@ -678,6 +764,7 @@ async def fasty(event):
     if not event.reply_to_msg_id:
         await event.edit("Reply To Any Video.")
         return
+    await event.edit("Ah, Shit. Here it Starts.")
     kk = await event.get_reply_message()
     if not kk.video or kk.video_note:
         await event.edit("`Oho, Reply To Video Only`")
@@ -696,7 +783,7 @@ async def fasty(event):
             file=open(filem, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, event, c_time, "Uploading Fast Motion Image..", filem
+                    d, t, event, c_time, "Uploading Fast Motion video..", filem
                 )
             ),
         )
@@ -713,6 +800,7 @@ async def fasty(event):
 async def fasty(event):
     if event.fwd_from:
         return
+    await event.edit("Ah, Shit. Here it Starts.")
     if not event.reply_to_msg_id:
         await event.edit("Reply To Any Video.")
         return
@@ -747,7 +835,136 @@ async def fasty(event):
         if files and os.path.exists(files):
             os.remove(files)
     
-    
+@friday.on(friday_on_cmd(pattern="vidflip$"))
+async def flip(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("Reply To Any Video.")
+        return
+    await event.edit("Ah, Shit. Here it Starts.")
+    kk = await event.get_reply_message()
+    if not kk.video or kk.video_note:
+        await event.edit("`Oho, Reply To Video Only`")
+        return
+    hmm = await event.client.download_media(kk.media)
+    c_time = time.time()
+    cmd = f'ffmpeg -i {hmm} -vf "transpose=2,transpose=2" FlipedBy@FridayOT.mp4'
+    await runcmd(cmd)
+    filem = "FlipedBy@FridayOT.mp4"
+    if not os.path.exists(filem):
+        await event.edit("**Process, Failed !**")
+        return
+    final_file = await uf(
+            file_name=filem,
+            client=bot,
+            file=open(filem, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading Flipped video..", filem
+                )
+            ),
+        )
+    await event.delete()
+    await borg.send_file(
+        event.chat_id,
+        final_file,
+        caption="**Video Flipped** - Powered By @FridayOT")
+    for files in (filem, hmm):
+        if files and os.path.exists(files):
+            os.remove(files)
+            
+@friday.on(friday_on_cmd(pattern="extractaudio$"))
+async def audio_extract(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("Reply To Any Video.")
+        return
+    await event.edit("Ah, Shit. Here it Starts.")
+    kk = await event.get_reply_message()
+    if not kk.video or kk.video_note:
+        await event.edit("`Oho, Reply To Video Only`")
+        return
+    hmm = await event.client.download_media(kk.media)
+    try:
+        thumb = await event.client.download_media(kk.media, thumb=-1)
+    except:
+        thumb = "./resources/IMG_20200929_103719_628.jpg"
+    name_out = str(kk.media.document.attributes[1].file_name.split(".")[0]) + str(".mp3")
+    c_time = time.time()
+    cmd = f"ffmpeg -i {hmm} -map 0:a {name_out}"
+    await runcmd(cmd)
+    filem = name_out
+    if not os.path.exists(filem):
+        await event.edit("**Process, Failed !**")
+        return
+    final_file = await uf(
+            file_name=filem,
+            client=bot,
+            file=open(filem, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading Audio From The video..", filem
+                )
+            ),
+        )
+    await event.delete()
+    await borg.send_file(
+        event.chat_id,
+        final_file,
+        thumb=thumb,
+        caption="**Audio Extarcted** - Powered By @FridayOT")
+    for files in (filem, hmm):
+        if files and os.path.exists(files):
+            os.remove(files)
+            
+@friday.on(friday_on_cmd(pattern="(videonote|convertvideonote)$"))
+async def convert_to_note(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("Reply To Any Video.")
+        return
+    await event.edit("Ah, Shit. Here it Starts.")
+    kk = await event.get_reply_message()
+    if not (kk.video or kk.video_note or kk.gif or kk.video_note):
+        await event.edit("`Oho, Reply To Video Only.`")
+        return
+    hmm = await event.client.download_media(kk.media)
+    try:
+        thumb = await event.client.download_media(kk.media, thumb=-1)
+    except:
+        thumb = "./resources/IMG_20200929_103719_628.jpg"
+    c_time = time.time()
+    filem = "ConvertedBy@FridayOT.mp4"
+    await crop_vid(hmm, filem)
+    if not os.path.exists(filem):
+        await event.edit("**Process, Failed !**")
+        return
+    final_file = await uf(
+            file_name=filem,
+            client=bot,
+            file=open(filem, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading Round / Video Note.", filem
+                )
+            ),
+        )
+    await event.delete()
+    await borg.send_file(
+        event.chat_id,
+        final_file,
+        thumb=thumb, 
+        video_note=True)
+    for files in (filem, hmm):
+        if files and os.path.exists(files):
+            os.remove(files)
+        
+def dodgeV2(image, mask):
+    return cv2.divide(image, 255 - mask, scale=256)
+
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\

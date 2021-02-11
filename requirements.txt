@@ -39,6 +39,7 @@ emoji
 emoji-country-flag
 emoji==0.6.0
 eyed3
+fake_useragent
 faker
 flask
 fontTools
@@ -107,6 +108,8 @@ pyjokes
 pylast
 pymediainfo
 pymongo
+pyppdf
+pyppeteer
 pyseoanalyzer
 pyshorteners
 pytesseract
