@@ -6,7 +6,7 @@ from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
 
-@friday.on(friday_on_cmd("pin ?(.*)"))
+@friday.on(friday_on_cmd("apin ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
