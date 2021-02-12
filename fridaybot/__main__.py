@@ -121,7 +121,7 @@ for name in files:
             failed_warner += 1
             fridaydevs.info("------------------------")
             fridaydevs.info("Failed To Load : " + str(shortname.replace(".py", "")) + f" Error : {str(e)}")
-            fridaydevs.info("------------------------")
+            fridaydevs.info("------------------------")   
         if failed2 is None:
             try:
                 load_module_dclient(shortname.replace(".py", ""), client2)

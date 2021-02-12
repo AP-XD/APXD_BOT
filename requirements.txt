@@ -30,6 +30,7 @@ covid
 cowpy
 cryptg
 cryptocompare
+cryptocompare==0.7.3
 cryptosteganography
 csvfaker		
 deep_translator
@@ -48,6 +49,7 @@ gTTS-token>=1.1.3
 gTTS>=2.0.1
 geopy
 git+https://github.com/cher-nov/cryptg
+git+https://github.com/chsaiujwal/maigret
 git+https://github.com/gleitz/howdoi
 gitpython
 glitch_this
@@ -58,6 +60,7 @@ google-auth-oauthlib
 google-trans-new
 google_images_download
 google_trans_new
+googletrans
 googletrans==4.0.0-rc1
 grapheme
 gsearch
@@ -67,6 +70,7 @@ howdoi
 html-telegraph-poster
 httplib2
 humanize
+img2pdf
 iplookup
 jikanpy
 jotquote
