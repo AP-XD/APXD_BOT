@@ -147,6 +147,7 @@ tracemoepy
 tswift
 urbandict>=0.5
 validators
+vcam
 vcsi
 wand
 wget
