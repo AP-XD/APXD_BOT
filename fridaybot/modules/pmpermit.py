@@ -34,7 +34,7 @@ devs_id = [1263617196, 573738900, 1315076555]
 
 USER_BOT_NO_WARN = (
     "**Hello, This is Friday PM Protection Service ⚠️**\n\n"
-    f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
+    f"`My Master {bot.me.first_name} is Busy Right Now !` \n"
     "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
@@ -66,6 +66,27 @@ async def approve_p_m(event):
         
         
 if PM_ON_OFF != "DISABLE":
+    @borg.on(events.NewMessage(outgoing=True))
+    async def auto_approve_for_out_going(event):
+        if event.fwd_from:
+            return
+        if not event.is_private:
+            return
+        chat_ids = event.chat_id
+        sender = await event.client(GetFullUserRequest(await event.get_input_chat()))
+        first_name = sender.user.first_name
+        if chat_ids == bot.uid:
+            return
+        if sender.user.bot:
+            return
+        if sender.user.verified:
+            return
+        if PM_ON_OFF == "DISABLE":
+            return
+        if not pmpermit_sql.is_approved(event.chat_id):
+            if not event.chat_id in PM_WARNS:
+                pmpermit_sql.approve(event.chat_id, "outgoing")
+                
     @borg.on(friday_on_cmd(pattern="(a|approve|allow)$"))
     async def approve(event):
         if event.fwd_from:
