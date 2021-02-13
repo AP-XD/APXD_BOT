@@ -33,6 +33,12 @@ async def rip(event):
         return
     ok = await _deezer_dl(sun, event, tgbot)
 
+HELP_EMOJI = os.environ.get("HELP_EMOJI", None)
+if not HELP_EMOJI:
+    emji = "🔥"
+else:
+    emji = HELP_EMOJI
+
 @tgbot.on(events.InlineQuery)
 async def inline_handler(event):
     builder = event.builder
@@ -83,7 +89,7 @@ async def on_plug_in_callback_query_handler(event):
         fci = custom.Button.inline("Open Main Menu Again", data="open")
         await event.edit("`Help Menu Closed...!`", buttons=fci)
     else:
-        reply_pop_up_alert = "Please get your own fridaybot ,and don't use mine."
+        reply_pop_up_alert = "Please get your own Bot ,and don't use mine."
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -298,7 +304,6 @@ async def opner(event):
         )
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = Config.NO_OF_ROWS_DISPLAYED_IN_H_ME_CMD
     number_of_cols = Config.NO_OF_COLUMNS_DISPLAYED_IN_H_ME_CMD
@@ -309,7 +314,7 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format("📌", x, "🔥"), data="us_plugin_{}".format(x)
+            "{} {} {}".format("📌", x, emji), data="us_plugin_{}".format(x)
         )
         for x in helpable_modules
     ]

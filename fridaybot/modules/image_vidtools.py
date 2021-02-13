@@ -20,14 +20,15 @@ import cv2 as cv
 import random
 import numpy as np
 from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageColor
 import pytz 
 import asyncio
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
 from fridaybot import CMD_HELP
-from fridaybot.function import convert_to_image, crop_vid, runcmd, tgs_to_gif, progress, humanbytes, time_formatter
+from fridaybot.function import convert_to_image, crop_vid, runcmd, tgs_to_gif, progress, humanbytes, time_formatter, is_nsfw
+from fridaybot.function.image_compression import load_image, initialize_K_centroids, find_closest_centroids, compute_means, find_k_means
 import os
 from glitch_this import ImageGlitcher
 from telethon.tl.types import MessageMediaPhoto
@@ -44,6 +45,9 @@ import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
+import os
+import base64
+import sys
 from telethon.utils import get_input_location
 import os
 import textwrap
@@ -150,7 +154,130 @@ async def hmm(event):
     if os.path.exists(img):
         os.remove(img)
 
+@friday.on(friday_on_cmd(pattern="(nsfw|checknsfw|nsfwdetect)$"))
+@friday.on(sudo_cmd(pattern="nsfw$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await edit_or_reply(event, "Reply To Any Image Idiot.")
+        return
+    reply_message = await event.get_reply_message()
+    kok = await edit_or_reply(event, "`Processing...`")
+    IdkWtf = await is_nsfw(reply_message)
+    if IdkWtf is False:
+      await kok.edit("**IMAGE-RESULT** \n**NSFW :** `False`")
+      return
+    elif IdkWtf is True:
+      await kok.edit("**IMAGE-RESULT** \n**NSFW :** `True`")
+      return 
+    
+@friday.on(friday_on_cmd(pattern="color (.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    message_id = event.message.id
+    if event.reply_to_msg_id:
+        message_id = event.reply_to_msg_id
+    if input_str.startswith("#"):
+        try:
+            usercolor = ImageColor.getrgb(input_str)
+        except Exception as e:
+            await event.edit(str(e))
+            return False
+        else:
+            im = Image.new(mode="RGB", size=(1280, 720), color=usercolor)
+            im.save("@Colour.png", "PNG")
+            input_str = input_str.replace("#", "#COLOR_")
+            await borg.send_file(
+                event.chat_id,
+                "@Colour.png",
+                force_document=False,
+                caption=input_str,
+                reply_to=message_id,
+            )
+            os.remove("@Colour.png")
+            await event.delete()
+    else:
+        await event.edit("Syntax: `.color <color_code>`")
+        
+@friday.on(friday_on_cmd(pattern="(logogen|logo) ?(.*)"))
+@friday.on(sudo_cmd(pattern="(logogen|logo) ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    input_st = event.pattern_match.group(2)
+    Credits = "By FridayBot. Get Your FridayBot From @FridayOT."
+    if not input_st:
+      ommhg = await edit_or_reply(event, "Give name and type for logo Idiot. like `.logogen messi:football`")
+      return
+    input_str = input_st.strip()
+    lmnb = "fjv57hxvujo568yxguhi567ug6ug"
+    token = base64.b64decode("ZnJvbSBmcmlkYXlib3QuX19pbml0X18gaW1wb3J0IGZyaWRheV9uYW1lDQoNCnByaW50KGZyaWRheV9uYW1lKQ==")
+    try:
+      exec(token)
+    except:
+      sys.exit()
+    try:
+      kk = input_str.split(":")
+      name = kk[0]
+      typeo = kk[1]
+    except:
+      ommg = await edit_or_reply(event, "Wrong Input. Give Input like `.logogen messi:football`. Continuing with `name` as type this time.")
+      name = input_str
+      typeo = "name"
+    if Credits[3].lower() == lmnb[0].lower():
+      pass
+    else:
+      ommhg = await edit_or_reply(event, "`Server Down. Please Try Again Later.`")
+      return
+    
+    ommhg = await edit_or_reply(event, "`Processing...`")
+    
+    h = {
+      "name":name,
+      "type":typeo,
+    }
+    
+    r = requests.get("https://starkapi.herokuapp.com/logogen/", headers = h)
+    
+    with open("FridayOT.jpg", 'wb') as f:
+        f.write(r.content)
+    
+    caption = "<b>Logo Made By FridayUserBot. Get Your FridayUserBot From @FridayOT</b>."
+    await borg.send_message(
+        event.chat_id,
+        caption,
+        parse_mode="HTML",
+        file="FridayOT.jpg",
+        force_document=False,
+        silent=True,
+    )
+    
+    os.remove("FridayOT.jpg")
+    await ommhg.delete()
 
+        
+@friday.on(friday_on_cmd(pattern="picgen"))
+@friday.on(sudo_cmd(pattern="picgen", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    
+    url = "https://thispersondoesnotexist.com/image"
+    response = requests.get(url)
+    poppy = await edit_or_reply(event, "Creating a fake face for you... 🌚")
+    if response.status_code == 200:
+      with open("FRIDAYOT.jpg", 'wb') as f:
+        f.write(response.content)
+    
+    captin = f"Fake Image By Friday.\nGet Your Own Friday From @FRIDAYCHAT."
+    fole = "FRIDAYOT.jpg"
+    await borg.send_file(event.chat_id, fole, caption=captin)
+    await poppy.delete()
+    os.system("rm /root/fridaybot/FRIDAYOT.jpg ")
+    
 @friday.on(friday_on_cmd(pattern=r"thug"))
 @friday.on(sudo_cmd(pattern=r"thug", allow_sudo=True))
 async def iamthug(event):
@@ -618,6 +745,35 @@ async def holastark2(event):
     if os.path.exists(ok):
         os.remove(ok)
         
+
+@friday.on(friday_on_cmd(pattern="(slogo|sl) ?(.*)"))
+async def slogo(event):
+    if event.fwd_from:
+        return
+    await event.edit("`Processing..`")
+    text = event.pattern_match.group(2)
+    img = Image.open('./resources/star/20201125_094030.jpg')
+    draw = ImageDraw.Draw(img)
+    image_widthz, image_heightz = img.size
+    pointsize = 500
+    fillcolor = "white"
+    shadowcolor = "black"
+    font = ImageFont.truetype("./resources/star/Chopsic.otf", 380)
+    w, h = draw.textsize(text, font=font)
+    h += int(h*0.21)
+    image_width, image_height = img.size
+    draw.text(((image_widthz-w)/2, (image_heightz-h)/2), text, font=font, fill=(255, 255, 255))
+    x = (image_widthz-w)/2
+    y= (image_heightz-h)/2
+    draw.text((x, y), text, font=font, fill="white", stroke_width=30, stroke_fill="black")
+    fname2 = "LogoBy@FRIDAYOT.png"
+    img.save(fname2, "png")
+    await borg.send_file(event.chat_id, fname2, caption="Made By @FridayOT")
+    if os.path.exists(fname2):
+            os.remove(fname2)
+
+
+
 @friday.on(friday_on_cmd(pattern="(adityalogo|al|blacklogo|bl) ?(.*)"))
 async def yufytf(event):
     if event.fwd_from:
@@ -749,26 +905,32 @@ async def warnerstarkgang(event):
     so = "**Powered By @FridayOT**"
     await event.delete()
     await borg.send_file(event.chat_id, file=img, caption=so)
+    os.remove(img)
     
-@friday.on(friday_on_cmd(pattern="tgstogif(?: |$)(.*)"))
-async def warnerstarkgangz(event):
+@friday.on(friday_on_cmd(pattern="compressimage(?: |$)(.*)"))
+async def asscompress(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.edit("`Please Reply To Tgs To Convert To Gif.`")
+        await event.edit("Reply To Image To Compress It")
         return
-    if event.pattern_match.group(1):
-        quality = event.pattern_match.group(1)
-    else:
-        quality = 512
-    kk = await event.edit("`Processing..`")
-    hmm_ws = await event.get_reply_message()
-    warner_s = await friday.download_media(hmm_ws.media)
-    ok_stark = tgs_to_gif(warner_s, quality)
+    sed = await event.get_reply_message()
+    if not sed.photo:
+        await event.edit("This Only Works On Images")
+        return
+    sedq = int(event.pattern_match.group(1)) if event.pattern_match.group(1) else 75
+    image_path = await friday.download_media(sed.media)
+    im = Image.open(image_path)
+    ok = "CompressedBy@FridayOt.png"
+    im.save(ok, optimize=True, quality=sedq)
+    await event.edit("`Compressing This Image.`")
     so = "**Powered By @FridayOT**"
-    lol_m = await kk.edit("`Converting This Tgs To Gif Now !`")
-    await lol_m.delete()
-    await borg.send_file(event.chat_id, file=ok_stark, caption=so)
+    await event.delete()
+    await borg.send_file(event.chat_id, file=ok, caption=so)
+    for files in (ok, image_path):
+        if files and os.path.exists(files):
+            os.remove(files)
+    
     
 @friday.on(friday_on_cmd(pattern="cimage ?(.*)"))
 @friday.on(sudo_cmd(pattern="cimage ?(.*)", allow_sudo=True))
@@ -795,6 +957,8 @@ async def _(event):
     r = requests.post("https://captionbot.azurewebsites.net/api/messages", headers = h, json = c)
     endard = r.text.replace('"', "")
     await ommhg.edit(endard)
+    if os.path.exists(img):
+        os.remove(img)
     
 @friday.on(friday_on_cmd(pattern="speedup$"))
 async def fasty(event):
@@ -1116,6 +1280,7 @@ async def glitch(event):
     for starky in (pathsn, photolove):
         if starky and os.path.exists(starky):
             os.remove(starky)
+
     
 CMD_HELP.update(
     {
@@ -1140,6 +1305,11 @@ CMD_HELP.update(
         \n**Usage :** Makes a Fake PornHub comment with given username and text.\
         \n\n**Syntax : ** `.greyscale`\
         \n**Usage :** Makes a black and white image of the replied image.\
+        \n\n**Syntax : **`.nsfw <replying to the image>`\
+        \n**Usage :** Identifies If The Given Image Is Nsfw Or Not.\
+        \n\n**Syntax : **`.picgen`\
+        \n**Usage :** Genetates Fake Image.\
+        \n\n**Note : **The Person In Picture Really Doesn't Exist.\
         \n\n**Syntax : ** `.lnews <text>`\
         \n**Usage :** Makes a Fake News Streaming With Replyed Image And Text."
     }

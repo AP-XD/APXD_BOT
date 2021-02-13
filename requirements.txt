@@ -51,6 +51,7 @@ geopy
 git+https://github.com/cher-nov/cryptg
 git+https://github.com/chsaiujwal/maigret
 git+https://github.com/gleitz/howdoi
+git+https://github.com/tushar-rishav/code2pdf
 gitpython
 glitch_this
 google
