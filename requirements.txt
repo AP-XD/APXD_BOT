@@ -131,7 +131,7 @@ requests_html
 rotten_tomatoes_client
 scapy
 scipy
-search-engine-parser>=0.4.2
+search-engine-parser>=0.6.2
 selenium
 setuptools		  
 spamwatch		 
