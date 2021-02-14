@@ -1,6 +1,6 @@
-from uniborg.util import admin_cmd
-
 from fridaybot import CMD_HELP
+
+from ..utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="copy"))
@@ -18,6 +18,5 @@ async def _(event):
         await event.edit("Reply to a  message .copy to copy nd paste ")
 
 
-CMD_HELP.update(
-    {"copy": ".copy <reply to any text> " "\nCopy that text nd redeliver it"}
-)
+
+CMD_HELP.update({"copy": ".c <reply to any text> " "\nc that text nd redeliver it"})

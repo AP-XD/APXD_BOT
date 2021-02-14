@@ -1,39 +1,53 @@
+# Concept got from Telebot
+# By @HeisenbergTheDanger and @xditya
+
 from telethon import *
 
 from fridaybot import CMD_HELP
-from fridaybot.utils import admin_cmd
+
+from fridaybot.utils import friday_on_cmd
+from telethon.tl.functions.users import GetFullUserRequest
 
 
-# Fixed by @NOOBGeng Second Member
-@borg.on(admin_cmd(pattern="dm ?(.*)"))
-async def _(dc):
+from fridaybot.utils import register
 
-    d = dc.pattern_match.group(1)
 
-    c = d.split(" ")  # hehe
+
+@friday.on(friday_on_cmd(pattern="dm ?(.*)"))
+
+async def _(event):
+    if event.fwd_from:
+        return
+    d = event.pattern_match.group(1)
+    print("dafaq" + str(d))
+    c = d.split(" ")  
 
     chat_id = c[0]
-    try:  # dc hehe
+    print(chat_id)
+    try:  
         chat_id = int(chat_id)
-    # hmm 🤔🤔🤔🤔
-    except BaseException:  # lalalala
-
-        pass
-
+    
+    except:  
+        H = await event.client(GetFullUserRequest(chat_id))
+        chat_id = H.user.id
     msg = ""
-    masg = await dc.get_reply_message()  # ghanta😒😒
-    if dc.reply_to_msg_id:
+    masg = await event.get_reply_message() 
+    if event.reply_to_msg_id:
         await borg.send_message(chat_id, masg)
-        await dc.edit("⚜️Message Delivered! Sar⚜️")
+        await event.edit("Message Delivered Succesufully ")
     for i in c[1:]:
-        msg += i + " "  # Fixed by @NOOBGeng Second Member
-    if msg == "":  # hoho
+        msg += i + " " 
+    if msg == "":  
         return
     try:
         await borg.send_message(chat_id, msg)
-        await dc.edit("`⚜️Message Delivered!⚜️`")
-    except BaseException:  # hmmmmmmmmm🤔🤔
-        await dc.edit(".dm (username) (text)")
+        await event.edit("Message Delivered")
+    except BaseException:  
+        await event.edit(".dm (username) (text)")
 
 
-CMD_HELP.update({"dm": ".dm (username) (text)"})
+CMD_HELP.update(
+    {
+        "dm": ".dm (username) (text)\n or\n .dm (username)(reply to msg)\n forward the replyed msg without the forward tag"
+    }
+)

@@ -248,7 +248,7 @@ async def _(event):
     caption = "<b>Logo Made By FridayUserBot. Get Your FridayUserBot From @FridayOT</b>."
     await borg.send_message(
         event.chat_id,
-        caption,
+        caption=caption,
         parse_mode="HTML",
         file="FridayOT.jpg",
         force_document=False,
@@ -774,7 +774,7 @@ async def slogo(event):
 
 
 
-@friday.on(friday_on_cmd(pattern="(adityalogo|al|blacklogo|bl) ?(.*)"))
+@friday.on(friday_on_cmd(pattern="(adityalogo|blacklogo|bl) ?(.*)"))
 async def yufytf(event):
     if event.fwd_from:
         return
@@ -1094,7 +1094,7 @@ async def audio_extract(event):
         thumb = await event.client.download_media(kk.media, thumb=-1)
     except:
         thumb = "./resources/IMG_20200929_103719_628.jpg"
-    name_out = str(kk.media.document.attributes[1].file_name.split(".")[0]) + str(".mp3")
+    name_out = os.path.basename(hmm) + str(".mp3")
     c_time = time.time()
     cmd = f"ffmpeg -i {hmm} -map 0:a {name_out}"
     await runcmd(cmd)

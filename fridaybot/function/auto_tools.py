@@ -56,6 +56,7 @@ counter = -30
 
 async def auto_pic():
     global counter
+    counter -= 30
     TZ = pytz.timezone(Config.TZ)
     datetime_tz = datetime.now(TZ)
     downloaded_file_name = "fridaybot/original_pic.png"
@@ -71,7 +72,7 @@ async def auto_pic():
         pass
     img = Image.open(downloaded_file_name)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype('Fonts/Streamster.ttf', 220)
+    font = ImageFont.truetype('Fonts/Streamster.ttf', 90)
     file_test = img.rotate(counter, expand=False)
     image_widthz, image_heightz = img.size
     TZ = pytz.timezone(Config.TZ)
@@ -88,7 +89,6 @@ async def auto_pic():
                 functions.photos.UploadProfilePhotoRequest(file)
             )
             os.remove(file_name)
-            counter -= 30
     except:
             return
     return
