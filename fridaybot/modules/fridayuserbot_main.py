@@ -81,7 +81,7 @@ async def fridayalive(alive):
         return
     await alive.get_chat()
     uptime = get_readable_time((time.time() - Lastupdate))
-    branch_name = Master
+    branch_name = "master"
     pm_caption = ("➥ **FRIDAY IS:** `ONLINE`\n\n"
                   "➥ **SYSTEMS STATS**\n"
                   f"➥ **Telethon Version:** `{tv}` \n"
