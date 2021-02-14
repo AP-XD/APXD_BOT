@@ -62,7 +62,6 @@ google-trans-new
 google_images_download
 google_trans_new
 googletrans
-googletrans==4.0.0-rc1
 grapheme
 gsearch
 hachoir
