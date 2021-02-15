@@ -5,7 +5,7 @@ from fridaybot import bot as apxd
 import subprocess, os , asyncio, shutil
 from fridaybot.utils import admin_cmd
 
-@apxd.on(admin_cmd("atgsmagic"))
+@apxd.on(admin_cmd("tgs"))
 async def messup(message):
 
    await message.edit("`messing....`")
