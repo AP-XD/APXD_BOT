@@ -10,7 +10,7 @@ async def messup(message):
 
    await message.edit("`messing....`")
    miraculous = message.text
-   tales = miraculous[11:]
+   tales = miraculous[5:]
    ladybug,lb,catnoir,cn = tales.split(";")
    a,lb,b,cn=int(ladybug),int(lb),int(catnoir),int(cn)
 
