@@ -23,7 +23,7 @@ async def gsearch(q_event):
     """ For .google command, do a Google search from @borgHelp. """
     match = q_event.pattern_match.group(1)
     query = match
-  
+    s = ""
     for j in search(query, num=10, stop=10, pause=2): 
         s = s + j + "\n"
     await q_event.edit(
