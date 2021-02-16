@@ -13,7 +13,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from validators.url import url
 from fridaybot import bot, client2, client3
 from fridaybot import catdef
-from fridaybot.function import fridayfunction as topfunc
 from fridaybot.Configs import Config
 from fridaybot.utils import admin_cmd, friday_on_cmd
 from fridaybot.Configs import Config
@@ -54,8 +53,6 @@ except AttributeError as e:
 
 
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
-idgen = topfunc.id_generator
-findnemo = topfunc.stark_finder
 heroku_api = "https://api.heroku.com"
 HEROKU_APP_NAME = Config.HEROKU_APP_NAME
 HEROKU_API_KEY = Config.HEROKU_API_KEY
