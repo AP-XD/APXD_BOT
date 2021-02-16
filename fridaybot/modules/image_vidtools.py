@@ -28,7 +28,6 @@ from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
 from fridaybot import CMD_HELP
 from fridaybot.function import convert_to_image, crop_vid, runcmd, tgs_to_gif, progress, humanbytes, time_formatter, is_nsfw
-from fridaybot.function.image_compression import load_image, initialize_K_centroids, find_closest_centroids, compute_means, find_k_means
 import os
 from glitch_this import ImageGlitcher
 from telethon.tl.types import MessageMediaPhoto
@@ -1193,10 +1192,14 @@ def generate_meme(
 async def glitch(event):
     if event.fwd_from:
         return
+    if not event.reply_to_msg_id:
+        await event.edit("`Are You on Weed? Please Reply To Image`")
+        return
     sed = await event.get_reply_message()
     okbruh = await event.edit("`Gli, Glitchiiingggg.....`")
     photolove = await convert_to_image(event, friday)
     pathsn = f"./starkgangz/@fridayot.gif"
+    await event.edit("Glitching Image :/")
     glitch_imgs = glitcher.glitch_image(photolove, 2, gif=True, color_offset=True)
     glitch_imgs[0].save(
         pathsn,
@@ -1207,7 +1210,9 @@ async def glitch(event):
         loop=LOOP,
     )
     c_time = time.time()
+    await event.edit("Optimizing Now")
     optimize(pathsn)
+    await event.edit("Starting Upload")
     stark_m = await uf(
         	file_name="Glitched@FridayOt.gif",
             client=borg,

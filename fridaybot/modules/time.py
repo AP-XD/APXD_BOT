@@ -4,9 +4,10 @@ Syntax: .getime"""
 import asyncio
 import os
 from datetime import datetime
-
+import time
 from PIL import Image, ImageDraw, ImageFont
 import pytz 
+from fridaybot import ALIVE_NAME, CMD_HELP, Lastupdate, friday_version
 from fridaybot import CMD_HELP
 from fridaybot.utils import friday_on_cmd
 
@@ -14,13 +15,41 @@ FONT_FILE_TO_USE = "Fonts/DroidSansMono.ttf"
 
 IST = pytz.timezone(Config.TZ) 
 
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
+
 @friday.on(friday_on_cmd("time$"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
+    uptime = get_readable_time((time.time() - Lastupdate))
     TZ = pytz.timezone(Config.TZ)
     current_time = datetime.now(TZ).strftime(
-        f"Time Zone : {Config.TZ} \n\nDate : %Y/%m/%d \nTime : %H:%M:%S"
+        f"Time Zone : {Config.TZ} \n\nDate : %Y/%m/%d \nTime : %H:%M:%S \nUptime : {uptime} \nFriday - Version : {friday_version}"
     )
     start = datetime.now()
     reply_msg_id = event.message.id
@@ -32,8 +61,8 @@ async def _(event):
     required_file_name = (
         Config.TMP_DOWNLOAD_DIRECTORY + " " + str(datetime.now()) + ".webp"
     )
-    img = Image.new("RGBA", (350, 220), color=(0, 0, 0, 115))
-    fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
+    img = Image.new("RGBA", (600, 400), color=(0, 0, 0, 115))
+    fnt = ImageFont.truetype(FONT_FILE_TO_USE, 35)
     drawn_text = ImageDraw.Draw(img)
     drawn_text.text((10, 10), current_time, font=fnt, fill=(255, 255, 255))
     img.save(required_file_name)
@@ -43,10 +72,6 @@ async def _(event):
         reply_to=reply_msg_id,
     )
     os.remove(required_file_name)
-    end = datetime.now()
-    time_taken_ms = (end - start).seconds
-    await event.edit("Created sticker in {} seconds".format(time_taken_ms))
-    await asyncio.sleep(5)
     await event.delete()
 
     

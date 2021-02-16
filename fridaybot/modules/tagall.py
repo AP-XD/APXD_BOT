@@ -25,17 +25,21 @@ async def _(event):
     await event.delete()
 
 
-# Added to TeleBot by @its_xditya
-@borg.on(admin_cmd(pattern=r"tagall", outgoing=True))
+@friday.on(friday_on_cmd(pattern="tagall(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "Hello"
     chat = await event.get_input_chat()
-    async for x in borg.iter_participants(chat, 350):
-        mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
-    await event.reply(mentions)
+    mentions = ""
+    sh = event.pattern_match.group(1) if event.pattern_match.group(1) else "Hi !"
+    async for x in event.client.iter_participants(chat):
+        mentions += f"[{x.first_name}](tg://user?id={x.id}) \n"
     await event.delete()
+    n = 4096
+    kk = [mentions[i:i+n] for i in range(0, len(mentions), n)]
+    for i in kk:
+        j = f"**{sh}** \n{i}"
+        await event.client.send_message(event.chat_id, j)
 
 
 CMD_HELP.update(
