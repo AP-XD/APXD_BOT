@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 
 
-ENV = bool(os.environ.get("ENV", False))
+ENV = True
 if not ENV:
     from local_config import Development as Config
 elif ENV:
