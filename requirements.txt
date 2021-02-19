@@ -7,7 +7,6 @@ PyLyrics
 PyPDF2
 PyProxyToolkit
 QScintilla
-Telethon==1.19.0
 Telethon==1.19.5
 aiofiles
 aiohttp
@@ -156,7 +155,6 @@ wget
 wheel
 wikipedia>=1.4.0
 yahoo_fin
-youtube-dl
 youtube-search
 youtube-search-python
 youtube_dl
