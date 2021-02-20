@@ -138,7 +138,6 @@ spotdl
 spotify_token	  
 sqlalchemy>=1.2
 telegraph
-telethon
 textblob
 the-python-bay
 the_python_bay
