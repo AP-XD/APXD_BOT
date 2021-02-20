@@ -30,7 +30,6 @@ covid
 cowpy
 cryptg
 cryptocompare
-cryptocompare==0.7.3
 cryptosteganography
 csvfaker		
 deep_translator
